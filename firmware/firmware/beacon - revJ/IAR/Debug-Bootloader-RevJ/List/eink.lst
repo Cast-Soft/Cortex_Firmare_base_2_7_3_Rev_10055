@@ -1,0 +1,598 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     13/Nov/2019  10:52:14 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\eink.c                                          #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\eink.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER   #
+#                    -D STM32F10X_CL -D COOS -D USE_MY_ASSERT -D _DEBUG -D    #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D BC_HW_REVJ   #
+#                    -lcN "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source  #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\eink.lst             #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\eink.o                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\eink.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : eink.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 5/17/2019
+      8          * Description        : All SPI routines related to EINK screen
+      9          *******************************************************************************/
+     10          
+     11          /* INCLUDES ------------------------------------------------------------------*/
+     12          #include "stm32f10x_dma.h"
+     13          #include "hardware.h"
+     14          #include "eink_comms.h"
+     15          #include "eink_defs.h"
+     16          #include "eink.h"
+     17          #include <string.h>
+     18          
+     19          #include "CoOS.h"
+     20          
+     21          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     22          
+     23          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     24          #define EINK_ID 0x56
+     25          /* PRIVATE MACROS ------------------------------------------------------------*/
+     26          
+     27          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     28          
+     29          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     30          
+     31          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     32          OS_MutexID  flagEinkIODone;
+     33          OS_EventID	semEinkBufferAllow;
+     34          
+     35          volatile EPD_buffer spiInk_ImgBuf;
+     36          volatile uint8_t spiInk_RxBuf[5] ={0,0,0,0,0};
+     37          volatile uint8_t spiInk_TxBuf[5] ={0,0,0,0,0};
+     38          uint8_t EInk_Present=0;
+     39          /* EXTERNAL FUNCTION PROTOTYPES ---------------------------------------------*/
+     40          extern OS_FlagID flagEInk_RDY;
+     41          extern OS_FlagID flagEInk_DMA_Done;
+     42          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+     43          uint8_t get_display_size(void);
+     44          uint8_t read_MTP_address(const uint16_t addr);
+     45          uint8_t MTPvalidation(const uint8_t * display_type_string);
+     46          
+     47          void clear();
+     48          void invert();
+     49          
+     50          uint16_t powerOn();
+     51          void powerOff();
+     52          
+     53          void WriteBuffer();
+     54          void drawPixel(int16_t x, int16_t y, uint16_t color);
+     55          int getPixel(int x, int y);
+     56          
+     57          void readSerialNo_MTP();
+     58          void WFversionNo_MTP();
+     59          
+     60          void EINK_write_DMA_Image(uint8_t reg, uint16_t payload);
+     61          void EINK_write_DMA_Image_Single(uint8_t reg, uint16_t payload, uint8_t * value);
+     62          void EINK_DMA_Read_Register(uint8_t reg, uint8_t payload);
+     63          void EINK_DMA_Write_Register(uint8_t reg, uint8_t payload, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4);
+     64          
+     65          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+     66          /*******************************************************************************
+     67          * Description : Sets the buffer for DMA transfer. Writes to the register
+     68          * Input       :
+     69          * Return      :
+     70          *******************************************************************************/
+     71          void EINK_write_DMA_Image(uint8_t reg, uint16_t payload){
+     72          	CoClearFlag(flagEInk_DMA_Done);
+     73          	HwSPISSAssert(SPI_INK);
+     74          	DMA_Cmd(SPI_INK_RX_DMA_CHAN, DISABLE);
+     75              DMA_Cmd(SPI_INK_TX_DMA_CHAN, DISABLE);
+     76          	spiInk_ImgBuf.regval = reg;
+     77          	SPI_INK_RX_DMA_CHAN->CCR &= (uint16_t)(~DMA_CCR4_MINC);		//disable memory increment
+     78          	SPI_INK_TX_DMA_CHAN->CCR |= (uint16_t)(DMA_CCR5_MINC);		//enable memory increment
+     79          	SPI_INK_TX_DMA_CHAN->CMAR = (uint32_t) &spiInk_ImgBuf.regval;
+     80          	SPI_INK_RX_DMA_CHAN->CNDTR = payload;
+     81              SPI_INK_TX_DMA_CHAN->CNDTR = payload;
+     82          	DMA_Cmd(SPI_INK_RX_DMA_CHAN, ENABLE);
+     83              DMA_Cmd(SPI_INK_TX_DMA_CHAN, ENABLE);
+     84          	CoWaitForSingleFlag(flagEInk_DMA_Done,0);
+     85          }
+     86          
+     87          /*******************************************************************************
+     88          * Description : Sets the buffer for DMA transfer. Reads the register and values
+     89          * Input       :
+     90          * Return      :
+     91          *******************************************************************************/
+     92          void EINK_DMA_Read_Register(uint8_t reg, uint8_t payload){
+     93          	CoClearFlag(flagEInk_DMA_Done);
+     94          	spiInk_TxBuf[0]=reg|0x80;
+     95          	HwSPISSAssert(SPI_INK);
+     96          	DMA_Cmd(SPI_INK_RX_DMA_CHAN, DISABLE);
+     97          	DMA_Cmd(SPI_INK_TX_DMA_CHAN, DISABLE);
+     98          	SPI_INK_RX_DMA_CHAN->CCR |= (uint16_t)(DMA_CCR4_MINC);		//enable memory increment
+     99          	SPI_INK_TX_DMA_CHAN->CCR |= (uint16_t)(DMA_CCR5_MINC);		//enable memory increment
+    100          	SPI_INK_TX_DMA_CHAN->CMAR = (uint32_t) spiInk_TxBuf;
+    101          	SPI_INK_RX_DMA_CHAN->CNDTR = payload+1;
+    102          	SPI_INK_TX_DMA_CHAN->CNDTR = payload+1;
+    103              DMA_Cmd(SPI_INK_RX_DMA_CHAN, ENABLE);
+    104              DMA_Cmd(SPI_INK_TX_DMA_CHAN, ENABLE);
+    105          	CoWaitForSingleFlag(flagEInk_DMA_Done,0);	
+    106          }
+    107          
+    108          /*******************************************************************************
+    109          * Description : Sets the buffer for DMA transfer. Reads the register and values
+    110          * Input       :
+    111          * Return      :
+    112          *******************************************************************************/
+    113          void EINK_DMA_Write_Register(uint8_t reg, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4, uint8_t payload){
+    114          	CoClearFlag(flagEInk_DMA_Done);
+    115          	spiInk_TxBuf[0]=reg; spiInk_TxBuf[1] = val1; spiInk_TxBuf[2] = val2; spiInk_TxBuf[3] = val3; spiInk_TxBuf[4]=val4;
+    116          	HwSPISSAssert(SPI_INK);
+    117          	DMA_Cmd(SPI_INK_RX_DMA_CHAN, DISABLE);
+    118          	DMA_Cmd(SPI_INK_TX_DMA_CHAN, DISABLE);
+    119          	SPI_INK_RX_DMA_CHAN->CCR |= (uint16_t)(DMA_CCR4_MINC);		//enable memory increment
+    120          	SPI_INK_TX_DMA_CHAN->CCR |= (uint16_t)(DMA_CCR5_MINC);		//enable memory increment
+    121          	SPI_INK_TX_DMA_CHAN->CMAR = (uint32_t) spiInk_TxBuf;
+    122          	SPI_INK_RX_DMA_CHAN->CNDTR = payload+1;
+    123          	SPI_INK_TX_DMA_CHAN->CNDTR = payload+1;
+    124              DMA_Cmd(SPI_INK_RX_DMA_CHAN, ENABLE);
+    125              DMA_Cmd(SPI_INK_TX_DMA_CHAN, ENABLE);
+    126          	CoWaitForSingleFlag(flagEInk_DMA_Done,0);	
+    127          }
+    128          
+    129          /*******************************************************************************
+    130          * Description : Activates high voltages required to update the screen.
+    131          * 				Called prior to triggering a image update.
+    132          * Input       :
+    133          * Return      :
+    134          *******************************************************************************/
+    135          uint16_t powerOn(){
+    136          	uint16_t count =0;
+    137          	EINK_DMA_Read_Register(EINK_POWER_CONTROL_SETTING,1);
+    138          	EINK_DMA_Write_Register(EINK_POWER_CONTROL_SETTING, 
+    139          							spiInk_RxBuf[1]|0x11, 0, 0, 0, 
+    140          							1);
+    141          	//EINK_RegisterWrite(	EINK_POWER_CONTROL_SETTING,
+    142          	//					EINK_RegisterRead(EINK_POWER_CONTROL_SETTING)|0x11,
+    143          	//					0,0,0,1);
+    144          	EINK_DMA_Read_Register(EINK_STATUS_REGISTER,1);	
+    145          	while(spiInk_RxBuf[1]!=4 && count<1000){
+    146          		count++;
+    147          		CoTickDelay(1);
+    148          		EINK_DMA_Read_Register(EINK_STATUS_REGISTER,1);	
+    149          	}
+    150          	return count;
+    151          }
+    152          
+    153          /*******************************************************************************
+    154          * Description : Deactivates high voltages required to update the screen.
+    155          * 				Called after triggering a image update.
+    156          * Input       :
+    157          * Return      :
+    158          *******************************************************************************/
+    159          void powerOff(){
+    160          	uint8_t status;
+    161          	EINK_DMA_Read_Register(EINK_POWER_CONTROL_SETTING,1);
+    162          	status = spiInk_RxBuf[1];
+    163          	status &= ~0x01;
+    164          	EINK_DMA_Write_Register(EINK_POWER_CONTROL_SETTING, 
+    165          							status, 0,0,0,
+    166          							1);
+    167          	CoWaitForSingleFlag(flagEInk_RDY,0);
+    168          
+    169          	status &= ~0x10;
+    170          	EINK_DMA_Write_Register(EINK_POWER_CONTROL_SETTING, 
+    171          							status, 0,0,0,
+    172          							1);
+    173          }
+    174          
+    175          
+    176          /*******************************************************************************
+    177          * Description : gets display size dimensions.
+    178          * Input       :
+    179          * Return      :
+    180          *******************************************************************************/
+    181          uint8_t get_display_size(){
+    182          	uint16_t start_addr = 0x4d0;
+    183          	uint8_t display_type_string[10];
+    184          	uint8_t i;
+    185          	uint8_t x;
+    186          
+    187          	EINK_RegisterWrite(EINK_PROGRAM_WS_MTP, 0xF2, 0,0,0,1);			//0x40 switch to type2 MTP area
+    188          
+    189          	for(i=0;i<9;i++)
+    190          		display_type_string[i] = read_MTP_address(start_addr+i);
+    191          	display_type_string[9]='\0';
+    192          	x=MTPvalidation(display_type_string);
+    193          	if(x==0){
+    194          		start_addr = 0x4f0;
+    195          		for(i=0;i<9;i++)
+    196          			display_type_string[i] = read_MTP_address(start_addr+i);
+    197          		display_type_string[9]='\0';
+    198          		x=MTPvalidation(display_type_string);
+    199          		if(x==0) return 0;
+    200          	}
+    201          	EINK_RegisterWrite(EINK_PROGRAM_WS_MTP, 0xF0, 0,0,0,1);		//restore waveform
+    202          	return 1;
+    203          }
+    204          
+    205          /*******************************************************************************
+    206          * Description : Test function that reads from the MTTP address. 
+    207          				Called by get_display_size
+    208          * Input       :
+    209          * Return      :
+    210          *******************************************************************************/
+    211          uint8_t read_MTP_address(const uint16_t addr){
+    212          	EINK_RegisterWrite(EINK_MTP_ADDRESS_SETTING, addr&0xFF, (addr>>8)&0x07,0,0,2);
+    213          	return EINK_MTP_RAM_Read(EINK_MTP_READ);
+    214          }
+    215          
+    216          /*******************************************************************************
+    217          * Description : Test function that checks the size of the plastic logic screen
+    218          				Called by get_display_size
+    219          * Input       :
+    220          * Return      :
+    221          *******************************************************************************/
+    222          uint8_t MTPvalidation(const uint8_t * display_type_string){
+    223          	if(strcmp(display_type_string, "S021_T1.1")==0){
+    224          		return 1;
+    225          	}
+    226          	else return 0;
+    227          }
+    228          
+    229          /*******************************************************************************
+    230          * Description : image update routine which clears the eink screen
+    231          * Input       :
+    232          * Return      :
+    233          *******************************************************************************/
+    234          void whiteerase(){
+    235          	clear();
+    236          	update(fullrefresh);
+    237          }
+    238          
+    239          /*******************************************************************************
+    240          * Description : resets display buffer to white
+    241          * Input       :
+    242          * Return      :
+    243          *******************************************************************************/
+    244          void clear(){
+    245          	memset((uint8_t*)&spiInk_ImgBuf.buffer[0],0xFF,sizeof(spiInk_ImgBuf.buffer));
+    246          }
+    247          
+    248          /*******************************************************************************
+    249          * Description : routine to update image on eink screen
+    250          * Input       :
+    251          * Return      :
+    252          *******************************************************************************/
+    253          void update(EPD_refresh type){
+    254          	uint16_t val;
+    255          	volatile uint16_t check_count;
+    256          
+    257          	WriteBuffer();
+    258          	check_count = powerOn();
+    259          	//0xF0|0x00 gives 4 level gray scale. 0xF0 is default setting. Unless changed, leave uncommented
+    260          	//EINK_RegisterWrite(EINK_PROGRAM_WS_MTP,0xF0,0,0,0,1);	
+    261          	if(type == fullrefresh)	
+    262          		EINK_DMA_Write_Register(EINK_DISPLAY_ENGINE_CONTROL_REGISTER, 
+    263          								0x03, 0,0,0,
+    264          								1);		
+    265          	else
+    266          		EINK_DMA_Write_Register(EINK_DISPLAY_ENGINE_CONTROL_REGISTER, 
+    267          								0x07, 0,0,0,
+    268          								1);		
+    269          
+    270          	CoWaitForSingleFlag(flagEInk_RDY,0);
+    271          
+    272          	powerOff();
+    273          }
+    274          
+    275          /*******************************************************************************
+    276          * Description : Writes to the RAM buffer of the Eink screen for image update.
+    277          * Input       :
+    278          * Return      :
+    279          *******************************************************************************/
+    280          void WriteBuffer(){
+    281          	uint8_t x;
+    282          	EINK_DMA_Read_Register(EINK_DATA_ENTRY_MODE_SETTING,1);
+    283          	x= spiInk_RxBuf[1];
+    284          	EINK_DMA_Write_Register(EINK_DATA_ENTRY_MODE_SETTING, 
+    285          							x&(~0x10), 0, 0, 0, 
+    286          							1);
+    287          	EINK_write_DMA_Image(EINK_WRITE_RAM, sizeof(spiInk_ImgBuf));
+    288          }
+    289          
+    290          /*******************************************************************************
+    291          * Description : Test routine to read Serial Number from MTP
+    292          * Input       :
+    293          * Return      :
+    294          *******************************************************************************/
+    295          void readSerialNo_MTP(){
+    296          	uint16_t start_addr = 0x4d0;
+    297          	volatile uint8_t display_serial_no[32];
+    298          	uint8_t i;
+    299          
+    300          	//default value for register 0x40: 0xF0
+    301          	EINK_RegisterWrite(EINK_PROGRAM_WS_MTP, 0xF2, 0,0,0,1);			//0x40 switch to type2 MTP area
+    302          	for(i=0;i<32;i++)
+    303          		display_serial_no[i] = read_MTP_address(start_addr+i);
+    304          	display_serial_no[31]= '\0';
+    305          
+    306          	EINK_RegisterWrite(EINK_PROGRAM_WS_MTP, 0xF0, 0,0,0,1);		//restore waveform
+    307          }
+    308          
+    309          /*******************************************************************************
+    310          * Description : Test routine to read Version Number from MTP
+    311          * Input       :
+    312          * Return      :
+    313          *******************************************************************************/
+    314          void WFversionNo_MTP(){
+    315          	uint16_t start_addr = 0x4d0;
+    316          	volatile uint8_t display_type[16];
+    317          	uint8_t i;
+    318          
+    319          	//default value for register 0x40: 0xF0
+    320          	EINK_RegisterWrite(EINK_PROGRAM_WS_MTP, 0xF2, 0,0,0,1);			//0x40 switch to type2 MTP area
+    321          	for(i=0;i<16;i++)
+    322          		display_type[i] = read_MTP_address(start_addr+i);
+    323          	display_type[15]= '\0';
+    324          
+    325          	EINK_RegisterWrite(EINK_PROGRAM_WS_MTP, 0xF0, 0,0,0,1);		//restore waveform
+    326          }
+    327          
+    328          /* PUBLIC FUNCTIONS ----------------------------------------------------------*/
+    329          /*******************************************************************************
+    330          * Description : Initialize routine for the Eink Display
+    331          * Input       :
+    332          * Return      :
+    333          *******************************************************************************/
+    334          uint8_t Eink_Init() {
+    335              while(!HwGPIState(GPI_INK_BUSY));
+    336              HwGPOLow(GPO_INK_RST);
+    337          	CoTickDelay(1);
+    338          	HwGPOHigh(GPO_INK_RST);
+    339              while(!HwGPIState(GPI_INK_BUSY));
+    340              CoTickDelay(5);
+    341          
+    342          	//confirm that the E-Ink display was attached
+    343          	if(EINK_RegisterRead(EINK_REVISION) != EINK_ID){
+    344          		return 0;
+    345          	}
+    346              
+    347              //register setup
+    348              EINK_RegisterWrite(EINK_PANEL_SETTING, 0x10, 0, 0, 0,1);						//0x01
+    349              EINK_RegisterWrite(EINK_DRIVER_VOLTAGE_SETTING, 0x25, 0xff, 0, 0,2);			//0x02
+    350          	EINK_RegisterWrite(EINK_TCOM_TIMING_SETTING,0x67,0x55,0,0,2);					//0x06
+    351              EINK_RegisterWrite(EINK_TEMPERATURE_SENSOR_CONFIGURATION, 0x0A, 0, 0, 0,1);		//0x07
+    352          	EINK_RegisterWrite(EINK_PANEL_RESOLUTION_SETTING,0,239,0,159,4);				//0x0C
+    353              EINK_RegisterWrite(EINK_WRITE_PIXEL_RECTANGULAR_SETTING, 0, 239, 0, 145,4);		//0x0D
+    354          	EINK_RegisterWrite(EINK_PIXEL_ACCESS_POSITION_SETTING,0,0,0,0,2);				//0x0E
+    355          	EINK_RegisterWrite(EINK_DATA_ENTRY_MODE_SETTING,0x24,0,0,0,1); 					//0x0F make 0x24 for portrait mode
+    356              EINK_RegisterWrite(EINK_VCOM_CONFIGURATION_REGISTER, 0x00, 0x00, 0x24, 0x07,4); //0x18
+    357          
+    358              EINK_RegisterWrite(EINK_VBORDER_SETTING, 0x04, 0, 0, 0,1);						//0x1D
+    359          	EINK_RegisterWrite(EINK_POWER_SEQUENCE_SETTING,0,0,0,0,3);						//0x1F
+    360              EINK_RegisterWrite(EINK_UNDOCUMENTED_REG, 0x60, 0, 0, 0,1);						//0x44
+    361          
+    362              //Testing EINK screen reads
+    363              //EINK_RegisterReadBytes(EINK_VCOM_DC_SETTING, buffertest,1);	//vcom reading -> 3.18v
+    364              //readSerialNo_MTP();
+    365              //WFversionNo_MTP();
+    366          	HwEINKEXTIInit();
+    367              return 1;
+    368          }
+    369          
+    370          /*******************************************************************************
+    371          * Description : Setup RTOS dependent variables for EInk SPI Line.
+    372          * Input       : -
+    373          * Return      : -
+    374          *******************************************************************************/
+    375          void init_coos_eink(void){
+    376              flagEinkIODone     = CoCreateMutex(); // since multiple tasks will be using the line.
+    377          	semEinkBufferAllow = CoCreateSem(0,1,EVENT_SORT_TYPE_FIFO);
+    378          }
+    379          
+    380          /*******************************************************************************
+    381          * Description : Tasks access EInk SPI exclusively
+    382          * Input       : -
+    383          * Return      : -
+    384          *******************************************************************************/
+    385          void WaitGrabEInk(void) {
+    386            CoEnterMutexSection(flagEinkIODone);
+    387          }
+    388          
+    389          /*******************************************************************************
+    390          * Description : Release EInk SPI for other tasks
+    391          * Input       : -
+    392          * Return      : -
+    393          *******************************************************************************/
+    394          void ReleaseEInk(void) {
+    395              CoLeaveMutexSection(flagEinkIODone);
+    396          }
+    397          
+    398          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  EINK_DMA_Read_Register
+             16 -> CoClearFlag
+             16 -> CoWaitForSingleFlag
+             16 -> DMA_Cmd
+             16 -> HwSPISSAssert
+       32  EINK_DMA_Write_Register
+             32 -> CoClearFlag
+             32 -> CoWaitForSingleFlag
+             32 -> DMA_Cmd
+             32 -> HwSPISSAssert
+       16  EINK_write_DMA_Image
+             16 -> CoClearFlag
+             16 -> CoWaitForSingleFlag
+             16 -> DMA_Cmd
+             16 -> HwSPISSAssert
+       16  Eink_Init
+             16 -> CoTickDelay
+             16 -> EINK_RegisterRead
+             16 -> EINK_RegisterWrite
+             16 -> HwEINKEXTIInit
+             16 -> HwGPIState
+             16 -> HwGPOHigh
+             16 -> HwGPOLow
+        8  MTPvalidation
+              8 -> strcmp
+        8  ReleaseEInk
+              8 -> CoLeaveMutexSection
+       40  WFversionNo_MTP
+             40 -> EINK_RegisterWrite
+             40 -> read_MTP_address
+        8  WaitGrabEInk
+              8 -> CoEnterMutexSection
+       16  WriteBuffer
+             16 -> EINK_DMA_Read_Register
+             16 -> EINK_DMA_Write_Register
+             16 -> EINK_write_DMA_Image
+        8  clear
+              8 -> memset
+       40  get_display_size
+             40 -> EINK_RegisterWrite
+             40 -> MTPvalidation
+             40 -> read_MTP_address
+        8  init_coos_eink
+              8 -> CoCreateMutex
+              8 -> CoCreateSem
+       16  memset
+             16 -> __aeabi_memset
+       16  powerOff
+             16 -> CoWaitForSingleFlag
+             16 -> EINK_DMA_Read_Register
+             16 -> EINK_DMA_Write_Register
+       16  powerOn
+             16 -> CoTickDelay
+             16 -> EINK_DMA_Read_Register
+             16 -> EINK_DMA_Write_Register
+       56  readSerialNo_MTP
+             56 -> EINK_RegisterWrite
+             56 -> read_MTP_address
+       16  read_MTP_address
+             16 -> EINK_MTP_RAM_Read
+             16 -> EINK_RegisterWrite
+       24  update
+             24 -> CoWaitForSingleFlag
+             24 -> EINK_DMA_Write_Register
+             24 -> WriteBuffer
+             24 -> powerOff
+             24 -> powerOn
+        8  whiteerase
+              8 -> clear
+              8 -> update
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      12  ?<Constant "S021_T1.1">
+       4  ??DataTable11
+       4  ??DataTable11_1
+       4  ??DataTable11_10
+       4  ??DataTable11_11
+       4  ??DataTable11_12
+       4  ??DataTable11_13
+       4  ??DataTable11_2
+       4  ??DataTable11_3
+       4  ??DataTable11_4
+       4  ??DataTable11_5
+       4  ??DataTable11_6
+       4  ??DataTable11_7
+       4  ??DataTable11_8
+       4  ??DataTable11_9
+     148  EINK_DMA_Read_Register
+     184  EINK_DMA_Write_Register
+     142  EINK_write_DMA_Image
+       1  EInk_Present
+     310  Eink_Init
+      24  MTPvalidation
+      12  ReleaseEInk
+      88  WFversionNo_MTP
+      12  WaitGrabEInk
+      50  WriteBuffer
+      16  clear
+       1  flagEinkIODone
+     164  get_display_size
+      26  init_coos_eink
+      22  memset
+      84  powerOff
+      92  powerOn
+      88  readSerialNo_MTP
+      40  read_MTP_address
+       1  semEinkBufferAllow
+    8764  spiInk_ImgBuf
+       8  spiInk_RxBuf
+       8  spiInk_TxBuf
+      82  update
+      14  whiteerase
+
+ 
+ 8 783 bytes in section .bss
+    12 bytes in section .rodata
+ 1 654 bytes in section .text
+ 
+ 1 632 bytes of CODE  memory (+ 22 bytes shared)
+    12 bytes of CONST memory
+ 8 783 bytes of DATA  memory
+
+Errors: none
+Warnings: 2

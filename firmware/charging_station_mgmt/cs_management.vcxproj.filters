@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{c7ed036b-9cce-4c3e-a728-c944aae77ee7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\cs_management.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cs_management.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cs_management.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cs_management_dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComDeviceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serial_com.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="serial_com_messenger.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="win_serial_com_messenger.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="serial_com_messenger_hook.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="endpoint.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\btcommon\led_mapping.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\base64.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\md5.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="HexEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cs_management.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cs_management_dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComDeviceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="serial_com.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="serial_com_messenger.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="config_command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\btcommon\led_mapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\base64.c">
+      <Filter>Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\md5.cpp">
+      <Filter>Shared</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="cs_management.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,2013 @@
+###############################################################################
+#                                                                             #
+# IAR ELF Linker V6.40.1.53790/W32 for ARM              17/Apr/2019  16:26:58 #
+# Copyright 2007-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Output file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Exe\BC.out                     #
+#    Map file     =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\BC.map                    #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\arch.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\base64.o"                  #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\basic_rf.o"                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\config.o"                  #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\console_tail.o"            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\core.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\event.o"                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\flag.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\hardware.o"                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\hook.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\i2c_ee.o"                  #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\kernelHeap.o"              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\main.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\mbox.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\misc.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\mutex.o"                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\portForM3.o"               #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\queue.o"                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\radio.o"                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\sem.o"                     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\serviceReq.o"              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\startup_stm32f10x_cl.o"    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_adc.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_dac.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_dbgmcu.o"        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_dma.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_exti.o"          #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_flash.o"         #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_gpio.o"          #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_i2c.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_it.o"            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_iwdg.o"          #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_rcc.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_spi.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\stm32f10x_tim.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\system_stm32f10x.o"        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\task.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\tasks.o"                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\time.o"                    #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usb_bsp.o"                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usb_core.o"                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usb_dcd.o"                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usb_dcd_int.o"             #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_cdc_core.o"           #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_cdc_vcp.o"            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_core.o"               #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_desc.o"               #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_ioreq.o"              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_req.o"                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_usr.o"                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\util.o" -o                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Exe\BC.out" --map              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\BC.map" --log modules     #
+#                    --log_file "C:\Users\User\Documents\Cortex_git\BLKT-01.g #
+#                    it\Source Code\BLKT-01 Beacon\Source\firmware\beacon -   #
+#                    Copy\IAR\Debug-Bootloader\List\BC.log" --config          #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\stm32f10x_flash_boot.icf" --entry               #
+#                    __iar_program_start --vfe                                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at 0x0800c000 { ro section .intvec };
+"P1":  place in [from 0x0800c000 to 0x0801ffff] { ro };
+"P2":  place in [from 0x20000000 to 0x2000ffff] { rw, block CSTACK, block HEAP };
+
+  Section            Kind        Address     Size  Object
+  -------            ----        -------     ----  ------
+"A1":                                       0x150
+  .intvec            ro code  0x0800c000    0x150  startup_stm32f10x_cl.o [1]
+                            - 0x0800c150    0x150
+
+"P1":                                     0x10c84
+  .text              ro code  0x0800c150   0x3c60  tasks.o [1]
+  .text              ro code  0x0800fdb0     0x34  getchar.o [3]
+  .text              ro code  0x0800fde4    0x1e4  time.o [1]
+  .text              ro code  0x0800ffc8     0x28  putchar.o [3]
+  .text              ro code  0x0800fff0    0xc80  basic_rf.o [1]
+  .text              ro code  0x08010c70     0x94  stm32f10x_dac.o [1]
+  .text              ro code  0x08010d04    0x440  usbd_cdc_vcp.o [1]
+  .text              ro code  0x08011144     0x16  usbd_cdc_vcp.o [1]
+  .text              ro code  0x0801115a     0x22  zero_init3.o [5]
+  .text              ro code  0x0801117c    0x4e0  flag.o [1]
+  .text              ro code  0x0801165c     0x38  stm32f10x_iwdg.o [1]
+  .text              ro code  0x08011694    0x174  sem.o [1]
+  .text              ro code  0x08011808    0x3dc  main.o [1]
+  .text              ro code  0x08011be4     0x42  util.o [1]
+  .text              ro code  0x08011c26     0x1e  xsscin.o [3]
+  .text              ro code  0x08011c44    0x66c  stm32f10x_tim.o [1]
+  .text              ro code  0x080122b0    0xd8c  hardware.o [1]
+  .text              ro code  0x0801303c    0x134  core.o [1]
+  .text              ro code  0x08013170    0x6bc  task.o [1]
+  .text              ro code  0x0801382c    0x182  stm32f10x_flash.o [1]
+  .text              ro code  0x080139ae     0x1a  xsnprout.o [3]
+  .text              ro code  0x080139c8     0x36  strlen.o [5]
+  .text              ro code  0x080139fe      0xe  usbd_usr.o [1]
+  .text              ro code  0x08013a0c    0x13c  console_tail.o [1]
+  .text              ro code  0x08013b48      0xc  tasks.o [1]
+  .text              ro code  0x08013b54      0x4  strtoul.o [3]
+  .text              ro code  0x08013b58    0x128  config.o [1]
+  .text              ro code  0x08013c80     0x16  tasks.o [1]
+  .text              ro code  0x08013c96      0xa  xsprout.o [3]
+  .text              ro code  0x08013ca0    0x400  i2c_ee.o [1]
+  .text              ro code  0x080140a0     0x44  strcpy.o [5]
+  .text              ro code  0x080140e4    0x1a4  base64.o [1]
+  .text              ro code  0x08014288    0x1de  stm32f10x_adc.o [1]
+  .rodata            const    0x08014466      0x1  base64.o [1]
+  .rodata            const    0x08014467      0x1  basic_rf.o [1]
+  .text              ro code  0x08014468     0x1e  I32ToFlt.o [4]
+  .rodata            const    0x08014486      0x1  basic_rf.o [1]
+  .rodata            const    0x08014487      0x1  basic_rf.o [1]
+  .text              ro code  0x08014488     0xd8  FltMul.o [4]
+  .text              ro code  0x08014560     0xfc  FltDiv.o [4]
+  .text              ro code  0x0801465c     0x84  FltAdd.o [4]
+  .text              ro code  0x080146e0     0x24  FltCmpGe.o [4]
+  .text              ro code  0x08014704     0x4e  FltToDbl.o [4]
+  .rodata            const    0x08014752      0x1  basic_rf.o [1]
+  .rodata            const    0x08014753      0x1  basic_rf.o [1]
+  .text              ro code  0x08014754     0xe8  DblAdd.o [4]
+  .text              ro code  0x0801483c    0x1a2  DblMul.o [4]
+  .rodata            const    0x080149de      0x1  basic_rf.o [1]
+  .text              ro code  0x080149e0    0x246  DblDiv.o [4]
+  .text              ro code  0x08014c28     0x90  DblToFlt.o [4]
+  .text              ro code  0x08014cb8     0x24  FltCmpLe.o [4]
+  .text              ro code  0x08014cdc     0x58  DblToI32.o [4]
+  .text              ro code  0x08014d34     0x44  FltToS32.o [4]
+  .text              ro code  0x08014d78    0x224  event.o [1]
+  .text              ro code  0x08014f9c    0x220  mutex.o [1]
+  .text              ro code  0x080151bc    0x20a  radio.o [1]
+  .text              ro code  0x080153c8     0xa8  stm32f10x_spi.o [1]
+  .text              ro code  0x08015470    0x2f4  stm32f10x_rcc.o [1]
+  .text              ro code  0x08015764     0x2c  vsprintf.o [3]
+  .text              ro code  0x08015790     0x24  printf.o [3]
+  .text              ro code  0x080157b4     0x76  ABImemcpy.o [5]
+  .text              ro code  0x0801582c    0x124  serviceReq.o [1]
+  .text              ro code  0x08015950     0x9c  misc.o [1]
+  .text              ro code  0x080159ec    0x340  usbd_core.o [1]
+  .text              ro code  0x08015d2c     0x24  stm32f10x_dbgmcu.o [1]
+  .text              ro code  0x08015d50    0x240  stm32f10x_gpio.o [1]
+  .text              ro code  0x08015f90    0x238  stm32f10x_i2c.o [1]
+  .text              ro code  0x080161c8     0xcc  stm32f10x_exti.o [1]
+  CODE               ro code  0x08016294     0x80  portForM3.o [1]
+  .text              ro code  0x08016314     0x3c  kernelHeap.o [1]
+  .text              ro code  0x08016350      0x4  hook.o [1]
+  .text              ro code  0x08016354     0x8c  arch.o [1]
+  .text              ro code  0x080163e0     0x62  memcmp.o [5]
+  .text              ro code  0x08016444     0x34  sprintf.o [3]
+  .text              ro code  0x08016478     0x24  sscanf.o [3]
+  .text              ro code  0x0801649c     0x16  tasks.o [1]
+  .text              ro code  0x080164b4    0x174  xstoul.o [3]
+  .text              ro code  0x08016628     0x66  ABImemset.o [5]
+  .text              ro code  0x08016690     0x16  strchr.o [5]
+  .text              ro code  0x080166a8     0xd6  FltSub.o [4]
+  .text              ro code  0x08016780    0x180  DblSub.o [4]
+  .text              ro code  0x08016900    0xcce  xprintffull_nomb.o [3]
+  .text              ro code  0x080175d0     0x40  mbox.o [1]
+  .text              ro code  0x08017610     0x60  queue.o [1]
+  .text              ro code  0x08017670     0x6e  usb_bsp.o [1]
+  .text              ro code  0x080176de    0x2e6  usb_dcd.o [1]
+  .text              ro code  0x080179c4    0x6be  usbd_req.o [1]
+  .text              ro code  0x08018082     0xe4  usbd_ioreq.o [1]
+  .text              ro code  0x08018168    0x504  xscanfsmall_nomb.o [3]
+  .text              ro code  0x0801866c     0x58  memchr.o [5]
+  .text              ro code  0x080186c4      0xc  errno.o [3]
+  .text              ro code  0x080186d0     0xee  I64DivMod.o [5]
+  .text              ro code  0x080187be     0x42  xdnorm.o [4]
+  .text              ro code  0x08018800     0x2e  DblCmpLe.o [4]
+  .text              ro code  0x08018830     0x2e  DblCmpGe.o [4]
+  .text              ro code  0x08018860    0x10c  xdscale.o [4]
+  .text              ro code  0x0801896c     0x30  I32ToDbl.o [4]
+  .text              ro code  0x0801899c      0xe  div.o [3]
+  .text              ro code  0x080189ac    0xb2e  usb_core.o [1]
+  .text              ro code  0x080194da     0x86  xstol.o [3]
+  .text              ro code  0x08019560      0x2  xtls.o [3]
+  .text              ro code  0x08019564      0x2  I64DivZer.o [5]
+  .text              ro code  0x08019568   0x1118  stm32f10x_it.o [1]
+  .text              ro code  0x0801a680    0x6fa  usb_dcd_int.o [1]
+  .text              ro code  0x0801ad7c    0x340  usbd_cdc_core.o [1]
+  .text              ro code  0x0801b0bc    0x1a4  system_stm32f10x.o [1]
+  .text              ro code  0x0801b260     0xc0  usbd_desc.o [1]
+  .text              ro code  0x0801b320     0x44  snprintf.o [3]
+  .text              ro code  0x0801b364     0xa6  packbits_init3.o [5]
+  .rodata            const    0x0801b40c     0x7c  stm32f10x_it.o [1]
+  .rodata            const    0x0801b488     0x78  basic_rf.o [1]
+  .rodata            const    0x0801b500     0x74  main.o [1]
+  .rodata            const    0x0801b574     0x74  radio.o [1]
+  .rodata            const    0x0801b5e8     0x74  task.o [1]
+  .rodata            const    0x0801b65c     0x74  tasks.o [1]
+  .rodata            const    0x0801b6d0     0x4c  tasks.o [1]
+  .rodata            const    0x0801b71c     0x48  hardware.o [1]
+  .rodata            const    0x0801b764     0x44  base64.o [1]
+  .rodata            const    0x0801b7a8     0x40  tasks.o [1]
+  .rodata            const    0x0801b7e8     0x40  tasks.o [1]
+  .rodata            const    0x0801b828     0x3c  basic_rf.o [1]
+  .rodata            const    0x0801b864     0x38  tasks.o [1]
+  .rodata            const    0x0801b89c     0x38  tasks.o [1]
+  .rodata            const    0x0801b8d4     0x34  basic_rf.o [1]
+  .rodata            const    0x0801b908     0x34  tasks.o [1]
+  .rodata            const    0x0801b93c     0x34  tasks.o [1]
+  .rodata            const    0x0801b970     0x34  tasks.o [1]
+  .rodata            const    0x0801b9a4     0x34  tasks.o [1]
+  .rodata            const    0x0801b9d8     0x34  tasks.o [1]
+  .rodata            const    0x0801ba0c     0x30  hardware.o [1]
+  .rodata            const    0x0801ba3c     0x30  tasks.o [1]
+  .rodata            const    0x0801ba6c     0x30  tasks.o [1]
+  .rodata            const    0x0801ba9c     0x30  tasks.o [1]
+  .rodata            const    0x0801bacc     0x30  tasks.o [1]
+  .rodata            const    0x0801bafc     0x30  tasks.o [1]
+  .rodata            const    0x0801bb2c     0x30  tasks.o [1]
+  .rodata            const    0x0801bb5c     0x2c  tasks.o [1]
+  .rodata            const    0x0801bb88     0x2c  tasks.o [1]
+  .rodata            const    0x0801bbb4     0x2c  tasks.o [1]
+  .rodata            const    0x0801bbe0     0x2c  tasks.o [1]
+  .rodata            const    0x0801bc0c     0x2c  tasks.o [1]
+  .rodata            const    0x0801bc38     0x2c  tasks.o [1]
+  .rodata            const    0x0801bc64     0x2c  tasks.o [1]
+  .rodata            const    0x0801bc90     0x28  tasks.o [1]
+  .rodata            const    0x0801bcb8     0x28  tasks.o [1]
+  .rodata            const    0x0801bce0     0x28  tasks.o [1]
+  .rodata            const    0x0801bd08     0x28  tasks.o [1]
+  .rodata            const    0x0801bd30     0x28  tasks.o [1]
+  .rodata            const    0x0801bd58     0x28  tasks.o [1]
+  .rodata            const    0x0801bd80     0x28  tasks.o [1]
+  .rodata            const    0x0801bda8     0x28  tasks.o [1]
+  .rodata            const    0x0801bdd0     0x28  tasks.o [1]
+  .rodata            const    0x0801bdf8     0x28  tasks.o [1]
+  .text              ro code  0x0801be20     0x28  data_init3.o [5]
+  .rodata            const    0x0801be48     0x24  hardware.o [1]
+  .rodata            const    0x0801be6c     0x24  tasks.o [1]
+  .rodata            const    0x0801be90     0x24  tasks.o [1]
+  .rodata            const    0x0801beb4     0x24  tasks.o [1]
+  .rodata            const    0x0801bed8     0x24  tasks.o [1]
+  .rodata            const    0x0801befc     0x24  tasks.o [1]
+  .rodata            const    0x0801bf20     0x24  tasks.o [1]
+  .rodata            const    0x0801bf44     0x24  tasks.o [1]
+  .rodata            const    0x0801bf68     0x24  tasks.o [1]
+  .iar.init_table    const    0x0801bf8c     0x2c  - Linker created -
+  .rodata            const    0x0801bfb8     0x20  basic_rf.o [1]
+  .rodata            const    0x0801bfd8     0x20  tasks.o [1]
+  .rodata            const    0x0801bff8     0x20  tasks.o [1]
+  .rodata            const    0x0801c018     0x20  tasks.o [1]
+  .rodata            const    0x0801c038     0x20  tasks.o [1]
+  .rodata            const    0x0801c058     0x20  tasks.o [1]
+  .rodata            const    0x0801c078     0x20  tasks.o [1]
+  .rodata            const    0x0801c098     0x20  tasks.o [1]
+  .rodata            const    0x0801c0b8     0x20  tasks.o [1]
+  .rodata            const    0x0801c0d8     0x1c  basic_rf.o [1]
+  .rodata            const    0x0801c0f4     0x1c  main.o [1]
+  .rodata            const    0x0801c110     0x1c  tasks.o [1]
+  .rodata            const    0x0801c12c     0x1c  tasks.o [1]
+  .rodata            const    0x0801c148     0x1c  tasks.o [1]
+  .rodata            const    0x0801c164     0x1c  tasks.o [1]
+  .rodata            const    0x0801c180     0x1c  tasks.o [1]
+  .rodata            const    0x0801c19c     0x1c  tasks.o [1]
+  .rodata            const    0x0801c1b8     0x1c  tasks.o [1]
+  .rodata            const    0x0801c1d4     0x1c  tasks.o [1]
+  .rodata            const    0x0801c1f0     0x1c  tasks.o [1]
+  .rodata            const    0x0801c20c     0x1c  tasks.o [1]
+  .rodata            const    0x0801c228     0x1c  tasks.o [1]
+  .rodata            const    0x0801c244     0x1c  tasks.o [1]
+  .rodata            const    0x0801c260     0x1c  tasks.o [1]
+  .rodata            const    0x0801c27c     0x1c  tasks.o [1]
+  .rodata            const    0x0801c298     0x18  basic_rf.o [1]
+  .rodata            const    0x0801c2b0     0x18  basic_rf.o [1]
+  .rodata            const    0x0801c2c8     0x18  basic_rf.o [1]
+  .rodata            const    0x0801c2e0     0x18  basic_rf.o [1]
+  .rodata            const    0x0801c2f8     0x18  hardware.o [1]
+  .rodata            const    0x0801c310     0x18  stm32f10x_it.o [1]
+  .rodata            const    0x0801c328     0x18  tasks.o [1]
+  .rodata            const    0x0801c340     0x18  tasks.o [1]
+  .rodata            const    0x0801c358     0x18  tasks.o [1]
+  .rodata            const    0x0801c370     0x18  tasks.o [1]
+  .rodata            const    0x0801c388     0x18  tasks.o [1]
+  .rodata            const    0x0801c3a0     0x18  tasks.o [1]
+  .rodata            const    0x0801c3b8     0x18  tasks.o [1]
+  .rodata            const    0x0801c3d0     0x18  tasks.o [1]
+  .rodata            const    0x0801c3e8     0x18  tasks.o [1]
+  .rodata            const    0x0801c400     0x18  tasks.o [1]
+  .rodata            const    0x0801c418     0x18  tasks.o [1]
+  .rodata            const    0x0801c430     0x18  tasks.o [1]
+  .rodata            const    0x0801c448     0x18  tasks.o [1]
+  .rodata            const    0x0801c460     0x18  tasks.o [1]
+  .rodata            const    0x0801c478     0x18  tasks.o [1]
+  .rodata            const    0x0801c490     0x18  tasks.o [1]
+  .rodata            const    0x0801c4a8     0x18  tasks.o [1]
+  .rodata            const    0x0801c4c0     0x18  tasks.o [1]
+  .rodata            const    0x0801c4d8     0x18  tasks.o [1]
+  .rodata            const    0x0801c4f0     0x18  tasks.o [1]
+  .rodata            const    0x0801c508     0x18  tasks.o [1]
+  .rodata            const    0x0801c520     0x18  tasks.o [1]
+  .rodata            const    0x0801c538     0x18  usbd_desc.o [1]
+  .text              ro code  0x0801c550     0x16  cmain.o [5]
+  .text              ro code  0x0801c566      0x4  low_level_init.o [3]
+  .text              ro code  0x0801c56a      0x4  exit.o [3]
+  .text              ro code  0x0801c570      0xa  cexit.o [5]
+  .text              ro code  0x0801c57c      0xc  XXexit.o [5]
+  .text              ro code  0x0801c588     0x16  xprout.o [3]
+  .rodata            const    0x0801c5a0     0x14  basic_rf.o [1]
+  .rodata            const    0x0801c5b4     0x14  basic_rf.o [1]
+  .rodata            const    0x0801c5c8     0x14  basic_rf.o [1]
+  .rodata            const    0x0801c5dc     0x14  basic_rf.o [1]
+  .rodata            const    0x0801c5f0     0x14  tasks.o [1]
+  .rodata            const    0x0801c604     0x14  tasks.o [1]
+  .rodata            const    0x0801c618     0x14  tasks.o [1]
+  .rodata            const    0x0801c62c     0x14  tasks.o [1]
+  .rodata            const    0x0801c640     0x14  tasks.o [1]
+  .rodata            const    0x0801c654     0x14  tasks.o [1]
+  .rodata            const    0x0801c668     0x14  tasks.o [1]
+  .rodata            const    0x0801c67c     0x14  tasks.o [1]
+  .rodata            const    0x0801c690     0x14  tasks.o [1]
+  .rodata            const    0x0801c6a4     0x14  tasks.o [1]
+  .rodata            const    0x0801c6b8     0x14  tasks.o [1]
+  .rodata            const    0x0801c6cc     0x14  tasks.o [1]
+  .rodata            const    0x0801c6e0     0x14  tasks.o [1]
+  .rodata            const    0x0801c6f4     0x14  usbd_desc.o [1]
+  .rodata            const    0x0801c708     0x10  basic_rf.o [1]
+  .rodata            const    0x0801c718     0x10  basic_rf.o [1]
+  .rodata            const    0x0801c728     0x10  tasks.o [1]
+  .rodata            const    0x0801c738     0x10  tasks.o [1]
+  .rodata            const    0x0801c748     0x10  tasks.o [1]
+  .rodata            const    0x0801c758     0x10  tasks.o [1]
+  .rodata            const    0x0801c768     0x10  tasks.o [1]
+  .rodata            const    0x0801c778     0x10  tasks.o [1]
+  .rodata            const    0x0801c788     0x10  tasks.o [1]
+  .rodata            const    0x0801c798     0x10  usbd_desc.o [1]
+  .text              ro code  0x0801c7a8     0x10  startup_stm32f10x_cl.o [1]
+  .rodata            const    0x0801c7b8      0xc  basic_rf.o [1]
+  .rodata            const    0x0801c7c4      0xc  basic_rf.o [1]
+  .rodata            const    0x0801c7d0      0xc  basic_rf.o [1]
+  .rodata            const    0x0801c7dc      0xc  basic_rf.o [1]
+  .rodata            const    0x0801c7e8      0xc  basic_rf.o [1]
+  .rodata            const    0x0801c7f4      0xc  hardware.o [1]
+  .rodata            const    0x0801c800      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c80c      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c818      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c824      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c830      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c83c      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c848      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c854      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c860      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c86c      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c878      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c884      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c890      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c89c      0xc  stm32f10x_it.o [1]
+  .rodata            const    0x0801c8a8      0xc  tasks.o [1]
+  .rodata            const    0x0801c8b4      0xc  tasks.o [1]
+  .rodata            const    0x0801c8c0      0xc  tasks.o [1]
+  .rodata            const    0x0801c8cc      0xc  tasks.o [1]
+  .rodata            const    0x0801c8d8      0xc  tasks.o [1]
+  .rodata            const    0x0801c8e4      0xc  tasks.o [1]
+  .rodata            const    0x0801c8f0      0xc  tasks.o [1]
+  .rodata            const    0x0801c8fc      0xc  tasks.o [1]
+  .rodata            const    0x0801c908      0xc  tasks.o [1]
+  .rodata            const    0x0801c914      0xc  tasks.o [1]
+  .rodata            const    0x0801c920      0xc  tasks.o [1]
+  .rodata            const    0x0801c92c      0xc  tasks.o [1]
+  .rodata            const    0x0801c938      0xc  tasks.o [1]
+  .rodata            const    0x0801c944      0xc  usbd_desc.o [1]
+  .text              ro code  0x0801c950      0xc  cstartup_M.o [5]
+  .rodata            const    0x0801c95c      0x8  console_tail.o [1]
+  .rodata            const    0x0801c964      0x8  console_tail.o [1]
+  .rodata            const    0x0801c96c      0x8  console_tail.o [1]
+  .rodata            const    0x0801c974      0x8  hardware.o [1]
+  .rodata            const    0x0801c97c      0x8  hardware.o [1]
+  .rodata            const    0x0801c984      0x8  hardware.o [1]
+  .rodata            const    0x0801c98c      0x8  hardware.o [1]
+  .rodata            const    0x0801c994      0x8  hardware.o [1]
+  .rodata            const    0x0801c99c      0x8  hardware.o [1]
+  .rodata            const    0x0801c9a4      0x8  main.o [1]
+  .rodata            const    0x0801c9ac      0x8  main.o [1]
+  .rodata            const    0x0801c9b4      0x8  task.o [1]
+  .rodata            const    0x0801c9bc      0x8  tasks.o [1]
+  .rodata            const    0x0801c9c4      0x8  tasks.o [1]
+  .rodata            const    0x0801c9cc      0x8  tasks.o [1]
+  .rodata            const    0x0801c9d4      0x8  tasks.o [1]
+  .rodata            const    0x0801c9dc      0x8  tasks.o [1]
+  .rodata            const    0x0801c9e4      0x8  usbd_desc.o [1]
+  .rodata            const    0x0801c9ec      0x4  hardware.o [1]
+  .rodata            const    0x0801c9f0      0x4  hardware.o [1]
+  .rodata            const    0x0801c9f4      0x4  hardware.o [1]
+  .rodata            const    0x0801c9f8      0x4  hardware.o [1]
+  .text              ro code  0x0801c9fc      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca00      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca04      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca08      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca0c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca10      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca14      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca18      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca1c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca20      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca24      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca28      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca2c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca30      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca34      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca38      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca3c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca40      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca44      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca48      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca4c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca50      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca54      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca58      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca5c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca60      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca64      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca68      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca6c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca70      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca74      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca78      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca7c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca80      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca84      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca88      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca8c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca90      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca94      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca98      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801ca9c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caa0      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caa4      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caa8      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caac      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cab0      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cab4      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cab8      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cabc      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cac0      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cac4      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cac8      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cacc      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cad0      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cad4      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cad8      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cadc      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cae0      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cae4      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cae8      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caec      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caf0      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caf4      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801caf8      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cafc      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cb00      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cb04      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cb08      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cb0c      0x4  startup_stm32f10x_cl.o [1]
+  .text              ro code  0x0801cb10      0x4  startup_stm32f10x_cl.o [1]
+  .rodata            const    0x0801cb14      0x0  zero_init3.o [5]
+  .rodata            const    0x0801cb14      0x0  packbits_init3.o [5]
+  Initializer bytes  ro data  0x0801cb14    0x2bf  <for P2 s0>
+                            - 0x0801cdd3  0x10c83
+
+"P2", part 1 of 3:                          0xac8
+  P2 s0                       0x20000000    0xac8  <Init block>
+    .data            inited   0x20000000    0x808  tasks.o [1]
+    .data            inited   0x20000808     0x48  config.o [1]
+    .data            inited   0x20000850     0x48  hardware.o [1]
+    .data            inited   0x20000898     0x44  usbd_cdc_core.o [1]
+    .data            inited   0x200008dc     0x40  basic_rf.o [1]
+    .data            inited   0x2000091c     0x30  hardware.o [1]
+    .data            inited   0x2000094c     0x2c  usbd_cdc_core.o [1]
+    .data            inited   0x20000978     0x2c  usbd_core.o [1]
+    .data            inited   0x200009a4     0x20  tasks.o [1]
+    .data            inited   0x200009c4     0x1c  basic_rf.o [1]
+    .data            inited   0x200009e0     0x1c  usbd_desc.o [1]
+    .data            inited   0x200009fc     0x1c  usbd_usr.o [1]
+    .data            inited   0x20000a18     0x14  usbd_cdc_vcp.o [1]
+    .data            inited   0x20000a2c     0x14  usbd_desc.o [1]
+    .data            inited   0x20000a40     0x10  basic_rf.o [1]
+    .data            inited   0x20000a50     0x10  stm32f10x_rcc.o [1]
+    .data            inited   0x20000a60      0xc  hardware.o [1]
+    .data            inited   0x20000a6c      0x8  hardware.o [1]
+    .data            inited   0x20000a74      0x8  hardware.o [1]
+    .data            inited   0x20000a7c      0x8  hardware.o [1]
+    .data            inited   0x20000a84      0x8  usbd_cdc_vcp.o [1]
+    .data            inited   0x20000a8c      0x4  stm32f10x_it.o [1]
+    .data            inited   0x20000a90      0x4  stm32f10x_it.o [1]
+    .data            inited   0x20000a94      0x4  stm32f10x_rcc.o [1]
+    .data            inited   0x20000a98      0x4  system_stm32f10x.o [1]
+    .data            inited   0x20000a9c      0x4  usbd_cdc_core.o [1]
+    .data            inited   0x20000aa0      0x4  usbd_core.o [1]
+    .data            inited   0x20000aa4      0x4  usbd_desc.o [1]
+    .data            inited   0x20000aa8      0x4  getchar.o [3]
+    .data            inited   0x20000aac      0x2  basic_rf.o [1]
+    .data            inited   0x20000aae      0x2  basic_rf.o [1]
+    .data            inited   0x20000ab0      0x2  hardware.o [1]
+    .data            inited   0x20000ab2      0x2  tasks.o [1]
+    .data            inited   0x20000ab4      0x1  basic_rf.o [1]
+    .data            inited   0x20000ab5      0x1  basic_rf.o [1]
+    .data            inited   0x20000ab6      0x1  basic_rf.o [1]
+    .data            inited   0x20000ab7      0x1  basic_rf.o [1]
+    .data            inited   0x20000ab8      0x1  main.o [1]
+    .data            inited   0x20000ab9      0x1  main.o [1]
+    .data            inited   0x20000aba      0x1  main.o [1]
+    .data            inited   0x20000abb      0x1  main.o [1]
+    .data            inited   0x20000abc      0x1  main.o [1]
+    .data            inited   0x20000abd      0x1  main.o [1]
+    .data            inited   0x20000abe      0x1  main.o [1]
+    .data            inited   0x20000abf      0x1  main.o [1]
+    .data            inited   0x20000ac0      0x1  main.o [1]
+    .data            inited   0x20000ac1      0x1  main.o [1]
+    .data            inited   0x20000ac2      0x1  main.o [1]
+    .data            inited   0x20000ac3      0x1  main.o [1]
+    .data            inited   0x20000ac4      0x1  tasks.o [1]
+    .data            inited   0x20000ac5      0x1  tasks.o [1]
+    .data            inited   0x20000ac6      0x1  tasks.o [1]
+    .data            inited   0x20000ac7      0x1  tasks.o [1]
+                            - 0x20000ac8    0xac8
+
+"P2", part 2 of 3:                         0xb0f8
+  .bss               zero     0x20000ac8   0x3ffc  tasks.o [1]
+  .bss               zero     0x20004ac4   0x2800  kernelHeap.o [1]
+  .bss               zero     0x200072c4    0x800  usbd_cdc_core.o [1]
+  .bss               zero     0x20007ac4    0x5f4  main.o [1]
+  .bss               zero     0x200080b8    0x400  main.o [1]
+  .bss               zero     0x200084b8    0x400  main.o [1]
+  .bss               zero     0x200088b8    0x400  main.o [1]
+  .bss               zero     0x20008cb8    0x400  main.o [1]
+  .bss               zero     0x200090b8    0x400  main.o [1]
+  .bss               zero     0x200094b8    0x400  main.o [1]
+  .bss               zero     0x200098b8    0x400  main.o [1]
+  .bss               zero     0x20009cb8    0x400  usbd_cdc_vcp.o [1]
+  .bss               zero     0x2000a0b8    0x3c0  tasks.o [1]
+  .bss               zero     0x2000a478    0x300  console_tail.o [1]
+  .bss               zero     0x2000a778    0x2ec  task.o [1]
+  .bss               zero     0x2000aa64    0x200  tasks.o [1]
+  .bss               zero     0x2000ac64    0x200  tasks.o [1]
+  .bss               zero     0x2000ae64    0x200  tasks.o [1]
+  .bss               zero     0x2000b064    0x200  usbd_cdc_vcp.o [1]
+  .bss               zero     0x2000b264    0x100  usbd_req.o [1]
+  .bss               zero     0x2000b364     0xa0  event.o [1]
+  .bss               zero     0x2000b404     0x98  basic_rf.o [1]
+  .bss               zero     0x2000b49c     0x94  basic_rf.o [1]
+  .bss               zero     0x2000b530     0x94  basic_rf.o [1]
+  .bss               zero     0x2000b5c4     0x84  basic_rf.o [1]
+  .bss               zero     0x2000b648     0x74  tasks.o [1]
+  .bss               zero     0x2000b6bc     0x64  serviceReq.o [1]
+  .bss               zero     0x2000b720     0x64  task.o [1]
+  .bss               zero     0x2000b784     0x50  mutex.o [1]
+  .bss               zero     0x2000b7d4     0x48  tasks.o [1]
+  .bss               zero     0x2000b81c     0x40  usbd_cdc_core.o [1]
+  .bss               zero     0x2000b85c     0x28  tasks.o [1]
+  .bss               zero     0x2000b884     0x20  stm32f10x_it.o [1]
+  .bss               zero     0x2000b8a4     0x20  stm32f10x_it.o [1]
+  .bss               zero     0x2000b8c4     0x14  flag.o [1]
+  .bss               zero     0x2000b8d8     0x10  console_tail.o [1]
+  .bss               zero     0x2000b8e8      0xc  basic_rf.o [1]
+  .bss               zero     0x2000b8f4      0xc  hardware.o [1]
+  .bss               zero     0x2000b900      0xc  tasks.o [1]
+  .bss               zero     0x2000b90c      0x4  basic_rf.o [1]
+  .bss               zero     0x2000b910      0x8  arch.o [1]
+  .bss               zero     0x2000b918      0x8  basic_rf.o [1]
+  .bss               zero     0x2000b920      0x8  hardware.o [1]
+  .bss               zero     0x2000b928      0x8  hardware.o [1]
+  .bss               zero     0x2000b930      0x8  i2c_ee.o [1]
+  .bss               zero     0x2000b938      0x8  kernelHeap.o [1]
+  .bss               zero     0x2000b940      0x8  main.o [1]
+  .bss               zero     0x2000b948      0x8  main.o [1]
+  .bss               zero     0x2000b950      0x8  stm32f10x_it.o [1]
+  .bss               zero     0x2000b958      0x8  stm32f10x_it.o [1]
+  .bss               zero     0x2000b960      0x8  stm32f10x_it.o [1]
+  .bss               zero     0x2000b968      0x8  stm32f10x_it.o [1]
+  .bss               zero     0x2000b970      0x8  stm32f10x_it.o [1]
+  .bss               zero     0x2000b978      0x8  task.o [1]
+  .bss               zero     0x2000b980      0x8  tasks.o [1]
+  .bss               zero     0x2000b988      0x8  tasks.o [1]
+  .bss               zero     0x2000b990      0x8  tasks.o [1]
+  .bss               zero     0x2000b998      0x8  tasks.o [1]
+  .bss               zero     0x2000b9a0      0x8  tasks.o [1]
+  .bss               zero     0x2000b9a8      0x8  tasks.o [1]
+  .bss               zero     0x2000b9b0      0x8  tasks.o [1]
+  .bss               zero     0x2000b9b8      0x8  tasks.o [1]
+  .bss               zero     0x2000b9c0      0x8  usbd_cdc_core.o [1]
+  .bss               zero     0x2000b9c8      0x4  basic_rf.o [1]
+  .bss               zero     0x2000b9cc      0x4  basic_rf.o [1]
+  .bss               zero     0x2000b9d0      0x4  basic_rf.o [1]
+  .bss               zero     0x2000b9d4      0x4  basic_rf.o [1]
+  .bss               zero     0x2000b9d8      0x4  basic_rf.o [1]
+  .bss               zero     0x2000b9dc      0x4  basic_rf.o [1]
+  .bss               zero     0x2000b9e0      0x4  console_tail.o [1]
+  .bss               zero     0x2000b9e4      0x4  console_tail.o [1]
+  .bss               zero     0x2000b9e8      0x4  event.o [1]
+  .bss               zero     0x2000b9ec      0x4  hardware.o [1]
+  .bss               zero     0x2000b9f0      0x4  hardware.o [1]
+  .bss               zero     0x2000b9f4      0x4  kernelHeap.o [1]
+  .bss               zero     0x2000b9f8      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000b9fc      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba00      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba04      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba08      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba0c      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba10      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba14      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba18      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba1c      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba20      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba24      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba28      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba2c      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba30      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba34      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba38      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba3c      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba40      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba44      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba48      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba4c      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba50      0x4  stm32f10x_it.o [1]
+  .bss               zero     0x2000ba54      0x4  task.o [1]
+  .bss               zero     0x2000ba58      0x4  task.o [1]
+  .bss               zero     0x2000ba5c      0x4  task.o [1]
+  .bss               zero     0x2000ba60      0x4  task.o [1]
+  .bss               zero     0x2000ba64      0x4  task.o [1]
+  .bss               zero     0x2000ba68      0x4  task.o [1]
+  .bss               zero     0x2000ba6c      0x4  tasks.o [1]
+  .bss               zero     0x2000ba70      0x4  tasks.o [1]
+  .bss               zero     0x2000ba74      0x4  tasks.o [1]
+  .bss               zero     0x2000ba78      0x4  tasks.o [1]
+  .bss               zero     0x2000ba7c      0x4  tasks.o [1]
+  .bss               zero     0x2000ba80      0x4  tasks.o [1]
+  .bss               zero     0x2000ba84      0x4  tasks.o [1]
+  .bss               zero     0x2000ba88      0x4  tasks.o [1]
+  .bss               zero     0x2000ba8c      0x4  tasks.o [1]
+  .bss               zero     0x2000ba90      0x4  tasks.o [1]
+  .bss               zero     0x2000ba94      0x4  tasks.o [1]
+  .bss               zero     0x2000ba98      0x4  tasks.o [1]
+  .bss               zero     0x2000ba9c      0x4  tasks.o [1]
+  .bss               zero     0x2000baa0      0x4  tasks.o [1]
+  .bss               zero     0x2000baa4      0x4  tasks.o [1]
+  .bss               zero     0x2000baa8      0x4  tasks.o [1]
+  .bss               zero     0x2000baac      0x4  tasks.o [1]
+  .bss               zero     0x2000bab0      0x4  tasks.o [1]
+  .bss               zero     0x2000bab4      0x4  tasks.o [1]
+  .bss               zero     0x2000bab8      0x4  tasks.o [1]
+  .bss               zero     0x2000babc      0x4  tasks.o [1]
+  .bss               zero     0x2000bac0      0x4  tasks.o [1]
+  .bss               zero     0x2000bac4      0x4  tasks.o [1]
+  .bss               zero     0x2000bac8      0x4  tasks.o [1]
+  .bss               zero     0x2000bacc      0x4  tasks.o [1]
+  .bss               zero     0x2000bad0      0x4  tasks.o [1]
+  .bss               zero     0x2000bad4      0x4  tasks.o [1]
+  .bss               zero     0x2000bad8      0x4  tasks.o [1]
+  .bss               zero     0x2000badc      0x4  tasks.o [1]
+  .bss               zero     0x2000bae0      0x4  tasks.o [1]
+  .bss               zero     0x2000bae4      0x4  tasks.o [1]
+  .bss               zero     0x2000bae8      0x4  tasks.o [1]
+  .bss               zero     0x2000baec      0x4  tasks.o [1]
+  .bss               zero     0x2000baf0      0x4  tasks.o [1]
+  .bss               zero     0x2000baf4      0x4  tasks.o [1]
+  .bss               zero     0x2000baf8      0x4  tasks.o [1]
+  .bss               zero     0x2000bafc      0x4  tasks.o [1]
+  .bss               zero     0x2000bb00      0x4  time.o [1]
+  .bss               zero     0x2000bb04      0x4  usbd_cdc_core.o [1]
+  .bss               zero     0x2000bb08      0x4  usbd_cdc_core.o [1]
+  .bss               zero     0x2000bb0c      0x4  usbd_cdc_core.o [1]
+  .bss               zero     0x2000bb10      0x4  usbd_cdc_core.o [1]
+  .bss               zero     0x2000bb14      0x4  usbd_cdc_core.o [1]
+  .bss               zero     0x2000bb18      0x4  usbd_cdc_core.o [1]
+  .bss               zero     0x2000bb1c      0x4  usbd_cdc_vcp.o [1]
+  .bss               zero     0x2000bb20      0x4  usbd_cdc_vcp.o [1]
+  .bss               zero     0x2000bb24      0x4  usbd_core.o [1]
+  .bss               zero     0x2000bb28      0x4  usbd_req.o [1]
+  .bss               zero     0x2000bb2c      0x4  usbd_req.o [1]
+  .bss               zero     0x2000bb30      0x4  usbd_req.o [1]
+  __DLIB_PERTHREAD   zero     0x2000bb34      0x4  errno.o [3]
+  .bss               zero     0x2000bb38      0x2  basic_rf.o [1]
+  .bss               zero     0x2000bb3a      0x2  basic_rf.o [1]
+  .bss               zero     0x2000bb3c      0x2  basic_rf.o [1]
+  .bss               zero     0x2000bb3e      0x2  main.o [1]
+  .bss               zero     0x2000bb40      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb42      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb44      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb46      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb48      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb4a      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb4c      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb4e      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb50      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb52      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb54      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb56      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb58      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb5a      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb5c      0x2  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb5e      0x2  task.o [1]
+  .bss               zero     0x2000bb60      0x2  tasks.o [1]
+  .bss               zero     0x2000bb62      0x2  tasks.o [1]
+  .bss               zero     0x2000bb64      0x2  tasks.o [1]
+  .bss               zero     0x2000bb66      0x2  tasks.o [1]
+  .bss               zero     0x2000bb68      0x2  tasks.o [1]
+  .bss               zero     0x2000bb6a      0x2  tasks.o [1]
+  .bss               zero     0x2000bb6c      0x2  tasks.o [1]
+  .bss               zero     0x2000bb6e      0x2  tasks.o [1]
+  .bss               zero     0x2000bb70      0x2  tasks.o [1]
+  .bss               zero     0x2000bb72      0x2  tasks.o [1]
+  .bss               zero     0x2000bb74      0x2  tasks.o [1]
+  .bss               zero     0x2000bb76      0x2  tasks.o [1]
+  .bss               zero     0x2000bb78      0x2  tasks.o [1]
+  .bss               zero     0x2000bb7a      0x2  tasks.o [1]
+  .bss               zero     0x2000bb7c      0x2  tasks.o [1]
+  .bss               zero     0x2000bb7e      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb7f      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb80      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb81      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb82      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb83      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb84      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb85      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb86      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb87      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb88      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb89      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb8a      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb8b      0x1  basic_rf.o [1]
+  .bss               zero     0x2000bb8c      0x1  core.o [1]
+  .bss               zero     0x2000bb8d      0x1  core.o [1]
+  .bss               zero     0x2000bb8e      0x1  core.o [1]
+  .bss               zero     0x2000bb8f      0x1  main.o [1]
+  .bss               zero     0x2000bb90      0x1  main.o [1]
+  .bss               zero     0x2000bb91      0x1  main.o [1]
+  .bss               zero     0x2000bb92      0x1  main.o [1]
+  .bss               zero     0x2000bb93      0x1  main.o [1]
+  .bss               zero     0x2000bb94      0x1  main.o [1]
+  .bss               zero     0x2000bb95      0x1  main.o [1]
+  .bss               zero     0x2000bb96      0x1  main.o [1]
+  .bss               zero     0x2000bb97      0x1  main.o [1]
+  .bss               zero     0x2000bb98      0x1  mutex.o [1]
+  .bss               zero     0x2000bb99      0x1  serviceReq.o [1]
+  .bss               zero     0x2000bb9a      0x1  serviceReq.o [1]
+  .bss               zero     0x2000bb9b      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb9c      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb9d      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb9e      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bb9f      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bba0      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bba1      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bba2      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bba3      0x1  stm32f10x_it.o [1]
+  .bss               zero     0x2000bba4      0x1  task.o [1]
+  .bss               zero     0x2000bba5      0x1  tasks.o [1]
+  .bss               zero     0x2000bba6      0x1  tasks.o [1]
+  .bss               zero     0x2000bba7      0x1  tasks.o [1]
+  .bss               zero     0x2000bba8      0x1  tasks.o [1]
+  .bss               zero     0x2000bba9      0x1  tasks.o [1]
+  .bss               zero     0x2000bbaa      0x1  tasks.o [1]
+  .bss               zero     0x2000bbab      0x1  tasks.o [1]
+  .bss               zero     0x2000bbac      0x1  tasks.o [1]
+  .bss               zero     0x2000bbad      0x1  tasks.o [1]
+  .bss               zero     0x2000bbae      0x1  tasks.o [1]
+  .bss               zero     0x2000bbaf      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb0      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb1      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb2      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb3      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb4      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb5      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb6      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb7      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb8      0x1  tasks.o [1]
+  .bss               zero     0x2000bbb9      0x1  tasks.o [1]
+  .bss               zero     0x2000bbba      0x1  usbd_cdc_core.o [1]
+  .bss               zero     0x2000bbbb      0x1  usbd_req.o [1]
+                            - 0x2000bbbc   0xb0f4
+
+"P2", part 3 of 3:                         0x1010
+  CSTACK                      0x2000bbc0   0x1000  <Block>
+    CSTACK           uninit   0x2000bbc0   0x1000  <Block tail>
+  .noinit            uninit   0x2000cbc0      0x4  stm32f10x_it.o [1]
+  .noinit            uninit   0x2000cbc4      0x4  stm32f10x_it.o [1]
+  .noinit            uninit   0x2000cbc8      0x4  stm32f10x_it.o [1]
+  .noinit            uninit   0x2000cbcc      0x4  tasks.o [1]
+                            - 0x2000cbd0   0x1010
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0xb0f4:
+          0x20000ac8  0xb0f4
+
+Copy/packbits (__iar_packbits_init3)
+    1 source range, total size 0x2bf (25% of destination):
+          0x0801cb14   0x2bf
+    1 destination range, total size 0xac8:
+          0x20000000   0xac8
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon - Copy\IAR\Debug-Bootloader\Obj: [1]
+    arch.o                      140                 8
+    base64.o                    420       69
+    basic_rf.o                3 200      595      764
+    config.o                    296       19       72
+    console_tail.o              316       24      792
+    core.o                      308                 3
+    event.o                     548               164
+    flag.o                    1 248                20
+    hardware.o                3 468      297      194
+    hook.o                        4
+    i2c_ee.o                  1 024                 8
+    kernelHeap.o                 60            10 252
+    main.o                      988      163    8 731
+    mbox.o                       64
+    misc.o                      156
+    mutex.o                     544                81
+    portForM3.o                 128
+    queue.o                      96
+    radio.o                     522      116
+    sem.o                       372
+    serviceReq.o                292               102
+    startup_stm32f10x_cl.o      632
+    stm32f10x_adc.o             478
+    stm32f10x_dac.o             148
+    stm32f10x_dbgmcu.o           36
+    stm32f10x_exti.o            204
+    stm32f10x_flash.o           386
+    stm32f10x_gpio.o            576
+    stm32f10x_i2c.o             568
+    stm32f10x_it.o            4 376      318      255
+    stm32f10x_iwdg.o             56
+    stm32f10x_rcc.o             756        5       20
+    stm32f10x_spi.o             168
+    stm32f10x_tim.o           1 644
+    system_stm32f10x.o          420        1        4
+    task.o                    1 724      124      883
+    tasks.o                  15 512    4 253   21 477
+    time.o                      484                 4
+    usb_bsp.o                   110
+    usb_core.o                2 862
+    usb_dcd.o                   742
+    usb_dcd_int.o             1 786
+    usbd_cdc_core.o             832       29    2 261
+    usbd_cdc_vcp.o            1 110        7    1 572
+    usbd_core.o                 832       12       52
+    usbd_desc.o                 192       94       52
+    usbd_ioreq.o                228
+    usbd_req.o                1 726               269
+    usbd_usr.o                   14        7       28
+    util.o                       66
+    -------------------------------------------------
+    Total:                   52 862    6 133   48 068
+
+command line: [2]
+    -------------------------------------------------
+    Total:
+
+dl7M_tln.a: [3]
+    div.o                        14
+    errno.o                      12                 4
+    exit.o                        4
+    getchar.o                    52        1        4
+    low_level_init.o              4
+    printf.o                     36
+    putchar.o                    40
+    snprintf.o                   68
+    sprintf.o                    52
+    sscanf.o                     36
+    strtoul.o                     4
+    vsprintf.o                   44
+    xprintffull_nomb.o        3 278
+    xprout.o                     22
+    xscanfsmall_nomb.o        1 284
+    xsnprout.o                   26
+    xsprout.o                    10
+    xsscin.o                     30
+    xstol.o                     134
+    xstoul.o                    372
+    xtls.o                        2
+    -------------------------------------------------
+    Total:                    5 524        1        8
+
+m7M_tl.a: [4]
+    DblAdd.o                    232
+    DblCmpGe.o                   46
+    DblCmpLe.o                   46
+    DblDiv.o                    582
+    DblMul.o                    418
+    DblSub.o                    384
+    DblToFlt.o                  144
+    DblToI32.o                   88
+    FltAdd.o                    132
+    FltCmpGe.o                   36
+    FltCmpLe.o                   36
+    FltDiv.o                    252
+    FltMul.o                    216
+    FltSub.o                    214
+    FltToDbl.o                   78
+    FltToS32.o                   68
+    I32ToDbl.o                   48
+    I32ToFlt.o                   30
+    xdnorm.o                     66
+    xdscale.o                   268
+    -------------------------------------------------
+    Total:                    3 384
+
+rt7M_tl.a: [5]
+    ABImemcpy.o                 118
+    ABImemset.o                 102
+    I64DivMod.o                 238
+    I64DivZer.o                   2
+    XXexit.o                     12
+    cexit.o                      10
+    cmain.o                      22
+    cstartup_M.o                 12
+    data_init3.o                 40
+    memchr.o                     88
+    memcmp.o                     98
+    packbits_init3.o            166
+    strchr.o                     22
+    strcpy.o                     68
+    strlen.o                     54
+    zero_init3.o                 34
+    -------------------------------------------------
+    Total:                    1 086
+
+    Gaps                         37        4
+    Linker created                        44    4 096
+-----------------------------------------------------
+    Grand Total:             62 893    6 182   52 172
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address    Size  Type      Object
+-----                      -------    ----  ----      ------
+?main                   0x0801c551          Code  Gb  cmain.o [5]
+ADC1_2_IRQHandler       0x0801ca69          Code  Wk  startup_stm32f10x_cl.o [1]
+ADCPrescTable           0x20000a94     0x4  Data  Lc  stm32f10x_rcc.o [1]
+ADC_Cmd                 0x080142d9    0x1a  Code  Gb  stm32f10x_adc.o [1]
+ADC_GetCalibrationStatus
+                        0x0801431f    0x18  Code  Gb  stm32f10x_adc.o [1]
+ADC_GetConversionValue  0x0801443f     0x6  Code  Gb  stm32f10x_adc.o [1]
+ADC_GetFlagStatus       0x0801444d    0x1a  Code  Gb  stm32f10x_adc.o [1]
+ADC_GetResetCalibrationStatus
+                        0x080142fd    0x18  Code  Gb  stm32f10x_adc.o [1]
+ADC_Init                0x08014289    0x50  Code  Gb  stm32f10x_adc.o [1]
+ADC_RegularChannelConfig
+                        0x08014351    0xee  Code  Gb  stm32f10x_adc.o [1]
+ADC_ResetCalibration    0x080142f3     0xa  Code  Gb  stm32f10x_adc.o [1]
+ADC_SoftwareStartConvCmd
+                        0x08014337    0x1a  Code  Gb  stm32f10x_adc.o [1]
+ADC_StartCalibration    0x08014315     0xa  Code  Gb  stm32f10x_adc.o [1]
+APBAHBPrescTable        0x20000a50    0x10  Data  Lc  stm32f10x_rcc.o [1]
+APP_Rx_Buffer           0x200072c4   0x800  Data  Gb  usbd_cdc_core.o [1]
+APP_Rx_length           0x2000bb10     0x4  Data  Gb  usbd_cdc_core.o [1]
+APP_Rx_ptr_in           0x2000bb08     0x4  Data  Gb  usbd_cdc_core.o [1]
+APP_Rx_ptr_out          0x2000bb0c     0x4  Data  Gb  usbd_cdc_core.o [1]
+APP_Tx_Buffer           0x20009cb8   0x400  Data  Lc  usbd_cdc_vcp.o [1]
+APP_Tx_ptr_in           0x2000bb20     0x4  Data  Gb  usbd_cdc_vcp.o [1]
+APP_Tx_ptr_out          0x2000bb1c     0x4  Data  Gb  usbd_cdc_vcp.o [1]
+ARM_proc_SN             0x2000b8f4     0xc  Data  Gb  hardware.o [1]
+AssignTCB               0x08013637    0x34  Code  Lc  task.o [1]
+BUTTON_CLK              0x0801c974     0x8  Data  Gb  hardware.o [1]
+BUTTON_PIN              0x0801c9ec     0x4  Data  Gb  hardware.o [1]
+BUTTON_PORT             0x20000a6c     0x8  Data  Gb  hardware.o [1]
+Base64                  0x0801b764    0x44  Data  Lc  base64.o [1]
+BattUnion               0x2000b9ec     0x4  Data  Gb  hardware.o [1]
+BusFault_Handler        0x08019893     0x2  Code  Gb  stm32f10x_it.o [1]
+CAN1_RX0_IRQHandler     0x0801ca71          Code  Wk  startup_stm32f10x_cl.o [1]
+CAN1_RX1_IRQHandler     0x0801ca75          Code  Wk  startup_stm32f10x_cl.o [1]
+CAN1_SCE_IRQHandler     0x0801ca79          Code  Wk  startup_stm32f10x_cl.o [1]
+CAN1_TX_IRQHandler      0x0801ca6d          Code  Wk  startup_stm32f10x_cl.o [1]
+CAN2_RX0_IRQHandler     0x0801cb05          Code  Wk  startup_stm32f10x_cl.o [1]
+CAN2_RX1_IRQHandler     0x0801cb09          Code  Wk  startup_stm32f10x_cl.o [1]
+CAN2_SCE_IRQHandler     0x0801cb0d          Code  Wk  startup_stm32f10x_cl.o [1]
+CAN2_TX_IRQHandler      0x0801cb01          Code  Wk  startup_stm32f10x_cl.o [1]
+CSTACK$$Base            0x2000bbc0           --   Gb  - Linker created -
+CSTACK$$Limit           0x2000cbc0           --   Gb  - Linker created -
+CalcConfigChecksum      0x08013b59    0x28  Code  Lc  config.o [1]
+CalcConfigChecksum      0x0801185d    0x2a  Code  Gb  main.o [1]
+CmdBuff                 0x2000b9c0     0x8  Data  Gb  usbd_cdc_core.o [1]
+CoAcceptSem             0x080116bb    0x34  Code  Gb  sem.o [1]
+CoAcceptSingleFlag      0x080111f9    0x40  Code  Gb  flag.o [1]
+CoAwakeTask             0x08013773    0x68  Code  Gb  task.o [1]
+CoClearFlag             0x080114b9    0x14  Code  Gb  flag.o [1]
+CoCreateFlag            0x0801117d    0x7c  Code  Gb  flag.o [1]
+CoCreateKheap           0x08016315    0x2c  Code  Gb  kernelHeap.o [1]
+CoCreateMutex           0x08014f9d    0x54  Code  Gb  mutex.o [1]
+CoCreateSem             0x08011695    0x26  Code  Gb  sem.o [1]
+CoEnterISR              0x0801303d     0xa  Code  Gb  core.o [1]
+CoEnterMutexSection     0x08014ff1    0xec  Code  Gb  mutex.o [1]
+CoExitISR               0x08013047    0x32  Code  Gb  core.o [1]
+CoGetOSTime             0x0800fee5     0x8  Code  Gb  time.o [1]
+CoGetStackDepth         0x080135e5    0x1c  Code  Gb  task.o [1]
+CoGetTaskFunc           0x08013625    0x12  Code  Gb  task.o [1]
+CoGetTaskLine           0x08013613    0x12  Code  Gb  task.o [1]
+CoGetTaskScheduledCount
+                        0x08013601    0x12  Code  Gb  task.o [1]
+CoIdleTask              0x08016351     0x2  Code  Gb  hook.o [1]
+CoInitOS                0x080130bb    0x56  Code  Gb  core.o [1]
+CoLeaveMutexSection     0x080150dd    0xc0  Code  Gb  mutex.o [1]
+CoPendSem               0x080116ef    0xa4  Code  Gb  sem.o [1]
+CoPostMail              0x080175d1    0x38  Code  Gb  mbox.o [1]
+CoPostQueueMail         0x08017611    0x58  Code  Gb  queue.o [1]
+CoPostSem               0x08011793    0x38  Code  Gb  sem.o [1]
+CoSchedLock             0x080130af     0xc  Code  Gb  core.o [1]
+CoSetFlag               0x080114cd    0x80  Code  Gb  flag.o [1]
+CoSetPriority           0x08013301   0x156  Code  Gb  task.o [1]
+CoStartOS               0x08013111    0x26  Code  Gb  core.o [1]
+CoStkOverflowHook       0x08016353     0x2  Code  Gb  hook.o [1]
+CoTickDelay             0x0800feed    0x4c  Code  Gb  time.o [1]
+CoWaitForMultipleFlags  0x08011365   0x154  Code  Gb  flag.o [1]
+CoWaitForSingleFlag     0x08011239   0x12c  Code  Gb  flag.o [1]
+ConsoleChecksum         0x08013a0d    0x1a  Code  Gb  console_tail.o [1]
+CopyConfigToExConfig    0x08013b81    0x1e  Code  Gb  config.o [1]
+CopyExConfigToConfig    0x08013b9f    0x28  Code  Gb  config.o [1]
+CreatEvent              0x08014dbd    0x54  Code  Gb  event.o [1]
+CreateEventList         0x08014d79    0x44  Code  Gb  event.o [1]
+CreateTCBList           0x08013171    0x48  Code  Gb  task.o [1]
+CreateTask              0x0801366b   0x108  Code  Gb  task.o [1]
+CurrentDataPointer      0x2000bb78     0x2  Data  Lc  tasks.o [1]
+DAC_Cmd                 0x08010cbb    0x26  Code  Gb  stm32f10x_dac.o [1]
+DAC_DeInit              0x08010c71    0x18  Code  Gb  stm32f10x_dac.o [1]
+DAC_Init                0x08010c89    0x32  Code  Gb  stm32f10x_dac.o [1]
+DAC_SetChannel2Data     0x08010ce1    0x1e  Code  Gb  stm32f10x_dac.o [1]
+DBGMCU_Config           0x08015d2d    0x1e  Code  Gb  stm32f10x_dbgmcu.o [1]
+DCD_EP_Close            0x080177fd    0x4a  Code  Gb  usb_dcd.o [1]
+DCD_EP_ClrStall         0x0801795b    0x50  Code  Gb  usb_dcd.o [1]
+DCD_EP_Open             0x08017781    0x7c  Code  Gb  usb_dcd.o [1]
+DCD_EP_PrepareRx        0x08017847    0x66  Code  Gb  usb_dcd.o [1]
+DCD_EP_SetAddress       0x080179ab    0x1a  Code  Gb  usb_dcd.o [1]
+DCD_EP_Stall            0x0801790b    0x50  Code  Gb  usb_dcd.o [1]
+DCD_EP_Tx               0x080178ad    0x5e  Code  Gb  usb_dcd.o [1]
+DCD_HandleEnumDone_ISR  0x0801acb9    0x4e  Code  Lc  usb_dcd_int.o [1]
+DCD_HandleInEP_ISR      0x0801a8ab   0x108  Code  Lc  usb_dcd_int.o [1]
+DCD_HandleOutEP_ISR     0x0801a9b3    0xde  Code  Lc  usb_dcd_int.o [1]
+DCD_HandleResume_ISR    0x0801a7d3    0x4c  Code  Lc  usb_dcd_int.o [1]
+DCD_HandleRxStatusQueueLevel_ISR
+                        0x0801aaaf    0xa4  Code  Lc  usb_dcd_int.o [1]
+DCD_HandleSof_ISR       0x0801aa91    0x1e  Code  Lc  usb_dcd_int.o [1]
+DCD_HandleUSBSuspend_ISR
+                        0x0801a81f    0x8c  Code  Lc  usb_dcd_int.o [1]
+DCD_HandleUsbReset_ISR  0x0801abf3    0xc6  Code  Lc  usb_dcd_int.o [1]
+DCD_Init                0x080176df    0xa2  Code  Gb  usb_dcd.o [1]
+DCD_IsoINIncomplete_ISR
+                        0x0801ad07    0x1e  Code  Lc  usb_dcd_int.o [1]
+DCD_IsoOUTIncomplete_ISR
+                        0x0801ad25    0x1e  Code  Lc  usb_dcd_int.o [1]
+DCD_OTG_ISR             0x0801a7ad    0x26  Code  Lc  usb_dcd_int.o [1]
+DCD_ReadDevInEP         0x0801ad4d    0x2e  Code  Lc  usb_dcd_int.o [1]
+DCD_SessionRequest_ISR  0x0801a78d    0x20  Code  Lc  usb_dcd_int.o [1]
+DCD_WriteEmptyTxFifo    0x0801ab53    0xa0  Code  Lc  usb_dcd_int.o [1]
+DMA1_Channel1_IRQHandler
+                        0x0801ca4d          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA1_Channel2_IRQHandler
+                        0x0801ca51          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA1_Channel3_IRQHandler
+                        0x0801ca55          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA1_Channel4_IRQHandler
+                        0x0801ca59          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA1_Channel5_IRQHandler
+                        0x0801ca5d          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA1_Channel6_IRQHandler
+                        0x0801ca61          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA1_Channel7_IRQHandler
+                        0x0801ca65          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA2_Channel1_IRQHandler
+                        0x0801cae5          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA2_Channel2_IRQHandler
+                        0x0801cae9          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA2_Channel3_IRQHandler
+                        0x0801caed          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA2_Channel4_IRQHandler
+                        0x0801caf1          Code  Wk  startup_stm32f10x_cl.o [1]
+DMA2_Channel5_IRQHandler
+                        0x0801caf5          Code  Wk  startup_stm32f10x_cl.o [1]
+DebugMon_Handler        0x08019899     0x2  Code  Gb  stm32f10x_it.o [1]
+Dec8                    0x080162a9          Code  Gb  portForM3.o [1]
+DlyList                 0x2000bb00     0x4  Data  Gb  time.o [1]
+EEPROM_ADDRESS          0x20000ab0     0x2  Data  Gb  hardware.o [1]
+EETime                  0x08013ca1    0x10  Code  Gb  i2c_ee.o [1]
+ETH_IRQHandler          0x0801caf9          Code  Wk  startup_stm32f10x_cl.o [1]
+ETH_WKUP_IRQHandler     0x0801cafd          Code  Wk  startup_stm32f10x_cl.o [1]
+EXTI0_IRQHandler        0x0801a19d    0x32  Code  Gb  stm32f10x_it.o [1]
+EXTI15_10_IRQHandler    0x0801a2c1    0x6a  Code  Gb  stm32f10x_it.o [1]
+EXTI1_IRQHandler        0x0801a1f5    0xa4  Code  Gb  stm32f10x_it.o [1]
+EXTI2_IRQHandler        0x0801a001   0x142  Code  Gb  stm32f10x_it.o [1]
+EXTI3_IRQHandler        0x0801a143    0x48  Code  Gb  stm32f10x_it.o [1]
+EXTI4_IRQHandler        0x0801ca49          Code  Wk  startup_stm32f10x_cl.o [1]
+EXTI9_5_IRQHandler      0x0801ca7d          Code  Wk  startup_stm32f10x_cl.o [1]
+EXTI_ClearITPendingBit  0x08016279     0x6  Code  Gb  stm32f10x_exti.o [1]
+EXTI_GetITStatus        0x08016251    0x28  Code  Gb  stm32f10x_exti.o [1]
+EXTI_Init               0x080161c9    0x88  Code  Gb  stm32f10x_exti.o [1]
+EventTaskToRdy          0x08014e9f    0x86  Code  Gb  event.o [1]
+EventTaskToWait         0x08014e11    0x8e  Code  Gb  event.o [1]
+EventTbl                0x2000b364    0xa0  Data  Gb  event.o [1]
+FLASH_ErasePage         0x08013855    0x5e  Code  Gb  stm32f10x_flash.o [1]
+FLASH_GetBank1Status    0x08013933    0x34  Code  Gb  stm32f10x_flash.o [1]
+FLASH_IRQHandler        0x0801ca31          Code  Wk  startup_stm32f10x_cl.o [1]
+FLASH_Lock              0x08013843    0x12  Code  Gb  stm32f10x_flash.o [1]
+FLASH_ProgramWord       0x080138b3    0x80  Code  Gb  stm32f10x_flash.o [1]
+FLASH_Unlock            0x0801382d    0x16  Code  Gb  stm32f10x_flash.o [1]
+FLASH_WaitForLastOperation
+                        0x08013981    0x2e  Code  Gb  stm32f10x_flash.o [1]
+FMBlist                 0x2000b9f4     0x4  Data  Gb  kernelHeap.o [1]
+FlagBlock               0x0801157b    0x3a  Code  Lc  flag.o [1]
+FlagCrl                 0x2000b8c4    0x14  Data  Gb  flag.o [1]
+FreeEventList           0x2000b9e8     0x4  Data  Gb  event.o [1]
+FreeTCB                 0x2000ba54     0x4  Data  Gb  task.o [1]
+GPIO_EXTILineConfig     0x08015f35    0x50  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_Init               0x08015d51   0x136  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_PinRemapConfig     0x08015ead    0x88  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_ReadInputDataBit   0x08015e87    0x1a  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_ResetBits          0x08015ea7     0x6  Code  Gb  stm32f10x_gpio.o [1]
+GPIO_SetBits            0x08015ea1     0x6  Code  Gb  stm32f10x_gpio.o [1]
+GPI_CLK                 0x0801ba0c    0x30  Data  Gb  hardware.o [1]
+GPI_PIN                 0x0801c2f8    0x18  Data  Gb  hardware.o [1]
+GPI_PORT                0x2000091c    0x30  Data  Gb  hardware.o [1]
+GPI_TYPE                0x0801c7f4     0xc  Data  Gb  hardware.o [1]
+GPO_CLK                 0x0801b71c    0x48  Data  Gb  hardware.o [1]
+GPO_PIN                 0x0801be48    0x24  Data  Gb  hardware.o [1]
+GPO_PORT                0x20000850    0x48  Data  Gb  hardware.o [1]
+GetARM_UUID             0x08012f8d    0x1a  Code  Gb  hardware.o [1]
+GetAverageImuData       0x0800c23b    0x32  Code  Lc  tasks.o [1]
+Handle_USBAsynchXfer    0x0801afb9    0xba  Code  Lc  usbd_cdc_core.o [1]
+HardFault_Handler       0x0801987d    0x14  Code  Gb  stm32f10x_it.o [1]
+HwAtoDInit              0x08012a11    0xea  Code  Lc  hardware.o [1]
+HwButtonInit            0x08012817    0x3c  Code  Gb  hardware.o [1]
+HwButtonPressed         0x08012853    0x1a  Code  Gb  hardware.o [1]
+HwDACInit               0x08012641    0x36  Code  Lc  hardware.o [1]
+HwGPIInit               0x08012677    0x48  Code  Gb  hardware.o [1]
+HwGPIState              0x080126bf    0x1a  Code  Gb  hardware.o [1]
+HwGPOHigh               0x080127c5    0x1e  Code  Gb  hardware.o [1]
+HwGPOInit               0x080126d9    0x42  Code  Gb  hardware.o [1]
+HwGPOInitAF             0x0801275d    0x4a  Code  Lc  hardware.o [1]
+HwGPOInitOC             0x0801271b    0x42  Code  Gb  hardware.o [1]
+HwGPOLow                0x080127a7    0x1e  Code  Gb  hardware.o [1]
+HwGPOToggle             0x080127e3    0x34  Code  Gb  hardware.o [1]
+HwGetSPISS              0x08012b2b    0x1a  Code  Gb  hardware.o [1]
+HwI2CInit               0x08012cf1   0x128  Code  Gb  hardware.o [1]
+HwIMUEXTIInit           0x08012f3d    0x50  Code  Gb  hardware.o [1]
+HwInkPeriphInit         0x080125f5    0x4c  Code  Lc  hardware.o [1]
+HwPeriphInit            0x08012b8d   0x164  Code  Gb  hardware.o [1]
+HwRadioEXTIInit         0x08012e19   0x124  Code  Gb  hardware.o [1]
+HwRadioSPIInit          0x08012581    0x74  Code  Lc  hardware.o [1]
+HwSPIInit               0x0801286d   0x1a4  Code  Gb  hardware.o [1]
+HwSPISSAssert           0x08012afb    0x18  Code  Gb  hardware.o [1]
+HwSPISSDeAssert         0x08012b13    0x18  Code  Gb  hardware.o [1]
+HwTIM1Init              0x080122b1    0x8e  Code  Lc  hardware.o [1]
+HwTIM2Init              0x0801233f    0xec  Code  Lc  hardware.o [1]
+HwTIM3Init              0x0801242b    0xd6  Code  Lc  hardware.o [1]
+HwTIM4Init              0x08012501    0x80  Code  Lc  hardware.o [1]
+HwWait                  0x08012b45    0x20  Code  Gb  hardware.o [1]
+I2C1_ER_IRQHandler      0x0801caa1          Code  Wk  startup_stm32f10x_cl.o [1]
+I2C1_EV_IRQHandler      0x0801ca9d          Code  Wk  startup_stm32f10x_cl.o [1]
+I2C2_ER_IRQHandler      0x0801caa9          Code  Wk  startup_stm32f10x_cl.o [1]
+I2C2_EV_IRQHandler      0x0801caa5          Code  Wk  startup_stm32f10x_cl.o [1]
+I2C_AcknowledgeConfig   0x080160e5    0x1c  Code  Gb  stm32f10x_i2c.o [1]
+I2C_CheckEvent          0x0801613d    0x38  Code  Gb  stm32f10x_i2c.o [1]
+I2C_ClearFlag           0x080161bb     0xe  Code  Gb  stm32f10x_i2c.o [1]
+I2C_Cmd                 0x08016091    0x1c  Code  Gb  stm32f10x_i2c.o [1]
+I2C_EE_BufferRead       0x08013cff    0xd6  Code  Gb  i2c_ee.o [1]
+I2C_EE_BufferWrite      0x08013dd5   0x164  Code  Gb  i2c_ee.o [1]
+I2C_EE_PageWrite        0x08013cd9    0x26  Code  Gb  i2c_ee.o [1]
+I2C_EE_PageWriteIMP     0x08013f39    0xee  Code  Lc  i2c_ee.o [1]
+I2C_EE_WaitEepromStandbyState
+                        0x08014027    0x54  Code  Lc  i2c_ee.o [1]
+I2C_GenerateSTART       0x080160ad    0x1c  Code  Gb  stm32f10x_i2c.o [1]
+I2C_GenerateSTOP        0x080160c9    0x1c  Code  Gb  stm32f10x_i2c.o [1]
+I2C_GetFlagStatus       0x08016175    0x46  Code  Gb  stm32f10x_i2c.o [1]
+I2C_Init                0x08015f91    0xf2  Code  Gb  stm32f10x_i2c.o [1]
+I2C_ReadRegister        0x08016123    0x1a  Code  Gb  stm32f10x_i2c.o [1]
+I2C_ReceiveData         0x08016107     0x6  Code  Gb  stm32f10x_i2c.o [1]
+I2C_Send7bitAddress     0x0801610d    0x16  Code  Gb  stm32f10x_i2c.o [1]
+I2C_SendData            0x08016101     0x6  Code  Gb  stm32f10x_i2c.o [1]
+IMUInit                 0x08010a79    0x48  Code  Gb  basic_rf.o [1]
+IMUPktNumAtSync         0x2000bb9b     0x1  Data  Gb  stm32f10x_it.o [1]
+IMUPresent              0x2000bbaa     0x1  Data  Gb  tasks.o [1]
+IMUProcess              0x08010ae1    0x82  Code  Gb  basic_rf.o [1]
+IMU_RawData             0x2000b8e8     0xc  Data  Gb  basic_rf.o [1]
+IMU_ReadOneByte         0x08015335    0x2a  Code  Gb  radio.o [1]
+IMU_SelectBank          0x08015387    0x10  Code  Gb  radio.o [1]
+IMU_TXBuffer            0x20000a40    0x10  Data  Gb  basic_rf.o [1]
+IMU_WriteOneByte        0x0801535f    0x28  Code  Gb  radio.o [1]
+IMUdbgPrt               0x2000baa8     0x4  Data  Gb  tasks.o [1]
+IRQ_DISABLE_SAVE        0x080162bf          Code  Gb  portForM3.o [1]
+IRQ_ENABLE_RESTORE      0x080162bb          Code  Gb  portForM3.o [1]
+IWDG_Enable             0x0801167f     0xa  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_ReloadCounter      0x08011675     0xa  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_SetPrescaler       0x08011665     0x8  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_SetReload          0x0801166d     0x8  Code  Gb  stm32f10x_iwdg.o [1]
+IWDG_WriteAccessCmd     0x0801165d     0x8  Code  Gb  stm32f10x_iwdg.o [1]
+ImuAccelBuffer          0x2000b928     0x8  Data  Gb  hardware.o [1]
+ImuGyroBuffer           0x2000b920     0x8  Data  Gb  hardware.o [1]
+Inc8                    0x08016295          Code  Gb  portForM3.o [1]
+InitTaskContext         0x08016355    0x22  Code  Gb  arch.o [1]
+InputDataIntoBuffer     0x0800c26d    0x4a  Code  Lc  tasks.o [1]
+InsertDelayList         0x0800fde5    0x8e  Code  Gb  time.o [1]
+InsertInSRQ             0x0801582d    0x62  Code  Gb  serviceReq.o [1]
+InsertToTCBRdyList      0x080131b9    0xd2  Code  Gb  task.o [1]
+IsrReq                  0x2000bb99     0x1  Data  Gb  serviceReq.o [1]
+KernelHeap              0x20004ac4  0x2800  Data  Gb  kernelHeap.o [1]
+Kheap                   0x2000b938     0x8  Data  Gb  kernelHeap.o [1]
+LoadConfig              0x08013bc7    0x96  Code  Gb  config.o [1]
+Load_2520_Defaults      0x0801018f    0x1c  Code  Gb  basic_rf.o [1]
+MemManage_Handler       0x08019891     0x2  Code  Gb  stm32f10x_it.o [1]
+MsTimerAtSync           0x2000bb46     0x2  Data  Gb  stm32f10x_it.o [1]
+MutexFreeID             0x2000bb98     0x1  Data  Gb  mutex.o [1]
+MutexTbl                0x2000b784    0x50  Data  Gb  mutex.o [1]
+NMI_Handler             0x0801c9fd          Code  Wk  startup_stm32f10x_cl.o [1]
+NVIC_GenerateSystemReset
+                        0x0800c22f     0xc  Code  Gb  tasks.o [1]
+NVIC_Init               0x0801595b    0x68  Code  Gb  misc.o [1]
+NVIC_PriorityGroupConfig
+                        0x08015951     0xa  Code  Gb  misc.o [1]
+NVIC_SetPriority        0x08011809    0x22  Code  Lc  main.o [1]
+NVIC_SetVectorTable     0x080159c3     0xc  Code  Gb  misc.o [1]
+OSCheckTime             0x2000b978     0x8  Data  Gb  task.o [1]
+OSIntNesting            0x2000bb8c     0x1  Data  Gb  core.o [1]
+OSSchedLock             0x2000bb8d     0x1  Data  Gb  core.o [1]
+OSTickCnt               0x2000b910     0x8  Data  Gb  arch.o [1]
+OTG_FS_IRQHandler       0x0801989b     0xc  Code  Gb  stm32f10x_it.o [1]
+OTG_FS_WKUP_IRQHandler  0x0801cac9          Code  Wk  startup_stm32f10x_cl.o [1]
+OsSchedUnlock           0x08013079    0x36  Code  Gb  core.o [1]
+PVD_IRQHandler          0x0801ca25          Code  Wk  startup_stm32f10x_cl.o [1]
+Pad64                   0x08014466     0x1  Data  Lc  base64.o [1]
+PendSV_Handler          0x080162d3          Code  Gb  portForM3.o [1]
+PrintConfig             0x0800c4e9   0x214  Code  Lc  tasks.o [1]
+ProcessRXError          0x0801024b    0x78  Code  Gb  basic_rf.o [1]
+RCC_ADCCLKConfig        0x08015479    0x18  Code  Gb  stm32f10x_rcc.o [1]
+RCC_AHBPeriphClockCmd   0x08015631    0x1e  Code  Gb  stm32f10x_rcc.o [1]
+RCC_APB1PeriphClockCmd  0x0801566d    0x1e  Code  Gb  stm32f10x_rcc.o [1]
+RCC_APB1PeriphResetCmd  0x080156a9    0x1e  Code  Gb  stm32f10x_rcc.o [1]
+RCC_APB2PeriphClockCmd  0x0801564f    0x1e  Code  Gb  stm32f10x_rcc.o [1]
+RCC_APB2PeriphResetCmd  0x0801568b    0x1e  Code  Gb  stm32f10x_rcc.o [1]
+RCC_ClearFlag           0x08015717     0xe  Code  Gb  stm32f10x_rcc.o [1]
+RCC_GetClocksFreq       0x08015491   0x1a0  Code  Gb  stm32f10x_rcc.o [1]
+RCC_GetFlagStatus       0x080156c7    0x50  Code  Gb  stm32f10x_rcc.o [1]
+RCC_IRQHandler          0x0801ca35          Code  Wk  startup_stm32f10x_cl.o [1]
+RCC_OTGFSCLKConfig      0x08015471     0x8  Code  Gb  stm32f10x_rcc.o [1]
+RFSyncPktRx             0x0801971d    0x3c  Code  Lc  stm32f10x_it.o [1]
+RF_SPI_CCA_CMD_STATE    0x080149de     0x1  Data  Gb  basic_rf.o [1]
+RF_SPI_INIT_STATE       0x08014467     0x1  Data  Gb  basic_rf.o [1]
+RF_SPI_RX1_UPLOADCMD_STATE
+                        0x08014487     0x1  Data  Gb  basic_rf.o [1]
+RF_SPI_RX2_DOWNLOAD_HEADER_STATE
+                        0x08014752     0x1  Data  Gb  basic_rf.o [1]
+RF_SPI_RX3_DOWNLOAD_BODY_STATE
+                        0x08014753     0x1  Data  Gb  basic_rf.o [1]
+RF_SPI_UPLOAD_ONLY_STATE
+                        0x08014486     0x1  Data  Gb  basic_rf.o [1]
+RTCAlarm_IRQHandler     0x0801cac5          Code  Wk  startup_stm32f10x_cl.o [1]
+RTC_IRQHandler          0x0801ca2d          Code  Wk  startup_stm32f10x_cl.o [1]
+RadioBuildHdr           0x0800fff1    0x50  Code  Lc  basic_rf.o [1]
+RadioGetRandom          0x08015397    0x30  Code  Gb  radio.o [1]
+RadioIMU_ReleaseSPI     0x0801004f     0xe  Code  Gb  basic_rf.o [1]
+RadioIMU_WaitGrabSPI    0x08010041     0xe  Code  Gb  basic_rf.o [1]
+RadioInit               0x0801005d   0x132  Code  Gb  basic_rf.o [1]
+RadioPrint2520Registers
+                        0x080101ab    0xa0  Code  Gb  basic_rf.o [1]
+RadioRxPkt              0x080102c3   0x22e  Code  Gb  basic_rf.o [1]
+RadioSetPanIdShortAddr  0x08010949    0x4c  Code  Gb  basic_rf.o [1]
+RadioSetRFChan          0x08010995    0x78  Code  Gb  basic_rf.o [1]
+RadioSetRFLevel         0x08010a0d    0x66  Code  Gb  basic_rf.o [1]
+RadioTxPkt              0x080104f1   0x458  Code  Gb  basic_rf.o [1]
+RadioTxPktQueue         0x0800c6fd    0xe0  Code  Lc  tasks.o [1]
+ReadPage                0x0800de4f    0x24  Code  Gb  tasks.o [1]
+Region$$Table$$Base     0x0801bf8c           --   Gb  - Linker created -
+Region$$Table$$Limit    0x0801bfb8           --   Gb  - Linker created -
+RemoveDelayList         0x0800fe73    0x72  Code  Gb  time.o [1]
+RemoveEventWaittingList
+                        0x08014f25    0x5e  Code  Gb  event.o [1]
+RemoveFromLink          0x080115b5    0x3a  Code  Lc  flag.o [1]
+RemoveFromTCBRdyList    0x0801328b    0x76  Code  Gb  task.o [1]
+RemoveLinkNode          0x080115ef    0x56  Code  Gb  flag.o [1]
+Reset_Handler           0x0801c7a9          Code  Wk  startup_stm32f10x_cl.o [1]
+RespondSRQ              0x0801588f    0xb2  Code  Gb  serviceReq.o [1]
+SET_TEST_MODE           0x2000bb24     0x4  Data  Gb  usbd_core.o [1]
+SPI1_IRQHandler         0x0801caad          Code  Wk  startup_stm32f10x_cl.o [1]
+SPI2_IRQHandler         0x0801cab1          Code  Wk  startup_stm32f10x_cl.o [1]
+SPI3_IRQHandler         0x08019caf   0x332  Code  Gb  stm32f10x_it.o [1]
+SPI_CLK                 0x0801c98c     0x8  Data  Gb  hardware.o [1]
+SPI_Cmd                 0x08015409    0x1c  Code  Gb  stm32f10x_spi.o [1]
+SPI_I2S_GetFlagStatus   0x08015459    0x18  Code  Gb  stm32f10x_spi.o [1]
+SPI_I2S_ITConfig        0x08015425    0x2c  Code  Gb  stm32f10x_spi.o [1]
+SPI_I2S_ReceiveData     0x08015455     0x4  Code  Gb  stm32f10x_spi.o [1]
+SPI_I2S_SendData        0x08015451     0x4  Code  Gb  stm32f10x_spi.o [1]
+SPI_Init                0x080153c9    0x40  Code  Gb  stm32f10x_spi.o [1]
+SPI_PIN_MISO            0x0801c9f8     0x4  Data  Gb  hardware.o [1]
+SPI_PIN_MOSI            0x0801c9f4     0x4  Data  Gb  hardware.o [1]
+SPI_PIN_SCK             0x0801c9f0     0x4  Data  Gb  hardware.o [1]
+SPI_PORT                0x20000a7c     0x8  Data  Gb  hardware.o [1]
+SPI_REMAP               0x0801c984     0x8  Data  Gb  hardware.o [1]
+SPI_SPI                 0x20000a74     0x8  Data  Gb  hardware.o [1]
+SPI_SPI_CLK             0x0801c97c     0x8  Data  Gb  hardware.o [1]
+SPI_SS_CLK              0x0801c994     0x8  Data  Gb  hardware.o [1]
+SPI_SS_PIN              0x0801c99c     0x8  Data  Gb  hardware.o [1]
+SPI_SS_PORT             0x20000a60     0xc  Data  Gb  hardware.o [1]
+SVC_Handler             0x08019897     0x2  Code  Gb  stm32f10x_it.o [1]
+SaveConfig              0x08013c5d    0x16  Code  Gb  config.o [1]
+Schedule                0x08013457   0x18e  Code  Gb  task.o [1]
+Send_SPI_byte           0x08015201    0x20  Code  Gb  radio.o [1]
+SerialDownload          0x0800de73   0x114  Code  Gb  tasks.o [1]
+ServiceReq              0x2000b6bc    0x64  Data  Gb  serviceReq.o [1]
+SetConfig               0x0800c2b7   0x232  Code  Lc  tasks.o [1]
+SetEnvironment          0x080162c3          Code  Gb  portForM3.o [1]
+SetSysClock             0x0801b123     0x8  Code  Lc  system_stm32f10x.o [1]
+SetSysClockTo72         0x0801b12b   0x110  Code  Lc  system_stm32f10x.o [1]
+SetTimeSlot             0x0800c151    0x48  Code  Gb  tasks.o [1]
+SwitchContext           0x080162cb          Code  Gb  portForM3.o [1]
+SysTick_Config          0x0801182b    0x32  Code  Lc  main.o [1]
+SysTick_Handler         0x08016377    0x58  Code  Gb  arch.o [1]
+SystemCoreClock         0x20000a98     0x4  Data  Gb  system_stm32f10x.o [1]
+SystemInit              0x0801b0bd    0x66  Code  Gb  system_stm32f10x.o [1]
+TAMPER_IRQHandler       0x0801ca29          Code  Wk  startup_stm32f10x_cl.o [1]
+TCBNext                 0x2000ba5c     0x4  Data  Gb  task.o [1]
+TCBRdy                  0x2000ba58     0x4  Data  Gb  task.o [1]
+TCBRunning              0x2000ba60     0x4  Data  Gb  task.o [1]
+TCBTbl                  0x2000a778   0x2ec  Data  Gb  task.o [1]
+TI1_Config              0x08012095    0x6a  Code  Lc  stm32f10x_tim.o [1]
+TI2_Config              0x08012111    0x74  Code  Lc  stm32f10x_tim.o [1]
+TI3_Config              0x08012195    0x72  Code  Lc  stm32f10x_tim.o [1]
+TI4_Config              0x0801221d    0x74  Code  Lc  stm32f10x_tim.o [1]
+TIM1_BRK_IRQHandler     0x0801ca81          Code  Wk  startup_stm32f10x_cl.o [1]
+TIM1_CC_IRQHandler      0x0801ca8d          Code  Wk  startup_stm32f10x_cl.o [1]
+TIM1_TRG_COM_IRQHandler
+                        0x0801ca89          Code  Wk  startup_stm32f10x_cl.o [1]
+TIM1_UP_IRQHandler      0x080198a7    0x6a  Code  Gb  stm32f10x_it.o [1]
+TIM2_IRQHandler         0x0801a3b9   0x180  Code  Gb  stm32f10x_it.o [1]
+TIM3_IRQHandler         0x08019911   0x39e  Code  Gb  stm32f10x_it.o [1]
+TIM4_IRQHandler         0x0801ca99          Code  Wk  startup_stm32f10x_cl.o [1]
+TIM5_IRQHandler         0x0801a33d    0x2e  Code  Gb  stm32f10x_it.o [1]
+TIM6_IRQHandler         0x0801cadd          Code  Wk  startup_stm32f10x_cl.o [1]
+TIM7_IRQHandler         0x0801cae1          Code  Wk  startup_stm32f10x_cl.o [1]
+TIMEVALID               0x08013cb1    0x28  Code  Gb  i2c_ee.o [1]
+TIM_ARRPreloadConfig    0x08011fa3    0x1c  Code  Gb  stm32f10x_tim.o [1]
+TIM_ClearITPendingBit   0x0801208d     0x8  Code  Gb  stm32f10x_tim.o [1]
+TIM_Cmd                 0x08011f71    0x1c  Code  Gb  stm32f10x_tim.o [1]
+TIM_DeInit              0x08011c45   0x1e0  Code  Gb  stm32f10x_tim.o [1]
+TIM_GetCounter          0x08012057     0x4  Code  Gb  stm32f10x_tim.o [1]
+TIM_GetITStatus         0x0801205b    0x32  Code  Gb  stm32f10x_tim.o [1]
+TIM_ICInit              0x08011eb9    0xa0  Code  Gb  stm32f10x_tim.o [1]
+TIM_ITConfig            0x08011f8d    0x16  Code  Gb  stm32f10x_tim.o [1]
+TIM_OC2PreloadConfig    0x08011fbf    0x14  Code  Gb  stm32f10x_tim.o [1]
+TIM_OC3PreloadConfig    0x08011fd3    0x12  Code  Gb  stm32f10x_tim.o [1]
+TIM_OC4PreloadConfig    0x08011fe5    0x14  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetAutoreload       0x08011ff9     0x4  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetCompare2         0x08011ffd     0x4  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetCompare3         0x08012001     0x4  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetCompare4         0x08012005     0x6  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetIC1Prescaler     0x0801200b    0x12  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetIC2Prescaler     0x0801201d    0x14  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetIC3Prescaler     0x08012031    0x12  Code  Gb  stm32f10x_tim.o [1]
+TIM_SetIC4Prescaler     0x08012043    0x14  Code  Gb  stm32f10x_tim.o [1]
+TIM_TimeBaseInit        0x08011e25    0x94  Code  Gb  stm32f10x_tim.o [1]
+TIM_TimeBaseStructInit  0x08011f59    0x18  Code  Gb  stm32f10x_tim.o [1]
+TK_BK_MEMRD8            0x08015253    0x34  Code  Gb  radio.o [1]
+TK_BK_MEMWR16           0x08015287    0x3c  Code  Gb  radio.o [1]
+TK_BK_MEMWR8            0x08015221    0x32  Code  Gb  radio.o [1]
+TK_BK_REGRD8            0x080152c3    0x36  Code  Gb  radio.o [1]
+TK_BK_REGWR8            0x080152f9    0x34  Code  Gb  radio.o [1]
+TK_BK_SPI_RX            0x080151bd     0xc  Code  Lc  radio.o [1]
+TK_BK_SPI_TX            0x080151c9    0x12  Code  Lc  radio.o [1]
+TK_BK_SPI_TXRX          0x080151db    0x16  Code  Lc  radio.o [1]
+TK_BK_SPI_WAIT_RXRDY    0x080151f1    0x10  Code  Gb  radio.o [1]
+TRACE                   0x080110d3    0x46  Code  Gb  usbd_cdc_vcp.o [1]
+Task1                   0x0800d009   0x1c0  Code  Gb  tasks.o [1]
+Task3                   0x0800db31   0x214  Code  Gb  tasks.o [1]
+Task8                   0x0800f5f9   0x564  Code  Gb  tasks.o [1]
+TaskConfig              0x0800e0c5  0x11c4  Code  Gb  tasks.o [1]
+TaskIMU_G               0x0800fb75    0xb4  Code  Gb  tasks.o [1]
+TaskRadioRx             0x0800d289   0x86e  Code  Gb  tasks.o [1]
+TaskRadioTx             0x0800f351   0x19e  Code  Gb  tasks.o [1]
+TaskSchedReq            0x2000bb8e     0x1  Data  Gb  core.o [1]
+Tim2UpdMovAvg           0x080195cd    0x64  Code  Lc  stm32f10x_it.o [1]
+Tim3UpdMovAvg           0x08019569    0x64  Code  Lc  stm32f10x_it.o [1]
+TimeDispose             0x0800ff39    0x52  Code  Gb  time.o [1]
+TimeReq                 0x2000bb9a     0x1  Data  Gb  serviceReq.o [1]
+TimeSlotVals            0x200009a4    0x20  Data  Lc  tasks.o [1]
+TxAmpValues             0x0801c7e8     0xc  Data  Gb  basic_rf.o [1]
+UART4_IRQHandler        0x0801cad5          Code  Wk  startup_stm32f10x_cl.o [1]
+UART5_IRQHandler        0x0801cad9          Code  Wk  startup_stm32f10x_cl.o [1]
+USART1_IRQHandler       0x0801cab5          Code  Wk  startup_stm32f10x_cl.o [1]
+USART2_IRQHandler       0x0801cab9          Code  Wk  startup_stm32f10x_cl.o [1]
+USART3_IRQHandler       0x0801cabd          Code  Wk  startup_stm32f10x_cl.o [1]
+USBD_CDC_cb             0x2000094c    0x2c  Data  Gb  usbd_cdc_core.o [1]
+USBD_ClrCfg             0x08015cab    0x18  Code  Gb  usbd_core.o [1]
+USBD_ClrFeature         0x08017f8d    0x3a  Code  Lc  usbd_req.o [1]
+USBD_CtlContinueRx      0x08018101    0x1e  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlContinueSendData
+                        0x080180b3    0x1e  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlError           0x0801800b    0x1e  Code  Gb  usbd_req.o [1]
+USBD_CtlPrepareRx       0x080180d1    0x30  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlReceiveStatus   0x08018143    0x24  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlSendData        0x08018083    0x30  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlSendStatus      0x0801811f    0x24  Code  Gb  usbd_ioreq.o [1]
+USBD_DCD_INT_cb         0x20000978    0x2c  Data  Gb  usbd_core.o [1]
+USBD_DCD_INT_fops       0x20000aa0     0x4  Data  Gb  usbd_core.o [1]
+USBD_DataInStage        0x08015b23    0xd2  Code  Lc  usbd_core.o [1]
+USBD_DataOutStage       0x08015a89    0x9a  Code  Lc  usbd_core.o [1]
+USBD_DeInit             0x08015a31     0x6  Code  Gb  usbd_core.o [1]
+USBD_DevConnected       0x08015ce7    0x16  Code  Lc  usbd_core.o [1]
+USBD_DevDisconnected    0x08015cfd    0x28  Code  Lc  usbd_core.o [1]
+USBD_DeviceDesc         0x20000a2c    0x14  Data  Gb  usbd_desc.o [1]
+USBD_GetConfig          0x08017e61    0x48  Code  Lc  usbd_req.o [1]
+USBD_GetDescriptor      0x08017c05   0x136  Code  Lc  usbd_req.o [1]
+USBD_GetLen             0x0801806f    0x14  Code  Lc  usbd_req.o [1]
+USBD_GetStatus          0x08017ea9    0x40  Code  Lc  usbd_req.o [1]
+USBD_GetString          0x08018029    0x46  Code  Gb  usbd_req.o [1]
+USBD_Init               0x080159ed    0x44  Code  Gb  usbd_core.o [1]
+USBD_IsoINIncomplete    0x08015cc3    0x12  Code  Lc  usbd_core.o [1]
+USBD_IsoOUTIncomplete   0x08015cd5    0x12  Code  Lc  usbd_core.o [1]
+USBD_LangIDDesc         0x20000aa4     0x4  Data  Gb  usbd_desc.o [1]
+USBD_OTG_ISR_Handler    0x0801a681   0x10c  Code  Gb  usb_dcd_int.o [1]
+USBD_ParseSetupRequest  0x08017fc7    0x44  Code  Gb  usbd_req.o [1]
+USBD_Reset              0x08015c03    0x30  Code  Lc  usbd_core.o [1]
+USBD_Resume             0x08015c33    0x1e  Code  Lc  usbd_core.o [1]
+USBD_RunTestMode        0x08015bf5     0xe  Code  Lc  usbd_core.o [1]
+USBD_SOF                0x08015c6f    0x1c  Code  Lc  usbd_core.o [1]
+USBD_SetAddress         0x08017d3b    0x60  Code  Lc  usbd_req.o [1]
+USBD_SetCfg             0x08015c8b    0x20  Code  Gb  usbd_core.o [1]
+USBD_SetConfig          0x08017d9b    0xc6  Code  Lc  usbd_req.o [1]
+USBD_SetFeature         0x08017ee9    0x90  Code  Lc  usbd_req.o [1]
+USBD_SetupStage         0x08015a37    0x52  Code  Lc  usbd_core.o [1]
+USBD_StdDevReq          0x080179c5    0x7c  Code  Gb  usbd_req.o [1]
+USBD_StdEPReq           0x08017a91   0x174  Code  Gb  usbd_req.o [1]
+USBD_StdItfReq          0x08017a41    0x50  Code  Gb  usbd_req.o [1]
+USBD_StrDesc            0x2000b264   0x100  Data  Gb  usbd_req.o [1]
+USBD_Suspend            0x08015c51    0x1e  Code  Lc  usbd_core.o [1]
+USBD_USR_ConfigStrDescriptor
+                        0x0801b2d3    0x14  Code  Gb  usbd_desc.o [1]
+USBD_USR_DeviceConfigured
+                        0x08013a03     0x2  Code  Gb  usbd_usr.o [1]
+USBD_USR_DeviceConnected
+                        0x08013a09     0x2  Code  Gb  usbd_usr.o [1]
+USBD_USR_DeviceDescriptor
+                        0x0801b261     0xa  Code  Gb  usbd_desc.o [1]
+USBD_USR_DeviceDisconnected
+                        0x08013a0b     0x2  Code  Gb  usbd_usr.o [1]
+USBD_USR_DeviceReset    0x08013a01     0x2  Code  Gb  usbd_usr.o [1]
+USBD_USR_DeviceResumed  0x08013a07     0x2  Code  Gb  usbd_usr.o [1]
+USBD_USR_DeviceSuspended
+                        0x08013a05     0x2  Code  Gb  usbd_usr.o [1]
+USBD_USR_Init           0x080139ff     0x2  Code  Gb  usbd_usr.o [1]
+USBD_USR_InterfaceStrDescriptor
+                        0x0801b2e7    0x14  Code  Gb  usbd_desc.o [1]
+USBD_USR_LangIDStrDescriptor
+                        0x0801b26b     0xa  Code  Gb  usbd_desc.o [1]
+USBD_USR_ManufacturerStrDescriptor
+                        0x0801b289    0x14  Code  Gb  usbd_desc.o [1]
+USBD_USR_ProductStrDescriptor
+                        0x0801b275    0x14  Code  Gb  usbd_desc.o [1]
+USBD_USR_SerialStrDescriptor
+                        0x0801b29d    0x36  Code  Gb  usbd_desc.o [1]
+USBD_cdc_GetCfgDesc     0x0801b073     0xa  Code  Lc  usbd_cdc_core.o [1]
+USBD_cfg_status         0x2000bb30     0x4  Data  Gb  usbd_req.o [1]
+USBD_default_cfg        0x2000bb2c     0x4  Data  Gb  usbd_req.o [1]
+USBD_ep_status          0x2000bb28     0x4  Data  Gb  usbd_req.o [1]
+USB_OTG_BSP_EnableInterrupt
+                        0x08017687    0x2e  Code  Gb  usb_bsp.o [1]
+USB_OTG_BSP_Init        0x08017671    0x16  Code  Gb  usb_bsp.o [1]
+USB_OTG_BSP_mDelay      0x080176cd    0x12  Code  Gb  usb_bsp.o [1]
+USB_OTG_BSP_uDelay      0x080176b5    0x18  Code  Gb  usb_bsp.o [1]
+USB_OTG_CoreInit        0x08018b89    0xca  Code  Gb  usb_core.o [1]
+USB_OTG_CoreInitDev     0x08018da3   0x1ae  Code  Gb  usb_core.o [1]
+USB_OTG_CoreReset       0x080189cf    0x64  Code  Lc  usb_core.o [1]
+USB_OTG_DisableGlobalInt
+                        0x08018c71    0x1e  Code  Gb  usb_core.o [1]
+USB_OTG_EP0Activate     0x08018fe7    0x50  Code  Gb  usb_core.o [1]
+USB_OTG_EP0StartXfer    0x08019295   0x12c  Code  Gb  usb_core.o [1]
+USB_OTG_EP0_OutStart    0x08019489    0x52  Code  Gb  usb_core.o [1]
+USB_OTG_EPActivate      0x08019037    0x7a  Code  Gb  usb_core.o [1]
+USB_OTG_EPClearStall    0x08019409    0x46  Code  Gb  usb_core.o [1]
+USB_OTG_EPDeactivate    0x080190b1    0x58  Code  Gb  usb_core.o [1]
+USB_OTG_EPSetStall      0x080193c1    0x48  Code  Gb  usb_core.o [1]
+USB_OTG_EPStartXfer     0x08019109   0x18c  Code  Gb  usb_core.o [1]
+USB_OTG_EnableCommonInt
+                        0x080189ad    0x22  Code  Lc  usb_core.o [1]
+USB_OTG_EnableDevInt    0x08018f51    0x62  Code  Gb  usb_core.o [1]
+USB_OTG_EnableGlobalInt
+                        0x08018c53    0x1e  Code  Gb  usb_core.o [1]
+USB_OTG_FlushRxFifo     0x08018cd7    0x40  Code  Gb  usb_core.o [1]
+USB_OTG_FlushTxFifo     0x08018c8f    0x48  Code  Gb  usb_core.o [1]
+USB_OTG_GetDeviceSpeed  0x08018fb3    0x34  Code  Gb  usb_core.o [1]
+USB_OTG_GetMode         0x08018d5d     0xa  Code  Gb  usb_core.o [1]
+USB_OTG_InitDevSpeed    0x08018d91    0x12  Code  Gb  usb_core.o [1]
+USB_OTG_IsDeviceMode    0x08018d67    0x18  Code  Gb  usb_core.o [1]
+USB_OTG_ReadCoreItr     0x08018d7f    0x12  Code  Gb  usb_core.o [1]
+USB_OTG_ReadDevAllInEPItr
+                        0x08019477    0x12  Code  Gb  usb_core.o [1]
+USB_OTG_ReadDevAllOutEp_itr
+                        0x0801944f    0x12  Code  Gb  usb_core.o [1]
+USB_OTG_ReadDevOutEP_itr
+                        0x08019461    0x16  Code  Gb  usb_core.o [1]
+USB_OTG_ReadPacket      0x08018a7b    0x2c  Code  Gb  usb_core.o [1]
+USB_OTG_SelectCore      0x08018aa7    0xe2  Code  Gb  usb_core.o [1]
+USB_OTG_SetCurrentMode  0x08018d21    0x3c  Code  Gb  usb_core.o [1]
+USB_OTG_WritePacket     0x08018a33    0x48  Code  Gb  usb_core.o [1]
+USB_OTG_dev             0x20007ac4   0x5f4  Data  Gb  main.o [1]
+USB_Rx_Buffer           0x2000b81c    0x40  Data  Gb  usbd_cdc_core.o [1]
+USB_Tx_State            0x2000bbba     0x1  Data  Gb  usbd_cdc_core.o [1]
+USR_cb                  0x200009fc    0x1c  Data  Gb  usbd_usr.o [1]
+USR_desc                0x200009e0    0x1c  Data  Gb  usbd_desc.o [1]
+UsageFault_Handler      0x08019895     0x2  Code  Gb  stm32f10x_it.o [1]
+VCP_Ctrl                0x08010d0d    0xb4  Code  Lc  usbd_cdc_vcp.o [1]
+VCP_DataRx              0x08010e7d    0xb6  Code  Lc  usbd_cdc_vcp.o [1]
+VCP_DataTx              0x08010dc1    0xbc  Code  Lc  usbd_cdc_vcp.o [1]
+VCP_DeInit              0x08010d09     0x4  Code  Lc  usbd_cdc_vcp.o [1]
+VCP_Init                0x08010d05     0x4  Code  Lc  usbd_cdc_vcp.o [1]
+VCP_fops                0x20000a18    0x14  Data  Gb  usbd_cdc_vcp.o [1]
+ValidateCommandLine     0x08013a27    0xe6  Code  Gb  console_tail.o [1]
+Valids                  0x2000ba6c     0x4  Data  Gb  tasks.o [1]
+WDTimerInit             0x08012b65    0x28  Code  Gb  hardware.o [1]
+WWDG_IRQHandler         0x0801ca21          Code  Wk  startup_stm32f10x_cl.o [1]
+WritePage               0x0800dd91    0xbe  Code  Gb  tasks.o [1]
+_GenldFullNoMb          0x08017321   0x266  Code  Lc  xprintffull_nomb.o [3]
+_GetintSmallNoMb        0x08018425   0x230  Code  Lc  xscanfsmall_nomb.o [3]
+_GetstrSmallNoMb        0x08018365    0xc0  Code  Lc  xscanfsmall_nomb.o [3]
+_LdtobFullNoMb          0x08016f21   0x3fa  Code  Lc  xprintffull_nomb.o [3]
+_LitobFullNoMb          0x08016e0b   0x10e  Code  Lc  xprintffull_nomb.o [3]
+_LocaleC_isspace        0x0801649d    0x16  Code  Gb  tasks.o [1]
+_PrintfFullNoMb         0x08016901   0x504  Code  Gb  xprintffull_nomb.o [3]
+_Prout                  0x0801c589    0x16  Code  Gb  xprout.o [3]
+_PutcharsFullNoMb       0x08017587    0x2e  Code  Lc  xprintffull_nomb.o [3]
+_SNProut                0x080139af    0x1a  Code  Gb  xsnprout.o [3]
+_SProut                 0x08013c97     0xa  Code  Gb  xsprout.o [3]
+_SScin                  0x08011c27    0x1e  Code  Gb  xsscin.o [3]
+_ScanfSmallNoMb         0x08018169   0x1f6  Code  Gb  xscanfsmall_nomb.o [3]
+_UngetChar              0x20000aa8     0x4  Data  Lc  getchar.o [3]
+__aeabi_cdcmple         0x08018801          Code  Gb  DblCmpLe.o [4]
+__aeabi_cdrcmple        0x08018831          Code  Gb  DblCmpGe.o [4]
+__aeabi_cfcmple         0x08014cb9          Code  Gb  FltCmpLe.o [4]
+__aeabi_cfrcmple        0x080146e1          Code  Gb  FltCmpGe.o [4]
+__aeabi_d2f             0x08014c29          Code  Gb  DblToFlt.o [4]
+__aeabi_d2iz            0x08014cdd          Code  Gb  DblToI32.o [4]
+__aeabi_d2uiz           0x08014d09          Code  Gb  DblToI32.o [4]
+__aeabi_dadd            0x08014755          Code  Gb  DblAdd.o [4]
+__aeabi_ddiv            0x080149e1          Code  Gb  DblDiv.o [4]
+__aeabi_dmul            0x0801483d          Code  Gb  DblMul.o [4]
+__aeabi_dsub            0x08016781          Code  Gb  DblSub.o [4]
+__aeabi_errno_addr      0x080186c5     0x6  Code  Gb  errno.o [3]
+__aeabi_f2d             0x08014705          Code  Gb  FltToDbl.o [4]
+__aeabi_f2iz            0x08014d35          Code  Gb  FltToS32.o [4]
+__aeabi_fadd            0x0801465d          Code  Gb  FltAdd.o [4]
+__aeabi_fdiv            0x08014561          Code  Gb  FltDiv.o [4]
+__aeabi_fmul            0x08014489          Code  Gb  FltMul.o [4]
+__aeabi_i2d             0x0801896d          Code  Gb  I32ToDbl.o [4]
+__aeabi_ldiv0           0x08019565          Code  Gb  I64DivZer.o [5]
+__aeabi_memcpy          0x080157b5          Code  Gb  ABImemcpy.o [5]
+__aeabi_memcpy4         0x080157d5          Code  Gb  ABImemcpy.o [5]
+__aeabi_memcpy8         0x080157d5          Code  Gb  ABImemcpy.o [5]
+__aeabi_memset          0x08016629          Code  Gb  ABImemset.o [5]
+__aeabi_ui2d            0x08018981          Code  Gb  I32ToDbl.o [4]
+__aeabi_ui2f            0x08014469          Code  Gb  I32ToFlt.o [4]
+__aeabi_uldivmod        0x080186d1          Code  Gb  I64DivMod.o [5]
+__cmain                 0x0801c551          Code  Gb  cmain.o [5]
+__exit                  0x0801c57d          Code  Gb  XXexit.o [5]
+__iar_Dnorm             0x080187bf    0x42  Code  Gb  xdnorm.o [4]
+__iar_Dscale            0x08018861   0x10c  Code  Gb  xdscale.o [4]
+__iar_Errno             0x2000bb34     0x4  Data  Gb  errno.o [3]
+__iar_Memchr            0x0801866d          Code  Gb  memchr.o [5]
+__iar_Memset            0x08016629          Code  Gb  ABImemset.o [5]
+__iar_Memset_word       0x08016631          Code  Gb  ABImemset.o [5]
+__iar_Stolx             0x080194db    0x86  Code  Gb  xstol.o [3]
+__iar_Stoul             0x080165d3     0x4  Code  Gb  xstoul.o [3]
+__iar_Stoulx            0x080164b5   0x118  Code  Gb  xstoul.o [3]
+__iar_Strchr            0x08016691          Code  Gb  strchr.o [5]
+__iar_d2uiz             0x08014d15          Code  Gb  DblToI32.o [4]
+__iar_dadd              0x08014769          Code  Gb  DblAdd.o [4]
+__iar_data_init3        0x0801be21    0x28  Code  Gb  data_init3.o [5]
+__iar_dlib_perthread_access
+                        0x08019561     0x2  Code  Gb  xtls.o [3]
+__iar_dsub              0x08016795          Code  Gb  DblSub.o [4]
+__iar_dsubStart         0x080167a7          Code  Gb  DblSub.o [4]
+__iar_fadd              0x0801466d          Code  Gb  FltAdd.o [4]
+__iar_fsub              0x080166a9          Code  Gb  FltSub.o [4]
+__iar_fsubStart         0x080166b9          Code  Gb  FltSub.o [4]
+__iar_packbits_init3    0x0801b365    0xa6  Code  Gb  packbits_init3.o [5]
+__iar_program_start     0x0801c951          Code  Gb  cstartup_M.o [5]
+__iar_ui2d              0x08018985          Code  Gb  I32ToDbl.o [4]
+__iar_ui2f              0x0801446d          Code  Gb  I32ToFlt.o [4]
+__iar_zero_init3        0x0801115b    0x22  Code  Gb  zero_init3.o [5]
+__low_level_init        0x0801c567     0x4  Code  Gb  low_level_init.o [3]
+__read                  0x08010f63    0xe4  Code  Gb  usbd_cdc_vcp.o [1]
+__task1_bat_pack        0x0800cb75    0x18  Code  Lc  tasks.o [1]
+__task1_batbtn_pack     0x0800cc1d    0x20  Code  Lc  tasks.o [1]
+__task1_batbtnimu_pack  0x0800cc3d    0x90  Code  Lc  tasks.o [1]
+__task1_batimu_pack     0x0800cb8d    0x84  Code  Lc  tasks.o [1]
+__task1_btn_pack        0x0800cacd    0x18  Code  Lc  tasks.o [1]
+__task1_btnimu_pack     0x0800cae5    0x84  Code  Lc  tasks.o [1]
+__task1_imu_pack        0x0800ca4d    0x80  Code  Lc  tasks.o [1]
+__task1_led_pack        0x0800ccd1    0x18  Code  Lc  tasks.o [1]
+__task1_ledbat_pack     0x0800ce31    0x20  Code  Lc  tasks.o [1]
+__task1_ledbatbtn_pack  0x0800cee9    0x28  Code  Lc  tasks.o [1]
+__task1_ledbatbtnimu_pack
+                        0x0800cf11    0x8a  Code  Lc  tasks.o [1]
+__task1_ledbatimu_pack  0x0800ce51    0x94  Code  Lc  tasks.o [1]
+__task1_ledbtn_pack     0x0800cd75    0x20  Code  Lc  tasks.o [1]
+__task1_ledbtnimu_pack  0x0800cd95    0x90  Code  Lc  tasks.o [1]
+__task1_ledimu_pack     0x0800cce9    0x88  Code  Lc  tasks.o [1]
+__vector_table          0x0800c000          Data  Gb  startup_stm32f10x_cl.o [1]
+__write                 0x08010f33    0x30  Code  Gb  usbd_cdc_vcp.o [1]
+__writeCmdLineRespPacket
+                        0x08011085    0x3c  Code  Gb  usbd_cdc_vcp.o [1]
+__writeIMU              0x080110c1    0x12  Code  Gb  usbd_cdc_vcp.o [1]
+_call_main              0x0801c55d          Code  Gb  cmain.o [5]
+_exit                   0x0801c571          Code  Gb  cexit.o [5]
+_main                   0x0801c563          Code  Gb  cmain.o [5]
+adjusted                0x2000bb52     0x2  Data  Gb  stm32f10x_it.o [1]
+adjusted_changed        0x2000bb9e     0x1  Data  Gb  stm32f10x_it.o [1]
+assert_failed           0x08011a9d    0x5a  Code  Gb  main.o [1]
+assert_loop             0x20000ac3     0x1  Data  Gb  main.o [1]
+asserted                0x2000bb8f     0x1  Data  Gb  main.o [1]
+b64_pton                0x080140e5   0x19a  Code  Gb  base64.o [1]
+backup_config           0x20000808    0x48  Data  Gb  config.o [1]
+beaconInSync            0x2000bba6     0x1  Data  Lc  tasks.o [1]
+beaconRSSI              0x2000bba8     0x1  Data  Lc  tasks.o [1]
+btnA                    0x2000b940     0x8  Data  Gb  main.o [1]
+btnB                    0x2000b948     0x8  Data  Gb  main.o [1]
+calls                   0x2000bab8     0x4  Data  Gb  tasks.o [1]
+cc2520_flags0           0x2000bb83     0x1  Data  Gb  basic_rf.o [1]
+cc2520_flags1           0x2000bb84     0x1  Data  Gb  basic_rf.o [1]
+cc2520_flags2           0x2000bb85     0x1  Data  Gb  basic_rf.o [1]
+cdcCmd                  0x20000a9c     0x4  Data  Lc  usbd_cdc_core.o [1]
+cdcLen                  0x2000bb14     0x4  Data  Lc  usbd_cdc_core.o [1]
+changeClocks            0x2000ba78     0x4  Data  Gb  tasks.o [1]
+chkbtnstate             0x08019631    0xec  Code  Lc  stm32f10x_it.o [1]
+config                  0x2000b7d4    0x48  Data  Gb  tasks.o [1]
+countA                  0x20000a8c     0x4  Data  Lc  stm32f10x_it.o [1]
+counter                 0x2000ba4c     0x4  Data  Gb  stm32f10x_it.o [1]
+counterIMU              0x2000bafc     0x4  Data  Gb  tasks.o [1]
+crc8                    0x08011be5    0x42  Code  Gb  util.o [1]
+currentTaskId           0x2000bba4     0x1  Data  Lc  task.o [1]
+delayedFrameIdCorrection
+                        0x2000ba30     0x4  Data  Gb  stm32f10x_it.o [1]
+digits                  0x080165d8    0x28  Data  Lc  xstoul.o [3]
+div                     0x0801899d     0xe  Code  Gb  div.o [3]
+drift                   0x2000b9fc     0x4  Data  Gb  stm32f10x_it.o [1]
+eeOSTime                0x2000b930     0x8  Data  Gb  i2c_ee.o [1]
+endRadioTx              0x2000b988     0x8  Data  Lc  tasks.o [1]
+errorFrameId            0x2000ba94     0x4  Data  Gb  tasks.o [1]
+exit                    0x0801c56b     0x4  Code  Gb  exit.o [3]
+fLast                   0x2000b85c    0x28  Data  Gb  tasks.o [1]
+fVolt                   0x2000baf4     0x4  Data  Gb  tasks.o [1]
+fillmsgBAT              0x0800c9d7    0x2a  Code  Gb  tasks.o [1]
+fillmsgBTN              0x0800c92d    0xaa  Code  Gb  tasks.o [1]
+fillmsgLED              0x0800ca01    0x4c  Code  Gb  tasks.o [1]
+fillmsgPreamble         0x0800c8c1    0x5e  Code  Gb  tasks.o [1]
+filltxbuf               0x0800c7e5    0xdc  Code  Gb  tasks.o [1]
+firstTime               0x20000ac7     0x1  Data  Gb  tasks.o [1]
+flagBTNNewData          0x20000abe     0x1  Data  Gb  main.o [1]
+flagBatDataReady        0x20000ac1     0x1  Data  Gb  main.o [1]
+flagBtnDataReady        0x20000ac0     0x1  Data  Gb  main.o [1]
+flagIMUDataReady        0x20000abf     0x1  Data  Gb  main.o [1]
+flagIMUNewData          0x20000ab9     0x1  Data  Gb  main.o [1]
+flagIMUTimeToSend       0x20000abc     0x1  Data  Gb  main.o [1]
+flagIMU_G_DRDY          0x20000aba     0x1  Data  Gb  main.o [1]
+flagLEDDataReady        0x20000ac2     0x1  Data  Gb  main.o [1]
+flagRadioCCA            0x20000abd     0x1  Data  Gb  main.o [1]
+flagRadioTxAllow        0x20000ab6     0x1  Data  Gb  basic_rf.o [1]
+flagRadioTxDone         0x20000ab5     0x1  Data  Gb  basic_rf.o [1]
+flagRadioTxReq          0x20000abb     0x1  Data  Gb  main.o [1]
+flagSPIIODone           0x2000bb80     0x1  Data  Gb  basic_rf.o [1]
+flagSPIMachineDone      0x20000ab7     0x1  Data  Gb  basic_rf.o [1]
+frameAdjust             0x20000ac5     0x1  Data  Gb  tasks.o [1]
+frameId                 0x2000b9f8     0x4  Data  Lc  stm32f10x_it.o [1]
+frameIdAtSync           0x2000ba08     0x4  Data  Gb  stm32f10x_it.o [1]
+frameIdCorrection       0x2000ba04     0x4  Data  Gb  stm32f10x_it.o [1]
+frameIdCorrectionCount  0x2000ba80     0x4  Data  Gb  tasks.o [1]
+frameIdFlag             0x20000ac4     0x1  Data  Gb  tasks.o [1]
+frameIdInced            0x2000ba3c     0x4  Data  Gb  stm32f10x_it.o [1]
+frameOffset             0x2000bb6c     0x2  Data  Gb  tasks.o [1]
+frameTime               0x2000b960     0x8  Data  Gb  stm32f10x_it.o [1]
+func                    0x2000ba64     0x4  Data  Gb  task.o [1]
+getchar                 0x0800fdb1    0x2e  Code  Gb  getchar.o [3]
+globl                   0x2000ba68     0x4  Data  Gb  task.o [1]
+got_beacon              0x2000bbb2     0x1  Data  Gb  tasks.o [1]
+halted                  0x2000bb64     0x2  Data  Lc  tasks.o [1]
+hard_fault_handler_c    0x08019759   0x124  Code  Gb  stm32f10x_it.o [1]
+header                  0x2000bae0     0x4  Data  Lc  tasks.o [1]
+hf_counter              0x2000ba1c     0x4  Data  Gb  stm32f10x_it.o [1]
+idle_stk                0x2000b720    0x64  Data  Gb  task.o [1]
+inIdx                   0x2000bb66     0x2  Data  Lc  tasks.o [1]
+isr_PostSem             0x080117cb    0x2e  Code  Gb  sem.o [1]
+isr_SetFlag             0x0801154d    0x2e  Code  Gb  flag.o [1]
+isr_TimeDispose         0x0800ff8b    0x1e  Code  Gb  time.o [1]
+isspace                 0x08013b49     0xc  Code  Gb  tasks.o [1]
+l                       0x2000bb5a     0x2  Data  Gb  stm32f10x_it.o [1]
+lastBatStatus           0x2000b900     0xc  Data  Lc  tasks.o [1]
+lastFrameIdAtCorrection
+                        0x2000ba28     0x4  Data  Gb  stm32f10x_it.o [1]
+lastFrameIdAtSync       0x2000ba9c     0x4  Data  Gb  tasks.o [1]
+lastFrameIdCorrection   0x2000baa0     0x4  Data  Gb  tasks.o [1]
+lastFrameTime           0x2000b9b8     0x8  Data  Gb  tasks.o [1]
+lastRadioTx             0x2000bbb7     0x1  Data  Gb  tasks.o [1]
+lastTim3Phase           0x2000bb74     0x2  Data  Gb  tasks.o [1]
+lastTime                0x2000bacc     0x4  Data  Gb  tasks.o [1]
+last_bat_sent           0x2000baac     0x4  Data  Gb  tasks.o [1]
+last_drift              0x2000ba00     0x4  Data  Gb  stm32f10x_it.o [1]
+last_percents           0x2000bba5     0x1  Data  Gb  tasks.o [1]
+last_reload             0x2000bb54     0x2  Data  Gb  stm32f10x_it.o [1]
+led_blinking            0x2000bb9f     0x1  Data  Gb  stm32f10x_it.o [1]
+line                    0x2000bb5e     0x2  Data  Gb  task.o [1]
+linecoding              0x20000a84     0x8  Data  Gb  usbd_cdc_vcp.o [1]
+log                     0x20000ac8  0x3ffc  Data  Gb  tasks.o [1]
+log_index_in            0x2000bb60     0x2  Data  Gb  tasks.o [1]
+lostSync                0x2000ba74     0x4  Data  Gb  tasks.o [1]
+main                    0x08011887   0x216  Code  Gb  main.o [1]
+memchr                  0x0801866d          Code  Gb  memchr.o [5]
+memcmp                  0x080163e1          Code  Gb  memcmp.o [5]
+memcpy                  0x08011145    0x16  Code  Gb  usbd_cdc_vcp.o [1]
+memset                  0x08013c81    0x16  Code  Gb  tasks.o [1]
+mycalls                 0x2000baec     0x4  Data  Gb  tasks.o [1]
+mygets                  0x0800c199    0x96  Code  Lc  tasks.o [1]
+ndigs                   0x08016600    0x28  Data  Lc  xstoul.o [3]
+newFrameIdAtSync        0x2000ba88     0x4  Data  Gb  tasks.o [1]
+newFrameTime            0x2000b998     0x8  Data  Gb  tasks.o [1]
+newTim3Phase            0x2000bb70     0x2  Data  Gb  tasks.o [1]
+newbcn                  0x2000ba7c     0x4  Data  Gb  tasks.o [1]
+notValids               0x2000ba70     0x4  Data  Gb  tasks.o [1]
+numTxRetries            0x2000bb44     0x2  Data  Gb  stm32f10x_it.o [1]
+oldFrameIdAtSync        0x2000ba84     0x4  Data  Gb  tasks.o [1]
+oldFrameTime            0x2000b990     0x8  Data  Gb  tasks.o [1]
+oldTim3Phase            0x2000bb72     0x2  Data  Gb  tasks.o [1]
+old_t1                  0x2000ba24     0x4  Data  Gb  stm32f10x_it.o [1]
+outIdx                  0x2000bb68     0x2  Data  Lc  tasks.o [1]
+over1                   0x2000bb50     0x2  Data  Gb  stm32f10x_it.o [1]
+pBattUnion              0x2000b9f0     0x4  Data  Gb  hardware.o [1]
+pSpiRxBuf               0x2000b9cc     0x4  Data  Gb  basic_rf.o [1]
+pSpiRxBuf_IMU           0x2000b9d0     0x4  Data  Gb  basic_rf.o [1]
+pSpiTxBuf               0x2000b9c8     0x4  Data  Gb  basic_rf.o [1]
+pSpiTxBuf_IMU           0x2000b9d4     0x4  Data  Gb  basic_rf.o [1]
+packet                  0x2000bb7a     0x2  Data  Lc  tasks.o [1]
+page                    0x20000000   0x808  Data  Gb  tasks.o [1]
+part_time_adjust        0x2000bba2     0x1  Data  Gb  stm32f10x_it.o [1]
+printf                  0x08015791    0x24  Code  Gb  printf.o [3]
+pushed_times            0x2000babc     0x4  Data  Gb  tasks.o [1]
+putchar                 0x0800ffc9    0x28  Code  Gb  putchar.o [3]
+queue_full              0x2000bba9     0x1  Data  Lc  tasks.o [1]
+radioConfig             0x2000b918     0x8  Data  Lc  basic_rf.o [1]
+radioRxEnd              0x2000b9a8     0x8  Data  Gb  tasks.o [1]
+radioRxStart            0x2000b9a0     0x8  Data  Gb  tasks.o [1]
+radioRxWait             0x2000b9b0     0x8  Data  Gb  tasks.o [1]
+radioTxEntries          0x2000baf0     0x4  Data  Gb  tasks.o [1]
+radio_off               0x2000bb81     0x1  Data  Gb  basic_rf.o [1]
+random                  0x2000cbcc     0x4  Data  Gb  tasks.o [1]
+readCCA                 0x2000bb8a     0x1  Data  Gb  basic_rf.o [1]
+realFrameId             0x2000ba98     0x4  Data  Gb  tasks.o [1]
+real_sec                0x2000ba0c     0x4  Data  Gb  stm32f10x_it.o [1]
+regVal                  0x200008dc    0x40  Data  Lc  basic_rf.o [1]
+regVal_IMU              0x200009c4    0x1c  Data  Lc  basic_rf.o [1]
+remainOutOfSyncTime     0x2000ba90     0x4  Data  Gb  tasks.o [1]
+rfChan                  0x2000bba7     0x1  Data  Lc  tasks.o [1]
+routerAddr              0x2000bb6a     0x2  Data  Gb  tasks.o [1]
+rt_flags                0x2000ba8c     0x4  Data  Gb  tasks.o [1]
+rxCount                 0x2000bb82     0x1  Data  Gb  basic_rf.o [1]
+rxDoneType              0x20000aae     0x2  Data  Gb  basic_rf.o [1]
+rxErrors                0x2000b90c     0x4  Data  Gb  basic_rf.o [1]
+rxFIFOError             0x2000bb38     0x2  Data  Gb  basic_rf.o [1]
+rxFIFOTime              0x2000b958     0x8  Data  Gb  stm32f10x_it.o [1]
+rxNotEmpty              0x2000bac8     0x4  Data  Gb  tasks.o [1]
+rxPackets               0x2000ba38     0x4  Data  Gb  stm32f10x_it.o [1]
+rxPkt                   0x2000b530    0x94  Data  Gb  basic_rf.o [1]
+rxPktCopy               0x2000b49c    0x94  Data  Lc  basic_rf.o [1]
+rxTotalRcvd             0x2000bac4     0x4  Data  Gb  tasks.o [1]
+rx_overflow             0x2000ba40     0x4  Data  Gb  stm32f10x_it.o [1]
+sampledCCA              0x2000bb40     0x2  Data  Gb  stm32f10x_it.o [1]
+savedFrameIdAtSync      0x2000bad4     0x4  Data  Gb  tasks.o [1]
+scratchBuf              0x2000b404    0x98  Data  Gb  basic_rf.o [1]
+sec                     0x2000ba20     0x4  Data  Gb  stm32f10x_it.o [1]
+secs                    0x2000ba50     0x4  Data  Gb  stm32f10x_it.o [1]
+sem                     0x2000b9dc     0x4  Data  Gb  basic_rf.o [1]
+semAllow                0x2000bbae     0x1  Data  Gb  tasks.o [1]
+semAllowPost            0x2000bb8b     0x1  Data  Gb  basic_rf.o [1]
+semAllowPostTask        0x2000bbad     0x1  Data  Gb  tasks.o [1]
+semIMUAllow             0x2000bb7f     0x1  Data  Gb  basic_rf.o [1]
+semRFRxFrames           0x2000bb97     0x1  Data  Gb  main.o [1]
+semTime                 0x2000b968     0x8  Data  Gb  stm32f10x_it.o [1]
+semTime2                0x2000b970     0x8  Data  Gb  stm32f10x_it.o [1]
+setIMUGRdy              0x2000bba1     0x1  Data  Gb  stm32f10x_it.o [1]
+setIMUReady             0x2000bbb9     0x1  Data  Gb  tasks.o [1]
+setRadioTx              0x2000bbac     0x1  Data  Gb  tasks.o [1]
+snprintf                0x0801b321    0x44  Code  Gb  snprintf.o [3]
+span                    0x2000bad0     0x4  Data  Gb  tasks.o [1]
+spi3_errors             0x2000ba34     0x4  Data  Gb  stm32f10x_it.o [1]
+spiIMUByteState         0x2000bb88     0x1  Data  Gb  basic_rf.o [1]
+spiIMUCount             0x2000bb87     0x1  Data  Gb  basic_rf.o [1]
+spiTime                 0x2000b950     0x8  Data  Gb  stm32f10x_it.o [1]
+spiTxRxByteCount        0x2000bb7e     0x1  Data  Gb  basic_rf.o [1]
+spiTxRxByteState        0x20000ab4     0x1  Data  Gb  basic_rf.o [1]
+sprintf                 0x08016445    0x34  Code  Gb  sprintf.o [3]
+sscanf                  0x08016479    0x24  Code  Gb  sscanf.o [3]
+stacked_lr              0x2000cbc0     0x4  Data  Gb  stm32f10x_it.o [1]
+stacked_pc              0x2000cbc4     0x4  Data  Gb  stm32f10x_it.o [1]
+stacked_psr             0x2000cbc8     0x4  Data  Gb  stm32f10x_it.o [1]
+startRadioTx            0x2000b980     0x8  Data  Lc  tasks.o [1]
+strchr                  0x08016691          Code  Gb  strchr.o [5]
+strcpy                  0x080140a1          Code  Gb  strcpy.o [5]
+strlen                  0x080139c9          Code  Gb  strlen.o [5]
+strrev                  0x08013b31    0x18  Code  Gb  console_tail.o [1]
+strtoul                 0x08013b55     0x4  Code  Gb  strtoul.o [3]
+successBeacons          0x2000baa4     0x4  Data  Gb  tasks.o [1]
+syncPackets             0x2000ba18     0x4  Data  Gb  stm32f10x_it.o [1]
+task1Id                 0x2000bb90     0x1  Data  Gb  main.o [1]
+task1Stack              0x200080b8   0x400  Data  Lc  main.o [1]
+task2StatusType         0x2000bbb1     0x1  Data  Gb  tasks.o [1]
+task3Id                 0x2000bb92     0x1  Data  Gb  main.o [1]
+task3Stack              0x200088b8   0x400  Data  Lc  main.o [1]
+task4Stack              0x20008cb8   0x400  Data  Lc  main.o [1]
+task8Id                 0x2000bb95     0x1  Data  Gb  main.o [1]
+task8Stack              0x200094b8   0x400  Data  Lc  main.o [1]
+taskConfigId            0x2000bb93     0x1  Data  Gb  main.o [1]
+taskIMUGId              0x2000bb96     0x1  Data  Gb  main.o [1]
+taskIMU_G_Stack         0x200098b8   0x400  Data  Lc  main.o [1]
+taskRadioRxId           0x2000bb91     0x1  Data  Gb  main.o [1]
+taskRadioRxStack        0x200084b8   0x400  Data  Lc  main.o [1]
+taskRadioTxId           0x2000bb94     0x1  Data  Gb  main.o [1]
+taskRadioTxStack        0x200090b8   0x400  Data  Lc  main.o [1]
+tasksWDT                0x2000bb3e     0x2  Data  Gb  main.o [1]
+test_imu_pkt_ctr        0x2000bbab     0x1  Data  Gb  tasks.o [1]
+tim2HistA               0x2000b8a4    0x20  Data  Lc  stm32f10x_it.o [1]
+tim2_phase              0x2000bb48     0x2  Data  Gb  stm32f10x_it.o [1]
+tim2_update_count       0x2000bb9d     0x1  Data  Lc  stm32f10x_it.o [1]
+tim3HistA               0x2000b884    0x20  Data  Lc  stm32f10x_it.o [1]
+tim3_at_radio           0x2000bb58     0x2  Data  Gb  stm32f10x_it.o [1]
+tim3_phase              0x2000bb4a     0x2  Data  Gb  stm32f10x_it.o [1]
+tim3_update_count       0x2000bb9c     0x1  Data  Lc  stm32f10x_it.o [1]
+tim4_phase              0x2000bb6e     0x2  Data  Gb  tasks.o [1]
+tim_at_sec              0x2000bb62     0x2  Data  Gb  tasks.o [1]
+trace_format_buf        0x2000b064   0x200  Data  Gb  usbd_cdc_vcp.o [1]
+trace_irq               0x2000ba2c     0x4  Data  Gb  stm32f10x_it.o [1]
+txBuf                   0x2000b5c4    0x84  Data  Lc  basic_rf.o [1]
+txBuf                   0x2000b648    0x74  Data  Lc  tasks.o [1]
+txCalls                 0x2000bab0     0x4  Data  Gb  tasks.o [1]
+txCalls2                0x2000bab4     0x4  Data  Gb  tasks.o [1]
+txDoneType              0x20000aac     0x2  Data  Gb  basic_rf.o [1]
+txError                 0x2000bb86     0x1  Data  Gb  basic_rf.o [1]
+txErrors                0x2000b9d8     0x4  Data  Gb  basic_rf.o [1]
+txFIFOError             0x2000bb3a     0x2  Data  Gb  basic_rf.o [1]
+txFrmDoneCount          0x2000ba48     0x4  Data  Gb  stm32f10x_it.o [1]
+txLine                  0x2000bb3c     0x2  Data  Gb  basic_rf.o [1]
+txPktQueue              0x2000a0b8   0x3c0  Data  Lc  tasks.o [1]
+txRetryState            0x2000bb42     0x2  Data  Gb  stm32f10x_it.o [1]
+txTimeSlot              0x20000ab2     0x2  Data  Gb  tasks.o [1]
+tx_overflow             0x2000ba44     0x4  Data  Gb  stm32f10x_it.o [1]
+usbd_cdc_AltSet         0x2000bb04     0x4  Data  Lc  usbd_cdc_core.o [1]
+usbd_cdc_CfgDesc        0x20000898    0x44  Data  Gb  usbd_cdc_core.o [1]
+usbd_cdc_DataIn         0x0801aeeb    0x7c  Code  Lc  usbd_cdc_core.o [1]
+usbd_cdc_DataOut        0x0801af67    0x30  Code  Lc  usbd_cdc_core.o [1]
+usbd_cdc_DeInit         0x0801adc9    0x28  Code  Lc  usbd_cdc_core.o [1]
+usbd_cdc_EP0_RxReady    0x0801aec5    0x26  Code  Lc  usbd_cdc_core.o [1]
+usbd_cdc_Init           0x0801ad7d    0x4c  Code  Lc  usbd_cdc_core.o [1]
+usbd_cdc_SOF            0x0801af97    0x22  Code  Lc  usbd_cdc_core.o [1]
+usbd_cdc_Setup          0x0801adf1    0xd4  Code  Lc  usbd_cdc_core.o [1]
+use_sync                0x20000ac6     0x1  Data  Gb  tasks.o [1]
+use_tim3_phase          0x2000bb7c     0x2  Data  Gb  tasks.o [1]
+vsprintf                0x08015765    0x2c  Code  Gb  vsprintf.o [3]
+watchdog_active         0x20000ab8     0x1  Data  Gb  main.o [1]
+whole_time_adjust       0x2000bb5c     0x2  Data  Gb  stm32f10x_it.o [1]
+write_header            0x08011047    0x3e  Code  Lc  usbd_cdc_vcp.o [1]
+
+
+[1] = C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon - Copy\IAR\Debug-Bootloader\Obj
+[2] = command line
+[3] = dl7M_tln.a
+[4] = m7M_tl.a
+[5] = rt7M_tl.a
+
+  62 893 bytes of readonly  code memory
+   6 182 bytes of readonly  data memory
+  52 172 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

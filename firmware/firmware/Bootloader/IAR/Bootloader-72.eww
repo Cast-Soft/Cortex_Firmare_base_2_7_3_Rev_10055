@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\Bootloader-72.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>All</name>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Debug-Beacon</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Debug-Router</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Debug-TK</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Release-Beacon</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Release-Router</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Release-TK</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Debug-MainMemory-Beacon</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Debug-MainMemory-Router</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Debug-MainMemory-TK</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Release-MainMemory-Beacon</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Release-MainMemory-Router</configuration>
+      </member>
+      <member>
+        <project>Bootloader-72</project>
+        <configuration>Release-MainMemory-TK</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

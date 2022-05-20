@@ -1,0 +1,507 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     21/Mar/2019  12:17:25 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\t #
+#                    ime.c                                                    #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\t #
+#                    ime.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER -D          #
+#                    STM32F10X_CL -D COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D   #
+#                    _DEBUG -D BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D    #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D msgmethod1   #
+#                    -lcN "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sou #
+#                    rce Code\BLKT-01 Beacon\Source\firmware\beacon -         #
+#                    Copy\IAR\Debug-Bootloader\List\" -o                      #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\" --no_cse --no_unroll     #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --fpu=None --dlib_config "C:\Program Files (x86)\IAR  #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\Source Code\BLKT-01 Beacon\Source\firmware\beacon -    #
+#                    Copy\IAR\..\App\" -I "C:\Users\User\Documents\Cortex_git #
+#                    \BLKT-01.git\Source Code\BLKT-01                         #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    Copy\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\ #
+#                    Source Code\BLKT-01 Beacon\Source\firmware\beacon -      #
+#                    Copy\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sourc #
+#                    e Code\BLKT-01 Beacon\Source\firmware\beacon -           #
+#                    Copy\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\" -I "C:\Users\User\Documents\Cort #
+#                    ex_git\BLKT-01.git\Source Code\BLKT-01                   #
+#                    Beacon\Source\firmware\beacon - Copy\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\time.lst                  #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\time.o                     #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\time.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       time.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      time management implementation code of CooCox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          
+     17          
+     18          /*---------------------------- Include ---------------------------------------*/
+     19          #include <coocox.h>
+     20          
+     21          #include <stdint.h>
+     22          #if CFG_TASK_WAITTING_EN > 0
+     23          
+     24          /*---------------------------- Variable Define -------------------------------*/
+     25          P_OSTCB DlyList   = Co_NULL;               /*!< Header pointer to the DELAY list.*/
+     26          
+     27          
+     28          /**
+     29           *******************************************************************************
+     30           * @brief      Insert into DELAY list
+     31           *
+     32           * @param[in]  ptcb    Task that want to insert into DELAY list.
+     33           * @param[in]  ticks   Delay system ticks.
+     34           * @param[out] None
+     35           * @retval     None.
+     36           *
+     37           * @par Description
+     38           * @details    This function is called to insert task into DELAY list.
+     39           *******************************************************************************
+     40           */
+     41          void InsertDelayList(P_OSTCB ptcb,U32 ticks)
+     42          {
+     43              S32 deltaTicks;
+     44              P_OSTCB dlyNext;
+     45          
+     46              if(ticks == 0)                      /* Is delay tick == 0?                */
+     47                  return;                         /* Yes,do nothing,return              */
+     48              if(DlyList == Co_NULL)                 /* Is no item in DELAY list?          */
+     49              {
+     50                  ptcb->delayTick = ticks;        /* Yes,set this as first item         */
+     51                  DlyList         = ptcb;
+     52              }
+     53              else
+     54              {
+     55                  /* No,find correct place ,and insert the task */
+     56                  dlyNext    = DlyList;
+     57                  deltaTicks = ticks;             /* Get task delay ticks               */
+     58          
+     59                  /* Find correct place */
+     60                  while(dlyNext != Co_NULL)
+     61                  {
+     62                      /* Get delta ticks with previous item */
+     63                      deltaTicks -= dlyNext->delayTick;
+     64                      if(deltaTicks < 0)          /* Is delta ticks<0?                  */
+     65                      {
+     66                          /* Yes,get correct place */
+     67                          if(dlyNext->TCBprev != Co_NULL)   /* Is head item of DELAY list? */
+     68                          {
+     69                            //Dmitriy:
+     70                            /* seems BUG FOUND
+     71                            situation is following:
+     72                            dlyNext = task4 => task3 => task8;
+     73                            NOW: previous of task 4 is points to task 6,
+     74                            which is task we want to insert;
+     75                            so it ends up that taks's prev points to itself
+     76                            */
+     77                              /** added condition **/
+     78                            if (dlyNext->TCBprev != ptcb) {
+     79                              //assert(dlyNext->TCBprev != ptcb);
+     80                              dlyNext->TCBprev->TCBnext = ptcb;   /* No,insert into     */
+     81                              ptcb->TCBprev             = dlyNext->TCBprev;
+     82                              ptcb->TCBnext             = dlyNext;
+     83                              dlyNext->TCBprev          = ptcb;
+     84                            }
+     85                          }
+     86                          else                    /* Yes,set task as first item         */
+     87                          {
+     88                              ptcb->TCBnext    = DlyList;
+     89                              DlyList->TCBprev = ptcb;
+     90                              DlyList          = ptcb;
+     91                          }
+     92                          ptcb->delayTick           = ptcb->TCBnext->delayTick+deltaTicks;
+     93                          ptcb->TCBnext->delayTick -= ptcb->delayTick;
+     94                          break;
+     95                      }
+     96                      /* Is last item in DELAY list? */
+     97                      else if((deltaTicks >= 0) && (dlyNext->TCBnext == Co_NULL) )
+     98                      {
+     99                          ptcb->TCBprev    = dlyNext; /* Yes,insert into                */
+    100                          dlyNext->TCBnext = ptcb;
+    101                          ptcb->delayTick  = deltaTicks;
+    102                          break;
+    103                      }
+    104                      dlyNext = dlyNext->TCBnext; /* Get the next item in DELAY list    */
+    105                  }
+    106              }
+    107          
+    108              ptcb->state  = TASK_WAITING; TASK_SEQ(ptcb);      /* Set task status as TASK_WAITING    */
+    109              TaskSchedReq = Co_TRUE;
+    110          }
+    111          
+    112          
+    113          /**
+    114           *******************************************************************************
+    115           * @brief      Remove from the DELAY list
+    116           * @param[in]  ptcb   Task that want to remove from the DELAY list.
+    117           * @param[out] None
+    118           * @retval     None
+    119           *
+    120           * @par Description
+    121           * @details    This function is called to remove task from the DELAY list.
+    122           *******************************************************************************
+    123           */
+    124          void RemoveDelayList(P_OSTCB ptcb)
+    125          {
+    126          
+    127              /* Is there only one item in the DELAY list?   */
+    128              if((ptcb->TCBprev == Co_NULL) && ( ptcb->TCBnext == Co_NULL))
+    129              {
+    130                  DlyList = Co_NULL;	                /* Yes,set DELAY list as Co_NULL         */
+    131              }
+    132              else if(ptcb->TCBprev == Co_NULL)      /* Is the first item in DELAY list?   */
+    133              {
+    134          	    /* Yes,remove task from the DELAY list,and reset the list             */
+    135                  DlyList	                  = ptcb->TCBnext;
+    136                  ptcb->TCBnext->delayTick += ptcb->delayTick;
+    137                  ptcb->TCBnext->TCBprev    = Co_NULL;
+    138                  ptcb->TCBnext             = Co_NULL;
+    139          
+    140              }
+    141              else if(ptcb->TCBnext == Co_NULL)      /* Is the last item in DELAY list?    */
+    142              {
+    143                  ptcb->TCBprev->TCBnext = Co_NULL;  /* Yes,remove task form DELAY list    */
+    144                  ptcb->TCBprev          = Co_NULL;
+    145              }
+    146              else                                /* No, remove task from DELAY list    */
+    147              {
+    148                  ptcb->TCBprev->TCBnext    = ptcb->TCBnext;
+    149                  ptcb->TCBnext->TCBprev    = ptcb->TCBprev;
+    150                  ptcb->TCBnext->delayTick += ptcb->delayTick;
+    151                  ptcb->TCBnext     	      = Co_NULL;
+    152                  ptcb->TCBprev             = Co_NULL;
+    153              }
+    154              ptcb->delayTick = INVALID_VALUE;  /* Set task delay tick value as invalid */
+    155          }
+    156          
+    157          /**
+    158           *******************************************************************************
+    159           * @brief      Get current ticks
+    160           * @param[in]  None
+    161           * @param[out] None
+    162           * @retval     Return current system tick counter.
+    163           *
+    164           * @par Description
+    165           * @details    This function is called to obtain current system tick counter.
+    166           *******************************************************************************
+    167           */
+    168          U64 CoGetOSTime(void)
+    169          {
+    170              return OSTickCnt;                   /* Get system time(tick)              */
+    171          }
+    172          
+    173          /**
+    174           *******************************************************************************
+    175           * @brief      Delay current task for specify ticks number
+    176           * @param[in]  ticks    Specify system tick number which will delay.
+    177           * @param[out] None
+    178           * @retval     E_CALL   Error call in ISR.
+    179           * @retval     E_OK     The current task was insert to DELAY list successful,it
+    180           *                      will delay specify time.
+    181           * @par Description
+    182           * @details    This function delay specify ticks for current task.
+    183           *
+    184           * @note       This function be called in ISR,do nothing and return immediately.
+    185           *******************************************************************************
+    186           */
+    187          StatusType CoTickDelay(U32 ticks)
+    188          {
+    189              if(OSIntNesting >0)	                /* Is call in ISR?                    */
+    190              {
+    191                  return E_CALL;                  /* Yes,error return                   */
+    192              }
+    193          
+    194              if(ticks == INVALID_VALUE)          /* Is tick==INVALID_VALUE?            */
+    195              {
+    196                  return E_INVALID_PARAMETER;     /* Yes,error return                   */
+    197              }
+    198              if(ticks == 0)                      /* Is tick==0?                        */
+    199              {
+    200                  return E_OK;                    /* Yes,do nothing ,return OK          */
+    201              }
+    202              if(OSSchedLock != 0)                /* Is OS lock?                        */
+    203              {
+    204                  return E_OS_IN_LOCK;            /* Yes,error return                   */
+    205              }
+    206              OsSchedLock();                      /* Lock schedule                      */
+    207              InsertDelayList(TCBRunning,ticks);	/* Insert task in DELAY list          */
+    208              OsSchedUnlock();                /* Unlock schedule,and call task schedule */
+    209              return E_OK;                        /* Return OK                          */
+    210          }
+    211          
+    212          
+    213          /**
+    214           *******************************************************************************
+    215           * @brief      Reset task delay ticks
+    216           * @param[in]  ptcb    Task that want to insert into DELAY list.
+    217           * @param[in]  ticks   Specify system tick number which will delay .
+    218           * @param[out] None
+    219           * @retval     E_CALL               Error call in ISR.
+    220           * @retval     E_INVALID_ID         Invalid task id.
+    221           * @retval     E_NOT_IN_DELAY_LIST  Task not in delay list.
+    222           * @retval     E_OK                 The current task was inserted to DELAY list
+    223           *                                  successful,it will delay for specify time.
+    224           * @par Description
+    225           * @details    This function delay specify ticks for current task.
+    226           *******************************************************************************
+    227           */
+    228          StatusType CoResetTaskDelayTick(OS_TID taskID,U32 ticks)
+    229          {
+    230              P_OSTCB ptcb;
+    231          
+    232          
+    233          #if CFG_PAR_CHECKOUT_EN >0              /* Check validity of parameter        */
+    234              if(taskID >= CFG_MAX_USER_TASKS + SYS_TASK_NUM)
+    235              {
+    236                  return E_INVALID_ID;
+    237              }
+    238          #endif
+    239          
+    240          	ptcb = &TCBTbl[taskID];
+    241          #if CFG_PAR_CHECKOUT_EN >0
+    242              if(ptcb->stkPtr == Co_NULL)
+    243              {
+    244                  return E_INVALID_ID;
+    245              }
+    246          #endif
+    247          
+    248              if(ptcb->delayTick == INVALID_VALUE)  /* Is tick==INVALID_VALUE?          */
+    249              {
+    250                  return E_NOT_IN_DELAY_LIST;       /* Yes,error return                 */
+    251              }
+    252              OsSchedLock();                        /* Lock schedule                    */
+    253              RemoveDelayList(ptcb);                /* Remove task from the DELAY list  */
+    254          
+    255              if(ticks == 0)                        /* Is delay tick==0?                */
+    256              {
+    257                  TASK_SEQ(ptcb); InsertToTCBRdyList(ptcb);         /* Insert task into the DELAY list  */
+    258              }
+    259              else
+    260              {
+    261                  InsertDelayList(ptcb,ticks);      /* No,insert task into DELAY list   */
+    262              }
+    263              OsSchedUnlock();                /* Unlock schedule,and call task schedule */
+    264              return E_OK;                          /* Return OK                        */
+    265          }
+    266          
+    267          
+    268          /**
+    269           *******************************************************************************
+    270           * @brief      Delay current task for detail time
+    271           * @param[in]  hour      Specify the number of hours.
+    272           * @param[in]  minute    Specify the number of minutes.
+    273           * @param[in]  sec       Specify the number of seconds.
+    274           * @param[in]  millsec   Specify the number of millseconds.
+    275           * @param[out] None
+    276           * @retval     E_CALL               Error call in ISR.
+    277           * @retval     E_INVALID_PARAMETER  Parameter passed was invalid,delay fail.
+    278           * @retval     E_OK                 The current task was inserted to DELAY list
+    279           *                                  successful,it will delay for specify time.
+    280           * @par Description
+    281           * @details    This function delay specify time for current task.
+    282           *
+    283           * @note       If this function called in ISR,do nothing and return immediately.
+    284           *******************************************************************************
+    285           */
+    286          #if CFG_TIME_DELAY_EN >0
+    287          StatusType  CoTimeDelay(U8 hour,U8 minute,U8 sec,U16 millsec)
+    288          {
+    289              U32	ticks;
+    290          #if CFG_PAR_CHECKOUT_EN >0              /* Check validity of parameter        */
+    291              if(OSIntNesting > 0)
+    292              {
+    293                  return E_CALL;
+    294              }
+    295              if((minute > 59)||(sec > 59)||(millsec > 999))
+    296                  return E_INVALID_PARAMETER;
+    297          #endif
+    298              if(OSSchedLock != 0)                /* Is OS lock?                        */
+    299              {
+    300                  return E_OS_IN_LOCK;            /* Yes,error return                   */
+    301              }
+    302          
+    303              /* Get tick counter from time */
+    304              ticks = ((hour*3600) + (minute*60) + (sec)) * (CFG_SYSTICK_FREQ)\
+    305                      + (millsec*CFG_SYSTICK_FREQ + 500)/1000;
+    306          
+    307              CoTickDelay(ticks);                 /* Call tick delay                    */
+    308              return E_OK;                        /* Return OK                          */
+    309          }
+    310          #endif
+    311          
+    312          
+    313          
+    314          
+    315          /**
+    316           *******************************************************************************
+    317           * @brief      Dispose time delay
+    318           * @param[in]  None
+    319           * @param[out] None
+    320           * @retval     None
+    321           *
+    322           * @par Description
+    323           * @details    This function is called to dispose time delay of all task.
+    324           *******************************************************************************
+    325           */
+    326          void TimeDispose(void)
+    327          {
+    328              P_OSTCB	dlyList;
+    329          
+    330              dlyList = DlyList;                  /* Get first item of DELAY list       */
+    331              while((dlyList != Co_NULL) && (dlyList->delayTick == 0) )
+    332              {
+    333          
+    334          #if CFG_EVENT_EN > 0
+    335                  if(dlyList->eventID != INVALID_ID) /* Is task in event waiting list?  */
+    336                  {
+    337                      RemoveEventWaittingList(dlyList); /* Yes,remove task from list    */
+    338                  }
+    339          #endif
+    340          
+    341          #if CFG_FLAG_EN  > 0
+    342                  if(dlyList->pnode != Co_NULL)          /* Is task in flag waiting list?  */
+    343                  {
+    344                      RemoveLinkNode(dlyList->pnode); /* Yes,remove task from list      */
+    345                  }
+    346          #endif
+    347                  dlyList->delayTick = INVALID_VALUE; /* Set delay tick value as invalid*/
+    348                  DlyList = dlyList->TCBnext; /* Get next item as the head of DELAY list*/
+    349                  dlyList->TCBnext   = Co_NULL;
+    350                  TASK_SEQ(dlyList); InsertToTCBRdyList(dlyList);        /* Insert task into READY list    */
+    351                  dlyList = DlyList;                /* Get the first item of DELAY list */
+    352                  if(dlyList != Co_NULL)                 /* Is DELAY list as Co_NULL?         */
+    353                  {
+    354                      dlyList->TCBprev = Co_NULL;        /* No,initialize the first item   */
+    355                  }
+    356              }
+    357          }
+    358          
+    359          
+    360          /**
+    361           *******************************************************************************
+    362           * @brief      Dispose time delay in ISR
+    363           * @param[in]  None
+    364           * @param[out] None
+    365           * @retval     None
+    366           *
+    367           * @par Description
+    368           * @details    This function is called in systick interrupt to dispose time delay
+    369           *             of all task.
+    370           *******************************************************************************
+    371           */
+    372          void isr_TimeDispose(void)
+    373          {
+    374              if(OSSchedLock > 1)                 /* Is schedule lock?                  */
+    375              {
+    376                  IsrReq = Co_TRUE;
+    377                  TimeReq = Co_TRUE;                 /* Yes,set time request Co_TRUE          */
+    378              }
+    379              else
+    380              {
+    381                  TimeDispose();                  /* No,call handler                    */
+    382              }
+    383          }
+    384          
+    385          
+    386          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  CoGetOSTime
+       16  CoResetTaskDelayTick
+             16 -> InsertDelayList
+             16 -> InsertToTCBRdyList
+             16 -> OsSchedUnlock
+             16 -> RemoveDelayList
+        8  CoTickDelay
+              8 -> InsertDelayList
+              8 -> OsSchedUnlock
+        8  InsertDelayList
+        0  RemoveDelayList
+        8  TimeDispose
+              8 -> InsertToTCBRdyList
+              8 -> RemoveEventWaittingList
+              8 -> RemoveLinkNode
+        8  isr_TimeDispose
+              8 -> TimeDispose
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable6
+       4  ??DataTable6_1
+       4  ??DataTable6_2
+       4  ??DataTable6_3
+       4  ??DataTable6_4
+       4  ??DataTable6_5
+       4  ??DataTable6_6
+       4  ??DataTable6_7
+       4  ??DataTable6_8
+       8  CoGetOSTime
+      76  CoResetTaskDelayTick
+      76  CoTickDelay
+       4  DlyList
+     142  InsertDelayList
+     114  RemoveDelayList
+      82  TimeDispose
+      30  isr_TimeDispose
+
+ 
+   4 bytes in section .bss
+ 564 bytes in section .text
+ 
+ 564 bytes of CODE memory
+   4 bytes of DATA memory
+
+Errors: none
+Warnings: none

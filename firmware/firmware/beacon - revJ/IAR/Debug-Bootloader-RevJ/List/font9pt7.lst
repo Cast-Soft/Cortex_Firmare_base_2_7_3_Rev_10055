@@ -1,0 +1,187 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     26/Oct/2019  13:14:14 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\font9pt7.c                                      #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\font9pt7.c" -D BEACON_APP -D                    #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D    #
+#                    TASKS_PROFILE -D BATTERY_CHECK -D CCA_EN_NO -D           #
+#                    NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D OLD_CONFIG -D    #
+#                    CIRCULAR_LOG -D BC_HW_REVJ -lcN                          #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\font9pt7.lst         #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\font9pt7.o            #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\font9pt7.c
+      1          /*******************************************************************************
+      2          * File Name          : font9pt7.c
+      3          * Author             : ?
+      4          * Version            : V1.0
+      5          * Date               : 10/23/2019
+      6          * Description        : 9px font array for graphics library
+      7          *******************************************************************************/
+      8          
+      9          /* INCLUDES ------------------------------------------------------------------*/
+     10          #include <stdint.h>
+     11          #include "blkt_gfx.h"
+     12          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     13          
+     14          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     15          
+     16          /* PRIVATE MACROS ------------------------------------------------------------*/
+     17          
+     18          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     19          
+     20          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     21          
+     22          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     23          //9x7=63 pixels per character. array contains 64 characters, 8 bytes of data each
+     24          const uint8_t Font9pt7bitmap[]={
+     25          	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	//0x20, space
+     26          	0x00,0x04,0x02,0x81,0x40,0x00,0x10,0x00,	//0x21, !
+     27          	0x00,0x0a,0x85,0x02,0x00,0x00,0x00,0x00,	//0x22, "
+     28          	0x00,0x0a,0xc5,0x06,0xb0,0x51,0x28,0x00,	//0x23, #
+     29          	0x00,0x04,0x4f,0xc0,0x01,0x79,0x10,0x00,	//0x24, $
+     30          	0x00,0x93,0x09,0x82,0x20,0xc8,0x64,0x00,	//0x25, %
+     31          	0x00,0x82,0x42,0x41,0x50,0x49,0x58,0x00,	//0x26, &
+     32          	0x00,0x06,0x83,0x01,0x00,0x00,0x00,0x00,	//0x27, '
+     33          	0x00,0x08,0x82,0x40,0x20,0x20,0x20,0x00, 	//0x28, (
+     34          	0x00,0x02,0x02,0x02,0x81,0x20,0x08,0x00,	//0x29, )
+     35          	0x00,0x00,0x82,0xe3,0xe3,0x20,0x00,0x00,	//0x2A, *
+     36          	0x00,0x00,0x02,0xe1,0x43,0x20,0x00,0x00,	//0x2B, +
+     37          	0x00,0x00,0x00,0x60,0x30,0x10,0x04,0x00,	//0x2C, ,
+     38          	0x00,0x00,0x00,0xe0,0x03,0x00,0x00,0x00,	//0x2D, -
+     39          	0x00,0x00,0x00,0x00,0x00,0x60,0x30,0x00,	//0x2E, .
+     40          	0x00,0x10,0x08,0x82,0x20,0x08,0x04,0x00,  //0x2F, /
+     41          	0x00,0x8e,0x48,0x24,0x12,0x89,0x38,0x00,	//0x30, 0
+     42          	0x00,0x04,0x03,0x81,0x40,0x20,0x38,0x00,	//0x31, 1
+     43          	0x00,0x8e,0x08,0xc4,0x11,0x08,0x7c,0x00,	//0x32, 2
+     44          	0x00,0x8e,0x08,0x84,0x01,0x89,0x38,0x00,	//0x33, 3
+     45          	0x00,0x08,0x86,0xe2,0x83,0x40,0x20,0x00,	//0x34, 4
+     46          	0x00,0x9f,0xc0,0x03,0x02,0x89,0x38,0x00,	//0x35, 5
+     47          	0x00,0x8e,0x40,0xe0,0x11,0x89,0x38,0x00,	//0x36, 6
+     48          	0x00,0x1f,0x08,0x82,0x20,0x08,0x04,0x00,	//0x37, 7
+     49          	0x00,0x8e,0x48,0xc4,0x11,0x89,0x38,0x00,	//0x38, 8
+     50          	0x00,0x8e,0x48,0xc4,0x03,0x81,0x38,0x00, 	//0x39, 9
+     51          	0x00,0x00,0x06,0x03,0xc0,0x60,0x00,0x00,	//0x3A, :
+     52          	0x00,0x06,0x03,0xc0,0x60,0x20,0x08,0x00,  //0x3B, ;
+     53          	0x00,0x08,0x82,0x20,0x20,0x20,0x20,0x00, 	//0x3C, <
+     54          	0x00,0x00,0xc0,0x07,0xf0,0x01,0x00,0x00,	//0x3D, =
+     55          	0x00,0x02,0x02,0x02,0x82,0x20,0x08,0x00,	//0x3E, >
+     56          	0x00,0x86,0x04,0x82,0x40,0x00,0x10,0x00,	//0x3F, ?
+     57          	0x00,0x8e,0x08,0xc4,0x52,0xa9,0x38,0x00,	//0x40, @
+     58          	0x00,0x04,0x45,0x24,0xF2,0x89,0x44,0x00, 	//0x41, A
+     59          	0x00,0x0F,0x89,0xC4,0x21,0x91,0x3C,0x00,	//0x42, B
+     60          	0x00,0x8e,0x48,0x20,0x10,0x88,0x38,0x00,	//0x43, C
+     61          	0x00,0x0f,0x89,0x44,0x22,0x91,0x3c,0x00,	//0x44, D
+     62          	0x00,0x9f,0x40,0xe0,0x11,0x08,0x7c,0x00,	//0x45, E
+     63          	0x00,0x9f,0x40,0xe0,0x11,0x08,0x04,0x00,	//0x46, F
+     64          	0x00,0x9e,0x40,0x20,0x13,0x89,0x78,0x00,	//0x47, G
+     65          	0x00,0x91,0x48,0xe4,0x13,0x89,0x44,0x00,	//0x48, H
+     66          	0x00,0x0e,0x02,0x81,0x40,0x20,0x38,0x00, 	//0x49, I
+     67          	0x00,0x10,0x08,0x04,0x02,0x89,0x38,0x00,  //0x4A, J
+     68          	0x00,0x91,0x44,0x61,0x50,0x48,0x44,0x00,	//0x4B, K
+     69          	0x00,0x81,0x40,0x20,0x10,0x08,0x7c,0x00, 	//0x4C, L
+     70          	0x00,0x91,0x4d,0xa5,0x12,0x89,0x44,0x00,  //0x4D, M
+     71          	0x00,0x91,0x49,0x25,0x13,0x89,0x44,0x00,  //0x4E, N
+     72          	0x00,0x9f,0x48,0x24,0x12,0x89,0x7c,0x00,	//0x4F, O
+     73          	0x00,0x8f,0x48,0xe4,0x11,0x08,0x04,0x00,  //0x50, P
+     74          	0x00,0x8e,0x48,0x24,0x52,0x49,0x58,0x00,	//0x51, Q
+     75          	0x00,0x8f,0x48,0xe4,0x51,0x48,0x44,0x00,	//0x52, R
+     76          	0x00,0x8e,0x88,0x80,0x80,0x88,0x38,0x00,	//0x53, S
+     77          	0x00,0x1f,0x02,0x81,0x40,0x20,0x10,0x00,	//0x54, T
+     78          	0x00,0x91,0x48,0x24,0x12,0x89,0x38,0x00,  //0x55, U
+     79          	0x00,0x91,0x48,0x44,0xa1,0x20,0x10,0x00,	//0x56, V
+     80          	0x00,0x91,0x48,0xa4,0x52,0xd9,0x44,0x00,	//0x57, W
+     81          	0x00,0x91,0x88,0x82,0xa0,0x88,0x44,0x00,	//0x58, X
+     82          	0x00,0x91,0x88,0x82,0x40,0x20,0x10,0x00,	//0x59, Y
+     83          	0x00,0x1f,0x08,0x82,0x20,0x08,0x7c,0x00,	//0x5A, Z
+     84          	0x00,0x87,0x40,0x20,0x10,0x08,0x1c,0x00,	//0x5B, [
+     85          	0x00,0x81,0x80,0x80,0x80,0x80,0x40,0x00,	//0x5C, \.
+     86          	0x00,0x1c,0x08,0x04,0x02,0x81,0x70,0x00, 	//0x5D, ]
+     87          	0x00,0x04,0x45,0x24,0x02,0x00,0x00,0x00,	//0x5E, ^
+     88          	0x00,0x00,0x00,0x00,0x00,0x00,0x7c,0x00,	//0x5F, _
+     89          };
+     90          
+     91          const GFXfont Font9pt7b = {
+     92          	Font9pt7bitmap,
+     93          	0x20,				//first
+     94          	0x5F,				//last
+     95          	9,					//yadvance
+     96          	8,					//bitmapoffset
+     97          	7,					//width
+     98          	9,					//height
+     99          	63					//numberofpixels
+    100          };
+    101          
+    102          /************************END OF FILE*******************************************/
+    103          
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      16  Font9pt7b
+     512  Font9pt7bitmap
+
+ 
+ 528 bytes in section .rodata
+ 
+ 528 bytes of CONST memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,408 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     29/Oct/2019  16:43:20 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\USB-Device-CD #
+#                    C\usbd_desc.c                                            #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\USB-Device-CD #
+#                    C\usbd_desc.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER -D  #
+#                    STM32F10X_CL -D COOS -D USE_MY_ASSERT -D _DEBUG -D       #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D BC_HW_REVJ   #
+#                    -lcN "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source  #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\usbd_desc.lst        #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\usbd_desc.o           #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\common\USB-Device-CDC\usbd_desc.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    usbd_desc.c
+      4            * @author  MCD Application Team
+      5            * @version V1.1.0
+      6            * @date    19-March-2012
+      7            * @brief   This file provides the USBD descriptors and string formating method.
+      8            ******************************************************************************
+      9            * @attention
+     10            *
+     11            * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+     12            *
+     13            * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+     14            * You may not use this file except in compliance with the License.
+     15            * You may obtain a copy of the License at:
+     16            *
+     17            *        http://www.st.com/software_license_agreement_liberty_v2
+     18            *
+     19            * Unless required by applicable law or agreed to in writing, software 
+     20            * distributed under the License is distributed on an "AS IS" BASIS, 
+     21            * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     22            * See the License for the specific language governing permissions and
+     23            * limitations under the License.
+     24            *
+     25            ******************************************************************************
+     26            */ 
+     27          
+     28          /* Includes ------------------------------------------------------------------*/
+     29          #include <stdio.h>
+     30          #include <string.h>
+     31          #include "usbd_core.h"
+     32          #include "usbd_desc.h"
+     33          #include "usbd_req.h"
+     34          #include "usbd_conf.h"
+     35          #include "usb_regs.h"
+     36          
+     37          /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
+     38            * @{
+     39            */
+     40          
+     41          
+     42          /** @defgroup USBD_DESC 
+     43            * @brief USBD descriptors module
+     44            * @{
+     45            */ 
+     46          
+     47          /** @defgroup USBD_DESC_Private_TypesDefinitions
+     48            * @{
+     49            */ 
+     50          /**
+     51            * @}
+     52            */ 
+     53          
+     54          
+     55          /** @defgroup USBD_DESC_Private_Defines
+     56            * @{
+     57            */ 
+     58          #define USBD_VID                        0x0483
+     59          
+     60          #define USBD_PID                        0x5740
+     61          
+     62          /** @defgroup USB_String_Descriptors
+     63            * @{
+     64            */ 
+     65          #define USBD_LANGID_STRING              0x409
+     66          #define USBD_MANUFACTURER_STRING        "STMicroelectronics"
+     67          
+     68          #define USBD_PRODUCT_FS_STRING          "BlackTrax-BC COM Port"
+     69          #define USBD_SERIALNUMBER_FS_STRING     "STM32"
+     70          #define USBD_CONFIGURATION_FS_STRING    "VCP Config"
+     71          #define USBD_INTERFACE_FS_STRING        "VCP Interface"
+     72          /**
+     73            * @}
+     74            */ 
+     75          
+     76          
+     77          /** @defgroup USBD_DESC_Private_Macros
+     78            * @{
+     79            */ 
+     80          /**
+     81            * @}
+     82            */ 
+     83          
+     84          
+     85          /** @defgroup USBD_DESC_Private_Variables
+     86            * @{
+     87            */ 
+     88          
+     89          USBD_DEVICE USR_desc =
+     90          {
+     91            USBD_USR_DeviceDescriptor,
+     92            USBD_USR_LangIDStrDescriptor, 
+     93            USBD_USR_ManufacturerStrDescriptor,
+     94            USBD_USR_ProductStrDescriptor,
+     95            USBD_USR_SerialStrDescriptor,
+     96            USBD_USR_ConfigStrDescriptor,
+     97            USBD_USR_InterfaceStrDescriptor,
+     98            
+     99          };
+    100          
+    101          /* USB Standard Device Descriptor */
+    102          __ALIGN_BEGIN uint8_t USBD_DeviceDesc[USB_SIZ_DEVICE_DESC] __ALIGN_END =
+    103            {
+    104              0x12,                       /*bLength */
+    105              USB_DEVICE_DESCRIPTOR_TYPE, /*bDescriptorType*/
+    106              0x00,                       /*bcdUSB */
+    107              0x02,
+    108              0x00, /*0x02*/              /*bDeviceClass*/
+    109              0x00,                       /*bDeviceSubClass*/
+    110              0x00,                       /*bDeviceProtocol*/
+    111              USB_OTG_MAX_EP0_SIZE,      /*bMaxPacketSize*/
+    112              LOBYTE(USBD_VID),           /*idVendor*/
+    113              HIBYTE(USBD_VID),           /*idVendor*/
+    114              LOBYTE(USBD_PID),           /*idVendor*/
+    115              HIBYTE(USBD_PID),           /*idVendor*/
+    116              0x00,                       /*bcdDevice rel. 2.00*/
+    117              0x02,
+    118              USBD_IDX_MFC_STR,           /*Index of manufacturer  string*/
+    119              USBD_IDX_PRODUCT_STR,       /*Index of product string*/
+    120              USBD_IDX_SERIAL_STR,        /*Index of serial number string*/
+    121              USBD_CFG_MAX_NUM            /*bNumConfigurations*/
+    122            } ; /* USB_DeviceDescriptor */
+    123          
+    124          /* USB Standard Device Descriptor */
+    125          __ALIGN_BEGIN uint8_t USBD_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_DESC] __ALIGN_END =
+    126          {
+    127            USB_LEN_DEV_QUALIFIER_DESC,
+    128            USB_DESC_TYPE_DEVICE_QUALIFIER,
+    129            0x00,
+    130            0x02,
+    131            0x00,
+    132            0x00,
+    133            0x00,
+    134            0x40,
+    135            0x01,
+    136            0x00,
+    137          };
+    138          
+    139          /* USB Standard Device Descriptor */
+    140          __ALIGN_BEGIN uint8_t USBD_LangIDDesc[USB_SIZ_STRING_LANGID] __ALIGN_END =
+    141          {
+    142               USB_SIZ_STRING_LANGID,         
+    143               USB_DESC_TYPE_STRING,       
+    144               LOBYTE(USBD_LANGID_STRING),
+    145               HIBYTE(USBD_LANGID_STRING), 
+    146          };
+    147          /**
+    148            * @}
+    149            */ 
+    150          
+    151          
+    152          /** @defgroup USBD_DESC_Private_FunctionPrototypes
+    153            * @{
+    154            */ 
+    155          /**
+    156            * @}
+    157            */ 
+    158          
+    159          
+    160          /** @defgroup USBD_DESC_Private_Functions
+    161            * @{
+    162            */ 
+    163          
+    164          /**
+    165          * @brief  USBD_USR_DeviceDescriptor 
+    166          *         return the device descriptor
+    167          * @param  speed : current device speed
+    168          * @param  length : pointer to data length variable
+    169          * @retval pointer to descriptor buffer
+    170          */
+    171          uint8_t *  USBD_USR_DeviceDescriptor( uint8_t speed , uint16_t *length)
+    172          {
+    173            *length = sizeof(USBD_DeviceDesc);
+    174            return USBD_DeviceDesc;
+    175          }
+    176          
+    177          /**
+    178          * @brief  USBD_USR_LangIDStrDescriptor 
+    179          *         return the LangID string descriptor
+    180          * @param  speed : current device speed
+    181          * @param  length : pointer to data length variable
+    182          * @retval pointer to descriptor buffer
+    183          */
+    184          uint8_t *  USBD_USR_LangIDStrDescriptor( uint8_t speed , uint16_t *length)
+    185          {
+    186            *length =  sizeof(USBD_LangIDDesc);  
+    187            return USBD_LangIDDesc;
+    188          }
+    189          
+    190          
+    191          /**
+    192          * @brief  USBD_USR_ProductStrDescriptor 
+    193          *         return the product string descriptor
+    194          * @param  speed : current device speed
+    195          * @param  length : pointer to data length variable
+    196          * @retval pointer to descriptor buffer
+    197          */
+    198          uint8_t *  USBD_USR_ProductStrDescriptor( uint8_t speed , uint16_t *length)
+    199          {
+    200          
+    201            USBD_GetString (USBD_PRODUCT_FS_STRING, USBD_StrDesc, length);    
+    202            return USBD_StrDesc;
+    203          }
+    204          
+    205          /**
+    206          * @brief  USBD_USR_ManufacturerStrDescriptor 
+    207          *         return the manufacturer string descriptor
+    208          * @param  speed : current device speed
+    209          * @param  length : pointer to data length variable
+    210          * @retval pointer to descriptor buffer
+    211          */
+    212          uint8_t *  USBD_USR_ManufacturerStrDescriptor( uint8_t speed , uint16_t *length)
+    213          {
+    214            USBD_GetString (USBD_MANUFACTURER_STRING, USBD_StrDesc, length);
+    215            return USBD_StrDesc;
+    216          }
+    217          
+    218          /**
+    219          * @brief  USBD_USR_SerialStrDescriptor 
+    220          *         return the serial number string descriptor
+    221          * @param  speed : current device speed
+    222          * @param  length : pointer to data length variable
+    223          * @retval pointer to descriptor buffer
+    224          */
+    225          uint8_t *  USBD_USR_SerialStrDescriptor( uint8_t speed , uint16_t *length)
+    226          {
+    227            uint8_t *sn = (uint8_t*) (0x1FFFF7E8);
+    228            
+    229            uint8_t serialNumber[28];
+    230            for (int i = 0; i < 12; i++) {
+    231              snprintf((char*) &serialNumber[i<<1], sizeof(serialNumber) - i, "%02X", *(sn + i));
+    232            }
+    233            USBD_GetString (serialNumber, USBD_StrDesc, length);    
+    234            return USBD_StrDesc;
+    235          }
+    236          
+    237          
+    238          /**
+    239          * @brief  USBD_USR_ConfigStrDescriptor 
+    240          *         return the configuration string descriptor
+    241          * @param  speed : current device speed
+    242          * @param  length : pointer to data length variable
+    243          * @retval pointer to descriptor buffer
+    244          */
+    245          uint8_t *  USBD_USR_ConfigStrDescriptor( uint8_t speed , uint16_t *length)
+    246          {
+    247            USBD_GetString (USBD_CONFIGURATION_FS_STRING, USBD_StrDesc, length); 
+    248            return USBD_StrDesc;  
+    249          }
+    250          
+    251          
+    252          /**
+    253          * @brief  USBD_USR_InterfaceStrDescriptor 
+    254          *         return the interface string descriptor
+    255          * @param  speed : current device speed
+    256          * @param  length : pointer to data length variable
+    257          * @retval pointer to descriptor buffer
+    258          */
+    259          uint8_t *  USBD_USR_InterfaceStrDescriptor( uint8_t speed , uint16_t *length)
+    260          {
+    261            USBD_GetString (USBD_INTERFACE_FS_STRING, USBD_StrDesc, length);
+    262            return USBD_StrDesc;  
+    263          }
+    264          
+    265          /**
+    266            * @}
+    267            */ 
+    268          
+    269          
+    270          /**
+    271            * @}
+    272            */ 
+    273          
+    274          
+    275          /**
+    276            * @}
+    277            */ 
+    278          
+    279          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+    280          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  USBD_USR_ConfigStrDescriptor
+             16 -> USBD_GetString
+        0  USBD_USR_DeviceDescriptor
+       16  USBD_USR_InterfaceStrDescriptor
+             16 -> USBD_GetString
+        0  USBD_USR_LangIDStrDescriptor
+       16  USBD_USR_ManufacturerStrDescriptor
+             16 -> USBD_GetString
+       16  USBD_USR_ProductStrDescriptor
+             16 -> USBD_GetString
+       48  USBD_USR_SerialStrDescriptor
+             48 -> USBD_GetString
+             48 -> snprintf
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       8  ?<Constant "%02X">
+      24  ?<Constant "BlackTrax-BC COM Port">
+      20  ?<Constant "STMicroelectronics">
+      12  ?<Constant "VCP Config">
+      16  ?<Constant "VCP Interface">
+       4  ??DataTable6
+       4  ??DataTable6_1
+       4  ??DataTable6_2
+       4  ??DataTable6_3
+       4  ??DataTable6_4
+       4  ??DataTable6_5
+       4  ??DataTable6_6
+       4  ??DataTable6_7
+       4  ??DataTable6_8
+      20  USBD_DeviceDesc
+      12  USBD_DeviceQualifierDesc
+       4  USBD_LangIDDesc
+      20  USBD_USR_ConfigStrDescriptor
+      10  USBD_USR_DeviceDescriptor
+      20  USBD_USR_InterfaceStrDescriptor
+      10  USBD_USR_LangIDStrDescriptor
+      20  USBD_USR_ManufacturerStrDescriptor
+      20  USBD_USR_ProductStrDescriptor
+      54  USBD_USR_SerialStrDescriptor
+      28  USR_desc
+
+ 
+  64 bytes in section .data
+  80 bytes in section .rodata
+ 190 bytes in section .text
+ 
+ 190 bytes of CODE  memory
+  80 bytes of CONST memory
+  64 bytes of DATA  memory
+
+Errors: none
+Warnings: none

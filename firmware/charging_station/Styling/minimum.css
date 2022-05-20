@@ -1,0 +1,27 @@
+#BeaconWidget {
+  border: 3px solid gray;
+  border-radius: 5px;
+  background: white;
+}
+
+#TrackableWidget {
+  border: 3px solid gray;
+  border-radius: 5px;
+  background: white;
+}
+
+#ChapterMappingWidget {
+  border: 3px solid gray;
+  border-radius: 5px;
+  background: white;
+}
+
+#ChapterMappingWidget[selected="true"] {
+  background: green;
+}
+
+#MotionSinkWidget {
+  border: 3px solid gray;
+  border-radius: 5px;
+  background: white;
+}

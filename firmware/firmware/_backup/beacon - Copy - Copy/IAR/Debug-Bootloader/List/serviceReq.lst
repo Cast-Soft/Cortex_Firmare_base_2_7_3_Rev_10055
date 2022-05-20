@@ -1,0 +1,302 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     21/Mar/2019  12:17:19 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\s #
+#                    erviceReq.c                                              #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\s #
+#                    erviceReq.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER -D    #
+#                    STM32F10X_CL -D COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D   #
+#                    _DEBUG -D BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D    #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D msgmethod1   #
+#                    -lcN "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sou #
+#                    rce Code\BLKT-01 Beacon\Source\firmware\beacon -         #
+#                    Copy\IAR\Debug-Bootloader\List\" -o                      #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\" --no_cse --no_unroll     #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --fpu=None --dlib_config "C:\Program Files (x86)\IAR  #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\Source Code\BLKT-01 Beacon\Source\firmware\beacon -    #
+#                    Copy\IAR\..\App\" -I "C:\Users\User\Documents\Cortex_git #
+#                    \BLKT-01.git\Source Code\BLKT-01                         #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    Copy\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\ #
+#                    Source Code\BLKT-01 Beacon\Source\firmware\beacon -      #
+#                    Copy\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sourc #
+#                    e Code\BLKT-01 Beacon\Source\firmware\beacon -           #
+#                    Copy\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\" -I "C:\Users\User\Documents\Cort #
+#                    ex_git\BLKT-01.git\Source Code\BLKT-01                   #
+#                    Beacon\Source\firmware\beacon - Copy\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\serviceReq.lst            #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\serviceReq.o               #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\serviceReq.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       serviceReq.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      servive request management implementation code of CooCox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          
+     17          
+     18          /*---------------------------- Include ---------------------------------------*/
+     19          #include <coocox.h>
+     20          
+     21          #if (CFG_TASK_WAITTING_EN > 0) || (CFG_TMR_EN >0)
+     22          
+     23          #if CFG_MAX_SERVICE_REQUEST > 0
+     24          /*---------------------------- Variable Define -------------------------------*/
+     25          SRQ   ServiceReq = {0,0};             /*!< ISR server request queue         */
+     26          #endif
+     27          BOOL  IsrReq   = Co_FALSE;
+     28          #if (CFG_TASK_WAITTING_EN > 0)
+     29          BOOL  TimeReq  = Co_FALSE;                 /*!< Time delay dispose request       */
+     30          #endif
+     31          
+     32          #if CFG_TMR_EN  > 0
+     33          BOOL  TimerReq = Co_FALSE;                 /*!< Timer dispose request            */
+     34          #endif
+     35          
+     36          /**
+     37           *******************************************************************************
+     38           * @brief      Insert into service requst queue
+     39           * @param[in]  type     Service request type.
+     40           * @param[in]  id       Service request event id,event id/flag id.
+     41           * @param[in]  arg      Service request argument.
+     42           * @param[out] None
+     43           *
+     44           * @retval     Co_FALSE    Successfully insert into service request queue.
+     45           * @retval     Co_TRUE     Failure to insert into service request queue.
+     46           *
+     47           * @par Description
+     48           * @details    This function be called to insert a requst into service request
+     49           *             queue.
+     50           * @note
+     51           *******************************************************************************
+     52           */
+     53          #if (CFG_MAX_SERVICE_REQUEST > 0)
+     54          BOOL InsertInSRQ(U8 type,U8 id,void* arg)
+     55          {
+     56              P_SQC   pcell;
+     57          	U8 cnt;
+     58          	U8 heed;
+     59              IRQ_DISABLE_SAVE();
+     60              if (ServiceReq.cnt >= CFG_MAX_SERVICE_REQUEST)
+     61              {
+     62                  IRQ_ENABLE_RESTORE ();
+     63          
+     64                  return Co_FALSE;                   /* Error return                       */
+     65              }
+     66          	cnt = Inc8(&ServiceReq.cnt);
+     67          	heed = ServiceReq.head;
+     68              IsrReq = Co_TRUE;
+     69              pcell = &ServiceReq.cell[((cnt+heed)%CFG_MAX_SERVICE_REQUEST)];/*the tail */
+     70              pcell->type = type;                 /* Save service request type,         */
+     71              pcell->id   = id;                   /* event id                           */
+     72              pcell->arg  = arg;                  /* and parameter                      */
+     73              IRQ_ENABLE_RESTORE ();
+     74          
+     75              return Co_TRUE;                        /* Return OK                          */
+     76          }
+     77          
+     78          BOOL InsertInSRQWithWaterMark(U8 type,U8 id,void* arg)
+     79          {
+     80              P_SQC   pcell;
+     81          	U8 cnt;
+     82          	U8 heed;
+     83              IRQ_DISABLE_SAVE();
+     84              if (ServiceReq.cnt >= CFG_MAX_SERVICE_WATERMARK)
+     85              {
+     86                  IRQ_ENABLE_RESTORE ();
+     87          
+     88                  return Co_FALSE;                   /* Error return                       */
+     89              }
+     90              cnt = Inc8(&ServiceReq.cnt);
+     91              heed = ServiceReq.head;
+     92              IsrReq = Co_TRUE;
+     93              pcell = &ServiceReq.cell[((cnt+heed)%CFG_MAX_SERVICE_REQUEST)];/*the tail */
+     94              pcell->type = type;                 /* Save service request type,         */
+     95              pcell->id   = id;                   /* event id                           */
+     96              pcell->arg  = arg;                  /* and parameter                      */
+     97              IRQ_ENABLE_RESTORE ();
+     98          
+     99              return Co_TRUE;                        /* Return OK                          */
+    100          }
+    101          
+    102          #endif
+    103          
+    104          
+    105          
+    106          /**
+    107           *******************************************************************************
+    108           * @brief      Respond the request in the service request queue.
+    109           * @param[in]  None
+    110           * @param[out] None
+    111           * @retval     None
+    112           *
+    113           * @par Description
+    114           * @details    This function be called to respond the request in the service
+    115           *             request queue.
+    116           * @note
+    117           *******************************************************************************
+    118           */
+    119          void RespondSRQ(void)
+    120          {
+    121          
+    122          #if CFG_MAX_SERVICE_REQUEST > 0
+    123              SQC cell;
+    124          
+    125          #endif
+    126          
+    127          #if (CFG_TASK_WAITTING_EN > 0)
+    128              if(TimeReq == Co_TRUE)                 /* Time delay request?                */
+    129              {
+    130                  TimeDispose();                  /* Yes,call handler                   */
+    131                  TimeReq = Co_FALSE;                /* Reset time delay request Co_FALSE     */
+    132              }
+    133          #endif
+    134          #if CFG_TMR_EN  > 0
+    135              if(TimerReq == Co_TRUE)                /* Timer request?                     */
+    136              {
+    137                  TmrDispose();                   /* Yes,call handler                   */
+    138                  TimerReq = Co_FALSE;               /* Reset timer request Co_FALSE          */
+    139              }
+    140          #endif
+    141          
+    142          #if CFG_MAX_SERVICE_REQUEST > 0
+    143          
+    144              while (ServiceReq.cnt != 0)
+    145              {
+    146                  IRQ_DISABLE_SAVE ();            /* need to protect the following      */
+    147                  cell = ServiceReq.cell[ServiceReq.head];  /* extract one cell         */
+    148                  ServiceReq.head = (ServiceReq.head + 1) % /* move head (pop)          */
+    149                               CFG_MAX_SERVICE_REQUEST;
+    150                  ServiceReq.cnt--;
+    151                  IRQ_ENABLE_RESTORE ();          /* now use the cell copy              */
+    152          
+    153                  switch(cell.type)               /* Judge service request type         */
+    154                  {
+    155          #if CFG_SEM_EN > 0
+    156                  case SEM_REQ:                   /* Semaphore post request,call handler*/
+    157                      CoPostSem(cell.id);
+    158                      break;
+    159          #endif
+    160          #if CFG_MAILBOX_EN > 0
+    161                  case MBOX_REQ:                  /* Mailbox post request,call handler  */
+    162                      CoPostMail(cell.id, cell.arg);
+    163                      break;
+    164          #endif
+    165          #if CFG_FLAG_EN > 0
+    166                  case FLAG_REQ:                  /* Flag set request,call handler      */
+    167                      CoSetFlag(cell.id);
+    168                      break;
+    169          #endif
+    170          #if CFG_QUEUE_EN > 0
+    171                  case QUEUE_REQ:                 /* Queue post request,call handler    */
+    172                      CoPostQueueMail(cell.id, cell.arg);
+    173                      break;
+    174          #endif
+    175                  default:                        /* Others,break                       */
+    176                      break;
+    177                  }
+    178              }
+    179          #endif
+    180              IRQ_DISABLE_SAVE ();                /* need to protect the following      */
+    181          
+    182              if (ServiceReq.cnt == 0)            /* another item in the queue already? */
+    183              {
+    184                  IsrReq = Co_FALSE;                 /* queue still empty here             */
+    185              }
+    186              IRQ_ENABLE_RESTORE ();              /* now it is done and return          */
+    187          }
+    188          
+    189          #endif
+    190          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       32  InsertInSRQ
+             32 -> IRQ_DISABLE_SAVE
+             32 -> IRQ_ENABLE_RESTORE
+             32 -> Inc8
+       32  InsertInSRQWithWaterMark
+             32 -> IRQ_DISABLE_SAVE
+             32 -> IRQ_ENABLE_RESTORE
+             32 -> Inc8
+       16  RespondSRQ
+             16 -> CoPostMail
+             16 -> CoPostQueueMail
+             16 -> CoPostSem
+             16 -> CoSetFlag
+             16 -> IRQ_DISABLE_SAVE
+             16 -> IRQ_ENABLE_RESTORE
+             16 -> TimeDispose
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       4  ??DataTable2_2
+      98  InsertInSRQ
+      98  InsertInSRQWithWaterMark
+       1  IsrReq
+     178  RespondSRQ
+     100  ServiceReq
+       1  TimeReq
+
+ 
+ 102 bytes in section .bss
+ 386 bytes in section .text
+ 
+ 386 bytes of CODE memory
+ 102 bytes of DATA memory
+
+Errors: none
+Warnings: none

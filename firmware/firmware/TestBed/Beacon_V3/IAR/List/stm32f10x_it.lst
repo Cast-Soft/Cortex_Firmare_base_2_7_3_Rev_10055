@@ -1,0 +1,1388 @@
+###############################################################################
+#                                                                             #
+#                                                       20/Jul/2011  17:33:52 #
+# IAR ANSI C/C++ Compiler V6.21.1.32794/W32 KICKSTART for ARM                 #
+# Copyright 1999-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\CAST\BC\App\stm32f10x_it.c                            #
+#    Command line =  C:\CAST\BC\App\stm32f10x_it.c -D USE_STDPERIPH_DRIVER    #
+#                    -D STM32F10X_CL -D COOS -D USE_MY_ASSERT -D              #
+#                    STDIO_TO_USART_NO -lCN C:\CAST\BC\IAR\List\ -o           #
+#                    C:\CAST\BC\IAR\Obj\ --no_unroll --no_inline --no_tbaa    #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --fpu=None --dlib_config "C:\Program Files\IAR        #
+#                    Systems\Embedded Workbench 6.0                           #
+#                    Kickstart\arm\INC\c\DLib_Config_Normal.h" -I             #
+#                    C:\CAST\BC\IAR\..\App\ -I C:\CAST\BC\IAR\..\CMSIS\CM3\De #
+#                    viceSupport\ST\STM32F10x\ -I                             #
+#                    C:\CAST\BC\IAR\..\STM32_USB-FS-Device_Driver\inc\ -I     #
+#                    C:\CAST\BC\IAR\..\STM32F10x_StdPeriph_Driver\inc\ -I     #
+#                    C:\CAST\BC\IAR\..\CoOS\kernel\ -I                        #
+#                    C:\CAST\BC\IAR\..\CoOS\portable\ -Om --use_c++_inline    #
+#                    -I "C:\Program Files\IAR Systems\Embedded Workbench 6.0  #
+#                    Kickstart\arm\CMSIS\Include"                             #
+#    List file    =  C:\CAST\BC\IAR\List\stm32f10x_it.lst                     #
+#    Object file  =  C:\CAST\BC\IAR\Obj\stm32f10x_it.o                        #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\CAST\BC\App\stm32f10x_it.c
+      1          /******************** (C) COPYRIGHT 2011 NaturalPoint, Inc. ********************
+      2          * File Name          : stm32f10x_it.c
+      3          * Author             : ???
+      4          * Version            : V1.0
+      5          * Date               : 6/2/2011
+      6          * Description        : ???
+      7          *******************************************************************************/
+      8          /*
+      9              NVIC Priority (Highest first):
+     10                  - OTG_FS_IRQ
+     11                  - TIM3_IRQn
+     12                  - SPI3_IRQn (SPI_RADIO_IRQn)
+     13                  - EXTI2_IRQn (GPI_RADIO_GPIO0_IRQn)
+     14                  - EXTI1_IRQn (GPI_RADIO_GPIO1_IRQn)
+     15                  - DMA1_Channel4_IRQn (SPI_IMU_RX_DMA_IRQ)
+     16                  - EXTI9_5_IRQn (GPI_IMU_DIO1_IRQn)
+     17                  - TIM5_IRQn
+     18          */
+     19          
+     20          /* INCLUDES ------------------------------------------------------------------*/
+     21          
+     22          #include "stm32f10x_it.h"
+     23          #include "stm32f10x_exti.h"
+     24          #include "stm32f10x_dma.h"
+     25          #include "usb_istr.h"
+     26          #include "hardware.h"
+     27          #include "basic_rf.h"
+     28          #include "radio_defs.h"
+     29          #ifdef COOS
+     30          #include "CoOS.h"
+     31          #endif
+     32          #include <stdio.h>
+     33          
+     34          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     35          
+     36          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     37          
+     38          #define RF_SYNC_PERIOD 30000
+     39          #define RF_SYNC_PERIOD_TOL 750
+     40          
+     41          #define RF_SYNC_PERIOD2 2*RF_SYNC_PERIOD
+     42          #define RF_SYNC_PERIOD_TOL2 2*RF_SYNC_PERIOD_TOL
+     43          
+     44          #define HIST_INIT_2  RF_SYNC_PERIOD2,RF_SYNC_PERIOD2
+     45          #define HIST_INIT_4  HIST_INIT_2,HIST_INIT_2
+     46          #define HIST_INIT_8  HIST_INIT_4,HIST_INIT_4
+     47          #define HIST_INIT_16 HIST_INIT_8,HIST_INIT_8
+     48          #define HIST_INIT_32 HIST_INIT_16,HIST_INIT_16
+     49          
+     50          /* PRIVATE MACROS ------------------------------------------------------------*/
+     51          
+     52          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     53          
+     54          extern OS_FlagID flagIMUNewData;
+     55          extern uint8_t *led0Id;
+     56          extern uint8_t *led1Id;
+     57          extern uint8_t *led2Id;
+     58          
+     59          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     60          
+
+   \                                 In section .bss, align 4
+     61          static uint32_t countA = 0;
+   \                     countA:
+   \   00000000                      DS8 4
+   \   00000004                      DS8 4
+     62          static uint32_t countB = 0;
+
+   \                                 In section .bss, align 4
+     63          static uint32_t frameId = 0;
+   \                     frameId:
+   \   00000000                      DS8 4
+     64          
+     65          static uint16_t tim4HistA[32] = {HIST_INIT_32};
+     66          static uint16_t tim3HistA[16];
+     67          
+     68          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     69          
+     70          #ifndef COOS
+     71          volatile unsigned int SysTickCounter = 0;a
+     72          #endif
+     73          
+     74          volatile uint32_t frameIdAtSync;
+   \                     frameIdAtSync:
+   \   00000004                      DS8 4
+     75          volatile uint32_t frameIdCorrection;
+   \                     frameIdCorrection:
+   \   00000008                      DS8 4
+     76          
+     77          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+     78          
+     79          static inline void Tim4UpdMovAvg(uint16_t newVal);
+     80          static inline void Tim3UpdMovAvg(uint16_t newVal);
+     81          static inline void RFSyncPktRx(void);
+     82          
+     83          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+     84          
+     85          /*******************************************************************************
+     86          * Description : Updates Moving Average of TIM4 (10Hz Sync Packet Freq)
+     87          * Input       : nominal RF_SYNC_PERIOD
+     88          * Return      : -
+     89          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+     90          static inline void Tim4UpdMovAvg(uint16_t newVal) {
+     91              static uint16_t idxA = 0;
+     92          
+     93              // will accept ONE missing sync-packet
+     94              if (newVal > (3*RF_SYNC_PERIOD/2)) newVal = (newVal + 1) / 2;
+   \                     Tim4UpdMovAvg:
+   \   00000000   4AF6C971           MOVW     R1,#+45001
+   \   00000004   8842               CMP      R0,R1
+   \   00000006   03D3               BCC.N    ??Tim4UpdMovAvg_0
+   \   00000008   401C               ADDS     R0,R0,#+1
+   \   0000000A   00EBD070           ADD      R0,R0,R0, LSR #+31
+   \   0000000E   4010               ASRS     R0,R0,#+1
+     95              // reject invalid newVal
+     96              if ( (newVal > (RF_SYNC_PERIOD + RF_SYNC_PERIOD_TOL)) ||
+     97                   (newVal < (RF_SYNC_PERIOD - RF_SYNC_PERIOD_TOL)) ) {
+   \                     ??Tim4UpdMovAvg_0:
+   \   00000010   47F24221           MOVW     R1,#+29250
+   \   00000014   411A               SUBS     R1,R0,R1
+   \   00000016   40F2DD52           MOVW     R2,#+1501
+   \   0000001A   89B2               UXTH     R1,R1
+   \   0000001C   9142               CMP      R1,R2
+   \   0000001E   0BD2               BCS.N    ??Tim4UpdMovAvg_1
+     98                  return;
+     99              }
+    100          
+    101              tim4HistA[idxA] = newVal * 2;   // make use of full dynamic-range
+   \   00000020   ........           LDR.W    R1,??DataTable11
+   \   00000024   0A88               LDRH     R2,[R1, #+0]
+   \   00000026   ........           LDR.W    R3,??DataTable11_1
+   \   0000002A   4000               LSLS     R0,R0,#+1
+   \   0000002C   23F81200           STRH     R0,[R3, R2, LSL #+1]
+    102              idxA = (idxA + 1) & 0x1F;       // array size = 32
+   \   00000030   501C               ADDS     R0,R2,#+1
+   \   00000032   00F01F00           AND      R0,R0,#0x1F
+   \   00000036   0880               STRH     R0,[R1, #+0]
+    103          }
+   \                     ??Tim4UpdMovAvg_1:
+   \   00000038   7047               BX       LR               ;; return
+    104          
+    105          /*******************************************************************************
+    106          * Description : Updates Moving Average of TIM3 (100Hz IRLED Phase)
+    107          * Input       :
+    108          * Return      :
+    109          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    110          static inline void Tim3UpdMovAvg(uint16_t newVal) {
+    111              static uint16_t idxA = 0;
+    112          
+    113              tim3HistA[idxA] = newVal;
+   \                     Tim3UpdMovAvg:
+   \   00000000   ........           LDR.W    R1,??DataTable11_2
+   \   00000004   0A88               LDRH     R2,[R1, #+0]
+   \   00000006   01EB4203           ADD      R3,R1,R2, LSL #+1
+   \   0000000A   9880               STRH     R0,[R3, #+4]
+    114              idxA = (idxA + 1) & 0xF;        // array size = 16
+   \   0000000C   501C               ADDS     R0,R2,#+1
+   \   0000000E   00F00F00           AND      R0,R0,#0xF
+   \   00000012   0880               STRH     R0,[R1, #+0]
+    115          }
+   \   00000014   7047               BX       LR               ;; return
+    116          
+    117          /*******************************************************************************
+    118          * Description : Received (10Hz) RF Sync Packet from TimeKeeper
+    119          * Input       :
+    120          * Return      :
+    121          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    122          static inline void RFSyncPktRx(void) {
+   \                     RFSyncPktRx:
+   \   00000000   38B5               PUSH     {R3-R5,LR}
+    123              static uint16_t tim4CntPrev;
+    124          
+    125              // update moving-average of freq
+    126              Tim4UpdMovAvg(TIM4->CCR1 - tim4CntPrev);
+   \   00000002   ........           LDR.W    R4,??DataTable11_3
+   \   00000006   ........           LDR.W    R5,??DataTable11_4  ;; 0x40000834
+   \   0000000A   2888               LDRH     R0,[R5, #+0]
+   \   0000000C   2188               LDRH     R1,[R4, #+0]
+   \   0000000E   401A               SUBS     R0,R0,R1
+   \   00000010   80B2               UXTH     R0,R0
+   \   00000012   ........           BL       Tim4UpdMovAvg
+    127              tim4CntPrev = TIM4->CCR1;
+   \   00000016   2888               LDRH     R0,[R5, #+0]
+   \   00000018   2080               STRH     R0,[R4, #+0]
+    128          
+    129              // update moving-average of phase
+    130              Tim3UpdMovAvg(TIM3->CCR1);
+   \   0000001A   ........           LDR.W    R0,??DataTable11_5  ;; 0x40000434
+   \   0000001E   0088               LDRH     R0,[R0, #+0]
+   \   00000020   BDE83240           POP      {R1,R4,R5,LR}
+   \   00000024   ....               B.N      Tim3UpdMovAvg
+    131          }
+    132          
+    133          /* PUBLIC FUNCTIONS ----------------------------------------------------------*/
+    134          
+    135          /*******************************************************************************
+    136          * Description : This function handles NMI exception.
+    137          * Input       : -
+    138          * Return      : -
+    139          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    140          void NMI_Handler(void)
+    141          {
+    142          }
+   \                     NMI_Handler:
+   \   00000000   7047               BX       LR               ;; return
+    143          
+    144          /*******************************************************************************
+    145          * Description : This function handles Hard Fault exception.
+    146          * Input       : -
+    147          * Return      : -
+    148          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    149          void HardFault_Handler(void)
+    150          {
+    151              /* Go to infinite loop when Hard Fault exception occurs */
+    152              while (1);
+   \                     HardFault_Handler:
+   \                     ??HardFault_Handler_0:
+   \   00000000   FEE7               B.N      ??HardFault_Handler_0
+    153          }
+    154          
+    155          /**
+    156           * @brief  This function handles Memory Manage exception.
+    157           * @param  None
+    158           * @retval None
+    159           */
+    160          /*******************************************************************************
+    161          * Description : This function handles NMI exception.
+    162          * Input       : -
+    163          * Return      : -
+    164          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    165          void MemManage_Handler(void)
+    166          {
+    167              /* Go to infinite loop when Memory Manage exception occurs */
+    168              while (1);
+   \                     MemManage_Handler:
+   \                     ??MemManage_Handler_0:
+   \   00000000   FEE7               B.N      ??MemManage_Handler_0
+    169          }
+    170          
+    171          /*******************************************************************************
+    172          * Description : This function handles Bus Fault exception.
+    173          * Input       : -
+    174          * Return      : -
+    175          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    176          void BusFault_Handler(void)
+    177          {
+    178              /* Go to infinite loop when Bus Fault exception occurs */
+    179              while (1);
+   \                     BusFault_Handler:
+   \                     ??BusFault_Handler_0:
+   \   00000000   FEE7               B.N      ??BusFault_Handler_0
+    180          }
+    181          
+    182          /*******************************************************************************
+    183          * Description : This function handles Usage Fault exception.
+    184          * Input       : -
+    185          * Return      : -
+    186          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    187          void UsageFault_Handler(void)
+    188          {
+    189              /* Go to infinite loop when Usage Fault exception occurs */
+    190              while (1);
+   \                     UsageFault_Handler:
+   \                     ??UsageFault_Handler_0:
+   \   00000000   FEE7               B.N      ??UsageFault_Handler_0
+    191          }
+    192          
+    193          /*******************************************************************************
+    194          * Description : This function handles SVCall exception.
+    195          * Input       : -
+    196          * Return      : -
+    197          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    198          void SVC_Handler(void)
+    199          {
+    200          }
+   \                     SVC_Handler:
+   \   00000000   7047               BX       LR               ;; return
+    201          
+    202          /*******************************************************************************
+    203          * Description : This function handles Debug Monitor exception.
+    204          * Input       : -
+    205          * Return      : -
+    206          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    207          void DebugMon_Handler(void)
+    208          {
+    209          }
+   \                     DebugMon_Handler:
+   \   00000000   7047               BX       LR               ;; return
+    210          
+    211          #ifndef COOS
+    212          /*******************************************************************************
+    213          * Description : This function handles PendSVC exception.
+    214          * Input       : -
+    215          * Return      : -
+    216          *******************************************************************************/
+    217          void PendSV_Handler(void)
+    218          {
+    219          }
+    220          
+    221          /*******************************************************************************
+    222          * Description : This function handles SysTick Handler.
+    223          * Input       : -
+    224          * Return      : -
+    225          *******************************************************************************/
+    226          void SysTick_Handler(void)
+    227          {
+    228              SysTickCounter++;
+    229          }
+    230          #endif
+    231          
+    232          /******************************************************************************/
+    233          /*            STM32F10x Peripherals Interrupt Handlers                        */
+    234          /******************************************************************************/
+    235          
+    236          #ifndef STDIO_TO_USART
+    237          /*******************************************************************************
+    238          * Description : This function handles USB-On-The-Go FS global interrupt request.
+    239          * Input       : -
+    240          * Return      : -
+    241          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    242          void OTG_FS_IRQHandler(void) {
+    243              STM32_PCD_OTG_ISR_Handler();
+   \                     OTG_FS_IRQHandler:
+   \   00000000   ........           B.W      STM32_PCD_OTG_ISR_Handler
+    244          }
+    245          #endif
+    246          
+    247          /*******************************************************************************
+    248          * Description : This function handles TIM3 global interrupt request.
+    249          *               TIM3: 100Hz IRLED
+    250          * Priority    : 0
+    251          * Input       : -
+    252          * Return      : -
+    253          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    254          void TIM3_IRQHandler(void) {
+   \                     TIM3_IRQHandler:
+   \   00000000   10B5               PUSH     {R4,LR}
+    255              uint16_t bitmask;
+    256          
+    257              if (TIM_GetITStatus(TIM3, TIM_IT_CC2) == SET) {
+   \   00000002   ........           LDR.W    R4,??DataTable11_6  ;; 0x40000400
+   \   00000006   0421               MOVS     R1,#+4
+   \   00000008   2046               MOV      R0,R4
+   \   0000000A   ........           BL       TIM_GetITStatus
+   \   0000000E   0128               CMP      R0,#+1
+   \   00000010   3FD1               BNE.N    ??TIM3_IRQHandler_0
+    258                  // Clear TIM3 Capture compare interrupt pending bit
+    259                  TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
+   \   00000012   0421               MOVS     R1,#+4
+   \   00000014   2046               MOV      R0,R4
+   \   00000016   ........           BL       TIM_ClearITPendingBit
+    260          
+    261                  // increment FrameID and make any necessary corrections
+    262                  frameId = frameId + frameIdCorrection + 1;
+   \   0000001A   ........           LDR.W    R0,??DataTable11_7
+   \   0000001E   0168               LDR      R1,[R0, #+0]
+   \   00000020   8268               LDR      R2,[R0, #+8]
+   \   00000022   521C               ADDS     R2,R2,#+1
+   \   00000024   5118               ADDS     R1,R2,R1
+   \   00000026   0160               STR      R1,[R0, #+0]
+    263                  frameIdCorrection = 0;
+   \   00000028   0021               MOVS     R1,#+0
+   \   0000002A   8160               STR      R1,[R0, #+8]
+    264          
+    265                  /* FrameID synchronized LED lighting */
+    266                  bitmask = (1 << (frameId & 0x7)); // CAST chose 8-bit IDs
+   \   0000002C   0121               MOVS     R1,#+1
+   \   0000002E   0078               LDRB     R0,[R0, #+0]
+   \   00000030   00F00700           AND      R0,R0,#0x7
+   \   00000034   01FA00F4           LSL      R4,R1,R0
+   \   00000038   A4B2               UXTH     R4,R4
+    267                  if (*led0Id & bitmask) HwGPOLow(GPO_IRLED0); else HwGPOHigh(GPO_IRLED0);
+   \   0000003A   ........           LDR.W    R0,??DataTable11_8
+   \   0000003E   0068               LDR      R0,[R0, #+0]
+   \   00000040   0078               LDRB     R0,[R0, #+0]
+   \   00000042   2146               MOV      R1,R4
+   \   00000044   0842               TST      R0,R1
+   \   00000046   03D0               BEQ.N    ??TIM3_IRQHandler_1
+   \   00000048   0220               MOVS     R0,#+2
+   \   0000004A   ........           BL       HwGPOLow
+   \   0000004E   02E0               B.N      ??TIM3_IRQHandler_2
+   \                     ??TIM3_IRQHandler_1:
+   \   00000050   0220               MOVS     R0,#+2
+   \   00000052   ........           BL       HwGPOHigh
+    268                  if (*led1Id & bitmask) HwGPOLow(GPO_IRLED1); else HwGPOHigh(GPO_IRLED1);
+   \                     ??TIM3_IRQHandler_2:
+   \   00000056   ........           LDR.W    R0,??DataTable11_9
+   \   0000005A   0068               LDR      R0,[R0, #+0]
+   \   0000005C   0078               LDRB     R0,[R0, #+0]
+   \   0000005E   2146               MOV      R1,R4
+   \   00000060   0842               TST      R0,R1
+   \   00000062   03D0               BEQ.N    ??TIM3_IRQHandler_3
+   \   00000064   0320               MOVS     R0,#+3
+   \   00000066   ........           BL       HwGPOLow
+   \   0000006A   02E0               B.N      ??TIM3_IRQHandler_4
+   \                     ??TIM3_IRQHandler_3:
+   \   0000006C   0320               MOVS     R0,#+3
+   \   0000006E   ........           BL       HwGPOHigh
+    269                  if (*led2Id & bitmask) HwGPOLow(GPO_IRLED2); else HwGPOHigh(GPO_IRLED2);
+   \                     ??TIM3_IRQHandler_4:
+   \   00000072   ........           LDR.W    R0,??DataTable11_10
+   \   00000076   0068               LDR      R0,[R0, #+0]
+   \   00000078   0078               LDRB     R0,[R0, #+0]
+   \   0000007A   2042               TST      R0,R4
+   \   0000007C   04D0               BEQ.N    ??TIM3_IRQHandler_5
+   \   0000007E   0420               MOVS     R0,#+4
+   \   00000080   BDE81040           POP      {R4,LR}
+   \   00000084   ........           B.W      HwGPOLow
+   \                     ??TIM3_IRQHandler_5:
+   \   00000088   0420               MOVS     R0,#+4
+   \   0000008A   BDE81040           POP      {R4,LR}
+   \   0000008E   ........           B.W      HwGPOHigh
+    270              } else if (TIM_GetITStatus(TIM3, TIM_IT_CC3) == SET) {
+   \                     ??TIM3_IRQHandler_0:
+   \   00000092   0821               MOVS     R1,#+8
+   \   00000094   2046               MOV      R0,R4
+   \   00000096   ........           BL       TIM_GetITStatus
+   \   0000009A   0128               CMP      R0,#+1
+   \   0000009C   0ED1               BNE.N    ??TIM3_IRQHandler_6
+    271                  // Clear TIM3 Capture compare interrupt pending bit
+    272                  TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+   \   0000009E   0821               MOVS     R1,#+8
+   \   000000A0   2046               MOV      R0,R4
+   \   000000A2   ........           BL       TIM_ClearITPendingBit
+    273          
+    274                  // turn off LEDs now to save power
+    275                  HwGPOHigh(GPO_IRLED0); HwGPOHigh(GPO_IRLED1); HwGPOHigh(GPO_IRLED2);
+   \   000000A6   0220               MOVS     R0,#+2
+   \   000000A8   ........           BL       HwGPOHigh
+   \   000000AC   0320               MOVS     R0,#+3
+   \   000000AE   ........           BL       HwGPOHigh
+   \   000000B2   0420               MOVS     R0,#+4
+   \   000000B4   BDE81040           POP      {R4,LR}
+   \   000000B8   ........           B.W      HwGPOHigh
+    276              } else assert(0);
+   \                     ??TIM3_IRQHandler_6:
+   \   000000BC   4FF48A71           MOV      R1,#+276
+   \   000000C0   ....               LDR.N    R0,??DataTable11_11
+   \   000000C2   BDE81040           POP      {R4,LR}
+   \   000000C6   ........           B.W      assert_failed
+    277          }
+    278          
+    279          /*******************************************************************************
+    280          * Description : This function handles SPI3 (SPI_RADIO_IRQn) global interrupt request.
+    281          * Priority    : 1
+    282          * Input       : -
+    283          * Return      : -
+    284          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    285          void SPI3_IRQHandler(void) {
+   \                     SPI3_IRQHandler:
+   \   00000000   2DE9F041           PUSH     {R4-R8,LR}
+    286              static uint16_t byteCountLSB;
+    287          
+    288          #ifdef COOS
+    289              CoEnterISR();
+   \   00000004   ........           BL       CoEnterISR
+    290          #endif
+    291              if (SPI_I2S_GetFlagStatus(SPI_RADIO_SPI, SPI_I2S_FLAG_RXNE) == RESET) return;
+   \   00000008   ....               LDR.N    R4,??DataTable11_12  ;; 0x40003c00
+   \   0000000A   0121               MOVS     R1,#+1
+   \   0000000C   2046               MOV      R0,R4
+   \   0000000E   ........           BL       SPI_I2S_GetFlagStatus
+   \   00000012   0028               CMP      R0,#+0
+   \   00000014   00F0AB80           BEQ.W    ??SPI3_IRQHandler_0
+    292          
+    293              *pSpiRxBuf = SPI_I2S_ReceiveData(SPI_RADIO_SPI);
+   \   00000018   2046               MOV      R0,R4
+   \   0000001A   ........           BL       SPI_I2S_ReceiveData
+   \   0000001E   ....               LDR.N    R5,??DataTable11_13
+   \   00000020   2968               LDR      R1,[R5, #+0]
+   \   00000022   0870               STRB     R0,[R1, #+0]
+    294          
+    295              byteCountLSB = spiTxRxByteCount & 0x00FF;
+   \   00000024   ....               LDR.N    R6,??DataTable11_14
+   \   00000026   3088               LDRH     R0,[R6, #+0]
+   \   00000028   C0B2               UXTB     R0,R0
+   \   0000002A   ....               LDR.N    R1,??DataTable11_15
+   \   0000002C   0880               STRH     R0,[R1, #+0]
+    296          
+    297              if (byteCountLSB) {     /* byteCountLSB != 0 */
+   \   0000002E   0028               CMP      R0,#+0
+   \   00000030   00F09480           BEQ.W    ??SPI3_IRQHandler_1
+    298                  byteCountLSB--;
+   \   00000034   401E               SUBS     R0,R0,#+1
+   \   00000036   0880               STRH     R0,[R1, #+0]
+    299                  spiTxRxByteCount = (spiTxRxByteCount & 0xFF00) | byteCountLSB;
+   \   00000038   3188               LDRH     R1,[R6, #+0]
+   \   0000003A   01F47F41           AND      R1,R1,#0xFF00
+   \   0000003E   0143               ORRS     R1,R0,R1
+   \   00000040   3180               STRH     R1,[R6, #+0]
+    300          
+    301                  if (byteCountLSB == 0) {  /* at last byte */
+   \   00000042   80B2               UXTH     R0,R0
+   \   00000044   0028               CMP      R0,#+0
+   \   00000046   69D1               BNE.N    ??SPI3_IRQHandler_2
+    302                      if (spiTxRxByteCount  & 0x8000) {           // RXBUF_Part1
+   \   00000048   3088               LDRH     R0,[R6, #+0]
+   \   0000004A   0004               LSLS     R0,R0,#+16
+   \   0000004C   1DD5               BPL.N    ??SPI3_IRQHandler_3
+    303                          HwSPISSDeAssert(SPI_RADIO);
+   \   0000004E   0020               MOVS     R0,#+0
+   \   00000050   ........           BL       HwSPISSDeAssert
+    304                          /* kick off ISR-driven SPI download */
+    305                          scratchBuf[0] = CC2520_INS_BCLR;        // reset RX_FRM_DONE signal/exception
+   \   00000054   ....               LDR.N    R0,??DataTable11_16
+   \   00000056   5821               MOVS     R1,#+88
+   \   00000058   0170               STRB     R1,[R0, #+0]
+    306                          scratchBuf[1] = (CC2520_EXCFLAG1 << 3) | (CC2520_EXC_RX_FRM_DONE - 8);
+   \   0000005A   8821               MOVS     R1,#+136
+   \   0000005C   4170               STRB     R1,[R0, #+1]
+    307                          scratchBuf[2] = CC2520_INS_SNOP;        // pad to 16-bit word align
+   \   0000005E   0021               MOVS     R1,#+0
+   \   00000060   8170               STRB     R1,[R0, #+2]
+    308                          scratchBuf[3] = CC2520_INS_RXBUF;
+   \   00000062   3021               MOVS     R1,#+48
+   \   00000064   C170               STRB     R1,[R0, #+3]
+    309                          spiTxRxByteCount = 0x4005;              // go to RXBUF_Part2
+   \   00000066   44F20501           MOVW     R1,#+16389
+   \   0000006A   3180               STRH     R1,[R6, #+0]
+    310                          pSpiTxBuf = scratchBuf;
+   \   0000006C   ....               LDR.N    R7,??DataTable11_17
+   \   0000006E   3860               STR      R0,[R7, #+0]
+    311                          pSpiRxBuf = (uint8_t*)&rxPkt;
+   \   00000070   ....               LDR.N    R0,??DataTable11_18
+   \   00000072   2860               STR      R0,[R5, #+0]
+    312                          HwSPISSAssert(SPI_RADIO);
+   \   00000074   0020               MOVS     R0,#+0
+   \   00000076   ........           BL       HwSPISSAssert
+    313                          SPI_I2S_SendData(SPI_RADIO_SPI, *pSpiTxBuf++);
+   \   0000007A   3968               LDR      R1,[R7, #+0]
+   \   0000007C   481C               ADDS     R0,R1,#+1
+   \   0000007E   3860               STR      R0,[R7, #+0]
+   \   00000080   0978               LDRB     R1,[R1, #+0]
+   \   00000082   2046               MOV      R0,R4
+   \   00000084   ........           BL       SPI_I2S_SendData
+   \   00000088   6FE0               B.N      ??SPI3_IRQHandler_4
+    314                      } else if (spiTxRxByteCount & 0x4000) {     // RXBUF_Part2
+   \                     ??SPI3_IRQHandler_3:
+   \   0000008A   3088               LDRH     R0,[R6, #+0]
+   \   0000008C   4004               LSLS     R0,R0,#+17
+   \   0000008E   32D5               BPL.N    ??SPI3_IRQHandler_5
+    315                          if ((*pSpiRxBuf < 2) || (*pSpiRxBuf > 127)) {   // Frame Length INVALID!
+   \   00000090   D5F80080           LDR      R8,[R5, #+0]
+   \   00000094   ....               LDR.N    R7,??DataTable11_17
+   \   00000096   98F80000           LDRB     R0,[R8, #+0]
+   \   0000009A   801E               SUBS     R0,R0,#+2
+   \   0000009C   C0B2               UXTB     R0,R0
+   \   0000009E   7E28               CMP      R0,#+126
+   \   000000A0   19D3               BCC.N    ??SPI3_IRQHandler_6
+    316                              HwSPISSDeAssert(SPI_RADIO);
+   \   000000A2   0020               MOVS     R0,#+0
+   \   000000A4   ........           BL       HwSPISSDeAssert
+    317                              *pSpiTxBuf++ = CC2520_INS_SFLUSHRX; // get rid of this packet
+   \   000000A8   3868               LDR      R0,[R7, #+0]
+   \   000000AA   4721               MOVS     R1,#+71
+   \   000000AC   0170               STRB     R1,[R0, #+0]
+   \   000000AE   3868               LDR      R0,[R7, #+0]
+   \   000000B0   401C               ADDS     R0,R0,#+1
+   \   000000B2   3860               STR      R0,[R7, #+0]
+    318                              *pSpiTxBuf-- = CC2520_INS_SFLUSHRX; // double flush [CC2520 Bug#1]
+   \   000000B4   0170               STRB     R1,[R0, #+0]
+   \   000000B6   3868               LDR      R0,[R7, #+0]
+   \   000000B8   401E               SUBS     R0,R0,#+1
+   \   000000BA   3860               STR      R0,[R7, #+0]
+    319                              spiTxRxByteCount = 0x0002;          // above 2 instructions
+   \   000000BC   0220               MOVS     R0,#+2
+   \   000000BE   3080               STRH     R0,[R6, #+0]
+    320                              HwSPISSAssert(SPI_RADIO);
+   \   000000C0   0020               MOVS     R0,#+0
+   \   000000C2   ........           BL       HwSPISSAssert
+    321                              SPI_I2S_SendData(SPI_RADIO_SPI, *pSpiTxBuf++);
+   \   000000C6   3968               LDR      R1,[R7, #+0]
+   \   000000C8   481C               ADDS     R0,R1,#+1
+   \   000000CA   3860               STR      R0,[R7, #+0]
+   \   000000CC   0978               LDRB     R1,[R1, #+0]
+   \   000000CE   2046               MOV      R0,R4
+   \   000000D0   ........           BL       SPI_I2S_SendData
+   \   000000D4   49E0               B.N      ??SPI3_IRQHandler_4
+    322                          } else {
+    323                              spiTxRxByteCount = 0x2000 |         // go to RXBUF_Part3
+    324                                                 *pSpiRxBuf++;    // PHR: Frame Length
+   \                     ??SPI3_IRQHandler_6:
+   \   000000D6   98F80000           LDRB     R0,[R8, #+0]
+   \   000000DA   40F40050           ORR      R0,R0,#0x2000
+   \   000000DE   3080               STRH     R0,[R6, #+0]
+   \   000000E0   08F10100           ADD      R0,R8,#+1
+   \   000000E4   2860               STR      R0,[R5, #+0]
+    325                              SPI_I2S_SendData(SPI_RADIO_SPI, *pSpiTxBuf++);
+   \   000000E6   3968               LDR      R1,[R7, #+0]
+   \   000000E8   481C               ADDS     R0,R1,#+1
+   \   000000EA   3860               STR      R0,[R7, #+0]
+   \   000000EC   0978               LDRB     R1,[R1, #+0]
+   \   000000EE   2046               MOV      R0,R4
+   \   000000F0   ........           BL       SPI_I2S_SendData
+   \   000000F4   39E0               B.N      ??SPI3_IRQHandler_4
+    326                          }
+    327                      } else {
+    328                          if (spiTxRxByteCount & 0x3000) {        // RXBUF_Part3 or RXBUF_Part4
+   \                     ??SPI3_IRQHandler_5:
+   \   000000F6   3088               LDRH     R0,[R6, #+0]
+   \   000000F8   4FF44051           MOV      R1,#+12288
+   \   000000FC   0842               TST      R0,R1
+   \   000000FE   03D0               BEQ.N    ??SPI3_IRQHandler_7
+    329          #ifdef COOS
+    330                              isr_SetFlag(flagRadioRxFrame);
+   \   00000100   ....               LDR.N    R0,??DataTable11_19
+   \   00000102   0078               LDRB     R0,[R0, #+0]
+   \   00000104   ........           BL       isr_SetFlag
+    331          #else
+    332                              flagRadioRxFrame = 1;
+    333          #endif
+    334                          }
+    335                          spiTxRxByteCount = 0;
+   \                     ??SPI3_IRQHandler_7:
+   \   00000108   0020               MOVS     R0,#+0
+   \   0000010A   3080               STRH     R0,[R6, #+0]
+    336                          HwSPISSDeAssert(SPI_RADIO);
+   \   0000010C   ........           BL       HwSPISSDeAssert
+    337                          SPI_I2S_ITConfig(SPI_RADIO_SPI, SPI_I2S_IT_RXNE, DISABLE);
+   \   00000110   0022               MOVS     R2,#+0
+   \   00000112   6021               MOVS     R1,#+96
+   \   00000114   2046               MOV      R0,R4
+   \   00000116   ........           BL       SPI_I2S_ITConfig
+   \   0000011A   26E0               B.N      ??SPI3_IRQHandler_4
+    338                      }
+    339                  } else {  /* not at last byte */
+    340                      if (spiTxRxByteCount & 0x2000) {            // RXBUF_Part3
+   \                     ??SPI3_IRQHandler_2:
+   \   0000011C   D5F80080           LDR      R8,[R5, #+0]
+   \   00000120   3088               LDRH     R0,[R6, #+0]
+   \   00000122   8004               LSLS     R0,R0,#+18
+   \   00000124   0ED5               BPL.N    ??SPI3_IRQHandler_8
+    341                          spiTxRxByteCount &= ~0x2000;            // go to RXBUF_Part4
+   \   00000126   3088               LDRH     R0,[R6, #+0]
+   \   00000128   4DF6FF71           MOVW     R1,#+57343
+   \   0000012C   0840               ANDS     R0,R1,R0
+   \   0000012E   3080               STRH     R0,[R6, #+0]
+    342                          spiTxRxByteCount |=  0x1000;            // "
+   \   00000130   3088               LDRH     R0,[R6, #+0]
+   \   00000132   40F48050           ORR      R0,R0,#0x1000
+   \   00000136   3080               STRH     R0,[R6, #+0]
+    343                          if (*pSpiRxBuf == 0x40) {               // check FCF0 = Beacon Frame
+   \   00000138   98F80000           LDRB     R0,[R8, #+0]
+   \   0000013C   4028               CMP      R0,#+64
+   \   0000013E   01D1               BNE.N    ??SPI3_IRQHandler_8
+    344                              RFSyncPktRx();
+   \   00000140   ........           BL       RFSyncPktRx
+    345                          }
+    346                      }
+    347                      pSpiRxBuf++;
+   \                     ??SPI3_IRQHandler_8:
+   \   00000144   08F10100           ADD      R0,R8,#+1
+   \   00000148   2860               STR      R0,[R5, #+0]
+    348                      SPI_I2S_SendData(SPI_RADIO_SPI, *pSpiTxBuf++);
+   \   0000014A   ....               LDR.N    R0,??DataTable11_17
+   \   0000014C   0268               LDR      R2,[R0, #+0]
+   \   0000014E   511C               ADDS     R1,R2,#+1
+   \   00000150   0160               STR      R1,[R0, #+0]
+   \   00000152   1178               LDRB     R1,[R2, #+0]
+   \   00000154   2046               MOV      R0,R4
+   \   00000156   ........           BL       SPI_I2S_SendData
+   \   0000015A   06E0               B.N      ??SPI3_IRQHandler_4
+    349                  }
+    350              } else {                /* byteCountLSB != 0 */
+    351                  // assert(0); // [[DEBUG]]
+    352                  spiTxRxByteCount = 0;
+   \                     ??SPI3_IRQHandler_1:
+   \   0000015C   0020               MOVS     R0,#+0
+   \   0000015E   3080               STRH     R0,[R6, #+0]
+    353                  SPI_I2S_ITConfig(SPI_RADIO_SPI, SPI_I2S_IT_RXNE, DISABLE);
+   \   00000160   0246               MOV      R2,R0
+   \   00000162   6021               MOVS     R1,#+96
+   \   00000164   2046               MOV      R0,R4
+   \   00000166   ........           BL       SPI_I2S_ITConfig
+    354              }
+    355          
+    356          #ifdef COOS
+    357              CoExitISR();
+   \                     ??SPI3_IRQHandler_4:
+   \   0000016A   ........           BL       CoExitISR
+    358          #endif
+    359          }
+   \                     ??SPI3_IRQHandler_0:
+   \   0000016E   BDE8F081           POP      {R4-R8,PC}       ;; return
+    360          
+    361          /*******************************************************************************
+    362          * Description : This function handles External line 2 interrupt request.
+    363          *               GPI_RADIO_GPIO0 (RX_FRM_DONE) = PD.2
+    364          * Priority    : 2
+    365          * Input       : -
+    366          * Return      : -
+    367          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    368          void EXTI2_IRQHandler(void) {
+   \                     EXTI2_IRQHandler:
+   \   00000000   38B5               PUSH     {R3-R5,LR}
+    369              // Clear the  EXTI pending bit
+    370              EXTI_ClearITPendingBit(EXTI_Line2);
+   \   00000002   0420               MOVS     R0,#+4
+   \   00000004   ........           BL       EXTI_ClearITPendingBit
+    371          
+    372              /* capture state in case this is an RF Sync Packet */
+    373              // latch TIM3 counter NOW via software CC1 event
+    374              TIM3->EGR = TIM_EventSource_CC1;
+   \   00000008   ....               LDR.N    R0,??DataTable11_20  ;; 0x40000414
+   \   0000000A   0221               MOVS     R1,#+2
+   \   0000000C   0180               STRH     R1,[R0, #+0]
+    375              // latch TIM4 counter NOW via software CC1 event
+    376              TIM4->EGR = TIM_EventSource_CC1;
+   \   0000000E   ....               LDR.N    R0,??DataTable11_21  ;; 0x40000814
+   \   00000010   0180               STRH     R1,[R0, #+0]
+    377              // store current frameId to compare and correct later
+    378              frameIdAtSync = frameId;
+   \   00000012   ....               LDR.N    R0,??DataTable11_7
+   \   00000014   0168               LDR      R1,[R0, #+0]
+   \   00000016   4160               STR      R1,[R0, #+4]
+    379          
+    380              if (!spiTxRxByteCount) {    // SPI not in use
+   \   00000018   ....               LDR.N    R0,??DataTable11_14
+   \   0000001A   0188               LDRH     R1,[R0, #+0]
+   \   0000001C   0029               CMP      R1,#+0
+   \   0000001E   22D1               BNE.N    ??EXTI2_IRQHandler_0
+    381                  /* kick off ISR-driven SPI download */
+    382                  scratchBuf[0] = CC2520_INS_BCLR;    // reset RX_FRM_DONE signal/exception
+   \   00000020   ....               LDR.N    R1,??DataTable11_16
+   \   00000022   5822               MOVS     R2,#+88
+   \   00000024   0A70               STRB     R2,[R1, #+0]
+    383                  scratchBuf[1] = (CC2520_EXCFLAG1 << 3) | (CC2520_EXC_RX_FRM_DONE - 8);
+   \   00000026   8822               MOVS     R2,#+136
+   \   00000028   4A70               STRB     R2,[R1, #+1]
+    384                  scratchBuf[2] = CC2520_INS_SNOP;    // pad to 16-bit word align
+   \   0000002A   0022               MOVS     R2,#+0
+   \   0000002C   8A70               STRB     R2,[R1, #+2]
+    385                  scratchBuf[3] = CC2520_INS_RXBUF;
+   \   0000002E   3022               MOVS     R2,#+48
+   \   00000030   CA70               STRB     R2,[R1, #+3]
+    386                  spiTxRxByteCount = 0x4005;  // go to RXBUF_Part2
+   \   00000032   44F20502           MOVW     R2,#+16389
+   \   00000036   0280               STRH     R2,[R0, #+0]
+    387                  pSpiTxBuf = scratchBuf;
+   \   00000038   ....               LDR.N    R4,??DataTable11_17
+   \   0000003A   2160               STR      R1,[R4, #+0]
+    388                  pSpiRxBuf = (uint8_t*)&rxPkt;
+   \   0000003C   ....               LDR.N    R0,??DataTable11_13
+   \   0000003E   ....               LDR.N    R1,??DataTable11_18
+   \   00000040   0160               STR      R1,[R0, #+0]
+    389                  HwSPISSAssert(SPI_RADIO);
+   \   00000042   0020               MOVS     R0,#+0
+   \   00000044   ........           BL       HwSPISSAssert
+    390                  SPI_I2S_ITConfig(SPI_RADIO_SPI, SPI_I2S_IT_RXNE, ENABLE);
+   \   00000048   ....               LDR.N    R5,??DataTable11_12  ;; 0x40003c00
+   \   0000004A   0122               MOVS     R2,#+1
+   \   0000004C   6021               MOVS     R1,#+96
+   \   0000004E   2846               MOV      R0,R5
+   \   00000050   ........           BL       SPI_I2S_ITConfig
+    391                  SPI_I2S_SendData(SPI_RADIO_SPI, *pSpiTxBuf++);
+   \   00000054   2168               LDR      R1,[R4, #+0]
+   \   00000056   481C               ADDS     R0,R1,#+1
+   \   00000058   2060               STR      R0,[R4, #+0]
+   \   0000005A   0978               LDRB     R1,[R1, #+0]
+   \   0000005C   2846               MOV      R0,R5
+   \   0000005E   BDE83440           POP      {R2,R4,R5,LR}
+   \   00000062   ........           B.W      SPI_I2S_SendData
+    392              } else {
+    393                  __disable_interrupt();
+   \                     ??EXTI2_IRQHandler_0:
+   \   00000066   72B6               CPSID    I
+    394                  spiTxRxByteCount |= 0x8000; // request to go to RXBUF_Part1
+   \   00000068   0188               LDRH     R1,[R0, #+0]
+   \   0000006A   41F40041           ORR      R1,R1,#0x8000
+   \   0000006E   0180               STRH     R1,[R0, #+0]
+    395                  __enable_interrupt();
+   \   00000070   62B6               CPSIE    I
+    396              }
+    397          }
+   \   00000072   31BD               POP      {R0,R4,R5,PC}    ;; return
+    398          
+    399          /*******************************************************************************
+    400          * Description : This function handles External line 2 interrupt request.
+    401          *               GPI_RADIO_GPIO1 (TX_FRM_DONE) = PD.1
+    402          * Priority    : 3
+    403          * Input       : -
+    404          * Return      : -
+    405          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    406          void EXTI1_IRQHandler(void) {
+   \                     EXTI1_IRQHandler:
+   \   00000000   80B5               PUSH     {R7,LR}
+    407          #ifdef COOS
+    408              CoEnterISR();
+   \   00000002   ........           BL       CoEnterISR
+    409          #endif
+    410              // Clear the  EXTI pending bit
+    411              EXTI_ClearITPendingBit(EXTI_Line1);
+   \   00000006   0220               MOVS     R0,#+2
+   \   00000008   ........           BL       EXTI_ClearITPendingBit
+    412          
+    413          #ifdef COOS
+    414              isr_SetFlag(flagRadioTxDone);
+   \   0000000C   ....               LDR.N    R0,??DataTable11_22
+   \   0000000E   0078               LDRB     R0,[R0, #+0]
+   \   00000010   ........           BL       isr_SetFlag
+    415              isr_SetFlag(flagRadioTxDoneQueue);
+   \   00000014   ....               LDR.N    R0,??DataTable11_23
+   \   00000016   0078               LDRB     R0,[R0, #+0]
+   \   00000018   ........           BL       isr_SetFlag
+    416              isr_SetFlag(flagRadioTxDoneUser);
+   \   0000001C   ....               LDR.N    R0,??DataTable11_24
+   \   0000001E   0078               LDRB     R0,[R0, #+0]
+   \   00000020   ........           BL       isr_SetFlag
+    417          #else
+    418              flagRadioTxDone = 1;
+    419              flagRadioTxDoneQueue = 1;
+    420              flagRadioTxDoneUser = 1;
+    421          #endif
+    422          
+    423          #ifdef COOS
+    424              CoExitISR();
+   \   00000024   BDE80140           POP      {R0,LR}
+   \   00000028   ........           B.W      CoExitISR
+    425          #endif
+    426          }
+    427          
+    428          /*******************************************************************************
+    429          * Description : This function handles DMA1 Channel 4 (SPI_IMU_RX_DMA_IRQ)
+    430          *               interrupt request.
+    431          * Priority    : 4
+    432          * Input       : -
+    433          * Return      : -
+    434          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    435          void DMA1_Channel4_IRQHandler(void)
+    436          {
+   \                     DMA1_Channel4_IRQHandler:
+   \   00000000   80B5               PUSH     {R7,LR}
+    437              CoEnterISR();
+   \   00000002   ........           BL       CoEnterISR
+    438          
+    439              if(DMA_GetITStatus(DMA1_IT_TC4)) {
+   \   00000006   4FF40050           MOV      R0,#+8192
+   \   0000000A   ........           BL       DMA_GetITStatus
+   \   0000000E   0028               CMP      R0,#+0
+   \   00000010   0FD0               BEQ.N    ??DMA1_Channel4_IRQHandler_0
+    440                  // Clear DMA1 Channel4 Transfer Complete interrupt pending bit
+    441                  DMA_ClearITPendingBit(DMA1_IT_TC4);
+   \   00000012   4FF40050           MOV      R0,#+8192
+   \   00000016   ........           BL       DMA_ClearITPendingBit
+    442                  HwSPISSDeAssert(SPI_IMU);
+   \   0000001A   0120               MOVS     R0,#+1
+   \   0000001C   ........           BL       HwSPISSDeAssert
+    443                  isr_SetFlag(flagIMUNewData);
+   \   00000020   ....               LDR.N    R0,??DataTable11_25
+   \   00000022   0078               LDRB     R0,[R0, #+0]
+   \   00000024   ........           BL       isr_SetFlag
+    444                  countB++;
+   \   00000028   ....               LDR.N    R0,??DataTable11_26
+   \   0000002A   4168               LDR      R1,[R0, #+4]
+   \   0000002C   491C               ADDS     R1,R1,#+1
+   \   0000002E   4160               STR      R1,[R0, #+4]
+   \   00000030   04E0               B.N      ??DMA1_Channel4_IRQHandler_1
+    445              } else assert(0);
+   \                     ??DMA1_Channel4_IRQHandler_0:
+   \   00000032   40F2BD11           MOVW     R1,#+445
+   \   00000036   ....               LDR.N    R0,??DataTable11_11
+   \   00000038   ........           BL       assert_failed
+    446          
+    447              CoExitISR();
+   \                     ??DMA1_Channel4_IRQHandler_1:
+   \   0000003C   BDE80140           POP      {R0,LR}
+   \   00000040   ........           B.W      CoExitISR
+    448          }
+    449          
+    450          /*******************************************************************************
+    451          * Description : This function handles External lines 9 to 5 interrupt request.
+    452          * Priority    : 5
+    453          * Input       : -
+    454          * Return      : -
+    455          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    456          void EXTI9_5_IRQHandler(void) {
+   \                     EXTI9_5_IRQHandler:
+   \   00000000   38B5               PUSH     {R3-R5,LR}
+    457              // GPI_IMU_DIO1 = PD.8
+    458              if(EXTI_GetITStatus(EXTI_Line8) == SET) {
+   \   00000002   4FF48070           MOV      R0,#+256
+   \   00000006   ........           BL       EXTI_GetITStatus
+   \   0000000A   0128               CMP      R0,#+1
+   \   0000000C   24D1               BNE.N    ??EXTI9_5_IRQHandler_0
+    459                  // Clear the  EXTI pending bit
+    460                  EXTI_ClearITPendingBit(EXTI_Line8);
+   \   0000000E   4FF48070           MOV      R0,#+256
+   \   00000012   ........           BL       EXTI_ClearITPendingBit
+    461          
+    462                  // Initiate SPI DMA to pull IMU data
+    463                  if (countA == countB) {
+   \   00000016   ....               LDR.N    R0,??DataTable11_26
+   \   00000018   0168               LDR      R1,[R0, #+0]
+   \   0000001A   4268               LDR      R2,[R0, #+4]
+   \   0000001C   9142               CMP      R1,R2
+   \   0000001E   20D1               BNE.N    ??EXTI9_5_IRQHandler_1
+    464                      countA++;
+   \   00000020   491C               ADDS     R1,R1,#+1
+   \   00000022   0160               STR      R1,[R0, #+0]
+    465                      HwSPISSAssert(SPI_IMU);
+   \   00000024   0120               MOVS     R0,#+1
+   \   00000026   ........           BL       HwSPISSAssert
+    466                      DMA_Cmd(SPI_IMU_RX_DMA_CHAN, DISABLE);
+   \   0000002A   ....               LDR.N    R4,??DataTable11_27  ;; 0x40020044
+   \   0000002C   0021               MOVS     R1,#+0
+   \   0000002E   2046               MOV      R0,R4
+   \   00000030   ........           BL       DMA_Cmd
+    467                      DMA_Cmd(SPI_IMU_TX_DMA_CHAN, DISABLE);
+   \   00000034   ....               LDR.N    R5,??DataTable11_28  ;; 0x40020058
+   \   00000036   0021               MOVS     R1,#+0
+   \   00000038   2846               MOV      R0,R5
+   \   0000003A   ........           BL       DMA_Cmd
+    468                      SPI_IMU_RX_DMA_CHAN->CNDTR = 8;
+   \   0000003E   0820               MOVS     R0,#+8
+   \   00000040   6060               STR      R0,[R4, #+4]
+    469                      SPI_IMU_TX_DMA_CHAN->CNDTR = 8;
+   \   00000042   6860               STR      R0,[R5, #+4]
+    470                      DMA_Cmd(SPI_IMU_RX_DMA_CHAN, ENABLE);
+   \   00000044   0121               MOVS     R1,#+1
+   \   00000046   2046               MOV      R0,R4
+   \   00000048   ........           BL       DMA_Cmd
+    471                      DMA_Cmd(SPI_IMU_TX_DMA_CHAN, ENABLE);
+   \   0000004C   0121               MOVS     R1,#+1
+   \   0000004E   2846               MOV      R0,R5
+   \   00000050   BDE83440           POP      {R2,R4,R5,LR}
+   \   00000054   ........           B.W      DMA_Cmd
+    472                  }
+    473              } else assert(0);
+   \                     ??EXTI9_5_IRQHandler_0:
+   \   00000058   40F2D911           MOVW     R1,#+473
+   \   0000005C   ....               LDR.N    R0,??DataTable11_11
+   \   0000005E   ........           BL       assert_failed
+    474          }
+   \                     ??EXTI9_5_IRQHandler_1:
+   \   00000062   31BD               POP      {R0,R4,R5,PC}    ;; return
+    475          
+    476          /*******************************************************************************
+    477          * Description : This function handles TIM5 global interrupt request.
+    478          * Input       : -
+    479          * Return      : -
+    480          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    481          void TIM5_IRQHandler(void) {
+   \                     TIM5_IRQHandler:
+   \   00000000   10B5               PUSH     {R4,LR}
+    482              if(TIM_GetITStatus(TIM5, TIM_IT_Update) == SET) {
+   \   00000002   ....               LDR.N    R4,??DataTable11_29  ;; 0x40000c00
+   \   00000004   0121               MOVS     R1,#+1
+   \   00000006   2046               MOV      R0,R4
+   \   00000008   ........           BL       TIM_GetITStatus
+   \   0000000C   0128               CMP      R0,#+1
+   \   0000000E   06D1               BNE.N    ??TIM5_IRQHandler_0
+    483                  /* Clear TIM5 Update interrupt pending bit */
+    484                  TIM_ClearITPendingBit(TIM5, TIM_IT_Update);
+   \   00000010   0121               MOVS     R1,#+1
+   \   00000012   2046               MOV      R0,R4
+   \   00000014   ........           BL       TIM_ClearITPendingBit
+    485                  //TIM_ITConfig(TIM5, TIM_IT_Update, DISABLE);
+    486          
+    487                  HwGPOLow(GPO_TP11);
+   \   00000018   0620               MOVS     R0,#+6
+   \   0000001A   ........           BL       HwGPOLow
+    488              }
+    489          }
+   \                     ??TIM5_IRQHandler_0:
+   \   0000001E   10BD               POP      {R4,PC}          ;; return
+    490          
+    491          /*******************************************************************************
+    492          * Description : Calculates Moving Average of TIM4 (10Hz Sync Packet Freq)
+    493          * Input       : -
+    494          * Return      : nominal 2 x RF_SYNC_PERIOD
+    495          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    496          uint16_t Tim4GetMovAvg(void) {
+   \                     Tim4GetMovAvg:
+   \   00000000   10B4               PUSH     {R4}
+    497              static uint32_t acc = RF_SYNC_PERIOD2;
+    498              uint16_t *pVal;
+    499              uint16_t i;
+    500          
+    501              pVal = tim4HistA;
+   \   00000002   ....               LDR.N    R0,??DataTable11_1
+   \   00000004   0146               MOV      R1,R0
+    502              acc = 0;
+   \   00000006   0022               MOVS     R2,#+0
+   \   00000008   0264               STR      R2,[R0, #+64]
+    503              for (i = 0; i < 32; i++) {      // array size = 32
+   \   0000000A   04E0               B.N      ??Tim4GetMovAvg_0
+    504                  acc += *pVal++;
+   \                     ??Tim4GetMovAvg_1:
+   \   0000000C   31F8024B           LDRH     R4,[R1], #+2
+   \   00000010   E318               ADDS     R3,R4,R3
+   \   00000012   0364               STR      R3,[R0, #+64]
+    505              }
+   \   00000014   521C               ADDS     R2,R2,#+1
+   \                     ??Tim4GetMovAvg_0:
+   \   00000016   036C               LDR      R3,[R0, #+64]
+   \   00000018   202A               CMP      R2,#+32
+   \   0000001A   F7D3               BCC.N    ??Tim4GetMovAvg_1
+    506          
+    507              return (acc/32);
+   \   0000001C   5809               LSRS     R0,R3,#+5
+   \   0000001E   80B2               UXTH     R0,R0
+   \   00000020   10BC               POP      {R4}
+   \   00000022   7047               BX       LR               ;; return
+    508          }
+
+   \                                 In section .data, align 4
+   \                     tim4HistA:
+   \   00000000   60EA60EA60EA       DC16 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000
+   \              60EA60EA60EA
+   \              60EA60EA60EA
+   \   00000012   60EA60EA60EA       DC16 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000
+   \              60EA60EA60EA
+   \              60EA60EA60EA
+   \   00000024   60EA60EA60EA       DC16 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000
+   \              60EA60EA60EA
+   \              60EA60EA60EA
+   \   00000036   60EA60EA60EA       DC16 60000, 60000, 60000, 60000, 60000
+   \              60EA60EA    
+   \   00000040   60EA0000           DC32 60000
+    509          
+    510          /*******************************************************************************
+    511          * Description : Calculates Moving Average of TIM3 (100Hz IRLED Phase)
+    512          * Input       : -
+    513          * Return      :
+    514          *******************************************************************************/
+
+   \                                 In section .text, align 2, keep-with-next
+    515          uint16_t Tim3GetMovAvg(void) {
+   \                     Tim3GetMovAvg:
+   \   00000000   10B4               PUSH     {R4}
+    516              static uint32_t acc;
+    517              uint16_t *pVal;
+    518              uint16_t i;
+    519          
+    520              pVal = tim3HistA;
+   \   00000002   ....               LDR.N    R0,??DataTable11_2
+   \   00000004   011D               ADDS     R1,R0,#+4
+    521              acc = 0;
+   \   00000006   0022               MOVS     R2,#+0
+   \   00000008   4262               STR      R2,[R0, #+36]
+    522              for (i = 0; i < 16; i++) {      // array size = 16
+   \   0000000A   04E0               B.N      ??Tim3GetMovAvg_0
+    523                  acc += *pVal++;
+   \                     ??Tim3GetMovAvg_1:
+   \   0000000C   31F8024B           LDRH     R4,[R1], #+2
+   \   00000010   E318               ADDS     R3,R4,R3
+   \   00000012   4362               STR      R3,[R0, #+36]
+    524              }
+   \   00000014   521C               ADDS     R2,R2,#+1
+   \                     ??Tim3GetMovAvg_0:
+   \   00000016   436A               LDR      R3,[R0, #+36]
+   \   00000018   102A               CMP      R2,#+16
+   \   0000001A   F7D3               BCC.N    ??Tim3GetMovAvg_1
+    525          
+    526              return (acc/16);
+   \   0000001C   1809               LSRS     R0,R3,#+4
+   \   0000001E   80B2               UXTH     R0,R0
+   \   00000020   10BC               POP      {R4}
+   \   00000022   7047               BX       LR               ;; return
+    527          }
+
+   \                                 In section .bss, align 4
+   \                     ??idxA:
+   \   00000000                      DS8 2
+   \   00000002                      DS8 2
+   \   00000004                      DS8 32
+   \   00000024                      DS8 4
+
+   \                                 In section .bss, align 2
+   \                     ??idxA_1:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 2
+   \                     ??tim4CntPrev:
+   \   00000000                      DS8 2
+
+   \                                 In section .bss, align 2
+   \                     ??byteCountLSB:
+   \   00000000                      DS8 2
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11:
+   \   00000000   ........           DC32     ??idxA_1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_1:
+   \   00000000   ........           DC32     tim4HistA
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_2:
+   \   00000000   ........           DC32     ??idxA
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_3:
+   \   00000000   ........           DC32     ??tim4CntPrev
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_4:
+   \   00000000   34080040           DC32     0x40000834
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_5:
+   \   00000000   34040040           DC32     0x40000434
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_6:
+   \   00000000   00040040           DC32     0x40000400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_7:
+   \   00000000   ........           DC32     frameId
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_8:
+   \   00000000   ........           DC32     led0Id
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_9:
+   \   00000000   ........           DC32     led1Id
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_10:
+   \   00000000   ........           DC32     led2Id
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_11:
+   \   00000000   ........           DC32     `?<Constant "C:\\\\CAST\\\\BC\\\\App\\\\stm32f...">`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_12:
+   \   00000000   003C0040           DC32     0x40003c00
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_13:
+   \   00000000   ........           DC32     pSpiRxBuf
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_14:
+   \   00000000   ........           DC32     spiTxRxByteCount
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_15:
+   \   00000000   ........           DC32     ??byteCountLSB
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_16:
+   \   00000000   ........           DC32     scratchBuf
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_17:
+   \   00000000   ........           DC32     pSpiTxBuf
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_18:
+   \   00000000   ........           DC32     rxPkt
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_19:
+   \   00000000   ........           DC32     flagRadioRxFrame
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_20:
+   \   00000000   14040040           DC32     0x40000414
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_21:
+   \   00000000   14080040           DC32     0x40000814
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_22:
+   \   00000000   ........           DC32     flagRadioTxDone
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_23:
+   \   00000000   ........           DC32     flagRadioTxDoneQueue
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_24:
+   \   00000000   ........           DC32     flagRadioTxDoneUser
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_25:
+   \   00000000   ........           DC32     flagIMUNewData
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_26:
+   \   00000000   ........           DC32     countA
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_27:
+   \   00000000   44000240           DC32     0x40020044
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_28:
+   \   00000000   58000240           DC32     0x40020058
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable11_29:
+   \   00000000   000C0040           DC32     0x40000c00
+
+   \                                 In section .rodata, align 4
+   \                     `?<Constant "C:\\\\CAST\\\\BC\\\\App\\\\stm32f...">`:
+   \   00000000   433A5C434153       DC8 "C:\\CAST\\BC\\App\\stm32f10x_it.c"
+   \              545C42435C41
+   \              70705C73746D
+   \              333266313078
+   \              5F69742E6300
+   \   0000001E   0000               DC8 0, 0
+    528          
+    529          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+     Function                 .cstack
+     --------                 -------
+     BusFault_Handler              0
+     DMA1_Channel4_IRQHandler      8
+     DebugMon_Handler              0
+     EXTI1_IRQHandler              8
+     EXTI2_IRQHandler             16
+     EXTI9_5_IRQHandler           16
+     HardFault_Handler             0
+     MemManage_Handler             0
+     NMI_Handler                   0
+     OTG_FS_IRQHandler             8
+     RFSyncPktRx                  16
+     SPI3_IRQHandler              24
+     SVC_Handler                   0
+     TIM3_IRQHandler               8
+     TIM5_IRQHandler               8
+     Tim3GetMovAvg                 4
+     Tim3UpdMovAvg                 0
+     Tim4GetMovAvg                 4
+     Tim4UpdMovAvg                 0
+     UsageFault_Handler            0
+
+
+   Section sizes:
+
+     Function/Label                             Bytes
+     --------------                             -----
+     countA                                        8
+     countB
+     frameId                                      12
+     frameIdAtSync
+     frameIdCorrection
+     Tim4UpdMovAvg                                58
+     Tim3UpdMovAvg                                22
+     RFSyncPktRx                                  38
+     NMI_Handler                                   2
+     HardFault_Handler                             2
+     MemManage_Handler                             2
+     BusFault_Handler                              2
+     UsageFault_Handler                            2
+     SVC_Handler                                   2
+     DebugMon_Handler                              2
+     OTG_FS_IRQHandler                             4
+     TIM3_IRQHandler                             202
+     SPI3_IRQHandler                             370
+     EXTI2_IRQHandler                            116
+     EXTI1_IRQHandler                             44
+     DMA1_Channel4_IRQHandler                     68
+     EXTI9_5_IRQHandler                          100
+     TIM5_IRQHandler                              32
+     Tim4GetMovAvg                                36
+     tim4HistA                                    68
+     acc
+     Tim3GetMovAvg                                36
+     idxA                                         40
+     tim3HistA
+     acc
+     idxA                                          2
+     tim4CntPrev                                   2
+     byteCountLSB                                  2
+     ??DataTable11                                 4
+     ??DataTable11_1                               4
+     ??DataTable11_2                               4
+     ??DataTable11_3                               4
+     ??DataTable11_4                               4
+     ??DataTable11_5                               4
+     ??DataTable11_6                               4
+     ??DataTable11_7                               4
+     ??DataTable11_8                               4
+     ??DataTable11_9                               4
+     ??DataTable11_10                              4
+     ??DataTable11_11                              4
+     ??DataTable11_12                              4
+     ??DataTable11_13                              4
+     ??DataTable11_14                              4
+     ??DataTable11_15                              4
+     ??DataTable11_16                              4
+     ??DataTable11_17                              4
+     ??DataTable11_18                              4
+     ??DataTable11_19                              4
+     ??DataTable11_20                              4
+     ??DataTable11_21                              4
+     ??DataTable11_22                              4
+     ??DataTable11_23                              4
+     ??DataTable11_24                              4
+     ??DataTable11_25                              4
+     ??DataTable11_26                              4
+     ??DataTable11_27                              4
+     ??DataTable11_28                              4
+     ??DataTable11_29                              4
+     ?<Constant "C:\\CAST\\BC\\App\\stm32f...">   32
+
+ 
+    66 bytes in section .bss
+    68 bytes in section .data
+    32 bytes in section .rodata
+ 1 260 bytes in section .text
+ 
+ 1 260 bytes of CODE  memory
+    32 bytes of CONST memory
+   134 bytes of DATA  memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,875 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     19/Mar/2019  16:48:04 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\common\CoOS\kernel\flag.c               #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\common\CoOS\kernel\flag.c" -D          #
+#                    BEACON_APP -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D    #
+#                    COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D         #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -lcN            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\List\" -o  #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\"      #
+#                    --no_cse --no_unroll --no_inline --no_code_motion        #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\RevJ\RevJ Beacon\firmware\beacon\IAR\..\App\" -I       #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\CMSIS\CM3\Devi #
+#                    ceSupport\ST\STM32F10x\" -I                              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\STM32F10x_StdP #
+#                    eriph_Driver\inc\" -I "C:\Users\User\Documents\Cortex_gi #
+#                    t\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\..\.. #
+#                    \common\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex #
+#                    _git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\.. #
+#                    \..\common\CoOS\portable\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\..\common\" -I        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\USB-Device-CDC #
+#                    \" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Re #
+#                    vJ\RevJ Beacon\firmware\beacon\IAR\..\..\common\" -I     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\" -On --use_c++_inline -I   #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.4\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\List\flag.l #
+#                    st                                                       #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\flag.o  #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ Beacon\firmware\common\CoOS\kernel\flag.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       flag.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      Flag management implementation code of coocox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          
+     17          
+     18          /*---------------------------- Include ---------------------------------------*/
+     19          #include <coocox.h>
+     20          
+     21          #if CFG_FLAG_EN > 0
+     22          /*---------------------------- Variable Define -------------------------------*/
+     23          #define FLAG_MAX_NUM  32                /*!< Define max flag number.          */
+     24          FCB     FlagCrl = {0};                  /*!< Flags list struct                */
+     25          
+     26          
+     27          /*---------------------------- Function Declare ------------------------------*/
+     28          static  void FlagBlock(P_FLAG_NODE pnode,U32 flags,U8 waitType);
+     29          static  P_FLAG_NODE RemoveFromLink(P_FLAG_NODE pnode);
+     30          
+     31          /**
+     32           *******************************************************************************
+     33           * @brief      Create a flag
+     34           * @param[in]  bAutoReset      Reset mode,Co_TRUE(Auto Reset)  FLASE(Manual Reset).
+     35           * @param[in]  bInitialState   Initial state.
+     36           * @param[out] None
+     37           * @retval     E_CREATE_FAIL   Create flag fail.
+     38           * @retval     others          Create flag successful.
+     39           *
+     40           * @par Description
+     41           * @details    This function use to create a event flag.
+     42           * @note
+     43           *******************************************************************************
+     44           */
+     45          OS_FlagID CoCreateFlag(BOOL bAutoReset,BOOL bInitialState)
+     46          {
+     47              U8  i;
+     48              OsSchedLock();
+     49          
+     50              for(i=0;i<FLAG_MAX_NUM;i++)
+     51              {
+     52                  /* Assign a free flag control block                                   */
+     53                  if((FlagCrl.flagActive&(1<<i)) == 0 )
+     54                  {
+     55                      FlagCrl.flagActive |= (1<<i);         /* Initialize active flag   */
+     56                      FlagCrl.flagRdy    |= (bInitialState<<i);/* Initialize ready flag */
+     57                      FlagCrl.resetOpt   |= (bAutoReset<<i);/* Initialize reset option  */
+     58                      OsSchedUnlock();
+     59                      return i ;                  /* Return Flag ID                     */
+     60                  }
+     61              }
+     62              OsSchedUnlock();
+     63          
+     64              return E_CREATE_FAIL;               /* There is no free flag control block*/
+     65          }
+     66          
+     67          
+     68          /**
+     69           *******************************************************************************
+     70           * @brief      Delete a flag
+     71           * @param[in]  id      Flag ID.
+     72           * @param[in]  opt     Delete option.
+     73           * @param[out] None
+     74           * @retval     E_CALL            Error call in ISR.
+     75           * @retval     E_INVALID_ID      Invalid event ID.
+     76           * @retval     E_TASK_WAITTING   Tasks waitting for the event,delete fail.
+     77           * @retval     E_OK              Event deleted successful.
+     78           *
+     79           * @par Description
+     80           * @details    This function is called to delete a event flag.
+     81           * @note
+     82           *******************************************************************************
+     83           */
+     84          StatusType CoDelFlag(OS_FlagID id,U8 opt)
+     85          {
+     86              P_FLAG_NODE pnode;
+     87              P_FCB pfcb;
+     88              pfcb  = &FlagCrl;
+     89              if(OSIntNesting > 0)                /* If be called from ISR              */
+     90              {
+     91                  return E_CALL;
+     92              }
+     93          #if CFG_PAR_CHECKOUT_EN >0
+     94              if((pfcb->flagActive&(1<<id)) == 0) /* Flag is valid or not               */
+     95              {
+     96                  return E_INVALID_ID;
+     97              }
+     98          #endif
+     99              OsSchedLock();
+    100              pnode = pfcb->headNode;
+    101          
+    102              while(pnode != Co_NULL)                /* Ready all tasks waiting for flags  */
+    103              {
+    104                  if((pnode->waitFlags&(1<<id)) != 0) /* If no task is waiting on flags */
+    105              	  {
+    106                      if(opt == OPT_DEL_NO_PEND)      /* Delete flag if no task waiting */
+    107                      {
+    108                        	OsSchedUnlock();
+    109                         	return E_TASK_WAITING;
+    110                      }
+    111                      else if (opt == OPT_DEL_ANYWAY) /* Always delete the flag         */
+    112                      {
+    113                          if(pnode->waitType == OPT_WAIT_ALL)
+    114                          {
+    115                              /* If the flag is only required by NODE                   */
+    116                              if( pnode->waitFlags == (1<<id) )
+    117                              {
+    118                                  /* Remove the NODE from waiting list                  */
+    119                                  TASK_SEQ(pnode->waitTask); pnode = RemoveFromLink(pnode);
+    120                                  continue;
+    121                              }
+    122                              else
+    123                              {
+    124                                  pnode->waitFlags &= ~(1<<id);   /* Update waitflags   */
+    125                              }
+    126                          }
+    127                          else
+    128                          {
+    129                              TASK_SEQ(pnode->waitTask); pnode = RemoveFromLink(pnode);
+    130                              continue;
+    131                          }
+    132                      }
+    133                  }
+    134                  pnode = pnode->nextNode;
+    135              }
+    136          
+    137              /* Remove the flag from the flags list */
+    138              pfcb->flagActive &= ~(1<<id);
+    139              pfcb->flagRdy    &= ~(1<<id);
+    140              pfcb->resetOpt   &= ~(1<<id);
+    141              OsSchedUnlock();
+    142              return E_OK;
+    143          }
+    144          
+    145          
+    146          /**
+    147           *******************************************************************************
+    148           * @brief      AcceptSingleFlag
+    149           * @param[in]  id     Flag ID.
+    150           * @param[out] None
+    151           * @retval     E_INVALID_ID      Invalid event ID.
+    152           * @retval     E_FLAG_NOT_READY  Flag is not in ready state.
+    153           * @retval     E_OK              The call was successful and your task owns the Flag.
+    154           *
+    155           * @par Description
+    156           * @details    This fucntion is called to accept single flag
+    157           * @note
+    158           *******************************************************************************
+    159           */
+    160          StatusType CoAcceptSingleFlag(OS_FlagID id)
+    161          {
+    162              P_FCB pfcb;
+    163              pfcb  = &FlagCrl;
+    164          #if CFG_PAR_CHECKOUT_EN >0
+    165              if(id >= FLAG_MAX_NUM)
+    166              {
+    167                  return E_INVALID_ID;            /* Invalid 'id',return error          */
+    168              }
+    169              if((pfcb->flagActive&(1<<id)) == 0)
+    170              {
+    171                  return E_INVALID_ID;            /* Flag is deactive,return error      */
+    172              }
+    173          #endif
+    174              if((pfcb->flagRdy&(1<<id)) != 0)    /* If the required flag is set        */
+    175              {
+    176                  OsSchedLock()
+    177                  pfcb->flagRdy &= ~((FlagCrl.resetOpt)&(1<<id)); /* Clear the flag     */
+    178                  OsSchedUnlock();
+    179                  return E_OK;
+    180              }
+    181              else                                /* If the required flag is not set    */
+    182              {
+    183                  return E_FLAG_NOT_READY;
+    184              }
+    185          }
+    186          
+    187          
+    188          /**
+    189           *******************************************************************************
+    190           * @brief      AcceptMultipleFlags
+    191           * @param[in]  flags      Flags that waiting to active task.
+    192           * @param[in]  waitType   Flags wait type.
+    193           * @param[out] perr       A pointer to error code.
+    194           * @retval     0
+    195           * @retval     springFlag
+    196           *
+    197           * @par Description
+    198           * @details    This fucntion is called to accept multiple flags.
+    199           * @note
+    200           *******************************************************************************
+    201           */
+    202          U32 CoAcceptMultipleFlags(U32 flags,U8 waitType,StatusType *perr)
+    203          {
+    204              U32  springFlag;
+    205              P_FCB pfcb;
+    206              pfcb  = &FlagCrl;
+    207          
+    208          #if CFG_PAR_CHECKOUT_EN >0
+    209              if((flags&pfcb->flagActive) != flags )  /* Judge flag is active or not?   */
+    210              {
+    211                  *perr = E_INVALID_PARAMETER;        /* Invalid flags                  */
+    212                  return 0;
+    213              }
+    214          #endif
+    215          
+    216              springFlag = flags & pfcb->flagRdy;
+    217          
+    218              OsSchedLock();
+    219              /* If any required flags are set */
+    220              if( (springFlag != 0) && (waitType == OPT_WAIT_ANY) )
+    221              {
+    222          
+    223                  pfcb->flagRdy &= ~(springFlag & pfcb->resetOpt);  /* Clear the flags  */
+    224                  OsSchedUnlock();
+    225                  *perr = E_OK;
+    226                  return springFlag;
+    227              }
+    228          
+    229              /* If all required flags are set */
+    230              if((springFlag == flags) && (waitType == OPT_WAIT_ALL))
+    231              {
+    232                  pfcb->flagRdy &= ~(springFlag&pfcb->resetOpt);    /* Clear the flags  */
+    233                  OsSchedUnlock();
+    234                  *perr = E_OK;
+    235                  return springFlag;
+    236              }
+    237              OsSchedUnlock();
+    238              *perr = E_FLAG_NOT_READY;
+    239              return 0;
+    240          }
+    241          
+    242          
+    243          
+    244          
+    245          /**
+    246           *******************************************************************************
+    247           * @brief      WaitForSingleFlag
+    248           * @param[in]  id        Flag ID.
+    249           * @param[in]  timeout   The longest time for writting flag.
+    250           * @param[out] None
+    251           * @retval     E_CALL         Error call in ISR.
+    252           * @retval     E_INVALID_ID   Invalid event ID.
+    253           * @retval     E_TIMEOUT      Flag wasn't received within 'timeout' time.
+    254           * @retval     E_OK           The call was successful and your task owns the Flag,
+    255           *                            or the event you are waiting for occurred.
+    256           *
+    257           * @par Description
+    258           * @details    This function is called to wait for only one flag,
+    259           *             (1) if parameter "timeout" == 0,waiting until flag be set;
+    260           *             (2) when "timeout" != 0,if flag was set or wasn't set but timeout
+    261           *                 occured,the task will exit the waiting list,convert to READY
+    262           *                 or RUNNING state.
+    263           * @note
+    264           *******************************************************************************
+    265           */
+    266          StatusType CoWaitForSingleFlag(OS_FlagID id,U32 timeout)
+    267          {
+    268              FLAG_NODE flagNode;
+    269              P_FCB     pfcb;
+    270              P_OSTCB   curTCB;
+    271          
+    272              if(OSIntNesting > 0)                /* See if the caller is ISR           */
+    273              {
+    274                  return E_CALL;
+    275              }
+    276              if(OSSchedLock != 0)                /* Schedule is lock?                  */
+    277              {
+    278                  return E_OS_IN_LOCK;            /* Yes,error return                   */
+    279              }
+    280          
+    281          #if CFG_PAR_CHECKOUT_EN >0
+    282              if(id >= FLAG_MAX_NUM)              /* Judge id is valid or not?          */
+    283              {
+    284                  return E_INVALID_ID;            /* Invalid 'id'                       */
+    285              }
+    286              if((FlagCrl.flagActive&(1<<id)) == 0 )/* Judge flag is active or not?       */
+    287              {
+    288                  return E_INVALID_ID;            /* Flag is deactive ,return error     */
+    289              }
+    290          #endif
+    291          
+    292             	OsSchedLock();
+    293          	pfcb = &FlagCrl;
+    294              /* See if the required flag is set */
+    295              if((pfcb->flagRdy&(1<<id)) != 0)    /* If the required flag is set        */
+    296              {
+    297                  pfcb->flagRdy &= ~((pfcb->resetOpt&(1<<id))); /* Clear the flag       */
+    298                  OsSchedUnlock();
+    299              }
+    300              else                                /* If the required flag is not set    */
+    301              {
+    302                  curTCB = TCBRunning;
+    303                  if(timeout == 0)                /* If time-out is not configured      */
+    304                  {
+    305                      /* Block task until the required flag is set                      */
+    306                      FlagBlock (&flagNode,(1<<id),OPT_WAIT_ONE);
+    307                      curTCB->state  = TASK_WAITING; TASK_SEQ(curTCB); 
+    308          	    TaskSchedReq   = Co_TRUE;
+    309                      OsSchedUnlock();
+    310          
+    311                      /* The required flag is set and the task is in running state      */
+    312                      curTCB->pnode  = Co_NULL;
+    313                      OsSchedLock();
+    314          
+    315                      /* Clear the required flag or not                                 */
+    316                      pfcb->flagRdy &= ~((1<<id)&(pfcb->resetOpt));
+    317                      OsSchedUnlock();
+    318                  }
+    319                  else                            /* If time-out is configured          */
+    320                  {
+    321                      /* Block task until the required flag is set or time-out occurs   */
+    322                      FlagBlock(&flagNode,(1<<id),OPT_WAIT_ONE);
+    323          #ifndef FLAG_BUG
+    324                      U8 oldState = curTCB->state;
+    325          #endif
+    326                      InsertDelayList(curTCB,timeout);
+    327                      OsSchedUnlock();
+    328                      if(curTCB->pnode == Co_NULL)     /* If time-out occurred             */
+    329                      {
+    330                          return E_TIMEOUT;
+    331                      }
+    332                      else                          /* If flag is set                   */
+    333                      {
+    334          
+    335                          curTCB->pnode = Co_NULL;
+    336          
+    337                          OsSchedLock();
+    338                          //FLAG_BUG:
+    339                          //There are rare cases when between previous OsSchedUnlock()
+    340                          //right after InsertDelayList and this OsSchedLock()
+    341                          //other task calls CoSetFlag(). As a result:
+    342                          //task is removed from delay list, but stays in TASK_WAITING
+    343                          //and is not in TCBRdy, therefore, never got called.
+    344                          //Extending locked state (remove pair Unlock/Lock did not work -
+    345                          //app stopped to work
+    346                          //Solution is to double test DlyList again after lock,
+    347                          //if we are not there, CoSetFlag was called, return as it was set
+    348                          //I assume only thing to chage would be restore previous state
+    349                          //which is TASK_RUNNING
+    350          #ifndef FLAG_BUG
+    351                          P_OSTCB dlyList = DlyList;
+    352                          U8 found = 0;
+    353                          while (dlyList) {
+    354                            if (dlyList == curTCB) {
+    355                              found = 1;
+    356                              break;
+    357                            }
+    358                            dlyList = dlyList->TCBnext;
+    359                          }
+    360                          if (!found) {
+    361          #ifdef TASKS_PROFILE
+    362                            curTCB->caught = __LINE__;
+    363          #endif
+    364                            curTCB->state = oldState; TASK_SEQ(curTCB); 
+    365                          }
+    366          #endif
+    367                          /* Clear the required flag or not                             */
+    368                          pfcb->flagRdy &= ~((1<<id)&(pfcb->resetOpt));
+    369                          OsSchedUnlock();
+    370                      }
+    371                  }
+    372              }
+    373              return E_OK;
+    374          }
+    375          
+    376          
+    377          /**
+    378           *******************************************************************************
+    379           * @brief      WaitForMultipleFlags
+    380           * @param[in]  flags      Flags that waiting to active task.
+    381           * @param[in]  waitType   Flags wait type.
+    382           * @param[in]  timeout    The longest time for writting flag.
+    383           * @param[out] perr       A pointer to error code.
+    384           * @retval     0
+    385           * @retval     springFlag
+    386           *
+    387           * @par Description
+    388           * @details    This function is called to pend a task for waitting multiple flag.
+    389           * @note
+    390           *******************************************************************************
+    391           */
+    392          U32 CoWaitForMultipleFlags(U32 flags,U8 waitType,U32 timeout,StatusType *perr)
+    393          {
+    394              U32       springFlag;
+    395              P_FCB     pfcb;
+    396              FLAG_NODE flagNode;
+    397              P_OSTCB   curTCB;
+    398          
+    399          
+    400              if(OSIntNesting > 0)                /* If the caller is ISR               */
+    401              {
+    402                  *perr = E_CALL;
+    403                  return 0;
+    404              }
+    405              if(OSSchedLock != 0)                /* Schedule is lock?                  */
+    406              {
+    407                  *perr = E_OS_IN_LOCK;
+    408                  return 0;                       /* Yes,error return                   */
+    409              }
+    410          #if CFG_PAR_CHECKOUT_EN >0
+    411              if( (flags&FlagCrl.flagActive) != flags )
+    412              {
+    413                  *perr = E_INVALID_PARAMETER;    /* Invalid 'flags'                    */
+    414                  return 0;
+    415              }
+    416          #endif
+    417              OsSchedLock();
+    418          	pfcb = &FlagCrl;
+    419              springFlag = flags & pfcb->flagRdy;
+    420          
+    421              /* If any required flags are set  */
+    422              if((springFlag != 0) && (waitType == OPT_WAIT_ANY))
+    423              {
+    424                  pfcb->flagRdy &= ~(springFlag & pfcb->resetOpt);  /* Clear the flag   */
+    425                  OsSchedUnlock();
+    426                  *perr = E_OK;
+    427                  return springFlag;
+    428              }
+    429          
+    430              /* If all required flags are set */
+    431              if( (springFlag == flags) && (waitType == OPT_WAIT_ALL) )
+    432              {
+    433                  pfcb->flagRdy &= ~(springFlag & pfcb->resetOpt);  /* Clear the flags  */
+    434                  OsSchedUnlock();
+    435                  *perr = E_OK;
+    436                  return springFlag;
+    437              }
+    438          
+    439              curTCB = TCBRunning;
+    440              if(timeout == 0)                    /* If time-out is not configured      */
+    441              {
+    442                  /* Block task until the required flag are set                         */
+    443                  FlagBlock(&flagNode,flags,waitType);
+    444          
+    445                  curTCB->state  = TASK_WAITING; TASK_SEQ(curTCB); 
+    446          		TaskSchedReq   = Co_TRUE;
+    447          		OsSchedUnlock();
+    448          
+    449                  curTCB->pnode  = Co_NULL;
+    450                  OsSchedLock();
+    451                  springFlag     = flags & pfcb->flagRdy;
+    452                  pfcb->flagRdy &= ~(springFlag & pfcb->resetOpt);/* Clear the flags    */
+    453                  OsSchedUnlock();
+    454                  *perr = E_OK;
+    455                  return springFlag;
+    456              }
+    457              else                                /* If time-out is configured          */
+    458              {
+    459                  /* Block task until the required flag are set or time-out occurred    */
+    460                  FlagBlock(&flagNode,flags,waitType);
+    461                  InsertDelayList(curTCB,timeout);
+    462          
+    463                  OsSchedUnlock();
+    464                  if(curTCB->pnode == Co_NULL)       /* If time-out occurred               */
+    465                  {
+    466                      *perr = E_TIMEOUT;
+    467                      return 0;
+    468                  }
+    469                  else                            /* If the required flags are set      */
+    470                  {
+    471                      curTCB->pnode = Co_NULL;
+    472                      OsSchedLock();
+    473                      springFlag    = flags & FlagCrl.flagRdy;
+    474          
+    475                      /* Clear the required ready flags or not */
+    476                      pfcb->flagRdy &= ~(springFlag & pfcb->resetOpt);
+    477                      OsSchedUnlock();
+    478                      *perr = E_OK;
+    479                      return springFlag;
+    480                  }
+    481              }
+    482          }
+    483          
+    484          
+    485          /**
+    486           *******************************************************************************
+    487           * @brief       Clear a Flag
+    488           * @param[in]   id     Flag ID.
+    489           * @param[out]  None
+    490           * @retval      E_OK           Event deleted successful.
+    491           * @retval      E_INVALID_ID   Invalid event ID.
+    492           *
+    493           * @par Description
+    494           * @details     This function is called to clear a flag.
+    495           *
+    496           * @note
+    497           *******************************************************************************
+    498           */
+    499          StatusType CoClearFlag(OS_FlagID id)
+    500          {
+    501              P_FCB pfcb;
+    502              pfcb = &FlagCrl;
+    503          #if CFG_PAR_CHECKOUT_EN >0
+    504              if(id >= FLAG_MAX_NUM)
+    505              {
+    506                  return E_INVALID_ID;                /* Invalid id                     */
+    507              }
+    508              if((pfcb->flagActive&(1<<id)) == 0)
+    509              {
+    510                  return E_INVALID_ID;                /* Invalid flag                   */
+    511              }
+    512          #endif
+    513          
+    514              pfcb->flagRdy &= ~(1<<id);              /* Clear the flag                 */
+    515              return E_OK;
+    516          }
+    517          
+    518          U16 fl;
+    519          StatusType myret;
+    520          /**
+    521           *******************************************************************************
+    522           * @brief      Set a flag
+    523           * @param[in]  id     Flag ID.
+    524           * @param[out] None
+    525           * @retval     E_INVALID_ID   Invalid event ID.
+    526           * @retval     E_OK           Event deleted successful.
+    527           *
+    528           * @par Description
+    529           * @details    This function is called to set a flag.
+    530           * @note
+    531           *******************************************************************************
+    532           */
+    533          StatusType CoSetFlag(OS_FlagID id)
+    534          {
+    535              P_FLAG_NODE pnode;
+    536              P_FCB pfcb;
+    537              pfcb  = &FlagCrl;
+    538          
+    539          #if CFG_PAR_CHECKOUT_EN >0
+    540              if(id >= FLAG_MAX_NUM)              /* Flag is valid or not               */
+    541              {
+    542                  return E_INVALID_ID;            /* Invalid flag id                    */
+    543              }
+    544              if((pfcb->flagActive&(1<<id)) == 0)
+    545              {
+    546                  return E_INVALID_ID;            /* Flag is not exist                  */
+    547              }
+    548          #endif
+    549          
+    550              if((pfcb->flagRdy&(1<<id)) != 0)    /* Flag had already been set          */
+    551              {
+    552              	return E_OK;
+    553              }
+    554          
+    555              pfcb->flagRdy |= (1<<id);           /* Update the flags ready list        */
+    556          
+    557              OsSchedLock();
+    558              pnode = pfcb->headNode;
+    559              while(pnode != Co_NULL)
+    560              {
+    561                  if(pnode->waitType == OPT_WAIT_ALL)   /* Extract all the bits we want */
+    562                	{
+    563                      if((pnode->waitFlags&pfcb->flagRdy) == pnode->waitFlags)
+    564                      {
+    565                         /* Remove the flag node from the wait list                    */
+    566                          TASK_SEQ(pnode->waitTask); pnode = RemoveFromLink(pnode);
+    567                          if((pfcb->resetOpt&(1<<id)) != 0)/* If the flags is auto-reset*/
+    568                          {
+    569                              break;
+    570                          }
+    571                          continue;
+    572                      }
+    573                	}
+    574                  else                           /* Extract only the bits we want       */
+    575                	{
+    576                      if( (pnode->waitFlags & pfcb->flagRdy) != 0)
+    577                      {
+    578                          /* Remove the flag node from the wait list                    */
+    579                          TASK_SEQ(pnode->waitTask); pnode = RemoveFromLink(pnode);
+    580                          if((pfcb->resetOpt&(1<<id)) != 0)
+    581                          {
+    582                              break;              /* The flags is auto-reset            */
+    583                          }
+    584                          continue;
+    585                      }
+    586                	}
+    587                	pnode = pnode->nextNode;
+    588              }
+    589              OsSchedUnlock();
+    590              return E_OK;
+    591          }
+    592          
+    593          
+    594          
+    595          /**
+    596           *******************************************************************************
+    597           * @brief      Set a flag	in ISR
+    598           * @param[in]  id     Flag ID.
+    599           * @param[out] None
+    600           * @retval     E_INVALID_ID   Invalid event ID.
+    601           * @retval     E_OK           Event deleted successful.
+    602           *
+    603           * @par Description
+    604           * @details    This function is called in ISR to set a flag.
+    605           * @note
+    606           *******************************************************************************
+    607           */
+    608          #if CFG_MAX_SERVICE_REQUEST > 0
+    609          StatusType isr_SetFlag(OS_FlagID id)
+    610          {
+    611              if(OSSchedLock > 0)         /* If scheduler is locked,(the caller is ISR) */
+    612              {
+    613                  /* Insert the request into service request queue                      */
+    614                  if(InsertInSRQ(FLAG_REQ,id,Co_NULL) == Co_FALSE)
+    615                  {
+    616                      return E_SEV_REQ_FULL;      /* The service requst queue is full   */
+    617                  }
+    618                  else
+    619                  {
+    620                      return E_OK;
+    621                  }
+    622              }
+    623              else
+    624              {
+    625                  return(CoSetFlag(id));          /* The caller is not ISR, set the flag*/
+    626              }
+    627          }
+    628          #endif
+    629          
+    630          /**
+    631           *******************************************************************************
+    632           * @brief      Block a task to wait a flag event
+    633           * @param[in]  pnode       A node that will link into flag waiting list.
+    634           * @param[in]  flags       Flag(s) that the node waiting for.
+    635           * @param[in]  waitType    Waiting type of the node.
+    636           * @param[out] None
+    637           * @retval     None
+    638           *
+    639           * @par Description
+    640           * @details    This function is called to block a task to wait a flag event.
+    641           * @note
+    642           *******************************************************************************
+    643           */
+    644          static void FlagBlock(P_FLAG_NODE pnode,U32 flags,U8 waitType)
+    645          {
+    646              P_FCB     pfcb;
+    647              pfcb  = &FlagCrl;
+    648          
+    649              TCBRunning->pnode = pnode;
+    650              pnode->waitTask   = TCBRunning;
+    651              pnode->waitFlags  = flags;      /* Save the flags that we need to wait for*/
+    652              pnode->waitType   = waitType;   /* Save the type of wait                  */
+    653          
+    654              if(pfcb->tailNode == Co_NULL)      /* If this is the first NODE to insert?   */
+    655              {
+    656                  pnode->nextNode = Co_NULL;
+    657                  pnode->prevNode = Co_NULL;
+    658                  pfcb->headNode  = pnode;    /* Insert the NODE to the head            */
+    659              }
+    660              else                            /* If it is not the first NODE to insert? */
+    661              {
+    662                  pfcb->tailNode->nextNode = pnode;   /* Insert the NODE to the tail    */
+    663                  pnode->prevNode          = pfcb->tailNode;
+    664                  pnode->nextNode          = Co_NULL;
+    665              }
+    666              pfcb->tailNode = pnode;
+    667          }
+    668          
+    669          
+    670          /**
+    671           *******************************************************************************
+    672           * @brief      Remove a flag node from list
+    673           * @param[in]  pnode    A node that will remove from flag waiting list.
+    674           * @param[out] None
+    675           * @retval     pnode    Next node of the node that have removed out.
+    676           *
+    677           * @par Description
+    678           * @details   This function is called to remove a flag node from the wait list.
+    679           * @note
+    680           *******************************************************************************
+    681           */
+    682          static P_FLAG_NODE RemoveFromLink(P_FLAG_NODE pnode)
+    683          {
+    684              P_OSTCB ptcb;
+    685          
+    686              RemoveLinkNode(pnode);            /* Remove the flag node from wait list. */
+    687              ptcb = pnode->waitTask;
+    688          
+    689              /* The task in the delay list */
+    690              if(ptcb->delayTick != INVALID_VALUE)/* If the task is in tick delay list  */
+    691              {
+    692                  RemoveDelayList(ptcb);        /* Remove the task from tick delay list */
+    693              }
+    694              ptcb->pnode = Co_NULL; //(void*) INVALID_VALUE; //0xffffffff;
+    695              if(ptcb == TCBRunning)
+    696              {
+    697          
+    698                      ptcb->state = TASK_RUNNING; TASK_SEQ(ptcb); 
+    699              }
+    700              else
+    701              {
+    702          
+    703                      TASK_SEQ(ptcb); InsertToTCBRdyList(ptcb);         /* Insert the task to ready list        */
+    704              }
+    705              return (pnode->nextNode);
+    706          }
+    707          
+    708          /**
+    709           *******************************************************************************
+    710           * @brief      Remove a flag node from list
+    711           * @param[in]  pnode 	A node that will remove from flag waiting list.
+    712           * @param[out] None
+    713           * @retval     None
+    714           *
+    715           * @par Description
+    716           * @details    This function is called to remove a flag node from the wait list.
+    717           * @note
+    718           *******************************************************************************
+    719           */
+    720          void RemoveLinkNode(P_FLAG_NODE pnode)
+    721          {
+    722              /* If only one NODE in the list*/
+    723              if((pnode->nextNode == Co_NULL) && (pnode->prevNode == Co_NULL))
+    724              {
+    725                  FlagCrl.headNode = Co_NULL;
+    726                  FlagCrl.tailNode = Co_NULL;
+    727              }
+    728              else if(pnode->nextNode == Co_NULL)      /* If the NODE is tail              */
+    729              {
+    730                  FlagCrl.tailNode          = pnode->prevNode;
+    731                  pnode->prevNode->nextNode = Co_NULL;
+    732              }
+    733              else if(pnode->prevNode == Co_NULL)      /* If the NODE is head              */
+    734              {
+    735                  FlagCrl.headNode          = pnode->nextNode;
+    736                  pnode->nextNode->prevNode = Co_NULL;
+    737              }
+    738              else                                  /* The NODE is in the middle        */
+    739              {
+    740                  pnode->nextNode->prevNode = pnode->prevNode;
+    741                  pnode->prevNode->nextNode = pnode->nextNode;
+    742              }
+    743              pnode->waitTask->pnode = Co_NULL;
+    744          }
+    745          
+    746          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       24  CoAcceptMultipleFlags
+             24 -> OsSchedUnlock
+       16  CoAcceptSingleFlag
+             16 -> OsSchedUnlock
+        0  CoClearFlag
+       16  CoCreateFlag
+             16 -> OsSchedUnlock
+       24  CoDelFlag
+             24 -> OsSchedUnlock
+             24 -> RemoveFromLink
+       16  CoSetFlag
+             16 -> OsSchedUnlock
+             16 -> RemoveFromLink
+       56  CoWaitForMultipleFlags
+             56 -> FlagBlock
+             56 -> InsertDelayList
+             56 -> OsSchedUnlock
+       56  CoWaitForSingleFlag
+             56 -> FlagBlock
+             56 -> InsertDelayList
+             56 -> OsSchedUnlock
+        4  FlagBlock
+       16  RemoveFromLink
+             16 -> InsertToTCBRdyList
+             16 -> RemoveDelayList
+             16 -> RemoveLinkNode
+        0  RemoveLinkNode
+        8  isr_SetFlag
+              8 -> CoSetFlag
+              8 -> InsertInSRQ
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable11
+       4  ??DataTable11_1
+       4  ??DataTable11_2
+       4  ??DataTable11_3
+       4  ??DataTable11_4
+       4  ??DataTable11_5
+     128  CoAcceptMultipleFlags
+      64  CoAcceptSingleFlag
+      20  CoClearFlag
+     124  CoCreateFlag
+     168  CoDelFlag
+     128  CoSetFlag
+     340  CoWaitForMultipleFlags
+     300  CoWaitForSingleFlag
+      58  FlagBlock
+      20  FlagCrl
+      58  RemoveFromLink
+      86  RemoveLinkNode
+       2  fl
+      46  isr_SetFlag
+       1  myret
+
+ 
+    23 bytes in section .bss
+ 1 544 bytes in section .text
+ 
+ 1 544 bytes of CODE memory
+    23 bytes of DATA memory
+
+Errors: none
+Warnings: none

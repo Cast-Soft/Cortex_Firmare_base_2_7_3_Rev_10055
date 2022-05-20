@@ -1,0 +1,920 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     19/Mar/2019  16:30:50 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\App\basic_rf.c                   #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\App\basic_rf.c" -D BEACON_APP   #
+#                    -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D       #
+#                    USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D BOOTLOADER -D   #
+#                    EE_M24C02 -D TASKS_PROFILE -D BATTERY_CHECK -D           #
+#                    CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D     #
+#                    OLD_CONFIG -D CIRCULAR_LOG -lcN                          #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\List\ #
+#                    " -o "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Rev #
+#                    J\RevJ Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\RevJ\RevJ Beacon\firmware\beacon\IAR\..\App\" -I       #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\CMSIS\CM3\Devi #
+#                    ceSupport\ST\STM32F10x\" -I                              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\STM32F10x_StdP #
+#                    eriph_Driver\inc\" -I "C:\Users\User\Documents\Cortex_gi #
+#                    t\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\..\.. #
+#                    \common\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex #
+#                    _git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\.. #
+#                    \..\common\CoOS\portable\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\..\common\" -I        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\USB-Device-CDC #
+#                    \" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Re #
+#                    vJ\RevJ Beacon\firmware\beacon\IAR\..\..\common\" -I     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\" -On --use_c++_inline -I   #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.4\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\List\b #
+#                    asic_rf.lst                                              #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\Obj\ba #
+#                    sic_rf.o                                                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\App\basic_rf.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : basic_rf.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : Basic RF library
+      9          *******************************************************************************/
+     10          
+     11          /*
+     12              FRAME FORMATS:
+     13              Data packets (without security):
+     14              [Preambles (4)][SFD (1)][Length (1)][Frame control field (2)]
+     15              [Sequence number (1)][PAN ID (2)][Dest. address (2)][Source address (2)]
+     16              [Payload (Length - 2+1+2+2+2)][Frame check sequence (2)]
+     17          */
+     18          
+     19          /* INCLUDES ------------------------------------------------------------------*/
+     20          
+     21          #include "hardware.h"
+     22          #include "basic_rf.h"
+     23          #include "radio.h"
+     24          #include "radio_defs.h"
+     25          #include "imu_defs.h"
+     26          
+     27          #include "stm32f10x_gpio.h"
+     28          #include "stm32f10x_dma.h"
+     29          #include "stm32f10x_exti.h"
+     30          #include "tasks.h"
+     31          #include <stdio.h>
+     32          #include <string.h>
+     33          #include <stdint.h>
+     34          #include "config.h"
+     35          
+     36          #include "CoOS.h"
+     37          
+     38          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     39          
+     40          // Basic RF packet header (IEEE 802.15.4)
+     41          typedef struct {
+     42              uint8_t     frameLength;    // PHR
+     43              uint8_t     fcf0;           // MHR: Frame Control Field LSB
+     44              uint8_t     fcf1;           // MHR: Frame Control Field MSB
+     45              uint8_t     seqNumber;      // MHR
+     46              uint16_t    panId;          // MHR
+     47              uint16_t    destAddr;       // MHR
+     48              uint16_t    srcAddr;        // MHR
+     49          } txPktHdr_t;
+     50          
+     51          typedef struct {
+     52              uint16_t    myAddr;
+     53              uint16_t    myPanId;
+     54              uint8_t     channel;
+     55          } radioConfig_t;
+     56          
+     57          typedef struct {
+     58              uint8_t reg;
+     59              uint8_t val;
+     60          } regVal_t;
+     61          
+     62          const uint8_t TxAmpValues[9]={0x03,0x2C,0x88,0x81,0x32,0x13,0xAB,0xF2,0xF7};
+     63          
+     64          const uint8_t RF_SPI_INIT_STATE = 0xFF;                 // Can start an new RF_SPI operation from this state only
+     65          const uint8_t RF_SPI_UPLOAD_ONLY_STATE = 0x00;          // Upload only. Does not care download content. For upload frame to CC2520
+     66          const uint8_t RF_SPI_RX1_UPLOADCMD_STATE = 0x40;        // RX frame step 1:  upload command RXBUF
+     67          const uint8_t RF_SPI_RX2_DOWNLOAD_HEADER_STATE = 0x20;  // RX frame step 2:  download frame header
+     68          const uint8_t RF_SPI_RX3_DOWNLOAD_BODY_STATE = 0x10;    // RX frame step 3:  download frame body
+     69          
+     70          // these are not verified yet
+     71          const uint8_t RF_SPI_CCA_CMD_STATE = 0x08;       // CCA upload read register FSMSTAT1 command
+     72          const uint8_t RF_SPI_STXONCCA_CMD_STATE = 0x04;
+     73          extern uint32_t sec;
+     74          
+     75          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     76          
+     77          // Frame Control Field
+     78          #define BASIC_RF_FCF_DATA               0x8841
+     79          #define BASIC_RF_FCF_BEACON             0x8040
+     80          
+     81          // FrameLength(1)
+     82          #define PHR_SIZE                        1
+     83          
+     84          /* IEEE 802.15.4 (2.4 GHz logical channels) */
+     85          #define MIN_CHANNEL                     11 // 2405 MHz
+     86          #define CHANNEL_SPACING                 5  // 5 MHz
+     87          
+     88          /* CC2590 LNA Gain */
+     89          #define CC2590_HGM                      CC2520_GPIO_LOW
+     90          //#define CC2590_HGM                      CC2520_GPIO_HIGH
+     91          
+     92          /* PRIVATE MACROS ------------------------------------------------------------*/
+     93          
+     94          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     95          extern volatile uint16_t tasksWDT;
+     96          extern OS_EventID semRFRxFrames;
+     97          extern uint32_t random;
+     98          extern uint8_t IMUPresent;
+     99          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+    100          static radioConfig_t    radioConfig;
+    101          static rxPkt_t          rxPktCopy;
+    102          // INS_SFLUSHTX(1 Byte) + INS_STXON(1 Byte) + 2*INS_SFLUSHRX(1 Byte) + INS_TXBUF(1 Byte) + PHR(1 Byte)
+    103          static uint8_t          txBuf[FRAME_LENGTH_MAX - MFR_SIZE + 6];
+    104          
+    105          static regVal_t         regVal[] = {
+    106              CC2520_CCACTRL0,    0xF8,               // Table21 (Required Updates)
+    107              CC2520_MDMCTRL0,    0x85,               // Table21 (Required Updates)
+    108              CC2520_MDMCTRL1,    0x14,               // Table21 (Required Updates)
+    109              CC2520_RXCTRL,      0x3F,               // Table21 (Required Updates)
+    110              CC2520_FSCTRL,      0x5A,               // Table21 (Required Updates)
+    111              CC2520_FSCAL1,      0x2B,               // Table21 (Required Updates)
+    112              CC2520_ADCTEST0,    0x10,               // Table21 (Required Updates)
+    113              CC2520_ADCTEST1,    0x0E,               // Table21 (Required Updates)
+    114              CC2520_ADCTEST2,    0x03,               // Table21 (Required Updates)
+    115          
+    116          #ifdef INCLUDE_PA
+    117              CC2520_TXPOWER,     0x32,               // Max TX output power
+    118          
+    119              CC2520_AGCCTRL1,    0x16,
+    120              CC2520_TXCTRL,      0xC1,
+    121          #else
+    122              CC2520_TXPOWER,     0xF7,               // Max TX output power
+    123              CC2520_AGCCTRL1,    0x11,               // Table21 (Required Updates)
+    124          #endif
+    125          
+    126          #ifdef INCLUDE_PA
+    127            #ifdef OLIMEX
+    128              CC2520_GPIOCTRL3,   CC2590_HGM,         // CC2590 HGM
+    129              CC2520_GPIOCTRL4,   0x46,               // EN set to lna_pd[1] inverted
+    130              CC2520_GPIOCTRL5,   0x47,               // PAEN set to pa_pd inverted
+    131              CC2520_GPIOPOLARITY,0x0F,               // Invert GPIO4 and GPIO5
+    132            #else                                     // if Timekeeper and Beacon
+    133              CC2520_GPIOCTRL3,   0x47,               // CC2590 HGM low gain mode for startup
+    134              CC2520_GPIOCTRL4,   0x46,               // EN set to on for rx
+    135              CC2520_GPIOCTRL5,   CC2590_HGM,         // GPIO5 to HGM pin
+    136              CC2520_GPIOPOLARITY,0x27,               // Invert GPIO4 and GPIO5
+    137            #endif /* OLIMEX */
+    138          #endif /* INCLUDE_PA */
+    139          
+    140              CC2520_FRMCTRL0,    0x40,               // APPEND_DATA_MODE=0, AUTOCRC=1
+    141              CC2520_EXTCLOCK,    0x00,
+    142          
+    143              CC2520_EXCFLAG0,    0x00,               // Clear any Exceptions
+    144              CC2520_EXCFLAG1,    0x00,               // Clear any Exceptions
+    145              CC2520_EXCFLAG2,    0x00,               // Clear any Exceptions
+    146          
+    147              // outputs TX exception in channel A to 2520 GPIO 2 (TP37)
+    148              CC2520_GPIOCTRL2, 0x21,
+    149              CC2520_EXCMASKA0, CC2520_EXC0_TX_UNDERFLOW_BM | CC2520_EXC0_TX_OVERFLOW_BM,
+    150              CC2520_EXCMASKA1, 0x00,
+    151              CC2520_EXCMASKA2, 0x00,     // for debugging: CC2520_EXC2_MEMADDR_ERROR_BM | CC2520_EXC2_USAGE_ERROR_BM | CC2520_EXC2_OPERAND_ERROR_BM | CC2520_EXC2_SPI_ERROR_BM
+    152          
+    153              // outputs RX exception in channel B to GPIO5 (TP11)
+    154              CC2520_GPIOCTRL5, 0x22,
+    155              CC2520_EXCMASKB0, /*CC2520_EXC0_RX_UNDERFLOW_BM |*/ CC2520_EXC0_RX_OVERFLOW_BM,
+    156              CC2520_EXCMASKB1, 0x00,
+    157              CC2520_EXCMASKB2, 0x00,     // for debugging: CC2520_EXC2_MEMADDR_ERROR_BM | CC2520_EXC2_USAGE_ERROR_BM | CC2520_EXC2_OPERAND_ERROR_BM | CC2520_EXC2_SPI_ERROR_BM
+    158          
+    159              CC2520_FRMFILT1, 0x08,      //accepts only beacons
+    160              // Terminate array
+    161              0, 0x00
+    162          };
+    163          
+    164          static regVal_t         regVal_IMU[] = {
+    165              IMU_USER_CTRL,	    	0x78,				//disable I2C for SPI communication              
+    166              IMU_PWR_MGMT_1, 		0x01,               //set auto select best clock source  
+    167              IMU_PWR_MGMT_2,   		(0x38|0x07),		//disable both accelerometer and gyrometer        
+    168              IMU_PWR_MGMT_2,     	(0x00|0x00),		//enable accelerometer, enable gyrometer
+    169          
+    170          	IMU_REG_BANK_SEL,		BANK2,
+    171          	IMU_GYRO_CONFIG_1,		(0x00|0x29),		//gyro rate 250, gyro lpf 17hz
+    172          	IMU_GYRO_SMPLRT_DIV,	0x13,				//set gyroscope ODR to 190Hz (same val as REVH)
+    173          	
+    174          	IMU_ACCEL_CONFIG,		(0x00|0x11),		//accel rate 2g, accel lpf 136hz: 
+    175          	IMU_ACCEL_SMPLRT_DIV_1, 0x00,
+    176          	IMU_ACCEL_SMPLRT_DIV_2, 0x26, 				//set acceleration ODR to 190Hz 
+    177          	
+    178          	IMU_REG_BANK_SEL,		BANK0,
+    179          	IMU_ENABLE_1,			0x01,				//set raw data ready interrupt.
+    180              0xFF, 0x0									// Terminate array
+    181          };
+    182          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+    183          
+    184          /* --- FOR ISR-USE ONLY --- */
+    185          volatile uint8_t spiTxRxByteCount = 0;
+    186          volatile uint8_t spiTxRxByteState = 0xFF;   // RF_SPI_INIT_STATE;
+    187          
+    188          uint32_t            rxErrors;
+    189          uint8_t*            pSpiTxBuf;
+    190          uint8_t*            pSpiRxBuf;
+    191          rxPkt_t             rxPkt;
+    192          uint8_t             scratchBuf[FRAME_LENGTH_MAX + 5 + 20];      // 20 more bytes for sending FIFO clear command
+    193          
+    194          OS_FlagID           flagRadioTxDone = 0xFF;
+    195          OS_FlagID           flagRadioTxAllow = 0xFF;
+    196          OS_FlagID           flagRadioTxDoneUser = 0xFF;
+    197          OS_EventID          semIMUAllow;
+    198          OS_MutexID 			flagSPIIODone;       // For exclusive accessing radio SPI
+    199          volatile uint16_t txDoneType = 1;        // 0: successful, 1: failed
+    200          volatile uint16_t rxDoneType = 1;        // 0: successful, 1: failed
+    201          volatile uint16_t rxFIFOError = 0;       // 0: no error, 1: with rror
+    202          volatile uint16_t txFIFOError = 0;       // 0: no error, 1: with rror
+    203          
+    204          OS_FlagID flagSPIMachineDone = 0xFF;
+    205          
+    206          uint8_t         radio_off = 0;
+    207          uint8_t         rxCount;
+    208          uint8_t         cc2520_flags0;
+    209          uint8_t         cc2520_flags1;
+    210          uint8_t         cc2520_flags2;
+    211          StatusType      txError;
+    212          
+    213          
+    214          //Developing secondary SPI buffer primarily for IMU. Don't want to edit currently working functionality of radio
+    215          volatile uint8_t spiIMUCount = 0;
+    216          volatile uint8_t spiIMUByteState = IMU_SPI_INIT_STATE;
+    217          	
+    218          uint8_t*		pSpiRxBuf_IMU;
+    219          uint8_t*		pSpiTxBuf_IMU;
+    220          
+    221          uint8_t	IMU_TXBuffer[]={IMU_READBIT|IMU_ACCEL_XOUT_H,	//start address to read	
+    222          								0,0,0,0,0,0,						//6 empty tx bytes to acquire 6 bytes of accel data	
+    223          								0,0,0,0,0,0};					//6 empty tx bytes to acquire 6 bytes of gyro data	
+    224          uint8_t	IMU_RawData[12];
+    225          
+    226          //both radio and IMU 
+    227          //SPI3_CS_TypeDef SPI3_CS;	//indicate chip selection on the SPI line.
+    228          
+    229          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+    230          
+    231          //static void             RadioCheckException(void);
+    232          static uint8_t          RadioBuildHdr(txPktHdr_t *pktHdr, uint16_t destAddr, uint8_t beacon, uint8_t payloadLength);
+    233          
+    234          void RadioWaitGrabSPI();
+    235          void RadioReleaseSPI(void);
+    236          void Enable_Osc(void);
+    237          void Load_2520_Defaults(void);
+    238          void RxTx_Setup(void);
+    239          void RadioTxTest(void);
+    240          
+    241          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+    242          
+    243          
+    244          /*******************************************************************************
+    245          * Description : Builds packet header according to IEEE 802.15.4 frame format
+    246          * Input       :
+    247          * Return      : size of header (in bytes)
+    248          *******************************************************************************/
+    249          static uint8_t RadioBuildHdr(txPktHdr_t *pktHdr, uint16_t destAddr, uint8_t beacon, uint8_t payloadLength) {
+    250              static uint8_t txSeqNumber = 0;
+    251          
+    252              // 802.15.4 Frame Format with Short Addressing
+    253              pktHdr->frameLength = payloadLength + MHR_SIZE + MFR_SIZE;
+    254              if (beacon) {
+    255                  pktHdr->fcf0 = LO_UINT16(BASIC_RF_FCF_BEACON);
+    256                  pktHdr->fcf1 = HI_UINT16(BASIC_RF_FCF_BEACON);
+    257              } else {
+    258                  pktHdr->fcf0 = LO_UINT16(BASIC_RF_FCF_DATA);
+    259                  pktHdr->fcf1 = HI_UINT16(BASIC_RF_FCF_DATA);
+    260              }
+    261              pktHdr->seqNumber = txSeqNumber++;
+    262              pktHdr->panId = radioConfig.myPanId;
+    263              pktHdr->destAddr = destAddr;
+    264              pktHdr->srcAddr = radioConfig.myAddr;
+    265          
+    266              return (MHR_SIZE + PHR_SIZE);
+    267          }
+    268          
+    269          
+    270          /*******************************************************************************
+    271          * Description : Tasks access SPI exclusively
+    272          * Input       : -
+    273          * Return      : -
+    274          *******************************************************************************/
+    275          void RadioIMU_WaitGrabSPI() {
+    276            CoEnterMutexSection(flagSPIIODone);
+    277          }
+    278          
+    279          /*******************************************************************************
+    280          * Description : Release SPI for other tasks
+    281          * Input       : -
+    282          * Return      : -
+    283          *******************************************************************************/
+    284          void RadioIMU_ReleaseSPI(void) {
+    285              CoLeaveMutexSection(flagSPIIODone);
+    286          }
+    287          
+    288          /*******************************************************************************
+    289          * Description : [API] Initialize and Configure Radio with default settings
+    290          * Input       : -
+    291          * Return      : -
+    292          *******************************************************************************/
+    293          void RadioInit(uint16_t panId, uint16_t shortAddr, uint8_t chan, uint8_t test) {
+    294          #ifdef OLIMEX
+    295              GPIO_WriteBit(GPIOD, GPIO_Pin_3, Bit_RESET);       // reset radio...
+    296              HwWait(10);
+    297              GPIO_WriteBit(GPIOD, GPIO_Pin_3, Bit_SET);
+    298          #endif /* OLIMEX */
+    299          #ifdef BC_HW_REVB
+    300              Send_SPI_2byte(CC2520_INS_SRES, CC2520_INS_SRES);
+    301              Send_SPI_2byte(CC2520_INS_SXOSCON, CC2520_INS_SNOP);
+    302          #endif
+    303          #ifdef BC_HW_REVC
+    304                     HwGPOHigh(GPO_RF_EN);  // enable the pwer supply
+    305                      HwWait(10);
+    306                    HwGPOLow(GPO_2520_RST);  // take rest low
+    307                      HwWait(10);
+    308                    HwGPOHigh(GPO_2520_RST);  // rest high
+    309          #endif
+    310          #ifdef BC_HW_REVJ
+    311          		HwGPOHigh(GPO_RF_EN);
+    312          		HwWait(10);
+    313          		HwGPOLow(GPO_2520_RST);
+    314          		HwWait(10);
+    315          		HwGPOHigh(GPO_2520_RST);
+    316          #endif
+    317              HwWait(10);  // wait a bit
+    318              // see if the SPI bus comes ready
+    319              assert( Send_SPI_byte(CC2520_INS_SNOP) & CC2520_STB_XOSC_STABLE_BM );
+    320          
+    321              flagSPIIODone     = CoCreateMutex();
+    322              flagSPIMachineDone = CoCreateFlag(0, 0); // manual-reset, flag clear
+    323          
+    324          
+    325              flagRadioTxDone      = CoCreateFlag(1, 1); // auto-reset, flag set
+    326              flagRadioTxAllow     = CoCreateFlag(1, 0); // auto-reset, flag clear
+    327              semIMUAllow         = CoCreateSem(1, 1, EVENT_SORT_TYPE_FIFO);
+    328              Send_SPI_byte(CC2520_INS_SRFOFF);
+    329          
+    330              //Enable_Osc();   //Turn on the oscillator
+    331              /* Load defalt Radio enable values   */
+    332              Load_2520_Defaults();  // load the defaults
+    333          
+    334              // Initialize radioConfig struct
+    335              radioConfig.myAddr = shortAddr;
+    336              radioConfig.myPanId = panId;
+    337              radioConfig.channel = chan;
+    338          
+    339              // Set channel
+    340              TK_BK_REGWR8(CC2520_FREQCTRL, MIN_CHANNEL + (((radioConfig.channel)-MIN_CHANNEL) * CHANNEL_SPACING));
+    341          
+    342              TK_BK_REGWR8(CC2520_TXPOWER,TxAmpValues[config.TxLevel]);   // Max TX output power
+    343          
+    344          //      TK_BK_REGWR8(CC2520_TXPOWER,0xF7);
+    345          
+    346              // Write the short address and the PAN ID to the CC2520 RAM
+    347              TK_BK_MEMWR16(CC2520_RAM_SHORTADDR, radioConfig.myAddr);
+    348              TK_BK_MEMWR16(CC2520_RAM_PANID, radioConfig.myPanId);
+    349          
+    350              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // flush the rx fifo to clear any errors
+    351              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // ... [CC2520 Bug#1]
+    352          
+    353              Send_SPI_byte(CC2520_INS_SFLUSHTX);     // flush the tx FIFO
+    354              Send_SPI_byte(CC2520_INS_SFLUSHTX);     // again just in case an exception in previous SFLUSHTX
+    355          
+    356              // Set up 2520 GPIO 0 (TP35) as RX_FRM_DONE Output
+    357              TK_BK_REGWR8(CC2520_GPIOCTRL0, CC2520_GPIO_RX_FRM_DONE);
+    358          
+    359              // Set up 2520 GPIO 1 (TP36) as TX_FRM_DONE Output
+    360              TK_BK_REGWR8(CC2520_GPIOCTRL1, CC2520_GPIO_TX_FRM_DONE);
+    361          
+    362              // now enable RADIO_GPIO0 and RADIO_GPIO1 EXTIs
+    363              HwRadioEXTIInit();
+    364          
+    365          #if 0  //check radio - does it work?
+    366              TK_BK_MEMWR8(0x17F, 0xC1);
+    367              rxCount = TK_BK_MEMRD8(0x17F);
+    368          #endif
+    369          
+    370              // And...Turn on Rx ,mode as default
+    371              Send_SPI_byte(CC2520_INS_SRXON);        // enable RX
+    372              assert( Send_SPI_byte(CC2520_INS_SNOP) & CC2520_STB_RX_ACTIVE_BM  );
+    373          }
+    374          
+    375          
+    376          /*******************************************************************************
+    377          * Description : SOXON  turns on internal oscilator for analog potion of chip
+    378          * Input       :
+    379          * Return      :
+    380          *******************************************************************************/
+    381          void Enable_Osc(void){
+    382              Send_SPI_2byte(CC2520_INS_SXOSCON, CC2520_INS_SNOP); // turn on the oscillator
+    383          
+    384          
+    385              HwWait(10);
+    386              assert( Send_SPI_byte(CC2520_INS_SNOP) & CC2520_STB_XOSC_STABLE_BM );
+    387          
+    388          }
+    389          /*******************************************************************************
+    390          * Description : Loads 2520 registers
+    391          * Input       :
+    392          * Return      :
+    393          *******************************************************************************/
+    394          void Load_2520_Defaults(void){
+    395              regVal_t *p = regVal;
+    396              while (p->reg != 0) {
+    397                  TK_BK_MEMWR8(p->reg, p->val);
+    398                  p++;
+    399              }
+    400          
+    401          }
+    402          
+    403          void RadioPrint2520Registers(uint8_t flag){
+    404            regVal_t *p = regVal;
+    405            uint8_t val;
+    406            SAVE_POINT
+    407            RadioIMU_WaitGrabSPI();
+    408            SAVE_POINT
+    409                while (p->reg != 0) {
+    410                  val = TK_BK_MEMRD8(p->reg);
+    411                  if(val != p->val)
+    412                  {
+    413                    TRACE("reg(0x%X) = 0x%X\n\r", p->reg, val);
+    414                  }
+    415                  p++;
+    416                }
+    417          
+    418                {
+    419                  val = TK_BK_MEMRD8(CC2520_EXCFLAG2);
+    420                  TRACE("EXCFLAG2 = 0x%X\n\r", val);
+    421                }
+    422          
+    423                {
+    424                  val = TK_BK_MEMRD8(CC2520_FSMSTAT0);
+    425                  TRACE("FSMSTAT0 = 0x%X\n\r", val);
+    426                }
+    427          
+    428                {
+    429                  val = TK_BK_MEMRD8(CC2520_FSMSTAT1);
+    430                  TRACE("FSMSTAT1 = 0x%X\n\r", val);
+    431                }
+    432          
+    433                RadioIMU_ReleaseSPI();
+    434          
+    435          }
+    436          
+    437          //CC2520 when raises RX_OVERFLOW (happens async) stops receiving until RX_OVERFLOW
+    438          //is cleared
+    439          // handle rx overflow & underflow errors
+    440          void ProcessRXError() {
+    441              assert(spiTxRxByteState == RF_SPI_INIT_STATE);      // State machine must be stopped first
+    442              while (CoAcceptSem(semRFRxFrames) != E_SEM_EMPTY);        // remove all pending singnals
+    443              rxErrors++;
+    444              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // double flush ...
+    445              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // ... [CC2520 Bug#1]
+    446              Send_SPI_byte(CC2520_INS_ABORT);
+    447              Send_SPI_byte(CC2520_INS_SRXON);
+    448          
+    449              TK_BK_REGWR8(CC2520_EXCFLAG0, 0);
+    450              TK_BK_REGWR8(CC2520_EXCFLAG1, 0);
+    451              TK_BK_REGWR8(CC2520_EXCFLAG2, 0);
+    452              Send_SPI_byte(CC2520_INS_SRXON);
+    453          
+    454              HwWait(1);      // turn around time
+    455          }
+    456          
+    457          
+    458          
+    459          /*******************************************************************************
+    460          * Description : [API] wait and gets a new Received Packet
+    461          *******************************************************************************/
+    462          rxPkt_t* RadioRxPkt() {
+    463          
+    464             SAVE_POINT
+    465              //read count and first byte;
+    466              rxCount 		= TK_BK_REGRD8(CC2520_RXFIFOCNT);
+    467              cc2520_flags0	= TK_BK_REGRD8(CC2520_EXCFLAG0);
+    468              cc2520_flags1 	= TK_BK_REGRD8(CC2520_EXCFLAG1);
+    469              cc2520_flags2 	= TK_BK_REGRD8(CC2520_EXCFLAG2);
+    470          
+    471          //    assert((cc2520_flags0 & (1 << CC2520_EXC_RX_OVERFLOW)) == 0);
+    472              scratchBuf[0] 	= CC2520_INS_BCLR;    // reset RX_FRM_DONE signal/exception
+    473              scratchBuf[1] 	= (CC2520_EXCFLAG1 << 3) | (CC2520_EXC_RX_FRM_DONE - 8);
+    474              scratchBuf[2] 	= CC2520_INS_SNOP;    // pad to 16-bit word align
+    475             // scratchBuf[3] = CC2520_INS_REGRD | CC2520_RXFIFOCNT;
+    476             // scratchBuf[4] = CC2520_INS_SNOP;
+    477              scratchBuf[3] 	= CC2520_INS_RXBUF;
+    478              scratchBuf[4] 	= CC2520_INS_SNOP;
+    479          
+    480              spiTxRxByteCount = 5;  // go to RXBUF_Part2
+    481              assert(spiTxRxByteState == RF_SPI_INIT_STATE);
+    482              spiTxRxByteState = RF_SPI_RX1_UPLOADCMD_STATE;
+    483          
+    484              pSpiTxBuf = scratchBuf;
+    485              pSpiRxBuf = (uint8_t*)&rxPkt;
+    486          
+    487              rxDoneType = 1;     // Assuming not successful State Machine will change it to 0 if successful
+    488              CoClearFlag(flagSPIMachineDone);        // Must set before enabling SPI IO as SPI might happen at once (rear but possible)
+    489              // roll state machine
+    490          	//CS_SPI3 = RADIO_CS;
+    491              HwSPISSAssert(SPI_RADIO);
+    492              SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, ENABLE);
+    493              SPI_I2S_SendData(SPI_RADIO_IMU_SPI, *pSpiTxBuf++);
+    494          
+    495              CoWaitForSingleFlag(flagSPIMachineDone, 0);
+    496              SAVE_POINT
+    497              if (rxDoneType == 1) {      //overflow or underflow, which can stop SPI actions
+    498                if (rxCount) {
+    499                  //TODO - should I flash? Sets rxFIFOError to flash
+    500                  TRACE("RX error rxCount=%d\n\r", rxCount);
+    501                } // else false IRQ - ignore
+    502                  return NULL;
+    503              }
+    504          
+    505              rxPkt.payloadSize = rxPkt.frameLength - MHR_SIZE - MFR_SIZE;
+    506              rxPkt.rssi = rxPkt.payload[rxPkt.payloadSize];
+    507          
+    508              // printf("*RSSI*: %x \n\r",rxPkt.rssi);
+    509              // check if received CRC good
+    510              rxPkt.lqi = rxPkt.payload[rxPkt.payloadSize + 1];
+    511              if (radio_off) {
+    512                return NULL;
+    513              }
+    514              if (rxPkt.lqi & 0x80) {
+    515                  rxPkt.lqi &= 0x7F;
+    516                  random =  RadioGetRandom();
+    517                  if (config.flags & FLAG_TRACE_BEACON) {
+    518                    TRACE("OK srcAddr=0x%04X panId=%d rxCount=%d sec=%d flags=0x%02X\n\r",
+    519                        rxPkt.srcAddr, rxPkt.panId, rxCount, sec, cc2520_flags0);
+    520                  }
+    521                  //while(rxPkt.destAddr != 0xFFFF || rxPkt.srcAddr != 0xABCD);
+    522              } else {
+    523                if ( config.flags & FLAG_TRACE_CRC) {
+    524                  TRACE("Bad CRC. Abort rxCount=%d sec=%d.%d flags=0x%02X\n\r", rxCount, sec, TIM1->CNT, cc2520_flags0);
+    525                }
+    526                return NULL;    // bad CRC => reject packet
+    527              }
+    528          
+    529              // TODO!!! post to receive task; or should not happen if the first packet is not finished processing yet
+    530              // give user a copy of receive packet (avoid clobbering by next ISR-received pkt)
+    531              memcpy((void*)&rxPktCopy, (void*)&rxPkt, sizeof(rxPkt_t));
+    532              return &rxPktCopy;
+    533          }
+    534          
+    535          uint8_t readCCA;
+    536          uint32_t txErrors;
+    537          uint32_t sem;
+    538          StatusType semAllowPost;
+    539          extern uint8_t semAllow;
+    540          uint16_t txLine;
+    541          
+    542          /*******************************************************************************
+    543          * Description : [API] Transmit a Packet Immediately
+    544          * Input       : trigger => 0 = on GPIO2 rising-edge; 1 = right away
+    545          * Return      : -
+    546          *******************************************************************************/
+    547          void RadioTxPkt(uint16_t dstAddr, uint8_t beacon, uint8_t payloadSize, uint8_t *payload, uint8_t trigger) {
+    548          
+    549            SAVE_POINT
+    550            txLine = __LINE__;
+    551            if (radio_off) {
+    552              // radio off
+    553              return;
+    554            }
+    555            SAVE_POINT
+    556            txLine = __LINE__;
+    557              if (txFIFOError) {          // TODO!!! Question: when SPI uploading a frame a TX-FIFO takes place, will the behaviour get affected???  Now assuming No
+    558                  txFIFOError = 0;
+    559                  assert(spiTxRxByteState == RF_SPI_INIT_STATE);      // State machine must be stopped first
+    560                  // Clear TX-FIFO error
+    561                  Send_SPI_byte(CC2520_INS_SFLUSHTX);
+    562                  Send_SPI_byte(CC2520_INS_SFLUSHTX);
+    563          
+    564                  TK_BK_REGWR8(CC2520_EXCFLAG0, 0);
+    565                  TK_BK_REGWR8(CC2520_EXCFLAG1, 0);
+    566                  TK_BK_REGWR8(CC2520_EXCFLAG2, 0);
+    567                  txErrors++;
+    568                  txLine = line = __LINE__;
+    569                  HwWait(1);      // turn around time
+    570                  return;
+    571              }
+    572          
+    573              uint8_t hdrBytes;
+    574          
+    575              // flush Tx-FIFO to be safe
+    576              txBuf[0] = CC2520_INS_SFLUSHTX;
+    577              // insert CC2520 STXON, or not
+    578              if (trigger)
+    579              {
+    580          #ifdef CCA_EN
+    581                  txBuf[1] = CC2520_INS_STXONCCA; // 192us Tx Turnaround Time + 160us Preamble+SFD Tx Time
+    582          #else
+    583                  txBuf[1] = CC2520_INS_STXON; // [[DEBUG]]
+    584          #endif
+    585              }
+    586              else
+    587              {
+    588                  txBuf[1] = CC2520_INS_SNOP;
+    589              }
+    590              // double-flush Rx-FIFO [CC2520 Bug#1]
+    591              txBuf[2] = CC2520_INS_SNOP;
+    592              txBuf[3] = CC2520_INS_SNOP;
+    593              // insert TXBUF instruction to write data to Tx-FIFO
+    594              txBuf[4] = CC2520_INS_TXBUF;
+    595              // create the packet header (PHR+MHR) in the transmit buffer
+    596              hdrBytes = RadioBuildHdr((txPktHdr_t*)(txBuf + 5), dstAddr, beacon, payloadSize);
+    597              // copy over the payload (to avoid clobbering by user upon function exit)
+    598              memcpy((void*)(txBuf + hdrBytes + 5), (void*)payload, payloadSize);
+    599              txLine = line = __LINE__;
+    600          
+    601              // prev TX is done, so reset TX_FRM_DONE signal/exception
+    602              TK_BK_REGWR8(CC2520_EXCFLAG0, ~CC2520_EXC0_TX_FRM_DONE_BM);
+    603          
+    604              // kick off ISR-driven SPI upload
+    605              pSpiTxBuf = txBuf;
+    606              pSpiRxBuf = scratchBuf;
+    607          
+    608              spiTxRxByteCount = 5 + hdrBytes + payloadSize;
+    609              assert(spiTxRxByteState == RF_SPI_INIT_STATE);
+    610              spiTxRxByteState = RF_SPI_UPLOAD_ONLY_STATE;
+    611              readCCA = 2;
+    612              txDoneType = 1;     // Assuming not successful. State Machine will change it to 0 if successful
+    613              // Roll state machine when time slot arrives
+    614          
+    615              // TODO!!! change logic here:
+    616              // wait till we are allowed to TX (i.e. not within TX Inhibit guard-band)
+    617              txLine = line = __LINE__;
+    618          
+    619          #ifndef CCA_EN
+    620              if (config.flags & FLAG_TRACE_USE_TIMESLOT) {
+    621                  // imitate "event" synchornization. could be slower
+    622                 // CoClearFlag(flagRadioTxAllow);
+    623                if (CoAcceptSingleFlag(flagRadioTxAllow) == E_OK) {
+    624                  // that means flag already was raised, no worry,
+    625                  // the flag was cleared, will deliver in the next
+    626                  // slot
+    627                }
+    628                SAVE_POINT
+    629                txLine = __LINE__;
+    630                CoWaitForSingleFlag(flagRadioTxAllow, 0);
+    631                SAVE_POINT
+    632                txLine = __LINE__;
+    633          
+    634              }
+    635          #endif
+    636          
+    637              txLine = __LINE__;
+    638          
+    639              if (config.flags & FLAG_TRACE_TIMESLOT) {
+    640                  // time slot debug
+    641                  extern uint16_t txTimeSlot;
+    642                  extern uint32_t secs;
+    643                  uint16_t checkPoint = TIM_GetCounter(TIM2);
+    644                  uint16_t slotDelta = 2100;
+    645                  uint16_t slot2Offset = 60000 / 2 +  + txTimeSlot;
+    646                  BOOL error = 0;
+    647                  if (   (checkPoint >= txTimeSlot && checkPoint < txTimeSlot + slotDelta)
+    648                      || (checkPoint >= slot2Offset && checkPoint < slot2Offset + slotDelta)
+    649                          ) {
+    650                              error = 0;
+    651                          }
+    652                  else {
+    653                      error = 1;
+    654                  }
+    655                  TRACE("[%d-%d %d-%d]=>(%d.%d %c)-", txTimeSlot, txTimeSlot + slotDelta, slot2Offset, slot2Offset + slotDelta, secs, checkPoint, error == 0 ? ' ' : 'E');
+    656              }
+    657          
+    658              CoClearFlag(flagSPIMachineDone);         // Must set before enabling SPI IO as SPI might happen at once (rear but possible)
+    659              
+    660          	//CS_SPI3 = RADIO_CS;
+    661          	HwSPISSAssert(SPI_RADIO);
+    662              SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, ENABLE);
+    663              SPI_I2S_SendData(SPI_RADIO_IMU_SPI, *pSpiTxBuf++);      // send first byte. Other will be handled by SPI3 interrupt
+    664              txLine =  __LINE__;
+    665              SAVE_POINT
+    666              CoWaitForSingleFlag(flagSPIMachineDone, 0);
+    667              SAVE_POINT
+    668              txLine = __LINE__;
+    669              if (txDoneType == 1) {      //overflow or underflow, which can stop SPI actions
+    670                  TRACE("TX error\n\r");
+    671              }
+    672          
+    673               // Upload to CC2520 does not mean that the frame has been sent out into the air
+    674              if ((txError = CoWaitForSingleFlag(flagRadioTxDone, 50)) != E_OK) {  // TODO!!! verify if it can happen. If not, use infinit wait
+    675                  //assert(0);      // should not happen. Happened when unluging ST-Link in debug mode
+    676                SAVE_POINT
+    677                txLine = __LINE__;
+    678                TRACE("TX timout error =%d sec=%d.%d\n\r", txError, sec, TIM1->CNT);
+    679                  // put radio back into known state
+    680              //}
+    681                  Send_SPI_byte(CC2520_INS_SFLUSHTX);
+    682                  Send_SPI_byte(CC2520_INS_SFLUSHTX);
+    683          
+    684                  TK_BK_REGWR8(CC2520_EXCFLAG0, 0);
+    685                  TK_BK_REGWR8(CC2520_EXCFLAG1, 0);
+    686                  TK_BK_REGWR8(CC2520_EXCFLAG2, 0);
+    687                  HwWait(1);      // turn around time
+    688              }
+    689              SAVE_POINT
+    690              txLine = __LINE__;
+    691              if (config.flags & FLAG_TRACE_TIMESLOT) {
+    692                TRACE("radio done at %d.%d\r\n", secs, TIM2->CNT);
+    693              }
+    694          
+    695              semAllowPost = CoPostSem(semIMUAllow);
+    696              semAllow = 1;
+    697              sem++;
+    698              txLine = line = __LINE__;
+    699          
+    700          }
+    701          
+    702          /*******************************************************************************
+    703          * Description : [API] Call this RIGHT AFTER asserting GPIO2 Trigger (STXON)
+    704          *               [CC2520 Bug #1] => STXON may cause Rx-FIFO corruption
+    705          *               !NOTE!: To avoid flushing a good RX packet in the Rx-FIFO, call
+    706          *                       this function only right after STXON trigger
+    707          * Input       : -
+    708          * Return      : -
+    709          *******************************************************************************/
+    710          void RadioSTXONBugFlush(void) {
+    711              SAVE_POINT
+    712              RadioIMU_WaitGrabSPI();
+    713              SAVE_POINT
+    714              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // double flush ...
+    715              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // ... [CC2520 Bug#1]
+    716              RadioIMU_ReleaseSPI();
+    717          }
+    718          
+    719          /*******************************************************************************
+    720          * Description : [API] Sets new PAN ID and Short Source Address
+    721          * Input       :
+    722          * Return      : -
+    723          *******************************************************************************/
+    724          void RadioSetPanIdShortAddr(uint16_t panId, uint16_t shortAddr) {
+    725              radioConfig.myPanId = panId;
+    726              radioConfig.myAddr = shortAddr;
+    727              // Write the short address and the PAN ID to the CC2520 RAM
+    728              SAVE_POINT
+    729              RadioIMU_WaitGrabSPI();
+    730              SAVE_POINT
+    731              TK_BK_MEMWR16(CC2520_RAM_PANID, panId);
+    732              TK_BK_MEMWR16(CC2520_RAM_SHORTADDR, shortAddr);
+    733              RadioIMU_ReleaseSPI();
+    734          }
+    735          
+    736          /*******************************************************************************
+    737          * Description : [API] Sets new RF Channel
+    738          * Input       : chan => {11 - 26}
+    739          * Return      : -
+    740          *******************************************************************************/
+    741          void RadioSetRFChan(uint8_t chan) {
+    742              radioConfig.channel = chan;
+    743              SAVE_POINT
+    744              RadioIMU_WaitGrabSPI();
+    745              SAVE_POINT
+    746              Send_SPI_byte(CC2520_INS_SRFOFF);
+    747              TK_BK_REGWR8(CC2520_FREQCTRL, MIN_CHANNEL + ((chan - MIN_CHANNEL) * CHANNEL_SPACING) );
+    748              Send_SPI_byte(CC2520_INS_SRXON);
+    749              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // double flush ...
+    750              Send_SPI_byte(CC2520_INS_SFLUSHRX);     // ... [CC2520 Bug#1]
+    751          
+    752              TK_BK_REGWR8(CC2520_EXCFLAG0, 0);
+    753              TK_BK_REGWR8(CC2520_EXCFLAG1, 0);
+    754              TK_BK_REGWR8(CC2520_EXCFLAG2, 0);
+    755              Send_SPI_byte(CC2520_INS_SRXON);
+    756          
+    757              RadioIMU_ReleaseSPI();
+    758          }
+    759          
+    760          
+    761          /*******************************************************************************
+    762          * Description : [API] Sets new RF Tx Level
+    763          * Input       : chan => {11 - 26}
+    764          * Return      : -
+    765          *******************************************************************************/
+    766          void RadioSetRFLevel(uint8_t TxLev) {
+    767          //    radioConfig.channel = chan;
+    768          int8_t status;
+    769           //NO RadioWaitGrabSPI??? Potential bug!
+    770              SAVE_POINT
+    771              RadioIMU_WaitGrabSPI();
+    772              status = Send_SPI_byte(CC2520_INS_SNOP); // save curent status
+    773              Send_SPI_byte(CC2520_INS_SRFOFF);
+    774          	TK_BK_MEMWR8(CC2520_TXPOWER, TxAmpValues[TxLev]);
+    775              Send_SPI_byte(CC2520_INS_SNOP);
+    776              Send_SPI_byte(CC2520_INS_SNOP);
+    777              if( status & CC2520_STB_TX_ACTIVE_BM){
+    778                  Send_SPI_byte(CC2520_INS_STXON);  // turn on the radio
+    779              }else{
+    780                  Send_SPI_byte(CC2520_INS_SRXON);
+    781                  Send_SPI_byte(CC2520_INS_SFLUSHRX);     // double flush ...
+    782                  Send_SPI_byte(CC2520_INS_SFLUSHRX);
+    783              }
+    784              HwWait(10);
+    785          	RadioIMU_WaitGrabSPI();
+    786          }
+    787          /*******************************************************************************
+    788          * Description : [API] Gets RF Tx Level from 2520 X Level register
+    789          * Input       :
+    790          * Return      : Level
+    791          *******************************************************************************/
+    792          uint8_t RadioGetFLevel(void){
+    793          uint8_t tx_power;
+    794          
+    795                SAVE_POINT
+    796                RadioIMU_WaitGrabSPI();
+    797                SAVE_POINT
+    798                tx_power= TK_BK_REGRD8(CC2520_TXPOWER);
+    799                RadioIMU_ReleaseSPI();
+    800                return tx_power;
+    801          }
+    802          
+    803          /*******************************************************************************
+    804          * Description : [API] sets 2520 radio GPIO 0 as analog temperature out
+    805          * Input       :
+    806          * Return      :
+    807          *******************************************************************************/
+    808          
+    809          /*******************************************************************************
+    810          * Description : [API] REVJ. Sets up the IMU to default settings
+    811          * Input       :
+    812          * Return      :
+    813          *******************************************************************************/
+    814          void IMUInit(void){	
+    815          	const uint8_t whoami = 0xEA;
+    816              regVal_t *p = regVal_IMU;
+    817          
+    818              IMU_SelectBank(BANK0);
+    819          	if(IMU_ReadOneByte(IMU_WHO_AM_I, 0x01)!=whoami){
+    820          		IMUPresent=0;
+    821          		assert(0);
+    822          	}
+    823          	else IMUPresent=1;
+    824          	
+    825          	while (p->reg != 0xFF) {
+    826                  IMU_WriteOneByte(p->reg, p->val);
+    827                  p++;
+    828              }
+    829          	
+    830          	
+    831          	//setup external gpio interrupts if required on the stm.
+    832          	HwIMUEXTIInit();
+    833          }
+    834          
+    835          /*******************************************************************************
+    836          * Description : [API] REVJ. Sets up IMU_TX buffer to gather IMU raw data.
+    837          * Input       :
+    838          * Return      :
+    839          *******************************************************************************/
+    840          void IMUProcess(void){
+    841          	pSpiRxBuf_IMU = IMU_RawData;
+    842          	pSpiTxBuf_IMU = IMU_TXBuffer;
+    843          	spiIMUCount = 12;
+    844          	spiIMUByteState = IMU_SPI_INIT_STATE;
+    845          	
+    846          	SAVE_POINT
+    847          	//CS_SPI3 = IMU_CS;
+    848          	HwSPISSAssert(SPI_IMU);
+    849          	SAVE_POINT
+    850          	//I want to send: address read at address 0x33 (1 byte) + 6 bytes to ready gyro data (uint16_t) x,y,z.
+    851          	SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, ENABLE);
+    852              SPI_I2S_SendData(SPI_RADIO_IMU_SPI, *pSpiTxBuf_IMU++);
+    853          	
+    854          	SAVE_POINT	
+    855          	CoWaitForSingleFlag(flagIMUNewData, 0);
+    856          	SAVE_POINT	
+    857          	//HwSPISSDeAssert(SPI_IMU); 		//Deassert within ISR when received all data.
+    858          }
+    859          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+Errors: 1
+Warnings: 1

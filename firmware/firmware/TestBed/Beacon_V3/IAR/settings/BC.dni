@@ -1,0 +1,85 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[InterruptLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+SumSortOrder=0
+[Interrupts]
+Enabled=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
+[Trace1]
+Enabled=0
+ShowSource=1
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[DebugChecksum]
+Checksum=-433717114
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[Breakpoints]
+Count=0
+[RecentFlashDownload]
+Path=C:\Documents and Settings\CAST\Desktop\blacktrax\blacktrax_hardware\trunk\beacon_no_imu\BC\IAR\Exe\BCV2_wIMU\BC.out
+[struct_types]
+Fmt0=FCB-flagActive	4	0
+Fmt1=FCB-flagRdy	4	0
+Fmt2=FCB-resetOpt	4	0
+Fmt3=rxPkt_t-frameLength	4	0
+Fmt4=rxPkt_t-payloadSize	4	0
+Fmt5=rxPkt_t-seqNumber	4	0
+Fmt6=rxPkt_t-srcAddr	4	0
+[array_types]
+Fmt0=uint8_t[128]	4	0
+[watch_formats]
+Fmt0={W}0:*pConfig	4	0
+Fmt1={W}0:*pSpiRxBuf	4	0
+Fmt2={W}0:*pSpiTxBuf	4	0
+Fmt3={W}0:flagRadioRxFrame	4	0
+Fmt4={W}0:flagRadioTxDone	4	0
+Fmt5={W}0:flagRadioTxDoneUser	4	0
+Fmt6={W}0:id	4	0
+Fmt7={W}0:imu_data_test	4	0
+Fmt8={W}0:sampledCCA	4	0
+Fmt9={W}0:spiTxRxByteCount	4	0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=0
+Graph=0
+Symbiont=0
+Exclusions=
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+Count=0
+SuppressDialog=0

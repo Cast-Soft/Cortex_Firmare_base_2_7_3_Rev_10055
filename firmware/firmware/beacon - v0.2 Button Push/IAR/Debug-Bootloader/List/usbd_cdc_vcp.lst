@@ -1,0 +1,612 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     17/Apr/2019  15:42:50 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\USB-Device-CD #
+#                    C\usbd_cdc_vcp.c                                         #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\USB-Device-CD #
+#                    C\usbd_cdc_vcp.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER  #
+#                    -D STM32F10X_CL -D COOS -D USE_MY_ASSERT -D BC_HW_REVJ   #
+#                    -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE    #
+#                    -D BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4  #
+#                    -D WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D           #
+#                    msgmethod1 -lcN "C:\Users\User\Documents\Cortex_git\BLKT #
+#                    -01.git\Source Code\BLKT-01                              #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    Copy\IAR\Debug-Bootloader\List\" -o                      #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\" --no_cse --no_unroll     #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --fpu=None --dlib_config "C:\Program Files (x86)\IAR  #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\Source Code\BLKT-01 Beacon\Source\firmware\beacon -    #
+#                    Copy\IAR\..\App\" -I "C:\Users\User\Documents\Cortex_git #
+#                    \BLKT-01.git\Source Code\BLKT-01                         #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    Copy\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\ #
+#                    Source Code\BLKT-01 Beacon\Source\firmware\beacon -      #
+#                    Copy\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sourc #
+#                    e Code\BLKT-01 Beacon\Source\firmware\beacon -           #
+#                    Copy\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\" -I "C:\Users\User\Documents\Cort #
+#                    ex_git\BLKT-01.git\Source Code\BLKT-01                   #
+#                    Beacon\Source\firmware\beacon - Copy\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\usbd_cdc_vcp.lst          #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\usbd_cdc_vcp.o             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\common\USB-Device-CDC\usbd_cdc_vcp.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    usbd_cdc_vcp.c
+      4            * @author  MCD Application Team
+      5            * @version V1.1.0
+      6            * @date    19-March-2012
+      7            * @brief   Generic media access Layer.
+      8            ******************************************************************************
+      9            * @attention
+     10            *
+     11            * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+     12            *
+     13            * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+     14            * You may not use this file except in compliance with the License.
+     15            * You may obtain a copy of the License at:
+     16            *
+     17            *        http://www.st.com/software_license_agreement_liberty_v2
+     18            *
+     19            * Unless required by applicable law or agreed to in writing, software
+     20            * distributed under the License is distributed on an "AS IS" BASIS,
+     21            * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     22            * See the License for the specific language governing permissions and
+     23            * limitations under the License.
+     24            *
+     25            ******************************************************************************
+     26            */
+     27          
+     28          #define min(a,b)        (a < b ? a : b)
+     29          
+     30          
+     31          /* Includes ------------------------------------------------------------------*/
+     32          #include "usbd_cdc_vcp.h"
+     33          #include "usb_conf.h"
+     34          #include <stdio.h>
+     35          #include <ysizet.h>
+     36          #include <yfuns.h>
+     37          #include <string.h>
+     38          #include <stdarg.h>
+     39          #include "packets.h"
+     40          #include "hardware.h"
+     41          
+     42          #if defined(BEACON_APP) || defined(ROUTER_APP) || defined(TIMEKEEPER_APP)
+     43          #include "config.h"
+     44          #endif
+     45          
+     46          
+     47          /* Private typedef -----------------------------------------------------------*/
+     48          /* Private define ------------------------------------------------------------*/
+     49          /* Private macro -------------------------------------------------------------*/
+     50          /* Private variables ---------------------------------------------------------*/
+     51          LINE_CODING linecoding =
+     52            {
+     53              115200, /* baud rate*/
+     54              0x00,   /* stop bits-1*/
+     55              0x00,   /* parity - none*/
+     56              0x08    /* nb. of bits 8*/
+     57            };
+     58          
+     59          
+     60          #define APP_TX_BUFFER_SIZE      1024
+     61          static uint8_t APP_Tx_Buffer[APP_TX_BUFFER_SIZE];
+     62          uint32_t APP_Tx_ptr_out = 0;
+     63          uint32_t APP_Tx_ptr_in = 0;
+     64          
+     65          /* These are external variables imported from CDC core to be used for IN
+     66             transfer management. */
+     67          extern uint8_t  APP_Rx_Buffer []; /* Write CDC received data in this buffer.
+     68                                               These data will be sent over USB IN endpoint
+     69                                               in the CDC core functions. */
+     70          extern uint32_t APP_Rx_ptr_in;    /* Increment this pointer or roll it back to
+     71                                               start address when writing received data
+     72                                               in the buffer APP_Rx_Buffer. */
+     73          extern uint32_t  APP_Rx_ptr_out;
+     74          
+     75          /* Private function prototypes -----------------------------------------------*/
+     76          static uint16_t VCP_Init     (void);
+     77          static uint16_t VCP_DeInit   (void);
+     78          static uint16_t VCP_Ctrl     (uint32_t Cmd, uint8_t* Buf, uint32_t Len);
+     79          static uint16_t VCP_DataTx   (const uint8_t* Buf, uint32_t Len);
+     80          static uint16_t VCP_DataRx   (uint8_t* Buf, uint32_t Len);
+     81          
+     82          //static uint16_t VCP_COMConfig(uint8_t Conf);
+     83          
+     84          CDC_IF_Prop_TypeDef VCP_fops =
+     85          {
+     86            VCP_Init,
+     87            VCP_DeInit,
+     88            VCP_Ctrl,
+     89            VCP_DataTx,
+     90            VCP_DataRx
+     91          };
+     92          
+     93          /* Private functions ---------------------------------------------------------*/
+     94          
+     95          /**
+     96            * @brief  VCP_Init
+     97            *         Initializes the Media on the STM32
+     98            * @param  None
+     99            * @retval Result of the opeartion (USBD_OK in all cases)
+    100            */
+    101          static uint16_t VCP_Init(void)
+    102          {
+    103          
+    104            return USBD_OK;
+    105          }
+    106          
+    107          /**
+    108            * @brief  VCP_DeInit
+    109            *         DeInitializes the Media on the STM32
+    110            * @param  None
+    111            * @retval Result of the opeartion (USBD_OK in all cases)
+    112            */
+    113          static uint16_t VCP_DeInit(void)
+    114          {
+    115          
+    116            return USBD_OK;
+    117          }
+    118          
+    119          
+    120          /**
+    121            * @brief  VCP_Ctrl
+    122            *         Manage the CDC class requests
+    123            * @param  Cmd: Command code
+    124            * @param  Buf: Buffer containing command data (request parameters)
+    125            * @param  Len: Number of data to be sent (in bytes)
+    126            * @retval Result of the opeartion (USBD_OK in all cases)
+    127            */
+    128          static uint16_t VCP_Ctrl (uint32_t Cmd, uint8_t* Buf, uint32_t Len)
+    129          {
+    130            switch (Cmd)
+    131            {
+    132            case SEND_ENCAPSULATED_COMMAND:
+    133              /* Not  needed for this driver */
+    134              break;
+    135          
+    136            case GET_ENCAPSULATED_RESPONSE:
+    137              /* Not  needed for this driver */
+    138              break;
+    139          
+    140            case SET_COMM_FEATURE:
+    141              /* Not  needed for this driver */
+    142              break;
+    143          
+    144            case GET_COMM_FEATURE:
+    145              /* Not  needed for this driver */
+    146              break;
+    147          
+    148            case CLEAR_COMM_FEATURE:
+    149              /* Not  needed for this driver */
+    150              break;
+    151          
+    152            case SET_LINE_CODING:
+    153              linecoding.bitrate = (uint32_t)(Buf[0] | (Buf[1] << 8) | (Buf[2] << 16) | (Buf[3] << 24));
+    154              linecoding.format = Buf[4];
+    155              linecoding.paritytype = Buf[5];
+    156              linecoding.datatype = Buf[6];
+    157              /* Set the new configuration */
+    158             // VCP_COMConfig(OTHER_CONFIG);
+    159              break;
+    160          
+    161            case GET_LINE_CODING:
+    162              Buf[0] = (uint8_t)(linecoding.bitrate);
+    163              Buf[1] = (uint8_t)(linecoding.bitrate >> 8);
+    164              Buf[2] = (uint8_t)(linecoding.bitrate >> 16);
+    165              Buf[3] = (uint8_t)(linecoding.bitrate >> 24);
+    166              Buf[4] = linecoding.format;
+    167              Buf[5] = linecoding.paritytype;
+    168              Buf[6] = linecoding.datatype;
+    169              break;
+    170          
+    171            case SET_CONTROL_LINE_STATE:
+    172              /* Not  needed for this driver */
+    173              break;
+    174          
+    175            case SEND_BREAK:
+    176              /* Not  needed for this driver */
+    177              break;
+    178          
+    179            default:
+    180              break;
+    181            }
+    182          
+    183            return USBD_OK;
+    184          }
+    185          
+    186          /**
+    187            * @brief  VCP_DataTx
+    188            *         CDC received data to be send over USB IN endpoint are managed in
+    189            *         this function.
+    190            * @param  Buf: Buffer of data to be sent
+    191            * @param  Len: Number of data to be sent (in bytes)
+    192            * @retval Result of the opeartion: USBD_OK or number of characters not copied
+    193            */
+    194          static uint16_t VCP_DataTx (const uint8_t* Buf, uint32_t Len)
+    195          {
+    196            uint16_t ret = USBD_OK;
+    197          
+    198            do {
+    199              uint32_t CopyLen = Len;
+    200              uint32_t Avail = APP_RX_DATA_SIZE;
+    201          
+    202              if (Len == 0) {
+    203                break;
+    204              }
+    205              ret = Len;
+    206              if (APP_Rx_ptr_out <= APP_Rx_ptr_in) {
+    207                // first part fill out to the end
+    208                Avail = APP_RX_DATA_SIZE - APP_Rx_ptr_in;
+    209                CopyLen = min(Avail, CopyLen);
+    210                if (CopyLen) {
+    211                  memcpy(&APP_Rx_Buffer[APP_Rx_ptr_in], Buf, CopyLen);
+    212                  APP_Rx_ptr_in += CopyLen;
+    213                  Buf += CopyLen;
+    214                  Len -= CopyLen;
+    215                  if (APP_Rx_ptr_in >= APP_RX_DATA_SIZE) {
+    216                    APP_Rx_ptr_in = 0;
+    217                  }
+    218                  ret = Len;
+    219                  if (!Len) {
+    220                    break;
+    221                  }
+    222                } else {
+    223                  break;
+    224                }
+    225              }
+    226              // copy rest if any
+    227              Avail = APP_Rx_ptr_out - APP_Rx_ptr_in;
+    228              CopyLen = min(Avail, Len);
+    229              if (CopyLen) {
+    230                memcpy(&APP_Rx_Buffer[APP_Rx_ptr_in], Buf, CopyLen);
+    231                APP_Rx_ptr_in += CopyLen;
+    232                Len -= CopyLen;
+    233                ret = Len;
+    234              }
+    235            } while (0);
+    236            return ret;
+    237          }
+    238          
+    239          /**
+    240            * @brief  VCP_DataRx
+    241            *         Data received over USB OUT endpoint are sent over CDC interface
+    242            *         through this function.
+    243            *
+    244            *         @note
+    245            *         This function will block any OUT packet reception on USB endpoint
+    246            *         untill exiting this function. If you exit this function before transfer
+    247            *         is complete on CDC interface (ie. using DMA controller) it will result
+    248            *         in receiving more data while previous ones are still not sent.
+    249            *
+    250            * @param  Buf: Buffer of data to be received
+    251            * @param  Len: Number of data received (in bytes)
+    252            * @retval Result of the opeartion: USBD_OK if all operations are OK else VCP_FAIL
+    253            */
+    254          static uint16_t VCP_DataRx (uint8_t* Buf, uint32_t Len)
+    255          {
+    256              uint16_t ret = USBD_OK;
+    257          
+    258            do {
+    259              uint32_t CopyLen = Len;
+    260              uint32_t Avail = APP_TX_BUFFER_SIZE;
+    261          
+    262              if (Len == 0) {
+    263                break;
+    264              }
+    265              ret = Len;
+    266              if (APP_Tx_ptr_out <= APP_Tx_ptr_in) {
+    267                // first part fill out to the end
+    268                Avail = APP_TX_BUFFER_SIZE - APP_Tx_ptr_in;
+    269                CopyLen = min(Avail, CopyLen);
+    270                if (CopyLen) {
+    271                  memcpy(&APP_Tx_Buffer[APP_Tx_ptr_in], Buf, CopyLen);
+    272                  APP_Tx_ptr_in += CopyLen;
+    273                  Buf += CopyLen;
+    274                  Len -= CopyLen;
+    275                  if (APP_Tx_ptr_in >= APP_TX_BUFFER_SIZE) {
+    276                    APP_Tx_ptr_in = 0;
+    277                  }
+    278                  ret = Len;
+    279                  if (!Len) {
+    280                    break;
+    281                  }
+    282                } else {
+    283                  break;
+    284                }
+    285              }
+    286              // copy rest if any
+    287              Avail = APP_Tx_ptr_out - APP_Tx_ptr_in;
+    288              CopyLen = min(Avail, Len);
+    289              if (CopyLen) {
+    290                memcpy(&APP_Tx_Buffer[APP_Tx_ptr_in], Buf, CopyLen);
+    291                APP_Tx_ptr_in += CopyLen;
+    292                Len -= CopyLen;
+    293                ret = Len;
+    294              }
+    295            } while (0);
+    296            return ret;
+    297          
+    298          }
+    299          
+    300          /*******************************************************************************
+    301          * Description : STDOUT Low-Level write
+    302          * Input       :
+    303          * Return      :
+    304          *******************************************************************************/
+    305          size_t __write(int handle, const unsigned char *buffer, size_t size) {
+    306          
+    307              if ((buffer == 0) || (handle == -1)) {
+    308                  /*
+    309                   * This means that we should flush internal buffers.  Since we
+    310                   * don't we just return.  (Remember, "handle" == -1 means that all
+    311                   * handles should be flushed.)
+    312                   */
+    313                  return 0;
+    314              }
+    315          
+    316              /* This template only writes to "standard out" and "standard err",
+    317               * for all other file handles it returns failure. */
+    318              if (handle != _LLIO_STDOUT && handle != _LLIO_STDERR) {
+    319                  return _LLIO_ERROR;
+    320              }
+    321          
+    322              //Only called from printf, which is called from
+    323              //hard fault handler only
+    324              //no need to lock
+    325              return size - VCP_DataTx(buffer, size);
+    326          }
+    327          
+    328          
+    329          /*******************************************************************************
+    330          * Description : STDIN Low-Level read
+    331          * Input       :
+    332          * Return      :
+    333          *******************************************************************************/
+    334          size_t __read(int handle, unsigned char *buffer, size_t size) {
+    335              size_t nChars = 0;
+    336              size_t Avail = 0;
+    337          
+    338          
+    339              /* This template only reads from "standard in", for all other file
+    340              * handles it returns failure. */
+    341              if (handle != _LLIO_STDIN) {
+    342                  return _LLIO_ERROR;
+    343              }
+    344          
+    345              if (APP_Tx_ptr_out == APP_Tx_ptr_in || !size) {
+    346                return 0;
+    347              }
+    348          
+    349              if (APP_Tx_ptr_out > APP_Tx_ptr_in) {
+    350                Avail = APP_TX_BUFFER_SIZE - APP_Tx_ptr_out;
+    351                size_t CopyLen = min(Avail, size);
+    352                memcpy(buffer, &APP_Tx_Buffer[APP_Tx_ptr_out], CopyLen);
+    353                APP_Tx_ptr_out += CopyLen;
+    354                size -= CopyLen;
+    355                nChars += CopyLen;
+    356                buffer += nChars;
+    357                if (APP_Tx_ptr_out == APP_TX_BUFFER_SIZE) {
+    358                  APP_Tx_ptr_out = 0;
+    359                }
+    360              }
+    361          
+    362              if (size) {
+    363                if (APP_Tx_ptr_out < APP_Tx_ptr_in) {
+    364                  Avail = APP_Tx_ptr_in - APP_Tx_ptr_out;
+    365                  size_t CopyLen = min(Avail, size);
+    366                  memcpy(buffer, &APP_Tx_Buffer[APP_Tx_ptr_out], CopyLen);
+    367                  APP_Tx_ptr_out += CopyLen;
+    368                  size -= CopyLen;
+    369                  nChars += CopyLen;
+    370                  if (APP_Tx_ptr_out == APP_TX_BUFFER_SIZE) {
+    371                    APP_Tx_ptr_out = 0;
+    372                  }
+    373                }
+    374              }
+    375              return nChars;
+    376          }
+    377          
+    378          
+    379          static size_t write_header(uint8_t content_type, uint16_t length) {
+    380          
+    381            struct USBDebugInfoHeader dbgInfoheader;
+    382            int headerSize = sizeof(dbgInfoheader);
+    383          
+    384            dbgInfoheader.signature = TK_FRAME_SIGNATURE;
+    385            dbgInfoheader.version = 1;
+    386            dbgInfoheader.checkSum = 0;        // TODO!!!
+    387            dbgInfoheader.magicNumber = 0;     // TODO!!! random number / session id
+    388            dbgInfoheader.packetID = 0;        // TODO!!! Incrementing number
+    389            dbgInfoheader.contentType = content_type;
+    390            dbgInfoheader.contentLength = length + headerSize;     // Entire packet length including Header
+    391          
+    392            const unsigned char *headerBuffer = (const unsigned char *)&dbgInfoheader;
+    393          
+    394            return VCP_DataTx(headerBuffer, headerSize);
+    395          }
+    396          
+    397          /*******************************************************************************
+    398          * Description : STDOUT Low-Level write for command line response
+    399          * Input       :
+    400          * Return      :
+    401          *******************************************************************************/
+    402          size_t __writeCmdLineRespPacket(const unsigned char *buffer, size_t size, uint8_t contentType) {
+    403            size_t ret = 0;
+    404          
+    405            __disable_interrupt();
+    406            do {
+    407              if (write_header(contentType, size)) {
+    408                break;
+    409              }
+    410              ret = __write(_LLIO_STDOUT, buffer, size);
+    411            } while (0);
+    412            __enable_interrupt();
+    413          
+    414          #ifdef BEACON_APP
+    415              extern uint32_t IMUdbgPrt;
+    416              if (IMUdbgPrt) {
+    417                  //HwLEDToggle(LED2);
+    418                  //HwLEDToggle(LED1);
+    419                HwGPOToggle(GPO_TP6);
+    420              }
+    421          #endif
+    422          
+    423            return ret;
+    424          }
+    425          
+    426          /*******************************************************************************
+    427          * Description : STDOUT Low-Level write for IMU raw data
+    428          * Input       :
+    429          * Return      :
+    430          *******************************************************************************/
+    431          size_t __writeIMU(const unsigned char *buffer, size_t size)
+    432          {
+    433            return __writeCmdLineRespPacket(buffer, size, DEV_RESP_IMU_DATA);
+    434          }
+    435          
+    436          // intercept and add a header
+    437          char trace_format_buf[512];
+    438          int TRACE(char* fmt, ...) {
+    439              int len;
+    440          #if defined(BEACON_APP)
+    441              if (!(config.flags & FLAG_TRACE_ENABLE)) {
+    442                return 0;
+    443              }
+    444          #elif defined(ROUTER_APP) || defined(TIMEKEEPER_APP)
+    445              if (!(config.flags & FLAG_TRACE_ENABLE)) {
+    446                  return 0;
+    447              }
+    448          #endif
+    449              va_list argptr; /* Set up the variable argument list here */
+    450              va_start(argptr, fmt); /* Start up variable arguments */
+    451              len = vsprintf(trace_format_buf, fmt, argptr); /* print the variable arguments to buffer */
+    452              va_end(argptr);  /* Signify end of processing of variable arguments */
+    453          
+    454          #ifdef BEACON_APP
+    455              // Send out a header
+    456          
+    457              if (config.flags & FLAG_TRACE_USE_PROTO_CMD_LINE_RESP) {
+    458          #endif
+    459                return __writeCmdLineRespPacket((unsigned char*) trace_format_buf, len + 1, DEV_RESP_INFO);
+    460          #ifdef BEACON_APP
+    461              } else {
+    462                return printf(trace_format_buf);
+    463              }
+    464          #endif
+    465          
+    466          }
+    467          
+    468          
+    469          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       32  TRACE
+             32 -> __writeCmdLineRespPacket
+             32 -> printf
+             32 -> vsprintf
+        4  VCP_Ctrl
+       24  VCP_DataRx
+             24 -> memcpy
+       24  VCP_DataTx
+             24 -> memcpy
+        0  VCP_DeInit
+        0  VCP_Init
+       32  __read
+             32 -> memcpy
+       16  __write
+             16 -> VCP_DataTx
+       24  __writeCmdLineRespPacket
+             24 -> HwGPOToggle
+             24 -> __write
+             24 -> write_header
+       16  __writeIMU
+             16 -> __writeCmdLineRespPacket
+       16  memcpy
+             16 -> __aeabi_memcpy
+       40  write_header
+             40 -> VCP_DataTx
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable6
+       4  ??DataTable6_1
+       4  ??DataTable6_10
+       4  ??DataTable6_2
+       4  ??DataTable6_3
+       4  ??DataTable6_4
+       4  ??DataTable6_5
+       4  ??DataTable6_6
+       4  ??DataTable6_7
+       4  ??DataTable6_8
+       4  ??DataTable6_9
+    1024  APP_Tx_Buffer
+       4  APP_Tx_ptr_in
+       4  APP_Tx_ptr_out
+      70  TRACE
+     180  VCP_Ctrl
+     182  VCP_DataRx
+     188  VCP_DataTx
+       4  VCP_DeInit
+       4  VCP_Init
+      20  VCP_fops
+     228  __read
+      48  __write
+      60  __writeCmdLineRespPacket
+      18  __writeIMU
+       8  linecoding
+      22  memcpy
+     512  trace_format_buf
+      62  write_header
+
+ 
+ 1 544 bytes in section .bss
+    28 bytes in section .data
+ 1 110 bytes in section .text
+ 
+ 1 088 bytes of CODE memory (+ 22 bytes shared)
+ 1 572 bytes of DATA memory
+
+Errors: none
+Warnings: none

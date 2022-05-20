@@ -1,0 +1,676 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     26/Oct/2019  13:14:12 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\blkt_gfx.c                                      #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\blkt_gfx.c" -D BEACON_APP -D                    #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D    #
+#                    TASKS_PROFILE -D BATTERY_CHECK -D CCA_EN_NO -D           #
+#                    NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D OLD_CONFIG -D    #
+#                    CIRCULAR_LOG -D BC_HW_REVJ -lcN                          #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\blkt_gfx.lst         #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\blkt_gfx.o            #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\blkt_gfx.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : blkt_gfx.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : Custom graphics library based off adafruit gfx library
+      9          					   Graphics library designed specifically for PlasticLogic 2.1"
+     10          					   DrawPixel functionality to only work when Reg0x0F DEM bits assigned to 0x100b
+     11          *******************************************************************************/
+     12          
+     13          /* INCLUDES ------------------------------------------------------------------*/
+     14          #include <stdint.h>
+     15          #include <stdlib.h>
+     16          #include <string.h>
+     17          #include "blkt_gfx.h"
+     18          #include "eink.h"
+     19          
+     20          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     21          typedef struct{
+     22          	const GFXfont* fontselect;
+     23          	uint8_t x_pos;
+     24          	uint8_t y_pos;
+     25          }GUI_Controller;
+     26          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     27          
+     28          /* PRIVATE MACROS ------------------------------------------------------------*/
+     29          #define min(a,b) (((a) < (b)) ? (a) : (b))
+     30          #define _swap_int16_t(a, b) { int16_t t = a; a = b; b = t; }
+     31          
+     32          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     33          extern const GFXfont Font9pt7b;
+     34          extern const GFXfont Font16pt12b;
+     35          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     36          //GUI_Controller GFX_TextDriver = {&Font9pt7b,0,0};
+     37          GUI_Controller GFX_TextDriver = {&Font16pt12b,0,0};
+     38          
+     39          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     40          
+     41          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+     42          static void GFX_drawPixel(int16_t x, int16_t y, EPD_grayscale color);
+     43          static EPD_grayscale getPixel(const uint8_t x, uint8_t pos);
+     44          static void drawFastVLine(int16_t x, int16_t y, int16_t h, EPD_grayscale color);
+     45          static void drawFastHLine(int16_t x, int16_t y, int16_t w, EPD_grayscale color);
+     46          static void writeLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, EPD_grayscale color);
+     47          static void fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t corners, int16_t delta, EPD_grayscale color);
+     48          static void drawCircleHelper( int16_t x0, int16_t y0, int16_t r, uint8_t cornername, uint16_t color);
+     49          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+     50          
+     51          /*******************************************************************************
+     52          * Description : Inserts 2-bit grayscale into appropriate byte position of the frame buffer
+     53          * Input       : uint8_t x: targeted x row of internal framebuffer
+     54          				uint8_t y: targeted y column of internal framebuffer
+     55          * Return      :
+     56          *******************************************************************************/
+     57          static void GFX_drawPixel(int16_t x, int16_t y, EPD_grayscale color){
+     58          	uint16_t val;
+     59          	uint16_t mod;
+     60          
+     61          	if ((x<0)||(y<0)||(x >= EPD_WIDTH) || (y >= EPD_HEIGHT) || (color>white )) return;
+     62          	y = (y<120)? 119-y : y;
+     63          
+     64          	val = (x+(EPD_WIDTH*y));
+     65          	mod = val%4;
+     66          	val = val/4;
+     67              uint8_t pixels = spiInk_ImgBuf.buffer[val];
+     68          
+     69          	switch (mod) {					            //2-bit grayscale dot
+     70          	   	case 0: spiInk_ImgBuf.buffer[val] = (pixels & 0x3F) | ((uint8_t)color << 6); break;
+     71          	   	case 1: spiInk_ImgBuf.buffer[val] = (pixels & 0xCF) | ((uint8_t)color << 4); break;
+     72          	   	case 2: spiInk_ImgBuf.buffer[val] = (pixels & 0xF3) | ((uint8_t)color << 2); break;
+     73          	   	case 3: spiInk_ImgBuf.buffer[val] = (pixels & 0xFC) | (uint8_t)color; break;
+     74          	}
+     75          }
+     76          
+     77          /*******************************************************************************
+     78          * Description : Draws the selected bitmap at the specified (x,y) coordinate
+     79          * Input       : uint8_t x: top left x coordinate
+     80          				uint8_t y: top left y coordinate
+     81          				const uint8_t bitmap[]: selected bitmap
+     82          				uint8_t w: width of bitmap
+     83          				uint8_t h: height of bitmap
+     84          * Return      :
+     85          *******************************************************************************/
+     86          void GFX_DrawBitMap8Bit(uint8_t x, uint8_t y, const uint8_t bitmap[], uint8_t w, uint8_t h){
+     87          	uint8_t i,j;
+     88          	for(j=0; j<h; j++, y++){
+     89          		for(i=0; i<w; i++){
+     90          			GFX_drawPixel(x+i,y,getPixel8bit(*(const uint8_t*) &bitmap[j*w+i]));
+     91          		}
+     92          	}
+     93          }
+     94          
+     95          /*******************************************************************************
+     96          * Description : Retrieves selected pixel data from bitmap in flash
+     97          * Input       : uint8_t x: top left x coordinate
+     98          * Return      :
+     99          *******************************************************************************/
+    100          EPD_grayscale getPixel8bit(const uint8_t x) {
+    101              if(x<0x40) return black;
+    102              else if(x>=0x40 && x<0x53) return gray_l;
+    103              else if(x>=0x53 && x<0xC0) return gray_d;
+    104          	else return white;
+    105          }
+    106          
+    107          /*******************************************************************************
+    108          * Description : Retrieves selected pixel data from bitmap in flash
+    109          * Input       : uint8_t x: top left x coordinate
+    110          * Return      :
+    111          *******************************************************************************/
+    112          void GFX_DrawBitMap(uint8_t x, uint8_t y, const uint8_t bitmap[], uint8_t w, uint8_t h){
+    113          	uint8_t i=0;
+    114          	uint8_t bit=0;
+    115          	uint16_t pos=0;
+    116          	uint16_t pixelcnt = w*h;
+    117          
+    118          	while(pixelcnt--){
+    119          		GFX_drawPixel(x+i,y,getPixel(*(const uint8_t*) &bitmap[pos],bit));
+    120          		if(bit++==3){bit=0; pos++;}
+    121          		if(++i == w){i=0; y++;}
+    122          	}
+    123          }
+    124          
+    125          /*******************************************************************************
+    126          * Description : Retrieves selected pixel data from bitmap in flash
+    127          * Input       : uint8_t x: top left x coordinate
+    128          * Return      :
+    129          *******************************************************************************/
+    130          static EPD_grayscale getPixel(const uint8_t x, uint8_t pos){
+    131          	switch(pos){
+    132          	case 0: return (x &0x03);
+    133          	case 1: return ((x>>2) & 0x03);
+    134          	case 2: return ((x>>4) & 0x03);
+    135          	case 3:
+    136          	default:
+    137          	return ((x>>6) & 0x03);
+    138          	}
+    139          }
+    140          
+    141          /**************************************************************************/
+    142          /*!
+    143              @brief  Quarter-circle drawer with fill, used for circles and roundrects
+    144              @param  x0       Center-point x coordinate
+    145              @param  y0       Center-point y coordinate
+    146              @param  r        Radius of circle
+    147              @param  corners  Mask bits indicating which quarters we're doing
+    148              @param  delta    Offset from center-point, used for round-rects
+    149              @param  color    16-bit 5-6-5 Color to fill with
+    150          */
+    151          /**************************************************************************/
+    152          static void fillCircleHelper(int16_t x0, int16_t y0, int16_t r,
+    153            uint8_t corners, int16_t delta, EPD_grayscale color) {
+    154          
+    155              int16_t f     = 1 - r;
+    156              int16_t ddF_x = 1;
+    157              int16_t ddF_y = -2 * r;
+    158              int16_t x     = 0;
+    159              int16_t y     = r;
+    160              int16_t px    = x;
+    161              int16_t py    = y;
+    162          
+    163              delta++; // Avoid some +1's in the loop
+    164          
+    165              while(x < y) {
+    166                  if (f >= 0) {
+    167                      y--;
+    168                      ddF_y += 2;
+    169                      f     += ddF_y;
+    170                  }
+    171                  x++;
+    172                  ddF_x += 2;
+    173                  f     += ddF_x;
+    174                  // These checks avoid double-drawing certain lines, important
+    175                  // for the SSD1306 library which has an INVERT drawing mode.
+    176                  if(x < (y + 1)) {
+    177                      if(corners & 1) drawFastVLine(x0+x, y0-y, 2*y+delta, color);
+    178                      if(corners & 2) drawFastVLine(x0-x, y0-y, 2*y+delta, color);
+    179                  }
+    180                  if(y != py) {
+    181                      if(corners & 1) drawFastVLine(x0+py, y0-px, 2*px+delta, color);
+    182                      if(corners & 2) drawFastVLine(x0-py, y0-px, 2*px+delta, color);
+    183                      py = y;
+    184                  }
+    185                  px = x;
+    186              }
+    187          }
+    188          
+    189          /**************************************************************************/
+    190          /*!
+    191              @brief    Quarter-circle drawer, used to do circles and roundrects
+    192              @param    x0   Center-point x coordinate
+    193              @param    y0   Center-point y coordinate
+    194              @param    r   Radius of circle
+    195              @param    cornername  Mask bit #1 or bit #2 to indicate which quarters of the circle we're doing
+    196              @param    color 16-bit 5-6-5 Color to draw with
+    197          */
+    198          /**************************************************************************/
+    199          static void drawCircleHelper( int16_t x0, int16_t y0, int16_t r, uint8_t cornername, uint16_t color) {
+    200              int16_t f     = 1 - r;
+    201              int16_t ddF_x = 1;
+    202              int16_t ddF_y = -2 * r;
+    203              int16_t x     = 0;
+    204              int16_t y     = r;
+    205          
+    206              while (x<y) {
+    207                  if (f >= 0) {
+    208                      y--;
+    209                      ddF_y += 2;
+    210                      f     += ddF_y;
+    211                  }
+    212                  x++;
+    213                  ddF_x += 2;
+    214                  f     += ddF_x;
+    215                  if (cornername & 0x4) {
+    216                      GFX_drawPixel(x0 + x, y0 + y, color);
+    217                      GFX_drawPixel(x0 + y, y0 + x, color);
+    218                  }
+    219                  if (cornername & 0x2) {
+    220                      GFX_drawPixel(x0 + x, y0 - y, color);
+    221                      GFX_drawPixel(x0 + y, y0 - x, color);
+    222                  }
+    223                  if (cornername & 0x8) {
+    224                      GFX_drawPixel(x0 - y, y0 + x, color);
+    225                      GFX_drawPixel(x0 - x, y0 + y, color);
+    226                  }
+    227                  if (cornername & 0x1) {
+    228                      GFX_drawPixel(x0 - y, y0 - x, color);
+    229                      GFX_drawPixel(x0 - x, y0 - y, color);
+    230                  }
+    231              }
+    232          }
+    233          
+    234          
+    235          /*******************************************************************************
+    236          * Description : Draws a vertical line
+    237          * Input       : uint8_t x: top left x coordinate
+    238          * 				uint8_t y: top left y coordinate
+    239          * 				uint8_t h: height in pixels
+    240          * 				EPD_grayscale color: four level grayscale color
+    241          * Return      :
+    242          *******************************************************************************/
+    243          static void drawFastVLine(int16_t x, int16_t y, int16_t h, EPD_grayscale color) {
+    244              writeLine(x, y, x, y+h-1, color);
+    245          }
+    246          
+    247          /*******************************************************************************
+    248          * Description : Draws a horizontal line
+    249          * Input       : uint8_t x: top left x coordinate
+    250          * 				uint8_t y: top left y coordinate
+    251          * 				uint8_t w: width in pixels
+    252          * 				EPD_grayscale color: four level grayscale color
+    253          * Return      :
+    254          *******************************************************************************/
+    255          static void drawFastHLine(int16_t x, int16_t y, int16_t w, EPD_grayscale color){
+    256              writeLine(x, y, x+w-1, y, color);
+    257          }
+    258          
+    259          /*******************************************************************************
+    260          * Description : Draws a line according to Bresenham's algorithm
+    261          * Input       : int16_t x0: top left x coordinate
+    262          * 				int16_t y0: top left y coordinate
+    263          * 				int16_t x1: end point x coordinate
+    264          * 				int16_t y1: end point y coordinate
+    265          * 				EPD_grayscale color: four level grayscale color
+    266          * Return      :
+    267          *******************************************************************************/
+    268          static void writeLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, EPD_grayscale color) {
+    269              int16_t steep = abs(y1 - y0) > abs(x1 - x0);
+    270              if (steep) {
+    271                  _swap_int16_t(x0, y0);
+    272                  _swap_int16_t(x1, y1);
+    273              }
+    274              if (x0 > x1) {
+    275                  _swap_int16_t(x0, x1);
+    276                  _swap_int16_t(y0, y1);
+    277              }
+    278              int16_t dx, dy;
+    279              dx = x1 - x0;
+    280              dy = abs(y1 - y0);
+    281          
+    282              int16_t err = dx / 2;
+    283              int16_t ystep;
+    284          
+    285              if (y0 < y1) {
+    286                  ystep = 1;
+    287              } else {
+    288                  ystep = -1;
+    289              }
+    290          
+    291              for (; x0<=x1; x0++) {
+    292                  if (steep) {
+    293                  	GFX_drawPixel(y0, x0, color);
+    294                  } else {
+    295                  	GFX_drawPixel(x0, y0, color);
+    296                  }
+    297                  err -= dy;
+    298                  if (err < 0) {
+    299                      y0 += ystep;
+    300                      err += dx;
+    301                  }
+    302              }
+    303          }
+    304          
+    305          /*******************************************************************************
+    306          * Description : Fills entire memory buffer with a selected color
+    307          * Input       :
+    308          * Return      :
+    309          *******************************************************************************/
+    310          void GFX_FillBuffer(EPD_grayscale color) {
+    311              memset((uint8_t*)&spiInk_ImgBuf.buffer[0], color, EPD_BUFFERSIZE);
+    312          }
+    313          
+    314          
+    315          void setCursor(uint8_t x, uint8_t y){
+    316          	if(x>=EPD_WIDTH || y>=EPD_HEIGHT) return;
+    317          	GFX_TextDriver.x_pos = x; GFX_TextDriver.y_pos = y;
+    318          }
+    319          
+    320          void setFont(EPD_textsize size){
+    321          	GFX_TextDriver.fontselect = (size==smallfont)? &Font9pt7b : &Font16pt12b;
+    322          }
+    323          
+    324          /*******************************************************************************
+    325          * Description : draws string characters into the memory buffer
+    326          * Input       : 
+    327          * Return      :
+    328          *******************************************************************************/
+    329          void GFX_Print(uint8_t * str, uint8_t size, GFX_TextAlignment alignment, EPD_grayscale bg, EPD_grayscale fg){
+    330          	int16_t w,h;
+    331          	uint8_t c;
+    332          	h= *(const uint8_t*) &GFX_TextDriver.fontselect->height;
+    333          
+    334          	if(size==0 || h+GFX_TextDriver.y_pos > EPD_HEIGHT)	return;
+    335          
+    336          	w= *(const uint8_t*) &GFX_TextDriver.fontselect->width;
+    337          	//make sure cursor can accomodate spacing.
+    338          	if(alignment == centeralign && GFX_TextDriver.x_pos>=(size*w)/2){
+    339          		GFX_TextDriver.x_pos -= (size*w)/2;
+    340          	}
+    341          	if((w*size)+GFX_TextDriver.x_pos > EPD_WIDTH) return;
+    342          
+    343          	while(size--){
+    344          		c = *(str++);
+    345          		if(c=='\n' || c=='\r') continue;
+    346          		c = (c>= 0x61 && c<=0x7A)? c-0x20:c;	//Remove if lower case graphics are included
+    347          		if(c >= *(const uint8_t*)&GFX_TextDriver.fontselect->first &&
+    348          			c<=*(const uint8_t*) &GFX_TextDriver.fontselect->last){
+    349          			GFX_drawChar(GFX_TextDriver.x_pos, GFX_TextDriver.y_pos, c, bg, fg);
+    350          			GFX_TextDriver.x_pos+= (uint8_t) w;//*(const uint8_t*) &GFX_TextDriver.fontselect->xAdvance;
+    351          		}
+    352          	}
+    353          }
+    354          
+    355          /*******************************************************************************
+    356          * Description : Draws a single character
+    357          * Input       : uint8_t x: top left x coordinate
+    358          				uint8_t y: top left y coordinate
+    359          				unsigned char c: character to be printed
+    360          				EPD_grayscale bg: background color
+    361          				EPD_grayscale fg: foreground color
+    362          * Return      :
+    363          *******************************************************************************/
+    364          void GFX_drawChar(uint8_t x, uint8_t y, unsigned char c, EPD_grayscale bg, EPD_grayscale fg){
+    365          	uint16_t bo; uint16_t pixelcount;
+    366          	uint8_t w, i;
+    367          	uint8_t xx , bit=0;
+    368          	uint8_t val;
+    369          	const uint8_t * ptr;
+    370          	uint8_t color;
+    371          
+    372          	c -= *(const uint8_t*) &GFX_TextDriver.fontselect->first;
+    373          	bo = c * (*(const uint16_t*) &GFX_TextDriver.fontselect->bitmapOffset);
+    374              w = x+(*(const uint8_t*) &GFX_TextDriver.fontselect->width);
+    375              pixelcount = *(const uint16_t*) &GFX_TextDriver.fontselect->numofpixels;
+    376              ptr = (GFX_TextDriver.fontselect->bitmap)+bo;
+    377              val = *ptr;
+    378              xx=x;
+    379              for(i=0;i<pixelcount;i++){
+    380              	if(bit==8){
+    381              		val = *(++ptr);
+    382              		bit=0;
+    383              	}
+    384              	color = ((val>>bit)&0x01)? fg:bg;
+    385             		GFX_drawPixel(xx++, y, color);
+    386             		if(xx>=w){ xx=x; y++;}
+    387             		bit++;
+    388              }
+    389          }
+    390          
+    391          /*******************************************************************************
+    392          * Description : Draws a circle
+    393          * Input       : int16_t x0: center x coordinate
+    394          				int16_t y0: center y coordinate
+    395          				int16_t r: radius of circle
+    396          				EPD_grayscale color: color of line
+    397          * Return      :
+    398          *******************************************************************************/
+    399          void drawCircle(int16_t x0, int16_t y0, int16_t r, EPD_grayscale color) {
+    400              int16_t f = 1 - r;
+    401              int16_t ddF_x = 1;
+    402              int16_t ddF_y = -2 * r;
+    403              int16_t x = 0;
+    404              int16_t y = r;
+    405          
+    406              GFX_drawPixel(x0  , y0+r, color);
+    407              GFX_drawPixel(x0  , y0-r, color);
+    408              GFX_drawPixel(x0+r, y0  , color);
+    409              GFX_drawPixel(x0-r, y0  , color);
+    410          
+    411              while (x<y) {
+    412                  if (f >= 0) {
+    413                      y--;
+    414                      ddF_y += 2;
+    415                      f += ddF_y;
+    416                  }
+    417                  x++;
+    418                  ddF_x += 2;
+    419                  f += ddF_x;
+    420          
+    421                  GFX_drawPixel(x0 + x, y0 + y, color);
+    422                  GFX_drawPixel(x0 - x, y0 + y, color);
+    423                  GFX_drawPixel(x0 + x, y0 - y, color);
+    424                  GFX_drawPixel(x0 - x, y0 - y, color);
+    425                  GFX_drawPixel(x0 + y, y0 + x, color);
+    426                  GFX_drawPixel(x0 - y, y0 + x, color);
+    427                  GFX_drawPixel(x0 + y, y0 - x, color);
+    428                  GFX_drawPixel(x0 - y, y0 - x, color);
+    429              }
+    430          }
+    431          
+    432          /*******************************************************************************
+    433          * Description : Draws a circle
+    434          * Input       : int16_t x0: center x coordinate
+    435          				int16_t y0: center y coordinate
+    436          				int16_t r: radius of circle
+    437          				EPD_grayscale color: color of circle
+    438          * Return      :
+    439          *******************************************************************************/
+    440          void fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) {
+    441              drawFastVLine(x0, y0-r, 2*r+1, color);
+    442              fillCircleHelper(x0, y0, r, 3, 0, color);
+    443          }
+    444          
+    445          /*******************************************************************************
+    446          * Description : Fills a rectangle with one color
+    447          * Input       : int16_t x: Top left corner x coordinate
+    448          				int16_t y: Top left corner y coordinate
+    449          				int16_t w: width of rectangle
+    450          				int16_t h: height of rectangle
+    451          				EPD_grayscale color: color for rectangle
+    452          * Return      :
+    453          *******************************************************************************/
+    454          void drawRect(int16_t x, int16_t y, int16_t w, int16_t h, EPD_grayscale color) {
+    455              drawFastHLine(x, y, w, color);
+    456              drawFastHLine(x, y+h-1, w, color);
+    457              drawFastVLine(x, y, h, color);
+    458              drawFastVLine(x+w-1, y, h, color);
+    459          }
+    460          
+    461          /*******************************************************************************
+    462          * Description : Fills a rectangle with one color
+    463          * Input       : int16_t x: Top left corner x coordinate
+    464          				int16_t y: Top left corner y coordinate
+    465          				int16_t w: width of rectangle
+    466          				int16_t h: height of rectangle
+    467          				EPD_grayscale color: color for rectangle
+    468          * Return      :
+    469          *******************************************************************************/
+    470          void fillRect(int16_t x, int16_t y, int16_t w, int16_t h, EPD_grayscale color) {
+    471              for (int16_t i=x; i<x+w; i++) {
+    472                  drawFastVLine(i, y, h, color);
+    473              }
+    474          }
+    475          
+    476          /*******************************************************************************
+    477          * Description : Fills a rectangle with one color
+    478          * Input       : int16_t x: Top left corner x coordinate
+    479          				int16_t y: Top left corner y coordinate
+    480          				int16_t w: width of rectangle
+    481          				int16_t h: height of rectangle
+    482          				int16_t r: radius of corner rounding
+    483          				EPD_grayscale color: color for rectangle
+    484          * Return      :
+    485          *******************************************************************************/
+    486          
+    487          void drawRoundRect(int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, EPD_grayscale color) {
+    488              int16_t max_radius = ((w < h) ? w : h) / 2; // 1/2 minor axis
+    489              if(r > max_radius) r = max_radius;
+    490              // smarter version
+    491              drawFastHLine(x+r  , y    , w-2*r, color); // Top
+    492              drawFastHLine(x+r  , y+h-1, w-2*r, color); // Bottom
+    493              drawFastVLine(x    , y+r  , h-2*r, color); // Left
+    494              drawFastVLine(x+w-1, y+r  , h-2*r, color); // Right
+    495              // draw four corners
+    496              drawCircleHelper(x+r    , y+r    , r, 1, color);
+    497              drawCircleHelper(x+w-r-1, y+r    , r, 2, color);
+    498              drawCircleHelper(x+w-r-1, y+h-r-1, r, 4, color);
+    499              drawCircleHelper(x+r    , y+h-r-1, r, 8, color);
+    500          }
+    501          
+    502          void fillRoundRect(int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, EPD_grayscale color) {
+    503              int16_t max_radius = ((w < h) ? w : h) / 2; // 1/2 minor axis
+    504              if(r > max_radius) r = max_radius;
+    505              // smarter version
+    506              fillRect(x+r, y, w-2*r, h, color);
+    507              // draw four corners
+    508              fillCircleHelper(x+w-r-1, y+r, r, 1, h-2*r-1, color);
+    509              fillCircleHelper(x+r    , y+r, r, 2, h-2*r-1, color);
+    510          }
+    511          
+    512          /************************END OF FILE*******************************************/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       40  GFX_DrawBitMap
+             40 -> GFX_drawPixel
+             40 -> getPixel
+       32  GFX_DrawBitMap8Bit
+             32 -> GFX_drawPixel
+             32 -> getPixel8bit
+        8  GFX_FillBuffer
+              8 -> memset
+       40  GFX_Print
+             40 -> GFX_drawChar
+       48  GFX_drawChar
+             48 -> GFX_drawPixel
+       16  GFX_drawPixel
+       40  drawCircle
+             40 -> GFX_drawPixel
+       48  drawCircleHelper
+             48 -> GFX_drawPixel
+       24  drawFastHLine
+             24 -> writeLine
+       24  drawFastVLine
+             24 -> writeLine
+       24  drawRect
+             24 -> drawFastHLine
+             24 -> drawFastVLine
+       40  drawRoundRect
+             40 -> drawCircleHelper
+             40 -> drawFastHLine
+             40 -> drawFastVLine
+       32  fillCircle
+             32 -> drawFastVLine
+             32 -> fillCircleHelper
+       56  fillCircleHelper
+             56 -> drawFastVLine
+       32  fillRect
+             32 -> drawFastVLine
+       40  fillRoundRect
+             40 -> fillCircleHelper
+             40 -> fillRect
+        0  getPixel
+        0  getPixel8bit
+       16  memset
+             16 -> __aeabi_memset
+        0  setCursor
+        0  setFont
+       40  writeLine
+             40 -> GFX_drawPixel
+             40 -> abs
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable5
+       4  ??DataTable5_1
+       4  ??DataTable5_2
+       4  ??DataTable5_3
+       4  ??DataTable5_4
+     134  GFX_DrawBitMap
+     110  GFX_DrawBitMap8Bit
+      20  GFX_FillBuffer
+     274  GFX_Print
+       8  GFX_TextDriver
+     202  GFX_drawChar
+     188  GFX_drawPixel
+     330  drawCircle
+     282  drawCircleHelper
+      38  drawFastHLine
+      38  drawFastVLine
+     104  drawRect
+     328  drawRoundRect
+      66  fillCircle
+     314  fillCircleHelper
+      60  fillRect
+     182  fillRoundRect
+      42  getPixel
+      48  getPixel8bit
+      22  memset
+      24  setCursor
+      18  setFont
+     246  writeLine
+
+ 
+     8 bytes in section .data
+ 3 090 bytes in section .text
+ 
+ 3 068 bytes of CODE memory (+ 22 bytes shared)
+     8 bytes of DATA memory
+
+Errors: none
+Warnings: 15

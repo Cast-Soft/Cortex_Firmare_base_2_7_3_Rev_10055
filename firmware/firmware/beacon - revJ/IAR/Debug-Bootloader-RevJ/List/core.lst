@@ -1,0 +1,371 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     26/Oct/2019  13:14:13 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\c #
+#                    ore.c                                                    #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\c #
+#                    ore.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER -D          #
+#                    STM32F10X_CL -D COOS -D USE_MY_ASSERT -D _DEBUG -D       #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D BC_HW_REVJ   #
+#                    -lcN "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source  #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\core.lst             #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\core.o                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\core.c
+      1           /**
+      2           *******************************************************************************
+      3           * @file       core.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      Core implementation code of CooCox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          /*---------------------------- Include ---------------------------------------*/
+     17          #include <coocox.h>
+     18          
+     19          /*---------------------------- Variable Define -------------------------------*/
+     20          volatile U8     OSIntNesting  = 0;         /*!< Use to indicate interrupt nesting level*/
+     21          volatile U8     OSSchedLock   = 0;         /*!< Task Switch lock.                      */
+     22          volatile BOOL   TaskSchedReq  = Co_FALSE;
+     23          
+     24          
+     25          /**
+     26           *******************************************************************************
+     27           * @brief      Enter a ISR.
+     28           * @param[in]  None
+     29           * @param[out] None
+     30           * @retval     None
+     31           *
+     32           * @par Description
+     33           * @details    This function is called to notify OS when enter to an ISR.
+     34           *
+     35           * @note       When you call API in ISR,you must call CoEnterISR() before your
+     36           *             interrupt handler code,and call CoExitISR() after your handler
+     37           *             code and before exiting from ISR.
+     38           *******************************************************************************
+     39           */
+     40          void CoEnterISR(void)
+     41          {
+     42              Inc8(&OSIntNesting);                /* OSIntNesting increment             */
+     43          }
+     44          
+     45          
+     46          /**
+     47           *******************************************************************************
+     48           * @brief      Exit a ISR.
+     49           * @param[in]  None
+     50           * @param[out] None
+     51           * @retval     None
+     52           *
+     53           * @par Description
+     54           * @details    This function is called when exit from a ISR.
+     55           *
+     56           * @note
+     57           *******************************************************************************
+     58           */
+     59          void CoExitISR(void)
+     60          {
+     61              Dec8(&OSIntNesting);                /* OSIntNesting decrease              */
+     62              if( OSIntNesting == 0)              /* Is OSIntNesting == 0?              */
+     63              {
+     64                  if(TaskSchedReq == Co_TRUE)
+     65                  {
+     66          			OSSchedLock++;
+     67                      Schedule();                 /* Call task schedule                 */
+     68          			OSSchedLock--;
+     69                  }
+     70              }
+     71          }
+     72          
+     73          
+     74          /**
+     75           *******************************************************************************
+     76           * @brief      Unlock schedule
+     77           * @param[in]  None
+     78           * @param[out] None
+     79           * @retval     None
+     80           *
+     81           * @par Description
+     82           * @details   This function is called to unlock schedule(i.e.enable schedule again)
+     83           *
+     84           * @note
+     85           *******************************************************************************
+     86           */
+     87          void OsSchedUnlock(void)
+     88          {
+     89              if(OSSchedLock == 1)                /* Is OSSchedLock == 0?               */
+     90              {
+     91          #if CFG_TASK_WAITTING_EN > 0
+     92                  if(IsrReq == Co_TRUE)
+     93                  {
+     94                      RespondSRQ();               /* Respond service request            */
+     95                  }
+     96          #endif
+     97                  /* Judge task state change or higher PRI task coming in               */
+     98                  if(TaskSchedReq == Co_TRUE)
+     99                  {
+    100                      Schedule();                 /* Call task schedule                 */
+    101                  }
+    102          		OSSchedLock = 0;
+    103              }
+    104          	else
+    105          	{
+    106          		OSSchedLock--;
+    107          	}
+    108          }
+    109          
+    110          
+    111          /**
+    112           *******************************************************************************
+    113           * @brief      Lock schedule
+    114           * @param[in]  None
+    115           * @param[out] None
+    116           * @retval     None
+    117           *
+    118           * @par Description
+    119           * @details    This function is called in application code to lock schedule.
+    120           *
+    121           * @note
+    122           *******************************************************************************
+    123           */
+    124          void CoSchedLock(void)
+    125          {
+    126              OsSchedLock();                      /* Lock schedule                      */
+    127          }
+    128          
+    129          
+    130          /**
+    131           *******************************************************************************
+    132           * @brief      Unlock schedule
+    133           * @param[in]  None
+    134           * @param[out] None
+    135           * @retval     None
+    136           *
+    137           * @par Description
+    138           * @details    This function is called in APP to unlock schedule.
+    139           *
+    140           * @note
+    141           *******************************************************************************
+    142           */
+    143          void CoSchedUnlock(void)
+    144          {
+    145              OsSchedUnlock();                    /* Unlock schedule                    */
+    146          }
+    147          
+    148          
+    149          /**
+    150           *******************************************************************************
+    151           * @brief      Initialize OS
+    152           * @param[in]  None
+    153           * @param[out] None
+    154           * @retval     None
+    155           *
+    156           * @par Description
+    157           * @details   This function is called to initialize OS.
+    158           *
+    159           * @note      You must call this function first,before any other OS API function
+    160           *
+    161           * @code      There is a example for useage of this function,as follows:
+    162           *        e.g.
+    163           *            ...                   // Your target initial code.
+    164           *
+    165           *            OsInit();             // Initial OS.
+    166           *            CreateTask(...);      // Create tasks.
+    167           *            ...
+    168           *            OsStart();            // Start multitask.
+    169           * @endcode
+    170           *******************************************************************************
+    171           */
+    172          void CoInitOS(void)
+    173          {
+    174              InitSysTick();                /* Initialize system tick.                  */
+    175              InitInt();                    /* Initialize PendSV,SVC,SysTick interrupt  */
+    176              CreateTCBList();              /* Create TCB list.                         */
+    177          #if CFG_EVENT_EN > 0
+    178              CreateEventList();            /* Create event control list.               */
+    179          #endif
+    180          #if CFG_KHEAP_EN > 0
+    181              CoCreateKheap();              /* Create kernel heap within user define    */
+    182          #endif
+    183              OsSchedLock();                /* Lock Schedule                            */
+    184                                            /* Create first task -- IDLE task.          */
+    185              CoCreateTask(                      CoIdleTask,
+    186                                                       Co_NULL,
+    187                                            CFG_LOWEST_PRIO,
+    188                           &idle_stk[CFG_IDLE_STACK_SIZE-1],
+    189                                        CFG_IDLE_STACK_SIZE
+    190                           );
+    191          				                  /* Set PSP for CoIdleTask coming in */
+    192          	SetEnvironment(&idle_stk[CFG_IDLE_STACK_SIZE-1]);
+    193          }
+    194          
+    195          
+    196          /**
+    197           *******************************************************************************
+    198           * @brief      Start multitask
+    199           * @param[in]  None
+    200           * @param[out] None
+    201           * @retval     None
+    202           *
+    203           * @par Description
+    204           * @details    This function is called to start multitask.After it is called,
+    205           *             OS start schedule task by priority or/and time slice.
+    206           * @note       This function must be called to start OS when you use CoOS,and must
+    207           *             call after CoOsInit().
+    208           *******************************************************************************
+    209           */
+    210          void CoStartOS(void)
+    211          {
+    212              TCBRunning  = &TCBTbl[0];           /* Get running task                     */
+    213              TCBNext     = TCBRunning;           /* Set next scheduled task as running task */
+    214              TCBRunning->state = TASK_RUNNING;   /* Set running task status to RUNNING   */
+    215              RemoveFromTCBRdyList(TCBRunning);   /* Remove running task from READY list  */
+    216              OsSchedUnlock();					/* Enable Schedule,call task schedule   */
+    217          }
+    218          
+    219          
+    220          /**
+    221           *******************************************************************************
+    222           * @brief      Get OS version
+    223           * @param[in]  None
+    224           * @param[out] None
+    225           * @retval     The value is version of OS mutipled by 100.
+    226           *
+    227           * @par Description
+    228           * @details    This function is used to return the version number of CooCox OS.
+    229           *             the return value corresponds to CooCox's version number multiplied
+    230           *             by 100. In other words, version 1.02 would be returned as 102.
+    231           *******************************************************************************
+    232           */
+    233          OS_VER CoGetOSVersion(void)
+    234          {
+    235              return OS_VERSION;                  /* Get CooCox CoOS version            */
+    236          }
+    237          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        8  CoEnterISR
+             8 -> Inc8
+        8  CoExitISR
+             8 -> Dec8
+             8 -> Schedule
+        0  CoGetOSVersion
+        8  CoInitOS
+             8 -> CoCreateKheap
+             8 -> CreateEventList
+             8 -> CreateTCBList
+             8 -> CreateTask
+             8 -> SetEnvironment
+        0  CoSchedLock
+        8  CoSchedUnlock
+             8 -> OsSchedUnlock
+        8  CoStartOS
+             8 -> OsSchedUnlock
+             8 -> RemoveFromTCBRdyList
+        8  OsSchedUnlock
+             8 -> RespondSRQ
+             8 -> Schedule
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable5
+       4  ??DataTable5_1
+       4  ??DataTable5_10
+       4  ??DataTable5_11
+       4  ??DataTable5_12
+       4  ??DataTable5_13
+       4  ??DataTable5_2
+       4  ??DataTable5_3
+       4  ??DataTable5_4
+       4  ??DataTable5_5
+       4  ??DataTable5_6
+       4  ??DataTable5_7
+       4  ??DataTable5_8
+       4  ??DataTable5_9
+      10  CoEnterISR
+      50  CoExitISR
+       6  CoGetOSVersion
+      86  CoInitOS
+      12  CoSchedLock
+       8  CoSchedUnlock
+      38  CoStartOS
+       1  OSIntNesting
+       1  OSSchedLock
+      54  OsSchedUnlock
+       1  TaskSchedReq
+
+ 
+   3 bytes in section .bss
+ 320 bytes in section .text
+ 
+ 320 bytes of CODE memory
+   3 bytes of DATA memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,151 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Menu Buttons/Control_active.png</file>
+        <file>Menu Buttons/Control_hover.png</file>
+        <file>Menu Buttons/Control_inactive.png</file>
+        <file>Logos/Background.jpg</file>
+        <file>Textures/Black_Texture.jpg</file>
+        <file>Icons/Close_Folder_Off.png</file>
+        <file>Icons/Close_Folder_On.png</file>
+        <file>Icons/Creat_Folder_Off.png</file>
+        <file>Icons/Creat_Folder_On.png</file>
+        <file>Icons/double_Floppy_Off.png</file>
+        <file>Icons/double_Floppy_On.png</file>
+        <file>Icons/Folder_Off.png</file>
+        <file>Icons/Folder_On.png</file>
+        <file>Icons/single_Floppy_Off.png</file>
+        <file>Icons/single_Floppy_On.png</file>
+        <file>Icons/Update_File2_Off.png</file>
+        <file>Icons/Update_File2_On.png</file>
+        <file>Icons/Close_Folder_Off_disable.png</file>
+        <file>Icons/Creat_Folder_Off_disable.png</file>
+        <file>Icons/double_Floppy_Off_disable.png</file>
+        <file>Icons/Folder_Off_disable.png</file>
+        <file>Icons/single_Floppy_Off_disable.png</file>
+        <file>Icons/Update_File2_Off_disable.png</file>
+        <file>Widgets/checked_checkbox.png</file>
+        <file>Widgets/checked_checkbox_disabled.png</file>
+        <file>Widgets/checked_checkbox_hover.png</file>
+        <file>Widgets/unchecked_checkbox.png</file>
+        <file>Widgets/unchecked_checkbox_disabled.png</file>
+        <file>Widgets/unchecked_checkbox_hover.png</file>
+        <file>Icons/triangle_down.png</file>
+        <file>Icons/triangle_down_w.png</file>
+        <file>Icons/triangle_left.png</file>
+        <file>Icons/triangle_left_w.png</file>
+        <file>Icons/triangle_right.png</file>
+        <file>Icons/triangle_right_w.png</file>
+        <file>Icons/triangle_up.png</file>
+        <file>Icons/triangle_up_w.png</file>
+        <file>Icons/project_close.png</file>
+        <file>Icons/project_new.png</file>
+        <file>Icons/project_open.png</file>
+        <file>Icons/project_save.png</file>
+        <file>Icons/project_saveas.png</file>
+        <file>Icons/project_update.png</file>
+        <file>Icons/maximize.png</file>
+        <file>Icons/minimize.png</file>
+        <file>Battery/battery0.png</file>
+        <file>Battery/battery1.png</file>
+        <file>Battery/battery2.png</file>
+        <file>Battery/battery3.png</file>
+        <file>Battery/battery4.png</file>
+        <file>Battery/battery5.png</file>
+        <file>no_beacon.png</file>
+        <file>Trackable_no_info.png</file>
+        <file>Icons/arrow_down.png</file>
+        <file>Icons/arrow_left.png</file>
+        <file>Icons/arrow_right.png</file>
+        <file>Icons/arrow_up.png</file>
+        <file>Icons/Assign.png</file>
+        <file>Icons/blacktrax.png</file>
+        <file>Icons/Calibration.png</file>
+        <file>Icons/cancel.png</file>
+        <file>Icons/Connected.png</file>
+        <file>Icons/Costume.png</file>
+        <file>Icons/Current.png</file>
+        <file>Icons/delete.png</file>
+        <file>Icons/Disconnected.png</file>
+        <file>Icons/duplicate.png</file>
+        <file>Icons/Library.png</file>
+        <file>Icons/Loading.png</file>
+        <file>Icons/Lock Beam.png</file>
+        <file>Icons/minus.png</file>
+        <file>Icons/Network.png</file>
+        <file>Icons/ok.png</file>
+        <file>Icons/plus.png</file>
+        <file>Icons/project.png</file>
+        <file>Icons/Relationships.png</file>
+        <file>Icons/Reload.png</file>
+        <file>Icons/status.png</file>
+        <file>Icons/Unassign.png</file>
+        <file>Icons/Unlock Beam.png</file>
+        <file>Icons/unlock-beam.png</file>
+        <file>Icons/Update.png</file>
+        <file>Logos/BlackTrax_big_logo.png</file>
+        <file>Logos/BlackTrax_header_logo.png</file>
+        <file>Menu Buttons/Beacon_active.png</file>
+        <file>Menu Buttons/Beacon_hover.png</file>
+        <file>Menu Buttons/Beacon_inactive.png</file>
+        <file>Menu Buttons/Chapters_active.png</file>
+        <file>Menu Buttons/Chapters_hover.png</file>
+        <file>Menu Buttons/Chapters_inactive.png</file>
+        <file>Menu Buttons/Fixture_active.png</file>
+        <file>Menu Buttons/Fixture_hover.png</file>
+        <file>Menu Buttons/Fixture_hover2.png</file>
+        <file>Menu Buttons/Fixture_inactive.png</file>
+        <file>Menu Buttons/Project_active.png</file>
+        <file>Menu Buttons/Project_hover.png</file>
+        <file>Menu Buttons/Project_inactive.png</file>
+        <file>Menu Buttons/Status_active.png</file>
+        <file>Menu Buttons/Status_hover.png</file>
+        <file>Menu Buttons/Status_inactive.png</file>
+        <file>Menu Buttons/System_active.png</file>
+        <file>Menu Buttons/System_hover.png</file>
+        <file>Menu Buttons/System_inactive.png</file>
+        <file>Menu Buttons/Trackables_active.png</file>
+        <file>Menu Buttons/Trackables_hover.png</file>
+        <file>Menu Buttons/Trackables_inactive.png</file>
+        <file>Textures/Grid.png</file>
+        <file>Textures/outer_texture.png</file>
+        <file>Textures/header_background.png</file>
+        <file>Icons/show_mode.png</file>
+        <file>Icons/tracking_state.png</file>
+        <file>Icons/undo.png</file>
+        <file>Icons/unknown_beacon.png</file>
+        <file>Icons/log_msg_error.png</file>
+        <file>Icons/log_msg_warning.png</file>
+        <file>Icons/arnet_dmx_out.gif</file>
+        <file>Icons/artnet_dmx_in.gif</file>
+        <file>Icons/motion_in.gif</file>
+        <file>Icons/log_msg_info.png</file>
+        <file>Icons/linked.png</file>
+        <file>Icons/unlink.png</file>
+        <file>Icons/led.png</file>
+        <file>Styling/stylesheet.css</file>
+        <file>Styling/minimum.css</file>
+        <file>Icons/properties_led.png</file>
+        <file>Icons/properties_beam.png</file>
+        <file>Icons/led_1.png</file>
+        <file>Icons/led_2.png</file>
+        <file>Icons/led_3.png</file>
+        <file>Icons/iris.png</file>
+        <file>Icons/zoom.png</file>
+        <file>Icons/properties.png</file>
+        <file>Icons/chapters_tab.png</file>
+        <file>Icons/project_info_tab.png</file>
+        <file>Icons/properties_tab.png</file>
+        <file>Icons/assigned.png</file>
+        <file>Icons/unknown_fixture.png</file>
+        <file>Icons/unknown_trackable.png</file>
+        <file>Icons/no.png</file>
+        <file>Icons/yes.png</file>
+        <file>Icons/chapter_control_console.png</file>
+        <file>Icons/chapter_control_manual.png</file>
+        <file>Icons/verify_changes.png</file>
+        <file>Icons/apply_changes.png</file>
+        <file>Icons/editing_space_changed.gif</file>
+        <file>Icons/tracking_state_stop.png</file>
+        <file>Icons/apply_change.png</file>
+    </qresource>
+</RCC>

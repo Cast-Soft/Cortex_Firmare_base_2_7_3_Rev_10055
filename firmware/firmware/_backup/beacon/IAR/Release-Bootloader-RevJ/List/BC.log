@@ -1,0 +1,1906 @@
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\arch.o.
+              reference :  DlyList
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  TaskSchedReq
+              reference :  isr_TimeDispose
+              definition:  InitTaskContext
+              definition:  OSTickCnt
+              definition:  SysTick_Handler
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\base64.o.
+              reference :  __iar_Strchr
+              definition:  _LocaleC_isspace
+              definition:  b64_ntop
+              definition:  b64_pton
+              definition:  isspace
+              definition:  strchr
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\basic_rf.o.
+              reference :  CoAcceptSem
+              reference :  CoAcceptSingleFlag
+              reference :  CoClearFlag
+              reference :  CoCreateFlag
+              reference :  CoCreateMutex
+              reference :  CoCreateSem
+              reference :  CoEnterMutexSection
+              reference :  CoLeaveMutexSection
+              reference :  CoPostSem
+              reference :  CoWaitForSingleFlag
+              reference :  HwGPOHigh
+              reference :  HwGPOLow
+              reference :  HwIMUEXTIInit
+              reference :  HwRadioEXTIInit
+              reference :  HwSPISSAssert
+              reference :  HwWait
+              reference :  IMUPresent
+              reference :  IMU_ReadOneByte
+              reference :  IMU_SelectBank
+              reference :  IMU_WriteOneByte
+              reference :  RadioGetRandom
+              reference :  SPI_I2S_ITConfig
+              reference :  SPI_I2S_SendData
+              reference :  Send_SPI_2byte
+              reference :  Send_SPI_byte
+              reference :  TIM_GetCounter
+              reference :  TK_BK_MEMRD8
+              reference :  TK_BK_MEMWR16
+              reference :  TK_BK_MEMWR8
+              reference :  TK_BK_REGRD8
+              reference :  TK_BK_REGWR8
+              reference :  TRACE
+              reference :  __aeabi_memcpy
+              reference :  config
+              reference :  flagIMUNewData
+              reference :  func
+              reference :  line
+              reference :  random
+              reference :  sec
+              reference :  secs
+              reference :  semAllow
+              reference :  semRFRxFrames
+              reference :  txTimeSlot
+              definition:  Enable_Osc
+              definition:  IMUInit
+              definition:  IMUProcess
+              definition:  IMU_RawData
+              definition:  IMU_TXBuffer
+              definition:  Load_2520_Defaults
+              definition:  ProcessRXError
+              definition:  RF_SPI_CCA_CMD_STATE
+              definition:  RF_SPI_INIT_STATE
+              definition:  RF_SPI_RX1_UPLOADCMD_STATE
+              definition:  RF_SPI_RX2_DOWNLOAD_HEADER_STATE
+              definition:  RF_SPI_RX3_DOWNLOAD_BODY_STATE
+              definition:  RF_SPI_STXONCCA_CMD_STATE
+              definition:  RF_SPI_UPLOAD_ONLY_STATE
+              definition:  RadioGetFLevel
+              definition:  RadioIMU_ReleaseSPI
+              definition:  RadioIMU_WaitGrabSPI
+              definition:  RadioInit
+              definition:  RadioPrint2520Registers
+              definition:  RadioRxPkt
+              definition:  RadioSTXONBugFlush
+              definition:  RadioSetPanIdShortAddr
+              definition:  RadioSetRFChan
+              definition:  RadioSetRFLevel
+              definition:  RadioTxPkt
+              definition:  TxAmpValues
+              definition:  cc2520_flags0
+              definition:  cc2520_flags1
+              definition:  cc2520_flags2
+              definition:  flagRadioTxAllow
+              definition:  flagRadioTxDone
+              definition:  flagRadioTxDoneUser
+              definition:  flagSPIIODone
+              definition:  flagSPIMachineDone
+              definition:  memcpy
+              definition:  pSpiRxBuf
+              definition:  pSpiRxBuf_IMU
+              definition:  pSpiTxBuf
+              definition:  pSpiTxBuf_IMU
+              definition:  radio_off
+              definition:  readCCA
+              definition:  rxCount
+              definition:  rxDoneType
+              definition:  rxErrors
+              definition:  rxFIFOError
+              definition:  rxPkt
+              definition:  scratchBuf
+              definition:  sem
+              definition:  semAllowPost
+              definition:  semIMUAllow
+              definition:  spiIMUByteState
+              definition:  spiIMUCount
+              definition:  spiTxRxByteCount
+              definition:  spiTxRxByteState
+              definition:  txDoneType
+              definition:  txError
+              definition:  txErrors
+              definition:  txFIFOError
+              definition:  txLine
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\config.o.
+              reference :  I2C_EE_BufferRead
+              reference :  I2C_EE_BufferWrite
+              reference :  __aeabi_memcpy
+              reference :  memcmp
+              definition:  CopyConfigToExConfig
+              definition:  CopyExConfigToConfig
+              definition:  LoadConfig
+              definition:  SaveConfig
+              definition:  backup_config
+              definition:  memcpy
+              definition:  offsetDelta
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\console_tail.o.
+              reference :  __aeabi_memcpy
+              reference :  memcmp
+              reference :  sprintf
+              reference :  sscanf
+              reference :  strlen
+              definition:  ConsoleChecksum
+              definition:  ValidateCommandLine
+              definition:  memcpy
+              definition:  strrev
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\core.o.
+              reference :  CoCreateKheap
+              reference :  CoIdleTask
+              reference :  CreateEventList
+              reference :  CreateTCBList
+              reference :  CreateTask
+              reference :  Dec8
+              reference :  Inc8
+              reference :  IsrReq
+              reference :  RemoveFromTCBRdyList
+              reference :  RespondSRQ
+              reference :  Schedule
+              reference :  SetEnvironment
+              reference :  TCBNext
+              reference :  TCBRunning
+              reference :  TCBTbl
+              reference :  idle_stk
+              definition:  CoEnterISR
+              definition:  CoExitISR
+              definition:  CoGetOSVersion
+              definition:  CoInitOS
+              definition:  CoSchedLock
+              definition:  CoSchedUnlock
+              definition:  CoStartOS
+              definition:  OSIntNesting
+              definition:  OSSchedLock
+              definition:  OsSchedUnlock
+              definition:  TaskSchedReq
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\event.o.
+              reference :  InsertToTCBRdyList
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  RemoveDelayList
+              reference :  TCBRunning
+              reference :  TaskSchedReq
+              definition:  CreatEvent
+              definition:  CreateEventList
+              definition:  DeleteEvent
+              definition:  EventTaskToRdy
+              definition:  EventTaskToWait
+              definition:  EventTbl
+              definition:  FreeEventList
+              definition:  RemoveEventWaittingList
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\flag.o.
+              reference :  DlyList
+              reference :  InsertDelayList
+              reference :  InsertInSRQ
+              reference :  InsertToTCBRdyList
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  RemoveDelayList
+              reference :  TCBRunning
+              reference :  TaskSchedReq
+              definition:  CoAcceptMultipleFlags
+              definition:  CoAcceptSingleFlag
+              definition:  CoClearFlag
+              definition:  CoCreateFlag
+              definition:  CoDelFlag
+              definition:  CoSetFlag
+              definition:  CoWaitForMultipleFlags
+              definition:  CoWaitForSingleFlag
+              definition:  FlagCrl
+              definition:  RemoveLinkNode
+              definition:  fl
+              definition:  isr_SetFlag
+              definition:  myret
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\hardware.o.
+              reference :  ADC_Cmd
+              reference :  ADC_GetCalibrationStatus
+              reference :  ADC_GetFlagStatus
+              reference :  ADC_GetResetCalibrationStatus
+              reference :  ADC_Init
+              reference :  ADC_RegularChannelConfig
+              reference :  ADC_ResetCalibration
+              reference :  ADC_SoftwareStartConvCmd
+              reference :  ADC_StartCalibration
+              reference :  CoGetOSTime
+              reference :  DAC_Cmd
+              reference :  DAC_DeInit
+              reference :  DAC_Init
+              reference :  DBGMCU_Config
+              reference :  EXTI_ClearITPendingBit
+              reference :  EXTI_Init
+              reference :  GPIO_EXTILineConfig
+              reference :  GPIO_Init
+              reference :  GPIO_PinRemapConfig
+              reference :  GPIO_ReadInputDataBit
+              reference :  GPIO_ResetBits
+              reference :  GPIO_SetBits
+              reference :  I2C_Cmd
+              reference :  I2C_Init
+              reference :  IWDG_Enable
+              reference :  IWDG_SetPrescaler
+              reference :  IWDG_SetReload
+              reference :  IWDG_WriteAccessCmd
+              reference :  NVIC_Init
+              reference :  NVIC_PriorityGroupConfig
+              reference :  RCC_ADCCLKConfig
+              reference :  RCC_APB1PeriphClockCmd
+              reference :  RCC_APB1PeriphResetCmd
+              reference :  RCC_APB2PeriphClockCmd
+              reference :  SPI_Cmd
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ITConfig
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_Init
+              reference :  TIM_ARRPreloadConfig
+              reference :  TIM_Cmd
+              reference :  TIM_DeInit
+              reference :  TIM_ICInit
+              reference :  TIM_ITConfig
+              reference :  TIM_OC2PreloadConfig
+              reference :  TIM_OC3PreloadConfig
+              reference :  TIM_OC4PreloadConfig
+              reference :  TIM_TimeBaseInit
+              reference :  TIM_TimeBaseStructInit
+              reference :  USART_Cmd
+              reference :  USART_Init
+              definition:  ARM_proc_SN
+              definition:  BUTTON_CLK
+              definition:  BUTTON_PIN
+              definition:  BUTTON_PORT
+              definition:  BattUnion
+              definition:  COM_CLK
+              definition:  COM_PIN_RX
+              definition:  COM_PIN_TX
+              definition:  COM_PORT
+              definition:  COM_REMAP
+              definition:  COM_USART
+              definition:  COM_USART_CLK
+              definition:  EEPROM_ADDRESS
+              definition:  GPI_CLK
+              definition:  GPI_PIN
+              definition:  GPI_PORT
+              definition:  GPI_TYPE
+              definition:  GPO_CLK
+              definition:  GPO_PIN
+              definition:  GPO_PORT
+              definition:  GetARM_UUID
+              definition:  HwButtonInit
+              definition:  HwButtonPressed
+              definition:  HwCOMInit
+              definition:  HwGPIInit
+              definition:  HwGPIState
+              definition:  HwGPOHigh
+              definition:  HwGPOInit
+              definition:  HwGPOInitOC
+              definition:  HwGPOLow
+              definition:  HwGPOToggle
+              definition:  HwGetSPISS
+              definition:  HwI2CInit
+              definition:  HwIMUEXTIInit
+              definition:  HwPeriphInit
+              definition:  HwRadioEXTIInit
+              definition:  HwSPIInit
+              definition:  HwSPISSAssert
+              definition:  HwSPISSDeAssert
+              definition:  HwTimerExpired
+              definition:  HwTimerSet
+              definition:  HwWait
+              definition:  ImuAccelBuffer
+              definition:  ImuGyroBuffer
+              definition:  SPI_CLK
+              definition:  SPI_PIN_MISO
+              definition:  SPI_PIN_MOSI
+              definition:  SPI_PIN_SCK
+              definition:  SPI_PORT
+              definition:  SPI_REMAP
+              definition:  SPI_SPI
+              definition:  SPI_SPI_CLK
+              definition:  SPI_SS_CLK
+              definition:  SPI_SS_PIN
+              definition:  SPI_SS_PORT
+              definition:  WDTimerInit
+              definition:  imu_data_test
+              definition:  imu_data_test2
+              definition:  imu_data_test3
+              definition:  pBattUnion
+              definition:  spiIMUTxBuf
+              definition:  __iar_cc..$_vDm6_qIo4
+              definition:  __iar_cc..g3kjViOSjg_
+              definition:  __iar_cc.IRQn.mFPrTl9eOf8
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\hook.o.
+              definition:  CoIdleTask
+              definition:  CoStkOverflowHook
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\i2c_ee.o.
+              reference :  CoGetOSTime
+              reference :  EEPROM_ADDRESS
+              reference :  HwI2CInit
+              reference :  I2C_AcknowledgeConfig
+              reference :  I2C_CheckEvent
+              reference :  I2C_ClearFlag
+              reference :  I2C_GenerateSTART
+              reference :  I2C_GenerateSTOP
+              reference :  I2C_GetFlagStatus
+              reference :  I2C_ReadRegister
+              reference :  I2C_ReceiveData
+              reference :  I2C_Send7bitAddress
+              reference :  I2C_SendData
+              definition:  EETime
+              definition:  I2C_EE_BufferRead
+              definition:  I2C_EE_BufferWrite
+              definition:  I2C_EE_PageWrite
+              definition:  TIMEVALID
+              definition:  eeOSTime
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\kernelHeap.o.
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              definition:  CoCreateKheap
+              definition:  CoKfree
+              definition:  CoKmalloc
+              definition:  FMBlist
+              definition:  KernelHeap
+              definition:  Kheap
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\main.o.
+              reference :  CoCreateFlag
+              reference :  CoCreateSem
+              reference :  CoInitOS
+              reference :  CoStartOS
+              reference :  CreateTask
+              reference :  DAC_SetChannel2Data
+              reference :  GetARM_UUID
+              reference :  HwI2CInit
+              reference :  HwPeriphInit
+              reference :  I2C_EE_BufferRead
+              reference :  I2C_EE_BufferWrite
+              reference :  IMUInit
+              reference :  IWDG_ReloadCounter
+              reference :  LoadConfig
+              reference :  NVIC_SetVectorTable
+              reference :  RCC_ClearFlag
+              reference :  RCC_GetFlagStatus
+              reference :  RadioInit
+              reference :  SystemCoreClock
+              reference :  Task1
+              reference :  Task3
+              reference :  Task8
+              reference :  TaskConfig
+              reference :  TaskIMU_G
+              reference :  TaskRadioRx
+              reference :  TaskRadioTx
+              reference :  USBD_CDC_cb
+              reference :  USBD_Init
+              reference :  USR_cb
+              reference :  USR_desc
+              reference :  WDTimerInit
+              reference :  __aeabi_memset
+              reference :  config
+              reference :  log
+              reference :  part_time_adjust
+              reference :  whole_time_adjust
+              definition:  CalcConfigChecksum
+              definition:  USB_OTG_dev
+              definition:  asserted
+              definition:  firmwareVersion
+              definition:  flagIMUDataReady
+              definition:  flagIMUNewData
+              definition:  flagIMUTimeToSend
+              definition:  flagIMU_G_DRDY
+              definition:  flagRadioCCA
+              definition:  flagRadioTxReq
+              definition:  led0Id
+              definition:  led1Id
+              definition:  led2Id
+              definition:  loop
+              definition:  main
+              definition:  memset
+              definition:  semRFRxFrames
+              definition:  task1Id
+              definition:  task3Id
+              definition:  task8Id
+              definition:  taskConfigId
+              definition:  taskIMUGId
+              definition:  taskRadioRxId
+              definition:  taskRadioTxId
+              definition:  tasksWDT
+              definition:  watchdog_active
+              definition:  __iar_cc.IRQn.mFPrTl9eOf8
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\mbox.o.
+              reference :  CreatEvent
+              reference :  DeleteEvent
+              reference :  EventTaskToRdy
+              reference :  EventTaskToWait
+              reference :  EventTbl
+              reference :  InsertDelayList
+              reference :  InsertInSRQ
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  TCBRunning
+              definition:  CoAcceptMail
+              definition:  CoCreateMbox
+              definition:  CoDelMbox
+              definition:  CoPendMail
+              definition:  CoPostMail
+              definition:  isr_PostMail
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\misc.o.
+              definition:  NVIC_Init
+              definition:  NVIC_PriorityGroupConfig
+              definition:  NVIC_SetVectorTable
+              definition:  NVIC_SystemLPConfig
+              definition:  SysTick_CLKSourceConfig
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\mutex.o.
+              reference :  CoSetPriority
+              reference :  EventTaskToWait
+              reference :  EventTbl
+              reference :  InsertToTCBRdyList
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  RemoveEventWaittingList
+              reference :  RemoveFromTCBRdyList
+              reference :  TCBRunning
+              reference :  TCBTbl
+              reference :  TaskSchedReq
+              definition:  CoCreateMutex
+              definition:  CoEnterMutexSection
+              definition:  CoLeaveMutexSection
+              definition:  MutexFreeID
+              definition:  MutexTbl
+              definition:  RemoveMutexList
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\portForM3.o.
+              reference :  TCBRunning
+              reference :  TCBNext
+              reference :  OSSchedLock
+              definition:  Inc8
+              definition:  Dec8
+              definition:  IRQ_ENABLE_RESTORE
+              definition:  IRQ_DISABLE_SAVE
+              definition:  SwitchContext
+              definition:  PendSV_Handler
+              definition:  SetEnvironment
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\queue.o.
+              reference :  CreatEvent
+              reference :  DeleteEvent
+              reference :  EventTaskToRdy
+              reference :  EventTaskToWait
+              reference :  EventTbl
+              reference :  InsertDelayList
+              reference :  InsertInSRQ
+              reference :  InsertInSRQWithWaterMark
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  TCBRunning
+              definition:  CoAcceptQueueMail
+              definition:  CoCreateQueue
+              definition:  CoDelQueue
+              definition:  CoPendQueueMail
+              definition:  CoPostQueueMail
+              definition:  QueueIDVessel
+              definition:  QueueTbl
+              definition:  isr_PostQueueMail
+              definition:  isr_PostQueueMailWithWaterMark
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\radio.o.
+              reference :  HwSPISSAssert
+              reference :  HwSPISSDeAssert
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_I2S_SendData
+              definition:  IMU_ReadOneByte
+              definition:  IMU_SelectBank
+              definition:  IMU_WriteOneByte
+              definition:  RadioGetRandom
+              definition:  Send_SPI_2byte
+              definition:  Send_SPI_byte
+              definition:  TK_BK_MEMRD8
+              definition:  TK_BK_MEMWR16
+              definition:  TK_BK_MEMWR8
+              definition:  TK_BK_REGRD8
+              definition:  TK_BK_REGWR8
+              definition:  TK_BK_SPI_WAIT_RXRDY
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\sem.o.
+              reference :  CreatEvent
+              reference :  DeleteEvent
+              reference :  EventTaskToRdy
+              reference :  EventTaskToWait
+              reference :  EventTbl
+              reference :  InsertDelayList
+              reference :  InsertInSRQ
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  TCBRunning
+              definition:  CoAcceptSem
+              definition:  CoCreateSem
+              definition:  CoDelSem
+              definition:  CoPendSem
+              definition:  CoPostSem
+              definition:  isr_PostSem
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\serviceReq.o.
+              reference :  CoPostMail
+              reference :  CoPostQueueMail
+              reference :  CoPostSem
+              reference :  CoSetFlag
+              reference :  IRQ_DISABLE_SAVE
+              reference :  IRQ_ENABLE_RESTORE
+              reference :  Inc8
+              reference :  TimeDispose
+              definition:  InsertInSRQ
+              definition:  InsertInSRQWithWaterMark
+              definition:  IsrReq
+              definition:  RespondSRQ
+              definition:  ServiceReq
+              definition:  TimeReq
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o.
+              reference :  __iar_program_start
+              reference :  SystemInit
+              definition:  __vector_table
+              weak def  :  Reset_Handler
+              weak def  :  NMI_Handler
+              weak def  :  HardFault_Handler
+              weak def  :  MemManage_Handler
+              weak def  :  BusFault_Handler
+              weak def  :  UsageFault_Handler
+              weak def  :  SVC_Handler
+              weak def  :  DebugMon_Handler
+              weak def  :  PendSV_Handler
+              weak def  :  SysTick_Handler
+              weak def  :  WWDG_IRQHandler
+              weak def  :  PVD_IRQHandler
+              weak def  :  TAMPER_IRQHandler
+              weak def  :  RTC_IRQHandler
+              weak def  :  FLASH_IRQHandler
+              weak def  :  RCC_IRQHandler
+              weak def  :  EXTI0_IRQHandler
+              weak def  :  EXTI1_IRQHandler
+              weak def  :  EXTI2_IRQHandler
+              weak def  :  EXTI3_IRQHandler
+              weak def  :  EXTI4_IRQHandler
+              weak def  :  DMA1_Channel1_IRQHandler
+              weak def  :  DMA1_Channel2_IRQHandler
+              weak def  :  DMA1_Channel3_IRQHandler
+              weak def  :  DMA1_Channel4_IRQHandler
+              weak def  :  DMA1_Channel5_IRQHandler
+              weak def  :  DMA1_Channel6_IRQHandler
+              weak def  :  DMA1_Channel7_IRQHandler
+              weak def  :  ADC1_2_IRQHandler
+              weak def  :  CAN1_TX_IRQHandler
+              weak def  :  CAN1_RX0_IRQHandler
+              weak def  :  CAN1_RX1_IRQHandler
+              weak def  :  CAN1_SCE_IRQHandler
+              weak def  :  EXTI9_5_IRQHandler
+              weak def  :  TIM1_BRK_IRQHandler
+              weak def  :  TIM1_UP_IRQHandler
+              weak def  :  TIM1_TRG_COM_IRQHandler
+              weak def  :  TIM1_CC_IRQHandler
+              weak def  :  TIM2_IRQHandler
+              weak def  :  TIM3_IRQHandler
+              weak def  :  TIM4_IRQHandler
+              weak def  :  I2C1_EV_IRQHandler
+              weak def  :  I2C1_ER_IRQHandler
+              weak def  :  I2C2_EV_IRQHandler
+              weak def  :  I2C2_ER_IRQHandler
+              weak def  :  SPI1_IRQHandler
+              weak def  :  SPI2_IRQHandler
+              weak def  :  USART1_IRQHandler
+              weak def  :  USART2_IRQHandler
+              weak def  :  USART3_IRQHandler
+              weak def  :  EXTI15_10_IRQHandler
+              weak def  :  RTCAlarm_IRQHandler
+              weak def  :  OTG_FS_WKUP_IRQHandler
+              weak def  :  TIM5_IRQHandler
+              weak def  :  SPI3_IRQHandler
+              weak def  :  UART4_IRQHandler
+              weak def  :  UART5_IRQHandler
+              weak def  :  TIM6_IRQHandler
+              weak def  :  TIM7_IRQHandler
+              weak def  :  DMA2_Channel1_IRQHandler
+              weak def  :  DMA2_Channel2_IRQHandler
+              weak def  :  DMA2_Channel3_IRQHandler
+              weak def  :  DMA2_Channel4_IRQHandler
+              weak def  :  DMA2_Channel5_IRQHandler
+              weak def  :  ETH_IRQHandler
+              weak def  :  ETH_WKUP_IRQHandler
+              weak def  :  CAN2_TX_IRQHandler
+              weak def  :  CAN2_RX0_IRQHandler
+              weak def  :  CAN2_RX1_IRQHandler
+              weak def  :  CAN2_SCE_IRQHandler
+              weak def  :  OTG_FS_IRQHandler
+              reference :  CSTACK$$Limit
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_adc.o.
+              reference :  RCC_APB2PeriphResetCmd
+              definition:  ADC_AnalogWatchdogCmd
+              definition:  ADC_AnalogWatchdogSingleChannelConfig
+              definition:  ADC_AnalogWatchdogThresholdsConfig
+              definition:  ADC_AutoInjectedConvCmd
+              definition:  ADC_ClearFlag
+              definition:  ADC_ClearITPendingBit
+              definition:  ADC_Cmd
+              definition:  ADC_DMACmd
+              definition:  ADC_DeInit
+              definition:  ADC_DiscModeChannelCountConfig
+              definition:  ADC_DiscModeCmd
+              definition:  ADC_ExternalTrigConvCmd
+              definition:  ADC_ExternalTrigInjectedConvCmd
+              definition:  ADC_ExternalTrigInjectedConvConfig
+              definition:  ADC_GetCalibrationStatus
+              definition:  ADC_GetConversionValue
+              definition:  ADC_GetDualModeConversionValue
+              definition:  ADC_GetFlagStatus
+              definition:  ADC_GetITStatus
+              definition:  ADC_GetInjectedConversionValue
+              definition:  ADC_GetResetCalibrationStatus
+              definition:  ADC_GetSoftwareStartConvStatus
+              definition:  ADC_GetSoftwareStartInjectedConvCmdStatus
+              definition:  ADC_ITConfig
+              definition:  ADC_Init
+              definition:  ADC_InjectedChannelConfig
+              definition:  ADC_InjectedDiscModeCmd
+              definition:  ADC_InjectedSequencerLengthConfig
+              definition:  ADC_RegularChannelConfig
+              definition:  ADC_ResetCalibration
+              definition:  ADC_SetInjectedOffset
+              definition:  ADC_SoftwareStartConvCmd
+              definition:  ADC_SoftwareStartInjectedConvCmd
+              definition:  ADC_StartCalibration
+              definition:  ADC_StructInit
+              definition:  ADC_TempSensorVrefintCmd
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_dac.o.
+              reference :  RCC_APB1PeriphResetCmd
+              definition:  DAC_Cmd
+              definition:  DAC_DMACmd
+              definition:  DAC_DeInit
+              definition:  DAC_DualSoftwareTriggerCmd
+              definition:  DAC_GetDataOutputValue
+              definition:  DAC_Init
+              definition:  DAC_SetChannel1Data
+              definition:  DAC_SetChannel2Data
+              definition:  DAC_SetDualChannelData
+              definition:  DAC_SoftwareTriggerCmd
+              definition:  DAC_StructInit
+              definition:  DAC_WaveGenerationCmd
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_dbgmcu.o.
+              definition:  DBGMCU_Config
+              definition:  DBGMCU_GetDEVID
+              definition:  DBGMCU_GetREVID
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_dma.o.
+              definition:  DMA_ClearFlag
+              definition:  DMA_ClearITPendingBit
+              definition:  DMA_Cmd
+              definition:  DMA_DeInit
+              definition:  DMA_GetCurrDataCounter
+              definition:  DMA_GetFlagStatus
+              definition:  DMA_GetITStatus
+              definition:  DMA_ITConfig
+              definition:  DMA_Init
+              definition:  DMA_SetCurrDataCounter
+              definition:  DMA_StructInit
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_exti.o.
+              definition:  EXTI_ClearFlag
+              definition:  EXTI_ClearITPendingBit
+              definition:  EXTI_DeInit
+              definition:  EXTI_GenerateSWInterrupt
+              definition:  EXTI_GetFlagStatus
+              definition:  EXTI_GetITStatus
+              definition:  EXTI_Init
+              definition:  EXTI_StructInit
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_flash.o.
+              definition:  FLASH_ClearFlag
+              definition:  FLASH_EnableWriteProtection
+              definition:  FLASH_EraseAllBank1Pages
+              definition:  FLASH_EraseAllPages
+              definition:  FLASH_EraseOptionBytes
+              definition:  FLASH_ErasePage
+              definition:  FLASH_GetBank1Status
+              definition:  FLASH_GetFlagStatus
+              definition:  FLASH_GetPrefetchBufferStatus
+              definition:  FLASH_GetReadOutProtectionStatus
+              definition:  FLASH_GetStatus
+              definition:  FLASH_GetUserOptionByte
+              definition:  FLASH_GetWriteProtectionOptionByte
+              definition:  FLASH_HalfCycleAccessCmd
+              definition:  FLASH_ITConfig
+              definition:  FLASH_Lock
+              definition:  FLASH_LockBank1
+              definition:  FLASH_PrefetchBufferCmd
+              definition:  FLASH_ProgramHalfWord
+              definition:  FLASH_ProgramOptionByteData
+              definition:  FLASH_ProgramWord
+              definition:  FLASH_ReadOutProtection
+              definition:  FLASH_SetLatency
+              definition:  FLASH_Unlock
+              definition:  FLASH_UnlockBank1
+              definition:  FLASH_UserOptionByteConfig
+              definition:  FLASH_WaitForLastBank1Operation
+              definition:  FLASH_WaitForLastOperation
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_gpio.o.
+              reference :  RCC_APB2PeriphResetCmd
+              definition:  GPIO_AFIODeInit
+              definition:  GPIO_DeInit
+              definition:  GPIO_ETH_MediaInterfaceConfig
+              definition:  GPIO_EXTILineConfig
+              definition:  GPIO_EventOutputCmd
+              definition:  GPIO_EventOutputConfig
+              definition:  GPIO_Init
+              definition:  GPIO_PinLockConfig
+              definition:  GPIO_PinRemapConfig
+              definition:  GPIO_ReadInputData
+              definition:  GPIO_ReadInputDataBit
+              definition:  GPIO_ReadOutputData
+              definition:  GPIO_ReadOutputDataBit
+              definition:  GPIO_ResetBits
+              definition:  GPIO_SetBits
+              definition:  GPIO_StructInit
+              definition:  GPIO_Write
+              definition:  GPIO_WriteBit
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_i2c.o.
+              reference :  RCC_APB1PeriphResetCmd
+              reference :  RCC_GetClocksFreq
+              definition:  I2C_ARPCmd
+              definition:  I2C_AcknowledgeConfig
+              definition:  I2C_CalculatePEC
+              definition:  I2C_CheckEvent
+              definition:  I2C_ClearFlag
+              definition:  I2C_ClearITPendingBit
+              definition:  I2C_Cmd
+              definition:  I2C_DMACmd
+              definition:  I2C_DMALastTransferCmd
+              definition:  I2C_DeInit
+              definition:  I2C_DualAddressCmd
+              definition:  I2C_FastModeDutyCycleConfig
+              definition:  I2C_GeneralCallCmd
+              definition:  I2C_GenerateSTART
+              definition:  I2C_GenerateSTOP
+              definition:  I2C_GetFlagStatus
+              definition:  I2C_GetITStatus
+              definition:  I2C_GetLastEvent
+              definition:  I2C_GetPEC
+              definition:  I2C_ITConfig
+              definition:  I2C_Init
+              definition:  I2C_NACKPositionConfig
+              definition:  I2C_OwnAddress2Config
+              definition:  I2C_PECPositionConfig
+              definition:  I2C_ReadRegister
+              definition:  I2C_ReceiveData
+              definition:  I2C_SMBusAlertConfig
+              definition:  I2C_Send7bitAddress
+              definition:  I2C_SendData
+              definition:  I2C_SoftwareResetCmd
+              definition:  I2C_StretchClockCmd
+              definition:  I2C_StructInit
+              definition:  I2C_TransmitPEC
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o.
+              reference :  CoEnterISR
+              reference :  CoExitISR
+              reference :  CoGetOSTime
+              reference :  EXTI_ClearITPendingBit
+              reference :  EXTI_GetITStatus
+              reference :  HwGPOHigh
+              reference :  HwGPOLow
+              reference :  HwGPOToggle
+              reference :  HwGetSPISS
+              reference :  HwSPISSDeAssert
+              reference :  I2C_EE_BufferRead
+              reference :  I2C_EE_BufferWrite
+              reference :  RF_SPI_CCA_CMD_STATE
+              reference :  RF_SPI_INIT_STATE
+              reference :  RF_SPI_RX1_UPLOADCMD_STATE
+              reference :  RF_SPI_RX2_DOWNLOAD_HEADER_STATE
+              reference :  RF_SPI_RX3_DOWNLOAD_BODY_STATE
+              reference :  RF_SPI_UPLOAD_ONLY_STATE
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ITConfig
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_I2S_SendData
+              reference :  TIM_ClearITPendingBit
+              reference :  TIM_GetCounter
+              reference :  TIM_GetITStatus
+              reference :  TRACE
+              reference :  USBD_OTG_ISR_Handler
+              reference :  USB_OTG_dev
+              reference :  buttonA
+              reference :  buttonB
+              reference :  button_state
+              reference :  config
+              reference :  errorFrameId
+              reference :  flagIMUNewData
+              reference :  flagIMU_G_DRDY
+              reference :  flagRadioCCA
+              reference :  flagRadioTxAllow
+              reference :  flagRadioTxDone
+              reference :  flagSPIMachineDone
+              reference :  frameIdFlag
+              reference :  got_beacon
+              reference :  isr_PostSem
+              reference :  isr_SetFlag
+              reference :  log
+              reference :  log_index_in
+              reference :  lostSync
+              reference :  pSpiRxBuf
+              reference :  pSpiRxBuf_IMU
+              reference :  pSpiTxBuf
+              reference :  pSpiTxBuf_IMU
+              reference :  printf
+              reference :  radio_off
+              reference :  remainOutOfSyncTime
+              reference :  rxCount
+              reference :  rxDoneType
+              reference :  rxFIFOError
+              reference :  semRFRxFrames
+              reference :  spiIMUByteState
+              reference :  spiIMUCount
+              reference :  spiTxRxByteCount
+              reference :  spiTxRxByteState
+              reference :  test_imu_pkt_ctr
+              reference :  tim_at_sec
+              reference :  txDoneType
+              reference :  txFIFOError
+              reference :  txTimeSlot
+              reference :  use_tim3_phase
+              definition:  BusFault_Handler
+              definition:  DebugMon_Handler
+              definition:  EXTI0_IRQHandler
+              definition:  EXTI15_10_IRQHandler
+              definition:  EXTI1_IRQHandler
+              definition:  EXTI2_IRQHandler
+              definition:  EXTI3_IRQHandler
+              definition:  HardFault_Handler
+              definition:  IMUPktNumAtSync
+              definition:  IMUSampleTime
+              definition:  MemManage_Handler
+              definition:  MsTimerAtSync
+              definition:  OTG_FS_IRQHandler
+              definition:  SPI3_IRQHandler
+              definition:  SVC_Handler
+              definition:  TIM1_UP_IRQHandler
+              definition:  TIM2_IRQHandler
+              definition:  TIM3_IRQHandler
+              definition:  TIM5_IRQHandler
+              definition:  Tim2GetMovAvg
+              definition:  Tim4GetMovAvg
+              definition:  UsageFault_Handler
+              definition:  adjusted
+              definition:  adjusted_changed
+              definition:  ccaVal
+              definition:  counter
+              definition:  delayedFrameIdCorrection
+              definition:  drift
+              definition:  dummy
+              definition:  frameIdAtSync
+              definition:  frameIdCorrection
+              definition:  frameIdInced
+              definition:  frameTime
+              definition:  hard_fault_handler_c
+              definition:  hf_counter
+              definition:  l
+              definition:  lastFrameIdAtCorrection
+              definition:  last_drift
+              definition:  last_reload
+              definition:  led_blinking
+              definition:  myold_t1
+              definition:  myt1
+              definition:  numTxRetries
+              definition:  old_t1
+              definition:  over1
+              definition:  part_time_adjust
+              definition:  real_sec
+              definition:  rxFIFOTime
+              definition:  rxPackets
+              definition:  rx_overflow
+              definition:  sampledCCA
+              definition:  sec
+              definition:  secs
+              definition:  semTime
+              definition:  semTime2
+              definition:  setIMUGRdy
+              definition:  spi3_errors
+              definition:  spiTime
+              definition:  stacked_lr
+              definition:  stacked_pc
+              definition:  stacked_psr
+              definition:  syncPackets
+              definition:  tim2_phase
+              definition:  tim3_at_radio
+              definition:  tim3_phase
+              definition:  trace_irq
+              definition:  txFrmDoneCount
+              definition:  txRetryState
+              definition:  tx_overflow
+              definition:  whole_time_adjust
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_iwdg.o.
+              definition:  IWDG_Enable
+              definition:  IWDG_GetFlagStatus
+              definition:  IWDG_ReloadCounter
+              definition:  IWDG_SetPrescaler
+              definition:  IWDG_SetReload
+              definition:  IWDG_WriteAccessCmd
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_rcc.o.
+              definition:  RCC_ADCCLKConfig
+              definition:  RCC_AHBPeriphClockCmd
+              definition:  RCC_AHBPeriphResetCmd
+              definition:  RCC_APB1PeriphClockCmd
+              definition:  RCC_APB1PeriphResetCmd
+              definition:  RCC_APB2PeriphClockCmd
+              definition:  RCC_APB2PeriphResetCmd
+              definition:  RCC_AdjustHSICalibrationValue
+              definition:  RCC_BackupResetCmd
+              definition:  RCC_ClearFlag
+              definition:  RCC_ClearITPendingBit
+              definition:  RCC_ClockSecuritySystemCmd
+              definition:  RCC_DeInit
+              definition:  RCC_GetClocksFreq
+              definition:  RCC_GetFlagStatus
+              definition:  RCC_GetITStatus
+              definition:  RCC_GetSYSCLKSource
+              definition:  RCC_HCLKConfig
+              definition:  RCC_HSEConfig
+              definition:  RCC_HSICmd
+              definition:  RCC_I2S2CLKConfig
+              definition:  RCC_I2S3CLKConfig
+              definition:  RCC_ITConfig
+              definition:  RCC_LSEConfig
+              definition:  RCC_LSICmd
+              definition:  RCC_MCOConfig
+              definition:  RCC_OTGFSCLKConfig
+              definition:  RCC_PCLK1Config
+              definition:  RCC_PCLK2Config
+              definition:  RCC_PLL2Cmd
+              definition:  RCC_PLL2Config
+              definition:  RCC_PLL3Cmd
+              definition:  RCC_PLL3Config
+              definition:  RCC_PLLCmd
+              definition:  RCC_PLLConfig
+              definition:  RCC_PREDIV1Config
+              definition:  RCC_PREDIV2Config
+              definition:  RCC_RTCCLKCmd
+              definition:  RCC_RTCCLKConfig
+              definition:  RCC_SYSCLKConfig
+              definition:  RCC_WaitForHSEStartUp
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_spi.o.
+              reference :  RCC_APB1PeriphResetCmd
+              reference :  RCC_APB2PeriphResetCmd
+              reference :  RCC_GetClocksFreq
+              definition:  I2S_Cmd
+              definition:  I2S_Init
+              definition:  I2S_StructInit
+              definition:  SPI_BiDirectionalLineConfig
+              definition:  SPI_CalculateCRC
+              definition:  SPI_Cmd
+              definition:  SPI_DataSizeConfig
+              definition:  SPI_GetCRC
+              definition:  SPI_GetCRCPolynomial
+              definition:  SPI_I2S_ClearFlag
+              definition:  SPI_I2S_ClearITPendingBit
+              definition:  SPI_I2S_DMACmd
+              definition:  SPI_I2S_DeInit
+              definition:  SPI_I2S_GetFlagStatus
+              definition:  SPI_I2S_GetITStatus
+              definition:  SPI_I2S_ITConfig
+              definition:  SPI_I2S_ReceiveData
+              definition:  SPI_I2S_SendData
+              definition:  SPI_Init
+              definition:  SPI_NSSInternalSoftwareConfig
+              definition:  SPI_SSOutputCmd
+              definition:  SPI_StructInit
+              definition:  SPI_TransmitCRC
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_tim.o.
+              reference :  RCC_APB1PeriphResetCmd
+              reference :  RCC_APB2PeriphResetCmd
+              definition:  TIM_ARRPreloadConfig
+              definition:  TIM_BDTRConfig
+              definition:  TIM_BDTRStructInit
+              definition:  TIM_CCPreloadControl
+              definition:  TIM_CCxCmd
+              definition:  TIM_CCxNCmd
+              definition:  TIM_ClearFlag
+              definition:  TIM_ClearITPendingBit
+              definition:  TIM_ClearOC1Ref
+              definition:  TIM_ClearOC2Ref
+              definition:  TIM_ClearOC3Ref
+              definition:  TIM_ClearOC4Ref
+              definition:  TIM_Cmd
+              definition:  TIM_CounterModeConfig
+              definition:  TIM_CtrlPWMOutputs
+              definition:  TIM_DMACmd
+              definition:  TIM_DMAConfig
+              definition:  TIM_DeInit
+              definition:  TIM_ETRClockMode1Config
+              definition:  TIM_ETRClockMode2Config
+              definition:  TIM_ETRConfig
+              definition:  TIM_EncoderInterfaceConfig
+              definition:  TIM_ForcedOC1Config
+              definition:  TIM_ForcedOC2Config
+              definition:  TIM_ForcedOC3Config
+              definition:  TIM_ForcedOC4Config
+              definition:  TIM_GenerateEvent
+              definition:  TIM_GetCapture1
+              definition:  TIM_GetCapture2
+              definition:  TIM_GetCapture3
+              definition:  TIM_GetCapture4
+              definition:  TIM_GetCounter
+              definition:  TIM_GetFlagStatus
+              definition:  TIM_GetITStatus
+              definition:  TIM_GetPrescaler
+              definition:  TIM_ICInit
+              definition:  TIM_ICStructInit
+              definition:  TIM_ITConfig
+              definition:  TIM_ITRxExternalClockConfig
+              definition:  TIM_InternalClockConfig
+              definition:  TIM_OC1FastConfig
+              definition:  TIM_OC1Init
+              definition:  TIM_OC1NPolarityConfig
+              definition:  TIM_OC1PolarityConfig
+              definition:  TIM_OC1PreloadConfig
+              definition:  TIM_OC2FastConfig
+              definition:  TIM_OC2Init
+              definition:  TIM_OC2NPolarityConfig
+              definition:  TIM_OC2PolarityConfig
+              definition:  TIM_OC2PreloadConfig
+              definition:  TIM_OC3FastConfig
+              definition:  TIM_OC3Init
+              definition:  TIM_OC3NPolarityConfig
+              definition:  TIM_OC3PolarityConfig
+              definition:  TIM_OC3PreloadConfig
+              definition:  TIM_OC4FastConfig
+              definition:  TIM_OC4Init
+              definition:  TIM_OC4PolarityConfig
+              definition:  TIM_OC4PreloadConfig
+              definition:  TIM_OCStructInit
+              definition:  TIM_PWMIConfig
+              definition:  TIM_PrescalerConfig
+              definition:  TIM_SelectCCDMA
+              definition:  TIM_SelectCOM
+              definition:  TIM_SelectHallSensor
+              definition:  TIM_SelectInputTrigger
+              definition:  TIM_SelectMasterSlaveMode
+              definition:  TIM_SelectOCxM
+              definition:  TIM_SelectOnePulseMode
+              definition:  TIM_SelectOutputTrigger
+              definition:  TIM_SelectSlaveMode
+              definition:  TIM_SetAutoreload
+              definition:  TIM_SetClockDivision
+              definition:  TIM_SetCompare1
+              definition:  TIM_SetCompare2
+              definition:  TIM_SetCompare3
+              definition:  TIM_SetCompare4
+              definition:  TIM_SetCounter
+              definition:  TIM_SetIC1Prescaler
+              definition:  TIM_SetIC2Prescaler
+              definition:  TIM_SetIC3Prescaler
+              definition:  TIM_SetIC4Prescaler
+              definition:  TIM_TIxExternalClockConfig
+              definition:  TIM_TimeBaseInit
+              definition:  TIM_TimeBaseStructInit
+              definition:  TIM_UpdateDisableConfig
+              definition:  TIM_UpdateRequestConfig
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\system_stm32f10x.o.
+              definition:  AHBPrescTable
+              definition:  SystemCoreClock
+              definition:  SystemCoreClockUpdate
+              definition:  SystemInit
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\task.o.
+              reference :  CoLeaveMutexSection
+              reference :  CoStkOverflowHook
+              reference :  EventTaskToWait
+              reference :  EventTbl
+              reference :  InitTaskContext
+              reference :  MutexTbl
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OSTickCnt
+              reference :  OsSchedUnlock
+              reference :  RemoveDelayList
+              reference :  RemoveEventWaittingList
+              reference :  RemoveLinkNode
+              reference :  RemoveMutexList
+              reference :  SwitchContext
+              reference :  TaskSchedReq
+              definition:  CoAwakeTask
+              definition:  CoDelTask
+              definition:  CoExitTask
+              definition:  CoGetCurTaskID
+              definition:  CoGetCurrentTaskId
+              definition:  CoGetStackDepth
+              definition:  CoGetTaskFunc
+              definition:  CoGetTaskLine
+              definition:  CoGetTaskScheduledCount
+              definition:  CoSetPriority
+              definition:  CoSuspendTask
+              definition:  CreateTCBList
+              definition:  CreateTask
+              definition:  FreeTCB
+              definition:  InsertToTCBRdyList
+              definition:  OSCheckTime
+              definition:  RemoveFromTCBRdyList
+              definition:  Schedule
+              definition:  TCBNext
+              definition:  TCBRdy
+              definition:  TCBRunning
+              definition:  TCBTbl
+              definition:  func
+              definition:  globl
+              definition:  idle_stk
+              definition:  line
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\tasks.o.
+              reference :  ADC_GetConversionValue
+              reference :  ADC_SoftwareStartConvCmd
+              reference :  ARM_proc_SN
+              reference :  BattUnion
+              reference :  CalcConfigChecksum
+              reference :  CoAwakeTask
+              reference :  CoClearFlag
+              reference :  CoGetOSTime
+              reference :  CoGetStackDepth
+              reference :  CoGetTaskFunc
+              reference :  CoGetTaskLine
+              reference :  CoGetTaskScheduledCount
+              reference :  CoPendSem
+              reference :  CoPostSem
+              reference :  CoSchedLock
+              reference :  CoSetFlag
+              reference :  CoTickDelay
+              reference :  CoWaitForSingleFlag
+              reference :  CopyConfigToExConfig
+              reference :  CopyExConfigToConfig
+              reference :  DAC_SetChannel2Data
+              reference :  FLASH_ErasePage
+              reference :  FLASH_Lock
+              reference :  FLASH_ProgramWord
+              reference :  FLASH_Unlock
+              reference :  HwButtonPressed
+              reference :  HwGPIState
+              reference :  HwGPOHigh
+              reference :  HwGPOInitOC
+              reference :  HwGPOLow
+              reference :  HwSPISSAssert
+              reference :  HwSPISSDeAssert
+              reference :  I2C_EE_BufferRead
+              reference :  I2C_EE_BufferWrite
+              reference :  IMUPktNumAtSync
+              reference :  IMUProcess
+              reference :  IMU_RawData
+              reference :  IWDG_ReloadCounter
+              reference :  ImuAccelBuffer
+              reference :  ImuGyroBuffer
+              reference :  MsTimerAtSync
+              reference :  ProcessRXError
+              reference :  RadioIMU_ReleaseSPI
+              reference :  RadioIMU_WaitGrabSPI
+              reference :  RadioPrint2520Registers
+              reference :  RadioRxPkt
+              reference :  RadioSetPanIdShortAddr
+              reference :  RadioSetRFChan
+              reference :  RadioSetRFLevel
+              reference :  RadioTxPkt
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_I2S_SendData
+              reference :  SaveConfig
+              reference :  TIM_SetAutoreload
+              reference :  TIM_SetCompare2
+              reference :  TIM_SetCompare3
+              reference :  TIM_SetCompare4
+              reference :  TRACE
+              reference :  TxAmpValues
+              reference :  ValidateCommandLine
+              reference :  __aeabi_cfcmple
+              reference :  __aeabi_cfrcmple
+              reference :  __aeabi_d2f
+              reference :  __aeabi_d2iz
+              reference :  __aeabi_dadd
+              reference :  __aeabi_ddiv
+              reference :  __aeabi_dmul
+              reference :  __aeabi_f2d
+              reference :  __aeabi_f2iz
+              reference :  __aeabi_fadd
+              reference :  __aeabi_fdiv
+              reference :  __aeabi_fmul
+              reference :  __aeabi_memcpy
+              reference :  __aeabi_memcpy4
+              reference :  __aeabi_memset
+              reference :  __aeabi_ui2f
+              reference :  __writeCmdLineRespPacket
+              reference :  __writeIMU
+              reference :  adjusted
+              reference :  adjusted_changed
+              reference :  asserted
+              reference :  b64_pton
+              reference :  cc2520_flags0
+              reference :  cc2520_flags1
+              reference :  cc2520_flags2
+              reference :  crc8
+              reference :  drift
+              reference :  flagIMUDataReady
+              reference :  flagIMUNewData
+              reference :  flagIMU_G_DRDY
+              reference :  flagRadioTxReq
+              reference :  frameIdAtSync
+              reference :  frameIdCorrection
+              reference :  frameIdInced
+              reference :  frameTime
+              reference :  func
+              reference :  getchar
+              reference :  last_drift
+              reference :  led_blinking
+              reference :  line
+              reference :  numTxRetries
+              reference :  over1
+              reference :  part_time_adjust
+              reference :  putchar
+              reference :  radio_off
+              reference :  rxCount
+              reference :  rxErrors
+              reference :  rxFIFOError
+              reference :  rxFIFOTime
+              reference :  rxPackets
+              reference :  sec
+              reference :  secs
+              reference :  semIMUAllow
+              reference :  semRFRxFrames
+              reference :  semTime2
+              reference :  stacked_lr
+              reference :  stacked_pc
+              reference :  stacked_psr
+              reference :  strcpy
+              reference :  strlen
+              reference :  strtoul
+              reference :  task1Id
+              reference :  task3Id
+              reference :  task8Id
+              reference :  taskConfigId
+              reference :  taskIMUGId
+              reference :  taskRadioRxId
+              reference :  taskRadioTxId
+              reference :  tasksWDT
+              reference :  tim2_phase
+              reference :  tim3_at_radio
+              reference :  tim3_phase
+              reference :  trace_irq
+              reference :  txRetryState
+              reference :  watchdog_active
+              reference :  whole_time_adjust
+              definition:  IMUPresent
+              definition:  IMURegRd
+              definition:  IMURegWr
+              definition:  IMUdbgPrt
+              definition:  NVIC_GenerateSystemReset
+              definition:  ReadPage
+              definition:  RfTxLevel
+              definition:  SerialDownload
+              definition:  SetTimeSlot
+              definition:  Task1
+              definition:  Task3
+              definition:  Task8
+              definition:  TaskConfig
+              definition:  TaskIMU_G
+              definition:  TaskRadioRx
+              definition:  TaskRadioTx
+              definition:  Valids
+              definition:  WritePage
+              definition:  _LocaleC_isspace
+              definition:  acc_adjust_count
+              definition:  acc_done
+              definition:  acc_time_adjust
+              definition:  accs
+              definition:  bat_slot_numbers
+              definition:  buttonA
+              definition:  buttonB
+              definition:  button_state
+              definition:  calls
+              definition:  changeClocks
+              definition:  config
+              definition:  counterIMU
+              definition:  errorFrameId
+              definition:  fLast
+              definition:  fVolt
+              definition:  firstTime
+              definition:  frameAdjust
+              definition:  frameIdCorrectionCount
+              definition:  frameIdFlag
+              definition:  frameOffset
+              definition:  got_beacon
+              definition:  isspace
+              definition:  lastFrameIdAtSync
+              definition:  lastFrameIdCorrection
+              definition:  lastFrameTime
+              definition:  lastRadioTx
+              definition:  lastTim3Phase
+              definition:  lastTime
+              definition:  last_bat_sent
+              definition:  last_percents
+              definition:  log
+              definition:  log_index_in
+              definition:  lostSync
+              definition:  memcpy
+              definition:  memset
+              definition:  mycalls
+              definition:  newFrameIdAtSync
+              definition:  newFrameTime
+              definition:  newTim3Phase
+              definition:  newbcn
+              definition:  notValids
+              definition:  now_sec
+              definition:  oldFrameIdAtSync
+              definition:  oldFrameTime
+              definition:  oldTim3Phase
+              definition:  old_sec
+              definition:  old_tim
+              definition:  page
+              definition:  pushed_times
+              definition:  radioRxEnd
+              definition:  radioRxStart
+              definition:  radioRxWait
+              definition:  radioTxEntries
+              definition:  random
+              definition:  random_slot1
+              definition:  random_slot2
+              definition:  realFrameId
+              definition:  remainOutOfSyncTime
+              definition:  routerAddr
+              definition:  rt_flags
+              definition:  rxNotEmpty
+              definition:  rxReloaded
+              definition:  rxTotalRcvd
+              definition:  rx_reload
+              definition:  savedFrameIdAtSync
+              definition:  semAllow
+              definition:  semAllowPostTask
+              definition:  setIMUReady
+              definition:  setRadioTx
+              definition:  setTxDone
+              definition:  span
+              definition:  successBeacons
+              definition:  tab_1024
+              definition:  task2StatusType
+              definition:  task2_errors
+              definition:  task2enter
+              definition:  test_imu_pkt_ctr
+              definition:  tim
+              definition:  tim4_phase
+              definition:  tim_at_sec
+              definition:  txCalls
+              definition:  txCalls2
+              definition:  txTimeSlot
+              definition:  use_sync
+              definition:  use_tim3_phase
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\time.o.
+              reference :  InsertToTCBRdyList
+              reference :  IsrReq
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OSTickCnt
+              reference :  OsSchedUnlock
+              reference :  RemoveEventWaittingList
+              reference :  RemoveLinkNode
+              reference :  TCBRunning
+              reference :  TCBTbl
+              reference :  TaskSchedReq
+              reference :  TimeReq
+              definition:  CoGetOSTime
+              definition:  CoResetTaskDelayTick
+              definition:  CoTickDelay
+              definition:  DlyList
+              definition:  InsertDelayList
+              definition:  RemoveDelayList
+              definition:  TimeDispose
+              definition:  isr_TimeDispose
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usb_bsp.o.
+              reference :  NVIC_Init
+              reference :  NVIC_PriorityGroupConfig
+              reference :  RCC_AHBPeriphClockCmd
+              reference :  RCC_OTGFSCLKConfig
+              definition:  USB_OTG_BSP_EnableInterrupt
+              definition:  USB_OTG_BSP_Init
+              definition:  USB_OTG_BSP_mDelay
+              definition:  USB_OTG_BSP_uDelay
+              definition:  __iar_cc.IRQn.7bh8ohQc709
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usb_core.o.
+              reference :  USB_OTG_BSP_mDelay
+              reference :  USB_OTG_BSP_uDelay
+              definition:  USB_OTG_ActiveRemoteWakeup
+              definition:  USB_OTG_CoreInit
+              definition:  USB_OTG_CoreInitDev
+              definition:  USB_OTG_DisableCommonInt
+              definition:  USB_OTG_DisableGlobalInt
+              definition:  USB_OTG_EP0Activate
+              definition:  USB_OTG_EP0StartXfer
+              definition:  USB_OTG_EP0_OutStart
+              definition:  USB_OTG_EPActivate
+              definition:  USB_OTG_EPClearStall
+              definition:  USB_OTG_EPDeactivate
+              definition:  USB_OTG_EPSetStall
+              definition:  USB_OTG_EPStartXfer
+              definition:  USB_OTG_EnableDevInt
+              definition:  USB_OTG_EnableGlobalInt
+              definition:  USB_OTG_FlushRxFifo
+              definition:  USB_OTG_FlushTxFifo
+              definition:  USB_OTG_GetDeviceSpeed
+              definition:  USB_OTG_GetEPStatus
+              definition:  USB_OTG_GetMode
+              definition:  USB_OTG_InitDevSpeed
+              definition:  USB_OTG_IsDeviceMode
+              definition:  USB_OTG_IsHostMode
+              definition:  USB_OTG_ReadCoreItr
+              definition:  USB_OTG_ReadDevAllInEPItr
+              definition:  USB_OTG_ReadDevAllOutEp_itr
+              definition:  USB_OTG_ReadDevOutEP_itr
+              definition:  USB_OTG_ReadOtgItr
+              definition:  USB_OTG_ReadPacket
+              definition:  USB_OTG_SelectCore
+              definition:  USB_OTG_SetCurrentMode
+              definition:  USB_OTG_SetEPStatus
+              definition:  USB_OTG_StopDevice
+              definition:  USB_OTG_UngateClock
+              definition:  USB_OTG_WritePacket
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usb_dcd.o.
+              reference :  USB_OTG_BSP_mDelay
+              reference :  USB_OTG_CoreInit
+              reference :  USB_OTG_CoreInitDev
+              reference :  USB_OTG_DisableGlobalInt
+              reference :  USB_OTG_EP0StartXfer
+              reference :  USB_OTG_EPActivate
+              reference :  USB_OTG_EPClearStall
+              reference :  USB_OTG_EPDeactivate
+              reference :  USB_OTG_EPSetStall
+              reference :  USB_OTG_EPStartXfer
+              reference :  USB_OTG_EnableGlobalInt
+              reference :  USB_OTG_FlushRxFifo
+              reference :  USB_OTG_FlushTxFifo
+              reference :  USB_OTG_GetEPStatus
+              reference :  USB_OTG_SelectCore
+              reference :  USB_OTG_SetCurrentMode
+              reference :  USB_OTG_SetEPStatus
+              definition:  DCD_DevConnect
+              definition:  DCD_DevDisconnect
+              definition:  DCD_EP_Close
+              definition:  DCD_EP_ClrStall
+              definition:  DCD_EP_Flush
+              definition:  DCD_EP_Open
+              definition:  DCD_EP_PrepareRx
+              definition:  DCD_EP_SetAddress
+              definition:  DCD_EP_Stall
+              definition:  DCD_EP_Tx
+              definition:  DCD_GetEPStatus
+              definition:  DCD_Init
+              definition:  DCD_SetEPStatus
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usb_dcd_int.o.
+              reference :  USBD_DCD_INT_fops
+              reference :  USB_OTG_EP0Activate
+              reference :  USB_OTG_EP0_OutStart
+              reference :  USB_OTG_FlushTxFifo
+              reference :  USB_OTG_GetDeviceSpeed
+              reference :  USB_OTG_IsDeviceMode
+              reference :  USB_OTG_ReadCoreItr
+              reference :  USB_OTG_ReadDevAllInEPItr
+              reference :  USB_OTG_ReadDevAllOutEp_itr
+              reference :  USB_OTG_ReadDevOutEP_itr
+              reference :  USB_OTG_ReadPacket
+              reference :  USB_OTG_WritePacket
+              definition:  USBD_OTG_ISR_Handler
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_cdc_core.o.
+              reference :  DCD_EP_Close
+              reference :  DCD_EP_Open
+              reference :  DCD_EP_PrepareRx
+              reference :  DCD_EP_Tx
+              reference :  USBD_CtlError
+              reference :  USBD_CtlPrepareRx
+              reference :  USBD_CtlSendData
+              reference :  USBD_DeviceDesc
+              reference :  VCP_fops
+              definition:  APP_Rx_Buffer
+              definition:  APP_Rx_length
+              definition:  APP_Rx_ptr_in
+              definition:  APP_Rx_ptr_out
+              definition:  CmdBuff
+              definition:  USBD_CDC_cb
+              definition:  USB_Rx_Buffer
+              definition:  USB_Tx_State
+              definition:  usbd_cdc_CfgDesc
+              definition:  usbd_cdc_OtherCfgDesc
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_cdc_vcp.o.
+              reference :  APP_Rx_Buffer
+              reference :  APP_Rx_ptr_in
+              reference :  APP_Rx_ptr_out
+              reference :  HwGPOToggle
+              reference :  IMUdbgPrt
+              reference :  __aeabi_memcpy
+              reference :  config
+              reference :  printf
+              reference :  vsprintf
+              definition:  APP_Tx_ptr_in
+              definition:  APP_Tx_ptr_out
+              definition:  TRACE
+              definition:  VCP_fops
+              definition:  __read
+              definition:  __write
+              definition:  __writeCmdLineRespPacket
+              definition:  __writeIMU
+              definition:  linecoding
+              definition:  memcpy
+              definition:  trace_format_buf
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_core.o.
+              reference :  DCD_EP_Open
+              reference :  DCD_EP_Stall
+              reference :  DCD_Init
+              reference :  USBD_CtlContinueRx
+              reference :  USBD_CtlContinueSendData
+              reference :  USBD_CtlReceiveStatus
+              reference :  USBD_CtlSendStatus
+              reference :  USBD_ParseSetupRequest
+              reference :  USBD_StdDevReq
+              reference :  USBD_StdEPReq
+              reference :  USBD_StdItfReq
+              reference :  USB_OTG_BSP_EnableInterrupt
+              reference :  USB_OTG_BSP_Init
+              reference :  radio_off
+              definition:  SET_TEST_MODE
+              definition:  USBD_ClrCfg
+              definition:  USBD_DCD_INT_cb
+              definition:  USBD_DCD_INT_fops
+              definition:  USBD_DeInit
+              definition:  USBD_Init
+              definition:  USBD_SetCfg
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_desc.o.
+              reference :  USBD_GetString
+              reference :  USBD_StrDesc
+              reference :  snprintf
+              definition:  USBD_DeviceDesc
+              definition:  USBD_DeviceQualifierDesc
+              definition:  USBD_LangIDDesc
+              definition:  USBD_USR_ConfigStrDescriptor
+              definition:  USBD_USR_DeviceDescriptor
+              definition:  USBD_USR_InterfaceStrDescriptor
+              definition:  USBD_USR_LangIDStrDescriptor
+              definition:  USBD_USR_ManufacturerStrDescriptor
+              definition:  USBD_USR_ProductStrDescriptor
+              definition:  USBD_USR_SerialStrDescriptor
+              definition:  USR_desc
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_ioreq.o.
+              reference :  DCD_EP_PrepareRx
+              reference :  DCD_EP_Tx
+              reference :  USB_OTG_EP0_OutStart
+              definition:  USBD_CtlContinueRx
+              definition:  USBD_CtlContinueSendData
+              definition:  USBD_CtlPrepareRx
+              definition:  USBD_CtlReceiveStatus
+              definition:  USBD_CtlSendData
+              definition:  USBD_CtlSendStatus
+              definition:  USBD_GetRxCount
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_req.o.
+              reference :  DCD_EP_ClrStall
+              reference :  DCD_EP_SetAddress
+              reference :  DCD_EP_Stall
+              reference :  SET_TEST_MODE
+              reference :  USBD_ClrCfg
+              reference :  USBD_CtlSendData
+              reference :  USBD_CtlSendStatus
+              reference :  USBD_SetCfg
+              reference :  USB_OTG_EP0_OutStart
+              definition:  USBD_CtlError
+              definition:  USBD_GetString
+              definition:  USBD_ParseSetupRequest
+              definition:  USBD_StdDevReq
+              definition:  USBD_StdEPReq
+              definition:  USBD_StdItfReq
+              definition:  USBD_StrDesc
+              definition:  USBD_cfg_status
+              definition:  USBD_default_cfg
+              definition:  USBD_ep_status
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_usr.o.
+              definition:  USBD_USR_DeviceConfigured
+              definition:  USBD_USR_DeviceConnected
+              definition:  USBD_USR_DeviceDisconnected
+              definition:  USBD_USR_DeviceReset
+              definition:  USBD_USR_DeviceResumed
+              definition:  USBD_USR_DeviceSuspended
+              definition:  USBD_USR_Init
+              definition:  USR_cb
+Loading object C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\util.o.
+              definition:  crc8
+Selecting member cstartup_M.o(rt7M_tl.a) to define __iar_program_start.
+              reference :  __cmain
+              reference :  __vector_table
+              weak ref  :  __iar_init_core
+              weak ref  :  __iar_init_vfp
+              definition:  __iar_program_start
+Selecting member strchr.o(rt7M_tl.a) to define __iar_Strchr.
+              definition:  strchr
+              definition:  __iar_Strchr
+Selecting member ABImemcpy.o(rt7M_tl.a) to define __aeabi_memcpy.
+              definition:  __aeabi_memcpy
+              definition:  __aeabi_memcpy4
+              definition:  __aeabi_memcpy8
+Selecting member memcmp.o(rt7M_tl.a) to define memcmp.
+              definition:  memcmp
+Selecting member sprintf.o(dl7M_tln.a) to define sprintf.
+              reference :  _Printf
+              reference :  _SProut
+              definition:  __iar_default_requirements$$_Printf<unknown>sprintf
+              definition:  sprintf
+Selecting member sscanf.o(dl7M_tln.a) to define sscanf.
+              reference :  _SScin
+              reference :  _Scanf
+              definition:  __iar_default_requirements$$_Scanf<unknown>sscanf
+              definition:  sscanf
+Selecting member strlen.o(rt7M_tl.a) to define strlen.
+              definition:  strlen
+Selecting member ABImemset.o(rt7M_tl.a) to define __aeabi_memset.
+              definition:  __iar_Memset
+              definition:  __iar_Memset_word
+              definition:  __aeabi_memset
+Selecting member printf.o(dl7M_tln.a) to define printf.
+              reference :  _Printf
+              reference :  _Prout
+              definition:  __iar_default_requirements$$_Printf<unknown>printf
+              definition:  printf
+Selecting member FltCmpLe.o(m7M_tl.a) to define __aeabi_cfcmple.
+              definition:  __aeabi_cfcmple
+Selecting member FltCmpGe.o(m7M_tl.a) to define __aeabi_cfrcmple.
+              definition:  __aeabi_cfrcmple
+Selecting member DblToFlt.o(m7M_tl.a) to define __aeabi_d2f.
+              definition:  __aeabi_d2f
+Selecting member DblToI32.o(m7M_tl.a) to define __aeabi_d2iz.
+              definition:  __aeabi_d2iz
+              definition:  __aeabi_d2uiz
+              definition:  __iar_d2uiz
+Selecting member DblAdd.o(m7M_tl.a) to define __aeabi_dadd.
+              reference :  __iar_dsub
+              definition:  __aeabi_dadd
+              definition:  __iar_dadd
+Selecting member DblDiv.o(m7M_tl.a) to define __aeabi_ddiv.
+              definition:  __aeabi_ddiv
+Selecting member DblMul.o(m7M_tl.a) to define __aeabi_dmul.
+              definition:  __aeabi_dmul
+Selecting member FltToDbl.o(m7M_tl.a) to define __aeabi_f2d.
+              definition:  __aeabi_f2d
+Selecting member FltToS32.o(m7M_tl.a) to define __aeabi_f2iz.
+              definition:  __aeabi_f2iz
+Selecting member FltAdd.o(m7M_tl.a) to define __aeabi_fadd.
+              reference :  __iar_fsub
+              definition:  __aeabi_fadd
+              definition:  __iar_fadd
+Selecting member FltDiv.o(m7M_tl.a) to define __aeabi_fdiv.
+              definition:  __aeabi_fdiv
+Selecting member FltMul.o(m7M_tl.a) to define __aeabi_fmul.
+              definition:  __aeabi_fmul
+Selecting member I32ToFlt.o(m7M_tl.a) to define __aeabi_ui2f.
+              definition:  __aeabi_i2f
+              definition:  __aeabi_ui2f
+              definition:  __iar_ui2f
+Selecting member getchar.o(dl7M_tln.a) to define getchar.
+              reference :  __read
+              definition:  __ungetchar
+              definition:  getchar
+Selecting member putchar.o(dl7M_tln.a) to define putchar.
+              reference :  __write
+              definition:  putchar
+Selecting member strcpy.o(rt7M_tl.a) to define strcpy.
+              definition:  strcpy
+Selecting member strtoul.o(dl7M_tln.a) to define strtoul.
+              reference :  __iar_Stoul
+              definition:  strtoul
+Selecting member vsprintf.o(dl7M_tln.a) to define vsprintf.
+              reference :  _Printf
+              reference :  _SProut
+              definition:  __iar_default_requirements$$_Printf<unknown>vsprintf
+              definition:  vsprintf
+Selecting member snprintf.o(dl7M_tln.a) to define snprintf.
+              reference :  _Printf
+              reference :  _SNProut
+              definition:  __iar_default_requirements$$_Printf<unknown>snprintf
+              definition:  snprintf
+Selecting member cmain.o(rt7M_tl.a) to define __cmain.
+              weak ref  :  __iar_data_init3
+              reference :  __low_level_init
+              reference :  main
+              reference :  exit
+              definition:  __cmain
+              definition:  ?main
+              definition:  _main
+              definition:  _call_main
+Selecting member xsprout.o(dl7M_tln.a) to define _SProut.
+              definition:  _SProut
+Selecting member xsscin.o(dl7M_tln.a) to define _SScin.
+              definition:  _SScin
+Selecting member xprout.o(dl7M_tln.a) to define _Prout.
+              reference :  putchar
+              definition:  _Prout
+Selecting member DblSub.o(m7M_tl.a) to define __iar_dsub.
+              reference :  __iar_dadd
+              definition:  __iar_dsub
+              definition:  __aeabi_dsub
+              definition:  __iar_dsubStart
+Selecting member FltSub.o(m7M_tl.a) to define __iar_fsub.
+              reference :  __iar_fadd
+              definition:  __aeabi_fsub
+              definition:  __iar_fsub
+              definition:  __iar_fsubStart
+Selecting member xstoul.o(dl7M_tln.a) to define __iar_Stoul.
+              reference :  __aeabi_errno_addr
+              reference :  __iar_Memchr
+              definition:  __iar_Stoul
+              definition:  __iar_Stoulx
+Selecting member xsnprout.o(dl7M_tln.a) to define _SNProut.
+              definition:  _SNProut
+Selecting member low_level_init.o(dl7M_tln.a) to define __low_level_init.
+              definition:  __low_level_init
+Selecting member exit.o(dl7M_tln.a) to define exit.
+              reference :  _exit
+              definition:  exit
+Selecting member errno.o(dl7M_tln.a) to define __aeabi_errno_addr.
+              reference :  __iar_dlib_perthread_access
+              definition:  __aeabi_EDOM
+              definition:  __aeabi_EFPOS
+              definition:  __aeabi_EILSEQ
+              definition:  __aeabi_ERANGE
+              definition:  __aeabi_ERRMAX
+              definition:  __aeabi_errno_addr
+              definition:  __iar_Errno
+Selecting member memchr.o(rt7M_tl.a) to define __iar_Memchr.
+              definition:  memchr
+              definition:  __iar_Memchr
+Selecting member cexit.o(rt7M_tl.a) to define _exit.
+              weak ref  :  __call_dtors
+              weak ref  :  _Close_all
+              weak ref  :  __iar_clearlocks
+              reference :  __exit
+              definition:  _exit
+              definition:  __cexit_call_dtors
+              definition:  __cexit_closeall
+              definition:  __cexit_clearlocks
+Selecting member xtls.o(dl7M_tln.a) to define __iar_dlib_perthread_access.
+              definition:  __iar_dlib_perthread_access
+Selecting member XXexit.o(rt7M_tl.a) to define __exit.
+              definition:  __exit
+Selecting member xprintffull_nomb.o(dl7M_tln.a) to define _PrintfFullNoMb.
+              reference :  __aeabi_cdcmple
+              reference :  __aeabi_cdrcmple
+              reference :  __aeabi_d2iz
+              reference :  __aeabi_d2uiz
+              reference :  __aeabi_ddiv
+              reference :  __aeabi_dmul
+              reference :  __aeabi_dsub
+              reference :  __aeabi_i2d
+              reference :  __aeabi_memcpy
+              reference :  __aeabi_ui2d
+              reference :  __aeabi_uldivmod
+              reference :  __iar_Dnorm
+              reference :  __iar_Dscale
+              reference :  __iar_Memchr
+              reference :  __iar_Strchr
+              reference :  div
+              reference :  strlen
+              definition:  _PrintfFullNoMb
+              definition:  __iar_provide$$_Printf<flags,floats,hex_floats,int_specials,long_longs,n_formatters,qualifiers,widths>_PrintfFullNoMb
+Selecting member xscanfsmall_nomb.o(dl7M_tln.a) to define _ScanfSmallNoMb.
+              reference :  __iar_Stolx
+              reference :  __iar_Stoul
+              reference :  __iar_Strchr
+              definition:  _ScanfSmallNoMb
+              definition:  __iar_provide$$_Scanf<>_ScanfSmallNoMb
+Selecting member DblCmpLe.o(m7M_tl.a) to define __aeabi_cdcmple.
+              definition:  __aeabi_cdcmple
+Selecting member DblCmpGe.o(m7M_tl.a) to define __aeabi_cdrcmple.
+              definition:  __aeabi_cdrcmple
+Selecting member I32ToDbl.o(m7M_tl.a) to define __aeabi_i2d.
+              definition:  __aeabi_i2d
+              definition:  __aeabi_ui2d
+              definition:  __iar_ui2d
+Selecting member I64DivMod.o(rt7M_tl.a) to define __aeabi_uldivmod.
+              reference :  __aeabi_ldiv0
+              definition:  __aeabi_ldivmod
+              definition:  __aeabi_uldivmod
+Selecting member xdnorm.o(m7M_tl.a) to define __iar_Dnorm.
+              definition:  __iar_Dnorm
+Selecting member xdscale.o(m7M_tl.a) to define __iar_Dscale.
+              reference :  __iar_Dnorm
+              definition:  __iar_Dscale
+Selecting member div.o(dl7M_tln.a) to define div.
+              definition:  div
+Selecting member xstol.o(dl7M_tln.a) to define __iar_Stolx.
+              reference :  __aeabi_errno_addr
+              reference :  __iar_Stoulx
+              definition:  __iar_Stolx
+Selecting member I64DivZer.o(rt7M_tl.a) to define __aeabi_ldiv0.
+              definition:  __aeabi_ldiv0
+Selecting member data_init3.o(rt7M_tl.a) to define __iar_data_init3 (optional).
+              definition:  __iar_data_init3
+              reference :  Region$$Table$$Base
+              reference :  Region$$Table$$Limit
+Selecting member zero_init3.o(rt7M_tl.a) to define __iar_zero_init3 (optional).
+              definition:  __iar_zero_init3
+Selecting member copy_init3.o(rt7M_tl.a) to define __iar_copy_init3 (optional).
+              definition:  __iar_copy_init3
+Selecting member rle_init3.o(rt7M_tl.a) to define __iar_rle_init3 (optional).
+              definition:  __iar_rle_init3
+Selecting member packbits_init3.o(rt7M_tl.a) to define __iar_packbits_init3 (optional).
+              definition:  __iar_packbits_init3
+Selecting member lzw_init3c.o(rt7M_tl.a) to define __iar_lzw_init3 (optional).
+              reference :  abort
+              definition:  __iar_lzw_init3
+Selecting member bwt_init3c.o(rt7M_tl.a) to define __iar_bwt_init3 (optional).
+              reference :  __aeabi_memclr4
+              reference :  abort
+              definition:  __iar_bwt_init3
+Selecting member lz77_init3c.o(rt7M_tl.a) to define __iar_lz77_init3 (optional).
+              reference :  abort
+              definition:  __iar_lz77_init3
+Selecting member abort.o(dl7M_tln.a) to define abort (optional).
+              reference :  __exit
+              definition:  abort
+Selecting member ABImemclr4.o(rt7M_tl.a) to define __aeabi_memclr4 (optional).
+              reference :  __iar_Memset4_word
+              definition:  __aeabi_memclr4
+Selecting member ABImemset48.o(rt7M_tl.a) to define __iar_Memset4_word (optional).
+              definition:  __aeabi_memset4
+              definition:  __aeabi_memset8
+              definition:  __iar_Memset4_word
+              definition:  __iar_Memset8_word
+Resolving duplicate symbol definitions
+  Picking DebugMon_Handler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing DebugMon_Handler [s15 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI15_10_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing EXTI15_10_IRQHandler [s58 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI2_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing EXTI2_IRQHandler [s26 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking HardFault_Handler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing HardFault_Handler [s10 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking OTG_FS_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing OTG_FS_IRQHandler [s78 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking SVC_Handler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing SVC_Handler [s14 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking strchr [s6 strchr.o(rt7M_tl.a)]
+    Suppressing strchr [s9 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\base64.o]
+  Picking BusFault_Handler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing BusFault_Handler [s12 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking MemManage_Handler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing MemManage_Handler [s11 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking SPI3_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing SPI3_IRQHandler [s62 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking UsageFault_Handler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing UsageFault_Handler [s13 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI3_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing EXTI3_IRQHandler [s27 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking PendSV_Handler [s6 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\portForM3.o]
+    Suppressing PendSV_Handler [s16 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking TIM1_UP_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing TIM1_UP_IRQHandler [s43 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI1_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing EXTI1_IRQHandler [s25 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking TIM2_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing TIM2_IRQHandler [s46 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI0_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing EXTI0_IRQHandler [s24 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking SysTick_Handler [s9 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\arch.o]
+    Suppressing SysTick_Handler [s17 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking TIM3_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing TIM3_IRQHandler [s47 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking TIM5_IRQHandler [s8 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\stm32f10x_it.o]
+    Suppressing TIM5_IRQHandler [s61 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\startup_stm32f10x_cl.o]
+  Picking memset [s11 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\tasks.o]
+    Suppressing memset [s15 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\main.o]
+  Picking isspace [s15 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\tasks.o]
+    Suppressing isspace [s13 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\base64.o]
+  Picking _LocaleC_isspace [s13 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\tasks.o]
+    Suppressing _LocaleC_isspace [s11 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\base64.o]
+  Picking __iar_cc.IRQn.mFPrTl9eOf8 [s56 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\main.o]
+    Suppressing __iar_cc.IRQn.mFPrTl9eOf8 [s230 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\hardware.o]
+  Picking memcpy [s9 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\usbd_cdc_vcp.o]
+    Suppressing memcpy [s9 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\basic_rf.o]
+    Suppressing memcpy [s9 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\config.o]
+    Suppressing memcpy [s9 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\console_tail.o]
+    Suppressing memcpy [s9 C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Release-Bootloader-RevJ\Obj\tasks.o]

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\TK630.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>TK</name>
+      <member>
+        <project>TK630</project>
+        <configuration>Debug-Bootloader</configuration>
+      </member>
+      <member>
+        <project>TK630</project>
+        <configuration>Release-Bootloader</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

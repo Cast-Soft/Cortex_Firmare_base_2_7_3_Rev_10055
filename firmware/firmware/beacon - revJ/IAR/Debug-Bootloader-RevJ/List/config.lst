@@ -1,0 +1,241 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     29/Oct/2019  16:43:08 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\config.c                                        #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\config.c" -D BEACON_APP -D                      #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D    #
+#                    TASKS_PROFILE -D BATTERY_CHECK -D CCA_EN_NO -D           #
+#                    NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D OLD_CONFIG -D    #
+#                    CIRCULAR_LOG -D BC_HW_REVJ -lcN                          #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\config.lst           #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\config.o              #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\config.c
+      1          #include "VersionNo.h"
+      2          
+      3          #include <stm32f10x.h>
+      4          #include <string.h>
+      5          #include "config.h"
+      6          #include "i2c_ee.h"
+      7          #include "packets.h"
+      8          
+      9          #include "flash_map.h"
+     10          
+     11          uint16_t offsetDelta = 0;                       // Could be overridden by T.K. sync packet
+     12          
+     13          config_t  backup_config = {
+     14              //.size = sizeof(beacon_config_t) - sizeof(uint16_t)*2,
+     15              //.checksum = 3, //TODO
+     16              .config_version = CURRENT_CONFIG_VERSION,
+     17              .productID      = 0xBC10,
+     18              .serialNum      = 0x444,
+     19              .panId          = 0x23,
+     20              .mySrcAddr      = 0x5678,
+     21              .routerDstAddr      = 0xABCD,
+     22              .ledOnOffs      = 52000,
+     23              .ledOffOffs     = 4000,
+     24              .ledDAC         = 3840,
+     25              .rfChan         = 15,
+     26              .rfTimeSlot     = 2,
+     27              .led0Id         = 0xFE,
+     28              .led1Id         = 0xFD,
+     29              .led2Id         = 0xFB,
+     30              .TestMode       = 0x00,
+     31              .TxLevel        = 8,
+     32              .radioPacketFlags          = 0xFF,
+     33              .led0IdPattern = 0xFFFFFFFF,
+     34              .led1IdPattern = 0xFFFFFFFE,
+     35              .led2IdPattern = 0xFFFFFFFD,
+     36              .led0Index     = 1,
+     37              .led1Index     = 2,
+     38              .led2Index     = 3,
+     39              .frameBits = 8,
+     40              .BTN_debounce_val =1,
+     41              .BTN_dblclick_val =5,
+     42              .BTN_hold_val     =5,
+     43              .chgstate_radio_en = 0,
+     44              .dummyPad   = 0xFF,
+     45              .flags      =
+     46          #ifdef _DEBUG
+     47                            FLAG_TRACE_ENABLE |
+     48          #else
+     49          
+     50          #endif
+     51                FLAG_FRAMEID_24BITS | FLAG_TRACE_USE_PROTO_CMD_LINE_RESP,
+     52              .time_adjust = 0,
+     53              .frameCountNoSync   = DEFAULT_FRAME_COUNT_NO_SYNC
+     54          };
+     55          
+     56          static uint16_t CalcConfigChecksum(ex_config_t *config) {
+     57              uint16_t checksum = 0xCCCC; // checksum initialization
+     58          
+     59              // checksum is last half-word in struct
+     60              // checksum field not included in checksum
+     61              uint8_t *p = (uint8_t*) config;
+     62              for (uint16_t i = 0; i < (sizeof(*config)/2 - 1); i++) {
+     63          
+     64                  checksum ^= (i ^ (*p)++);
+     65              }
+     66              return checksum;
+     67          }
+     68          
+     69          void CopyConfigToExConfig(config_t *config, ex_config_t *exConfig)
+     70          {
+     71            memcpy( (uint8_t*) &exConfig->productID, (uint8_t*) &config->productID, sizeof(*exConfig) - sizeof(uint16_t));
+     72            exConfig->size = sizeof(*exConfig);
+     73            exConfig->checksum = CalcConfigChecksum(exConfig);
+     74          }
+     75          
+     76          /* returns 0 if no changes */
+     77          int CopyExConfigToConfig(ex_config_t *exConfig, config_t *config)
+     78          {
+     79            int8_t ret = memcmp((uint8_t*) &exConfig->productID, (uint8_t*) &config->productID, sizeof(*exConfig) - sizeof(uint16_t));
+     80            if ( ret != 0) {
+     81              memcpy((uint8_t*) &config->productID, (uint8_t*) &exConfig->productID, sizeof(*exConfig) - sizeof(uint16_t));
+     82            }
+     83            return ret;
+     84          }
+     85          
+     86          void LoadConfig(config_t *config)
+     87          {
+     88            uint16_t key = 0;
+     89            I2C_EE_BufferRead((uint8_t*) &key, EEPROM_CONFIG_ADDRESS, sizeof(uint16_t));
+     90            if (key != 0xFFFF &&  key != 0 && !IS_VALID_CONFIG_KEY(key)) { // old format
+     91              ex_config_t old_config;
+     92              I2C_EE_BufferRead((uint8_t*) &old_config, EEPROM_CONFIG_ADDRESS, sizeof(old_config));
+     93              CopyExConfigToConfig(&old_config, config);
+     94          
+     95              config->config_version = CURRENT_CONFIG_VERSION;
+     96              config->flags =
+     97          #ifdef _DEBUG
+     98                            FLAG_TRACE_ENABLE |
+     99          #else
+    100          
+    101          #endif
+    102                FLAG_FRAMEID_24BITS | FLAG_TRACE_USE_PROTO_CMD_LINE_RESP;
+    103              config->time_adjust = 0;
+    104              config->frameCountNoSync   = DEFAULT_FRAME_COUNT_NO_SYNC;
+    105          
+    106              SaveConfig(config);
+    107            } else if (key == CURRENT_CONFIG_VERSION) {
+    108              I2C_EE_BufferRead((uint8_t*) config, EEPROM_CONFIG_ADDRESS, sizeof(*config));
+    109            } else {
+    110              memcpy(config, (void *)&backup_config, sizeof(*config));
+    111              SaveConfig(config);
+    112            }
+    113          }
+    114          
+    115          void SaveConfig(config_t *config)
+    116          {
+    117              config->written_by_ver =    (THIS_MAJOR << 24) |
+    118                                          (THIS_MINOR << 16) |
+    119                                          (THIS_PATCH << 8) |
+    120                                          ((char)THIS_REVISION);          // Revision low 8 byte only
+    121          
+    122              I2C_EE_BufferWrite((uint8_t*) config, EEPROM_CONFIG_ADDRESS, sizeof(*config));
+    123          }
+    124          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        8  CalcConfigChecksum
+       16  CopyConfigToExConfig
+             16 -> CalcConfigChecksum
+             16 -> memcpy
+       16  CopyExConfigToConfig
+             16 -> memcmp
+             16 -> memcpy
+       72  LoadConfig
+             72 -> CopyExConfigToConfig
+             72 -> I2C_EE_BufferRead
+             72 -> SaveConfig
+             72 -> memcpy
+        8  SaveConfig
+              8 -> I2C_EE_BufferWrite
+       16  memcpy
+             16 -> __aeabi_memcpy
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable1
+       4  ??DataTable1_1
+       4  ??DataTable1_2
+      40  CalcConfigChecksum
+      30  CopyConfigToExConfig
+      40  CopyExConfigToConfig
+     148  LoadConfig
+      22  SaveConfig
+      68  backup_config
+      22  memcpy
+       2  offsetDelta
+
+ 
+   2 bytes in section .bss
+  68 bytes in section .data
+ 314 bytes in section .text
+ 
+ 292 bytes of CODE memory (+ 22 bytes shared)
+  70 bytes of DATA memory
+
+Errors: none
+Warnings: 6

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\Router.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>Router</name>
+      <member>
+        <project>Router</project>
+        <configuration>Debug-Bootloader</configuration>
+      </member>
+      <member>
+        <project>Router</project>
+        <configuration>Release-Bootloader</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

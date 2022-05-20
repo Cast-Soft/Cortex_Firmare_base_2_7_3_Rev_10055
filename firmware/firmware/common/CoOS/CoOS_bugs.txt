@@ -1,0 +1,21 @@
+
+Bug #3
+Issue: sometimes, approximately 1-2 beacon from 10 during 24 hours stop transmitting.
+Results:
+  After 2 weeks research and closing in seems following happens:
+call to CoWaitForSingleFlag() with timeout value of 1 never returned.
+Task never gets called again.
+Appears that task is in TASK_READY state, but it is not in TCBRdy list,
+not in delay list.
+Seems following happens:
+1) Task1 calls CoWaitForSingleFlag with predefined timeout.
+   It locks, marks flags to be set, inserts task in DlyList (setting TASK_WAITING status), 
+   then unlocks, requesting scheduler!
+2) TaskRadioTx comes, calls CoSetFlag, 
+   It sets flag, then locks, removes task from Dlylist (not touching task status) and unlocks.
+3) Task1 again locks, reset flags, then unlocks.
+4) Scheduler comes: Task1 has status TASK_WAITING (supposed to be in DlyList, but is not there), so it is not supposed to be in TCBRdy list,
+   scheduler removes it from ready list and sets TASK_RUNNING.
+Now we have lost our task and will not get spins: it is not in TCBRdy, nor in Dlylist.
+
+Status: trying to confirm.  

@@ -1,0 +1,1554 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     13/Nov/2019  10:52:16 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\stm32f10x_it.c                                  #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\stm32f10x_it.c" -D BEACON_APP -D                #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D    #
+#                    TASKS_PROFILE -D BATTERY_CHECK -D CCA_EN_NO -D           #
+#                    NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D OLD_CONFIG -D    #
+#                    CIRCULAR_LOG -D BC_HW_REVJ -lcN                          #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\stm32f10x_it.lst     #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\stm32f10x_it.o        #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\stm32f10x_it.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : stm32f10x_it.c
+      5          * Author             : ???
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : ???
+      9          *******************************************************************************/
+     10          /*
+     11              NVIC Priority (Highest first):
+     12                  - Priority 0: OTG_FS_IRQ
+     13                  - Priority 0: EXTI2_IRQn
+     14                  - Priority 1: TIM2_IRQn
+     15                  - Priority 2: TIM3_IRQn
+     16                  - Priority 3: SPI3_IRQn (SPI_RADIO_IRQn)
+     17                  - Priority 4: EXTI2_IRQn (GPI_RADIO_GPIO0_IRQn)
+     18                  - Priority 4: EXTI1_IRQn (GPI_RADIO_GPIO1_IRQn)
+     19                  - Priority 4: EXTI3_IRQn (GPI_RADIO_GPIO5_IRQn)
+     20          
+     21                  - Priority 6: EXTI10_15_IRQn (GPI_IMU_INT_IRQn)
+     22                  - Priority 6: TIM6_IRQn (NOT USED)
+     23                  - Priority 8: TIM5_IRQn (NOT USED -- USED ONLY IF CCA_EN ENABLED)
+     24                  - PRIORITY 9: TIM1_IRQn
+     25          */
+     26          // EXPERIMENT I2C EVENT/ERROR INTERRUPTS ON PRIORITY 5 OR 7
+     27          
+     28          /* INCLUDES ------------------------------------------------------------------*/
+     29          
+     30          #include "stm32f10x_it.h"
+     31          #include "stm32f10x_exti.h"
+     32          #include "stm32f10x_dma.h"
+     33          #include "stm32f10x_tim.h"
+     34          #include "stm32f10x_i2c.h"
+     35          #include "usb_istr.h"
+     36          #include "hardware.h"
+     37          #include "basic_rf.h"
+     38          #include "radio_defs.h"
+     39          #include "tasks.h"
+     40          #include "CoOS.h"
+     41          #include <stdio.h>
+     42          #include "usb_core.h"
+     43          #include "packets.h"
+     44          #include "i2c_ee.h"
+     45          #include "flash_map.h"
+     46          #include "config.h"
+     47          #include "i2c_periph.h"
+     48          
+     49          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     50          
+     51          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     52          
+     53          #define RF_SYNC_PERIOD 30000
+     54          #define RF_SYNC_PERIOD_TOL 750
+     55          
+     56          #define RF_SYNC_PERIOD2 2*RF_SYNC_PERIOD
+     57          #define RF_SYNC_PERIOD_TOL2 2*RF_SYNC_PERIOD_TOL
+     58          
+     59          #define HIST_INIT_2  RF_SYNC_PERIOD2,RF_SYNC_PERIOD2
+     60          #define HIST_INIT_4  HIST_INIT_2,HIST_INIT_2
+     61          #define HIST_INIT_8  HIST_INIT_4,HIST_INIT_4
+     62          #define HIST_INIT_16 HIST_INIT_8,HIST_INIT_8
+     63          #define HIST_INIT_32 HIST_INIT_16,HIST_INIT_16
+     64          
+     65          
+     66          /* PRIVATE MACROS ------------------------------------------------------------*/
+     67          
+     68          #define ENTER_ISR() CoEnterISR()
+     69          #define EXIT_ISR() CoExitISR()
+     70          #define ISR_SETFLAG(x) isr_SetFlag(x);
+     71          
+     72          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     73          
+     74          /* Variables Defined in main.c */
+     75          
+     76          extern OS_FlagID flagIMUNewData;
+     77          extern OS_FlagID flagIMU_G_DRDY;
+     78          extern OS_FlagID flagRadioTxAllow;
+     79          extern OS_FlagID flagIMUTimeToSend;
+     80          extern OS_FlagID flagRadioCCA;
+     81          extern OS_FlagID flagLEDSync;
+     82          extern OS_FlagID flagEInk_RDY;
+     83          extern OS_FlagID flagEInk_DMA_Done;
+     84          extern OS_EventID semRFRxFrames;   // Number of RF frames received in Rx-FIFO. It is notified by RX_FRM_DONE interrupt
+     85          extern OS_FlagID flagTimeout_UI;
+     86          
+     87          extern int TRACE(char* fmt, ...);
+     88          extern uint32_t lostSync;
+     89          
+     90          extern void ISR_RadioReleaseSPI(void);
+     91          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     92          // history size
+     93          #define TIM3_HIS_SIZE 1
+     94          #define TIM2_HIS_SIZE 1
+     95          
+     96          static uint16_t tim4HistA[32] = {HIST_INIT_32};
+     97          static uint16_t tim3HistA[16];
+     98          static uint16_t tim2HistA[16];
+     99          
+    100          uint32_t drift;
+    101          int32_t last_drift;
+    102          
+    103          uint16_t sampledCCA;
+    104          
+    105          
+    106          extern uint8_t radio_off;
+    107          
+    108          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+    109          
+    110          volatile uint16_t txRetryState = 0;
+    111          volatile uint16_t numTxRetries = 0;
+    112          volatile uint32_t IMUSampleTime;
+    113          volatile uint16_t MsTimerAtSync;
+    114          volatile int frameIdInced = 0;
+    115          // =======================  Key synchronization variables. Must carefully guard operations on them ==================================
+    116          volatile uint32_t frameId = 0;           // together with TIM3->CCR1 determines beacons' frame id and phase(fraction of a frame). So make sure that operations on frameeId and TIM3->CCR1 are atomic.
+    117                                                          // also, if frameId changed and TIM3->CCR1 got reloaded, frameId must be adjusted accordingly
+    118          // These are a pair. Must be atomially used. local frame Id. TODO! rename them
+    119          volatile uint32_t frameIdAtSync;        // when detecting a packet is arriving in EXTI2_IRQHandler, beacon assumes that it is from T.K but it is until entire packet is received and processed by task TaskRadioRx() 
+    120                                                  // that beacon knows the packet is real or just noise. So if it is noise. Then they are useless as TaskRadioRx() will not be triggered
+    121          volatile uint16_t tim3PhaseAtSync;      // frameIdAtSync and tim3PhaseAtSync must be capture at the same time atomically
+    122                                                  // if just after frameIdAtSync captured, tim3PhaseAtSync got reloaded, then both frameId frameIdAtSync and tim3PhaseAtSync has to re-achieve again 
+    123          //====================================================================================================================================
+    124          
+    125          volatile uint8_t  IMUPktNumAtSync;
+    126          uint32_t          real_sec;
+    127          
+    128          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+    129          
+    130          static inline void Tim4UpdMovAvg(uint16_t newVal);
+    131          static inline void Tim3UpdMovAvg(uint16_t newVal);
+    132          static inline void Tim2UpdMovAvg(uint16_t newVal);
+    133          static inline void RFSyncPktRx(void);
+    134          
+    135          extern USB_OTG_CORE_HANDLE           USB_OTG_dev;
+    136          extern uint32_t USBD_OTG_ISR_Handler (USB_OTG_CORE_HANDLE *pdev);
+    137          
+    138          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+    139          #ifdef USE_TIM4
+    140          /*******************************************************************************
+    141          * Description : Updates Moving Average of TIM4 (10Hz Sync Packet Freq)
+    142          * Input       : nominal RF_SYNC_PERIOD
+    143          * Return      : -
+    144          *******************************************************************************/
+    145          static inline void Tim4UpdMovAvg(uint16_t newVal) {
+    146              static uint16_t idxA = 0;
+    147              // will accept ONE missing sync-packet
+    148              if (newVal > (3*RF_SYNC_PERIOD/2)) newVal = (newVal + 1) / 2;
+    149              // reject invalid newVal
+    150              if ( (newVal > (RF_SYNC_PERIOD + RF_SYNC_PERIOD_TOL)) ||
+    151                   (newVal < (RF_SYNC_PERIOD - RF_SYNC_PERIOD_TOL)) ) {
+    152                  return;
+    153              }
+    154          
+    155              tim4HistA[idxA] = newVal * 2;   // make use of full dynamic-range
+    156              idxA = (idxA + 1) & 0x1F;       // array size = 32
+    157          }
+    158          #endif
+    159          
+    160          static uint8_t tim3_update_count;
+    161          /*******************************************************************************
+    162          * Description : Updates Moving Average of TIM3 (100Hz IRLED Phase)
+    163          * Input       :
+    164          * Return      :
+    165          *******************************************************************************/
+    166          static inline void Tim3UpdMovAvg(uint16_t newVal) {
+    167              static uint16_t idxA = 0;
+    168              static uint32_t last_sec = 0;
+    169              // if missed 1 update, reset sequence
+    170              if (real_sec - last_sec > 1) {
+    171                idxA = 0;
+    172                tim3_update_count = 0;
+    173              }
+    174              tim3HistA[idxA] = newVal;
+    175              idxA = (++idxA) & (TIM3_HIS_SIZE - 1);
+    176              if (!tim3_update_count & 0xF0) {
+    177                tim3_update_count++;
+    178              }
+    179              last_sec = real_sec;
+    180          }
+    181          
+    182          static uint8_t tim2_update_count;
+    183          /*******************************************************************************
+    184          * Description : Updates Moving Average of TIM2 (10Hz Radio TX Inhibit Phase)
+    185          * Input       :
+    186          * Return      :
+    187          *******************************************************************************/
+    188          static inline void Tim2UpdMovAvg(uint16_t newVal) {
+    189              static uint16_t idxA = 0;
+    190              static uint32_t last_sec = 0;
+    191          
+    192              // if missed 1 update, reset sequence
+    193              if (real_sec - last_sec > 1) {
+    194                idxA = 0;
+    195                tim2_update_count = 0;
+    196              }
+    197              tim2HistA[idxA] = newVal;
+    198              idxA = (++idxA) & (TIM2_HIS_SIZE - 1);
+    199              if (!tim2_update_count & 0xF0) {
+    200                tim2_update_count++;
+    201              }
+    202              last_sec = real_sec;
+    203          }
+    204          
+    205          uint32_t syncPackets = 0;
+    206          /*******************************************************************************
+    207          * Description : Received (10Hz) RF Sync Packet from TimeKeeper
+    208          * Input       :
+    209          * Return      :
+    210          *******************************************************************************/
+    211          static inline void RFSyncPktRx(void) {
+    212              // update moving-average of phase
+    213              Tim3UpdMovAvg(TIM3->CCR1); // 100Hz IRLED
+    214              Tim2UpdMovAvg(TIM2->CCR1); // 10Hz Radio TX Inhibit
+    215          
+    216              // Reset to frameCountNoSync/10 seconds: a 10Hz timer will decrease the value. 100 ms / tick
+    217              __disable_interrupt();
+    218              remainOutOfSyncTime = config.frameCountNoSync;
+    219              syncPackets++;
+    220               __enable_interrupt();
+    221          }
+    222          
+    223          __no_init  unsigned int stacked_lr;
+    224          __no_init  unsigned int stacked_pc;
+    225          __no_init  unsigned int stacked_psr;
+    226          
+    227          uint32_t hf_counter;
+    228          
+    229          /* PUBLIC FUNCTIONS ----------------------------------------------------------*/
+    230          void hard_fault_handler_c(unsigned int * hardfault_args)
+    231          {
+    232            unsigned int stacked_r0;
+    233            unsigned int stacked_r1;
+    234            unsigned int stacked_r2;
+    235            unsigned int stacked_r3;
+    236            unsigned int stacked_r12;
+    237          
+    238            stacked_r0 = ((unsigned long) hardfault_args[0]);
+    239            stacked_r1 = ((unsigned long) hardfault_args[1]);
+    240            stacked_r2 = ((unsigned long) hardfault_args[2]);
+    241            stacked_r3 = ((unsigned long) hardfault_args[3]);
+    242          
+    243            stacked_r12 = ((unsigned long) hardfault_args[4]);
+    244            stacked_lr = ((unsigned long) hardfault_args[5]);
+    245            stacked_pc = ((unsigned long) hardfault_args[6]);
+    246            stacked_psr = ((unsigned long) hardfault_args[7]);
+    247          
+    248            I2C_ITConfig(I2C_EE, (I2C_IT_EVT | I2C_IT_BUF), DISABLE); 
+    249            I2C_SoftwareResetCmd(I2C_EE, ENABLE);
+    250          	I2C_SoftwareResetCmd(I2C_EE, DISABLE);
+    251            
+    252            I2C_EE_BufferWrite((uint8_t*) &stacked_lr, EEPROM_DEBUG_STACKED_LR, EEPROM_DEBUG_STACKED_LR_SIZE);
+    253            I2C_EE_BufferWrite((uint8_t*) &stacked_pc, EEPROM_DEBUG_STACKED_PC, EEPROM_DEBUG_STACKED_PC_SIZE);
+    254            I2C_EE_BufferWrite((uint8_t*) &stacked_psr, EEPROM_DEBUG_STACKED_PSR, EEPROM_DEBUG_STACKED_PSR_SIZE);
+    255          
+    256            I2C_EE_BufferRead((uint8_t*) &hf_counter, EEPROM_DEBUG_COUNTER, EEPROM_DEBUG_COUNTER_SIZE);
+    257            hf_counter++;
+    258            I2C_EE_BufferWrite((uint8_t*) &hf_counter, EEPROM_DEBUG_COUNTER, EEPROM_DEBUG_COUNTER_SIZE);
+    259          
+    260            printf ("[Hard fault handler]\n");
+    261            printf ("R0 = %x\n", stacked_r0);
+    262            printf ("R1 = %x\n", stacked_r1);
+    263            printf ("R2 = %x\n", stacked_r2);
+    264            printf ("R3 = %x\n", stacked_r3);
+    265            printf ("R12 = %x\n", stacked_r12);
+    266            printf ("LR = %x\n", stacked_lr);
+    267            printf ("PC = %x\n", stacked_pc);
+    268            printf ("PSR = %x\n", stacked_psr);
+    269            printf ("BFAR = %x\n", (*((volatile unsigned long *)(0xE000ED38))));
+    270            printf ("CFSR = %x\n", (*((volatile unsigned long *)(0xE000ED28))));
+    271            printf ("HFSR = %x\n", (*((volatile unsigned long *)(0xE000ED2C))));
+    272            printf ("DFSR = %x\n", (*((volatile unsigned long *)(0xE000ED30))));
+    273            printf ("AFSR = %x\n", (*((volatile unsigned long *)(0xE000ED3C))));
+    274          
+    275          
+    276            while (1) ;
+    277          
+    278          }
+    279          
+    280          
+    281          /*******************************************************************************
+    282          * Description : This function handles Hard Fault exception.
+    283          * Input       : -
+    284          * Return      : -
+    285          *******************************************************************************/
+    286          void HardFault_Handler(void)
+    287          {
+    288              // Go to infinite loop when Hard Fault exception occurs
+    289            asm("TST LR, #4");
+    290            asm("ITE EQ \n");
+    291            asm("MRSEQ R0, MSP \n");
+    292            asm("MRSNE R0, PSP");
+    293            asm("B hard_fault_handler_c");
+    294              while (1);
+    295          }
+    296          
+    297          /**
+    298           * @brief  This function handles Memory Manage exception.
+    299           * @param  None
+    300           * @retval None
+    301           */
+    302          /*******************************************************************************
+    303          * Description : This function handles NMI exception.
+    304          * Input       : -
+    305          * Return      : -
+    306          *******************************************************************************/
+    307          void MemManage_Handler(void)
+    308          {
+    309              /* Go to infinite loop when Memory Manage exception occurs */
+    310              while (1);
+    311          }
+    312          
+    313          /*******************************************************************************
+    314          * Description : This function handles Bus Fault exception.
+    315          * Input       : -
+    316          * Return      : -
+    317          *******************************************************************************/
+    318          void BusFault_Handler(void)
+    319          {
+    320              /* Go to infinite loop when Bus Fault exception occurs */
+    321              while (1);
+    322          }
+    323          
+    324          /*******************************************************************************
+    325          * Description : This function handles Usage Fault exception.
+    326          * Input       : -
+    327          * Return      : -
+    328          *******************************************************************************/
+    329          void UsageFault_Handler(void)
+    330          {
+    331              /* Go to infinite loop when Usage Fault exception occurs */
+    332              while (1);
+    333          }
+    334          
+    335          /*******************************************************************************
+    336          * Description : This function handles SVCall exception.
+    337          * Input       : -
+    338          * Return      : -
+    339          *******************************************************************************/
+    340          void SVC_Handler(void)
+    341          {
+    342          }
+    343          
+    344          /*******************************************************************************
+    345          * Description : This function handles Debug Monitor exception.
+    346          * Input       : -
+    347          * Return      : -
+    348          *******************************************************************************/
+    349          void DebugMon_Handler(void)
+    350          {
+    351          }
+    352          
+    353          /******************************************************************************/
+    354          /*            STM32F10x Peripherals Interrupt Handlers                        */
+    355          /******************************************************************************/
+    356          
+    357          #ifndef STDIO_TO_USART
+    358          /*******************************************************************************
+    359          * Description : This function handles USB-On-The-Go FS global interrupt request.
+    360          * Priority    : 0
+    361          * Input       : -
+    362          * Return      : -
+    363          *******************************************************************************/
+    364          void OTG_FS_IRQHandler(void) {
+    365            USBD_OTG_ISR_Handler (&USB_OTG_dev);
+    366          }
+    367          #endif
+    368          uint32_t sec;
+    369          /*******************************************************************************
+    370          * Description : This function handles TIM1 global interrupt request.
+    371          *               TIM1: 95Hz IMU Sampling
+    372          * Priority    : 1
+    373          * Input       : -
+    374          * Return      : -
+    375          *******************************************************************************/
+    376          void TIM1_UP_IRQHandler(void) {
+    377              ENTER_ISR();
+    378          
+    379              if (TIM_GetITStatus(TIM1, TIM_IT_Update) == SET)
+    380              {
+    381          
+    382              // Clear TIM1 Capture compare interrupt pending bit
+    383              TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
+    384              assert(TIM1->RCR == 0);
+    385              sec++;
+    386              if (sec == 20) {
+    387                drift = 0;
+    388                last_drift = 0;
+    389              }
+    390          
+    391              // Get IMU sample
+    392              // PDE here is where we trigger the new IMU data is ready to be processed
+    393              // and then transmitted
+    394              //ISR_SETFLAG(flagIMUTimeToSend);
+    395              }
+    396          
+    397              EXIT_ISR();
+    398          }
+    399          
+    400          uint32_t old_t1;
+    401          uint16_t over1;
+    402          
+    403          /*******************************************************************************
+    404          * Description : This function handles TIM3 global interrupt request.
+    405          *               TIM3: 100Hz IRLED
+    406          * Priority    : 1
+    407          * Input       : -
+    408          * Return      : -
+    409          *******************************************************************************/
+    410          uint32_t myt1, myold_t1;
+    411          uint16_t adjusted;
+    412          uint8_t adjusted_changed;
+    413          extern uint16_t tim_at_sec;
+    414          uint8_t led_blinking = 0;
+    415          uint16_t last_reload;
+    416          uint32_t lastFrameIdAtCorrection;
+    417          volatile uint32_t trace_irq;
+    418          extern uint16_t use_tim3_phase;
+    419          
+    420          void TIM3_IRQHandler(void) {
+    421              uint32_t bitmask;
+    422              static uint8_t tim3_counter;
+    423              static int16_t my_tim3_phase;
+    424          
+    425              if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET)
+    426              {
+    427                __disable_interrupt();
+    428                TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+    429                trace_irq = 2;
+    430                tim3_counter++;
+    431          
+    432                frameId = frameId + 1;
+    433          //      if (config.flags & FLAG_FRAMEID_24BITS) {
+    434          //        frameId &= 0xFFFFFF;
+    435          //      }
+    436                __enable_interrupt();
+    437          
+    438                return;
+    439              }
+    440          
+    441              if (TIM_GetITStatus(TIM3, TIM_IT_CC2) == SET)
+    442              {
+    443                  // Clear TIM3 Capture compare interrupt pending bit
+    444                  TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
+    445                  int32_t t1 = TIM1->CNT;
+    446                  int32_t d = t1 + 60000;
+    447                  d = (d - old_t1)%60000;
+    448                  if (d > 660 || d < 540) {
+    449                    drift++;
+    450                    last_drift = d;
+    451                  }
+    452                  old_t1 = t1;
+    453                 // TIM1->CNT = 0;
+    454                  uint32_t ledIdBit = 0;
+    455                  if (config.frameBits == 12) { // workaround for byte swap
+    456                    ledIdBit = (frameId)%config.frameBits;
+    457                  } else {
+    458                    ledIdBit = frameId%config.frameBits;
+    459                  }
+    460                  /* FrameID synchronized LED lighting */
+    461                  bitmask = (1 << ledIdBit); // CAST chose 8-bit IDs. Which bit needs to be checked
+    462                  if (!radio_off) {
+    463                    led_blinking = 1;
+    464                    if (config.led0IdPattern & bitmask) {
+    465                      HwGPOHigh(GPO_IRLED0);
+    466                    } else {
+    467                      HwGPOLow(GPO_IRLED0);
+    468                    }
+    469          
+    470                    if (config.led1IdPattern & bitmask) {
+    471                      HwGPOHigh(GPO_IRLED1);
+    472                    } else {
+    473                      HwGPOLow(GPO_IRLED1);
+    474                    }
+    475          
+    476                    if (config.led2IdPattern & bitmask) {
+    477                      HwGPOHigh(GPO_IRLED2);
+    478                    } else {
+    479                      HwGPOLow(GPO_IRLED2);
+    480                    }
+    481                  }
+    482                  switch(led_select){
+    483                    case select_IRLED0:
+    484                      if(HwGPOstatus(GPO_IRLED0)){
+    485                        ENTER_ISR();
+    486                        ISR_SETFLAG(flagLEDSync);
+    487                        EXIT_ISR();
+    488                      }
+    489                      break;
+    490                    case select_IRLED1:
+    491                      if(HwGPOstatus(GPO_IRLED1)){
+    492                        ENTER_ISR();
+    493                        ISR_SETFLAG(flagLEDSync);
+    494                        EXIT_ISR();
+    495                      }
+    496                      break;
+    497                    case select_IRLED2:
+    498                      if(HwGPOstatus(GPO_IRLED2)){
+    499                        ENTER_ISR();
+    500                        ISR_SETFLAG(flagLEDSync);
+    501                        EXIT_ISR();
+    502                      }
+    503                      break;
+    504                  }
+    505              }
+    506              else if (TIM_GetITStatus(TIM3, TIM_IT_CC3) == SET)
+    507              {
+    508                  // Clear TIM3 Capture compare interrupt pending bit
+    509                  TIM_ClearITPendingBit(TIM3, TIM_IT_CC3);
+    510          
+    511                  // turn off LEDs now to save power
+    512          #ifdef BC_HW_REVA
+    513                  HwGPOHigh(GPO_IRLED0); HwGPOHigh(GPO_IRLED1); HwGPOHigh(GPO_IRLED2);
+    514          #else
+    515                  // disable TIM 3 CC4
+    516                  HwGPOLow(GPO_IRLED0); HwGPOLow(GPO_IRLED1); HwGPOLow(GPO_IRLED2);
+    517          #endif
+    518              }
+    519              else
+    520              {
+    521                assert(0);
+    522              }
+    523          }
+    524          extern uint8_t rxCount;
+    525          
+    526          uint32_t spi3_errors;
+    527          struct realTime spiTime;
+    528          struct realTime rxFIFOTime;
+    529          extern uint8_t readCCA;
+    530          uint8_t ccaVal;
+    531          uint8_t dummy;
+    532          
+    533          struct realTime frameTime;
+    534          
+    535          /*******************************************************************************
+    536          * Description : This function handles SPI3 (SPI_RADIO_IRQn) global interrupt request.
+    537          * Priority    : 2
+    538          * Input       : -
+    539          * Return      : -
+    540          *******************************************************************************/
+    541          void SPI3_IRQHandler(void) {
+    542              ENTER_ISR();
+    543          	if (SPI_I2S_GetFlagStatus(SPI_RADIO_IMU_SPI, SPI_I2S_FLAG_RXNE) == RESET) {
+    544          		EXIT_ISR();
+    545          		spi3_errors++;
+    546          		return;
+    547          	}
+    548          	spiTime.sec = sec;
+    549          	spiTime.uSec = TIM1->CNT;
+    550          	
+    551          	if(HwGetSPISS(SPI_RADIO)){	//check current chip selection SS is config to radio.
+    552          	//if(SPI3_CS==RADIO_CS){
+    553          		if (spiTxRxByteCount) {     // just finish up a SPI byte I/O
+    554          			spiTxRxByteCount--;
+    555          			*pSpiRxBuf = SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI);
+    556          			if (spiTxRxByteCount == 0) {  // at last byte. Roll the state machine
+    557          				if (spiTxRxByteState == RF_SPI_RX1_UPLOADCMD_STATE) {
+    558          					if (rxCount) {
+    559          						spiTxRxByteState = RF_SPI_RX2_DOWNLOAD_HEADER_STATE;  // start receiving frame
+    560          						spiTxRxByteCount = rxCount; //-1;
+    561          						(pSpiRxBuf++);    // PHR: Frame Length
+    562          						// assert(spiTxRxByteCount <= rxCount);
+    563          						if (spiTxRxByteCount) {
+    564          							// *(pSpiTxBuf++) = SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI);
+    565          							// spiTxRxByteCount--;
+    566          							spiTxRxByteCount++;
+    567          							SPI_I2S_SendData(SPI_RADIO_IMU_SPI, *(pSpiTxBuf));
+    568          						}
+    569          					} else {
+    570                          //ignore it, no data available
+    571          						spiTxRxByteState = RF_SPI_INIT_STATE;
+    572          						SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, DISABLE);
+    573          						ISR_SETFLAG(flagSPIMachineDone);
+    574          						if (rxCount) {
+    575          							// To flush overflown buffer
+    576          							rxFIFOError = 1;
+    577          							rxFIFOTime.sec = sec;
+    578          							rxFIFOTime.uSec = TIM1->CNT;
+    579          						}
+    580          					}
+    581          				} else {    // download finished                                    //STATE0, 3, 4, CCA, STXONCCA
+    582          					if (spiTxRxByteState == RF_SPI_UPLOAD_ONLY_STATE) {         // Upload frame is done
+    583          						txDoneType = 0;
+    584          					}
+    585          					else if (spiTxRxByteState == RF_SPI_RX2_DOWNLOAD_HEADER_STATE        // Some frame has header only
+    586          						||  spiTxRxByteState == RF_SPI_RX3_DOWNLOAD_BODY_STATE) {   // RXBUF_Part3 or RXBUF_Part4
+    587          						rxDoneType = 0;     // A successful frame RX. Assume that before rolling the state machine it is 1
+    588          					} else if (spiTxRxByteState == RF_SPI_CCA_CMD_STATE) { // reading FMSTAT1 (CCA Status)
+    589          						sampledCCA = *pSpiRxBuf;
+    590          					}
+    591          					spiTxRxByteState = RF_SPI_INIT_STATE;
+    592          					HwSPISSDeAssert(SPI_RADIO);
+    593          					SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, DISABLE);
+    594          
+    595          					ISR_SETFLAG(flagSPIMachineDone);
+    596          				}
+    597          			} else {  /* not at last byte */
+    598          				if (spiTxRxByteState == RF_SPI_RX2_DOWNLOAD_HEADER_STATE) {            // RXBUF_Part3: Receiving frame
+    599          					spiTxRxByteState = RF_SPI_RX3_DOWNLOAD_BODY_STATE;            // go to RXBUF_Part4 (Received first byte of frame then turn to state 4
+    600          					if (*pSpiRxBuf == 0x40) {               // check FCF0 = Beacon Frame
+    601          						RFSyncPktRx();
+    602          						frameTime.sec = sec;
+    603          						frameTime.uSec = TIM1->CNT;
+    604          					}
+    605          				}
+    606          				pSpiRxBuf++;
+    607          				SPI_I2S_SendData(SPI_RADIO_IMU_SPI, *(pSpiTxBuf++));
+    608          			}
+    609          		} else {                /* byteCountLSB == 0 */
+    610          			// It happens. SPI-CC2520 should be also working like this:
+    611          			// Each SPI_I2S_SendData trigger one interrupt and calls SPI3_IRQHandler
+    612          			// Number of time of SPI_I2S_SendData is determined by low byte of spiTxRxByteCount
+    613          			// So it could happen if some code does not wait for SPI3_IRQHandler to clean up low byte of spiTxRxByteCount
+    614          			// and resets it 0 in advance.
+    615          			// Only when SPI action is finished then other tasks are allowed to spiTxRxByteCount
+    616          			// spiTxRxByteCount operation in this interrupt service routin is safe but not in other tasks.
+    617          			assert(0);
+    618          			spiTxRxByteCount = 0;           // for sanity
+    619          			spiTxRxByteState = RF_SPI_INIT_STATE;
+    620          			HwSPISSDeAssert(SPI_RADIO);     // for sanity
+    621          			SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, DISABLE);
+    622          			ISR_SETFLAG(flagSPIMachineDone);
+    623          		}
+    624          	}
+    625          	else{	//current chip select configured as IMU.
+    626          		*pSpiRxBuf_IMU = SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI);
+    627          		if(spiIMUCount){
+    628          			spiIMUCount--;
+    629          			//don't increment rx buffer if the previous sent byte refers to register address 
+    630          			if(spiIMUByteState != IMU_SPI_INIT_STATE){
+    631          				pSpiRxBuf_IMU++;
+    632          				SPI_I2S_SendData(SPI_RADIO_IMU_SPI, *(pSpiTxBuf_IMU++));	
+    633          			} 
+    634          			else{
+    635          				SPI_I2S_SendData(SPI_RADIO_IMU_SPI, *(pSpiTxBuf_IMU++));
+    636          				spiIMUByteState = IMU_SPI_BODY_STATE;
+    637          			}
+    638          		}
+    639          		else{	//finished obtaining all data from IMU
+    640          			//*pSpiRxBuf_IMU = SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI);
+    641          			spiIMUByteState = IMU_SPI_INIT_STATE;
+    642          			HwSPISSDeAssert(SPI_IMU);
+    643          			SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, DISABLE);
+    644          			ISR_SETFLAG(flagIMUNewData);
+    645          		}
+    646          	}
+    647              EXIT_ISR();
+    648          }
+    649          struct realTime semTime;
+    650          uint32_t rxPackets;
+    651          
+    652          /*******************************************************************************
+    653          * Description : This function handles External line 2 interrupt request.
+    654          *               GPI_RADIO_GPIO0 (RX_FRM_DONE) = PD.2
+    655          * Priority    : 3
+    656          * Input       : -
+    657          * Return      : -
+    658          *******************************************************************************/
+    659          void EXTI2_IRQHandler(void) {
+    660            rxPackets++;
+    661            if (frameIdFlag) {
+    662              /* capture state in case this is an RF Sync Packet */       // As each timer has 4 channels to handle differrent events, they do not affect main counter
+    663              // latch TIM2, TIM3 & TIM4 counters NOW via software CC1 event
+    664              TIM2->EGR = TIM_EventSource_CC1;        // Must catch it to align 10Hz timer. Albert
+    665          #ifdef USE_TIM4
+    666              TIM4->EGR = TIM_EventSource_CC1;
+    667          #endif
+    668              __disable_interrupt();
+    669              frameIdAtSync = frameId;
+    670              tim3PhaseAtSync = TIM3->CNT;        // TODO! existing abs(tim3PhaseAtSync - TIM3_AUTORELOAD) <= delta &&  TIM3->CNT > delta then it could be noise                               
+    671              // if it is just turning to 0 and TIM_IT_Update got set EXTI2 has higest priority and TIM3 will not be triggered. Both TIM3 and tasks should treat frameIdAtSync and tim3PhaseAtSync in critical section 
+    672              if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) {
+    673                  frameIdAtSync++;
+    674                  tim3PhaseAtSync = TIM3->CNT;            // should be value as ARR. Need to verify. not 0! TODO!
+    675                  frameIdInced = 1;
+    676                } else {
+    677                  frameIdInced = 0;
+    678                }    
+    679              __enable_interrupt();
+    680          
+    681          #ifdef CIRCULAR_LOG
+    682                WRITE_LOG(CoGetOSTime(), LOG_TYPE_RXPACKET, frameIdAtSync);
+    683          #endif
+    684                frameIdFlag = 0;
+    685              MsTimerAtSync = TIM1->CNT;
+    686              IMUPktNumAtSync = test_imu_pkt_ctr;
+    687              //TIM1->CNT = 0;
+    688              ENTER_ISR();        // Above should be executed ASAP while ENTER_ISR could last long time
+    689              semTime.sec = sec;
+    690              semTime.uSec = TIM1->CNT;
+    691              StatusType statusType = isr_PostSem(semRFRxFrames);
+    692              // assert(statusType == E_OK); // happen when disconnecting ST-Link in debug mode
+    693             EXIT_ISR();
+    694            } else {
+    695                  errorFrameId++;
+    696            }
+    697              // Clear the  EXTI pending bit
+    698              EXTI_ClearITPendingBit(EXTI_Line2);
+    699          }
+    700          
+    701          uint32_t rx_overflow;
+    702          struct realTime semTime2;
+    703          
+    704          /*******************************************************************************
+    705          * Description : This function handles External line 3 interrupt request.
+    706          *               GPI_RADIO_GPIO5 (RX_UNDERFLOW | RX OVERFLOW)
+    707          * Input       : -
+    708          * Return      : -
+    709          *******************************************************************************/
+    710          void EXTI3_IRQHandler(void) {
+    711              ENTER_ISR(); 
+    712              
+    713              // Clear the  EXTI pending bit
+    714              EXTI_ClearITPendingBit(GPI_RADIO_GPIO5_EXTI_LINE);
+    715              rx_overflow++;
+    716              semTime2.sec = sec;
+    717              semTime2.uSec = TIM1->CNT;
+    718          
+    719              isr_PostSem(semRFRxFrames);
+    720              rxFIFOError = 1;     // failed. No need to lock? double check
+    721              
+    722              EXIT_ISR();    
+    723          }
+    724          uint32_t tx_overflow;
+    725          /*******************************************************************************
+    726          * Description : This function handles External line 0 interrupt request.
+    727          *               GPI_RADIO_GPIO2 (TX_OVERFLOW or TX_UNDERFLOW)
+    728          * Input       : -
+    729          * Return      : -
+    730          *******************************************************************************/
+    731          void EXTI0_IRQHandler(void) {
+    732              ENTER_ISR();
+    733              // Clear the  EXTI pending bit
+    734              EXTI_ClearITPendingBit(GPI_RADIO_GPIO2_EXTI_LINE);
+    735              tx_overflow++;
+    736              txFIFOError = 1;     // failed. no need to lock? double check
+    737              ISR_SETFLAG(flagRadioTxDone);       // notify TX task a transimit is done (but failed)
+    738              EXIT_ISR();
+    739          }
+    740          
+    741          uint32_t txFrmDoneCount = 0; // [[DEBUG]]
+    742          
+    743          /*******************************************************************************
+    744          * Description : This function handles External line 2 interrupt request.
+    745          *               GPI_RADIO_GPIO1 (TX_FRM_DONE) = PD.1
+    746          * Priority    : 4
+    747          * Input       : -
+    748          * Return      : -
+    749          *******************************************************************************/
+    750          void EXTI1_IRQHandler(void) {
+    751          
+    752              ENTER_ISR();
+    753          
+    754              txFrmDoneCount++; // [[DEBUG]]
+    755          
+    756          //    if (!radio_off) {
+    757                //HwLEDToggle(LED2);
+    758                //HwLEDToggle(LED1);
+    759          //    }
+    760          
+    761              // Clear the  EXTI pending bit
+    762              EXTI_ClearITPendingBit(EXTI_Line1);
+    763          
+    764              if (config.flags & FLAG_TRACE_TIMESLOT) {
+    765                  // time slot debug
+    766                  extern uint16_t txTimeSlot;
+    767                  uint16_t checkPoint = TIM_GetCounter(TIM2);
+    768                  uint16_t slotDelta = 2100;
+    769                  uint16_t slot2Offset = 60000 / 2 +  + txTimeSlot;
+    770                  BOOL error = 0;
+    771                  if (   (checkPoint >= txTimeSlot && checkPoint < txTimeSlot + slotDelta)
+    772                      || (checkPoint >= slot2Offset && checkPoint < slot2Offset + slotDelta)
+    773                          ) {
+    774                              error = 0;
+    775                          }
+    776                  else {
+    777                      error = 1;
+    778                  }
+    779                  TRACE("(%d %c)\n\r", checkPoint, error == 0 ? ' ' : 'E');
+    780              }
+    781          
+    782              ISR_SETFLAG(flagRadioTxDone);
+    783          
+    784              EXIT_ISR();
+    785          }
+    786          
+    787          uint32_t irq_spi_dma = 0;
+    788          
+    789          /*******************************************************************************
+    790          * Description : This function handles DMA1 Channel 4 (SPI_IMU_RX_DMA_IRQ)
+    791          *               interrupt request.
+    792          * Priority    : 5
+    793          * Input       : -
+    794          * Return      : -
+    795          *******************************************************************************/
+    796          void DMA1_Channel4_IRQHandler(void)
+    797          {
+    798              ENTER_ISR();
+    799              if(DMA_GetITStatus(DMA1_IT_TC4)) {
+    800                  // Clear DMA1 Channel5 Transfer Complete interrupt pending bit
+    801                  DMA_ClearITPendingBit(DMA1_IT_TC4);
+    802                  HwSPISSDeAssert(SPI_INK);
+    803                  ISR_SETFLAG(flagEInk_DMA_Done);
+    804              } else
+    805              assert(0);
+    806              EXIT_ISR();
+    807          }
+    808          
+    809          uint32_t counter;
+    810          uint32_t imu_irq_cnt=0;
+    811          StatusType setIMUGRdy;
+    812          uint16_t l;
+    813          
+    814          /*******************************************************************************
+    815          * Description : This function handles External lines 15 to 10 interrupt request.
+    816          				Triggers when the IMU interrupt is asserted.
+    817          * Priority    : 6
+    818          * Input       : -
+    819          * Return      : -
+    820          *******************************************************************************/
+    821          void EXTI15_10_IRQHandler(void)
+    822          {
+    823          	ENTER_ISR();
+    824          	if(EXTI_GetITStatus(EXTI_Line11) == SET){
+    825          	  EXTI_ClearITPendingBit(EXTI_Line11);
+    826              counter++;
+    827          	  l=__LINE__;
+    828          	  setIMUGRdy = ISR_SETFLAG(flagIMU_G_DRDY);
+    829          	  l=__LINE__;
+    830          	  test_imu_pkt_ctr++;
+    831              imu_irq_cnt++;
+    832          	}
+    833          	else if(EXTI_GetITStatus(EXTI_Line13)==SET){
+    834              EXTI_ClearITPendingBit(EXTI_Line13);
+    835              ISR_SETFLAG(flagEInk_RDY);
+    836            }
+    837          	EXIT_ISR();
+    838          }
+    839          
+    840          
+    841          /*******************************************************************************
+    842          * Description : This function handles TIM5 global interrupt request.
+    843          *               TIM5: STXONCCA Retries
+    844          * Priority    : 8
+    845          * Input       : -
+    846          * Return      : -
+    847          *******************************************************************************/
+    848          void TIM5_IRQHandler(void) {
+    849              ENTER_ISR();
+    850          
+    851              if(TIM_GetITStatus(TIM5, TIM_IT_Update) == SET) {
+    852                  /* Clear TIM5 Update interrupt pending bit */
+    853                  TIM_ClearITPendingBit(TIM5, TIM_IT_Update);
+    854          
+    855                  ISR_SETFLAG(flagRadioCCA);
+    856          
+    857              }
+    858          
+    859              EXIT_ISR();
+    860          }
+    861          
+    862          volatile uint32_t secs = 0;
+    863          int16_t whole_time_adjust;
+    864          int8_t part_time_adjust;
+    865          
+    866          /*******************************************************************************
+    867          * Description : This function handles TIM2 global interrupt request.
+    868          *               TIM2: 10Hz Radiox TX Inhibit
+    869          * Priority    : 9
+    870          * Input       : -
+    871          * Return      : -
+    872          *******************************************************************************/
+    873          void TIM2_IRQHandler(void) {
+    874              ENTER_ISR();
+    875              // CC2 Inhibit Begin
+    876              // CC3 Inhibit End
+    877              // CC4 IMU Sync
+    878              if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) {
+    879                TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+    880                secs++;
+    881              } else if (TIM_GetITStatus(TIM2, TIM_IT_CC2) == SET) {
+    882                  // Clear TIM2 Capture compare interrupt pending bit
+    883                  TIM_ClearITPendingBit(TIM2, TIM_IT_CC2);
+    884          
+    885                  __disable_interrupt();
+    886                  if (remainOutOfSyncTime > 0) {
+    887                    remainOutOfSyncTime--;
+    888                    if (remainOutOfSyncTime == 0) {
+    889                      lostSync++;
+    890                    }
+    891                  }
+    892                  __enable_interrupt();
+    893          
+    894              }
+    895              else if (TIM_GetITStatus(TIM2, TIM_IT_CC3) == SET) {            // start of timeslot
+    896                  // Clear TIM2 Capture compare interrupt pending bit
+    897                  TIM_ClearITPendingBit(TIM2, TIM_IT_CC3);
+    898                  /* END of Inhibition */
+    899                  ISR_SETFLAG(flagRadioTxAllow);
+    900              }
+    901              else if (TIM_GetITStatus(TIM2, TIM_IT_CC4) == SET) {            // Allow for IMU to have a second chance to transmit it is a half of 60000 period???
+    902                  // Clear TIM3 Capture compare interrupt pending bit
+    903                  TIM_ClearITPendingBit(TIM2, TIM_IT_CC4);
+    904                  //if (secs%2==0) {
+    905                  ISR_SETFLAG(flagRadioTxAllow);
+    906                }
+    907              /*else
+    908                assert(0);*/
+    909              EXIT_ISR();
+    910          }
+    911          #ifdef USE_TIM4
+    912          /*******************************************************************************
+    913          * Description : Calculates Moving Average of TIM4 (10Hz Sync Packet Freq)
+    914          * Input       : -
+    915          * Return      : nominal 2 x RF_SYNC_PERIOD
+    916          *******************************************************************************/
+    917          uint16_t Tim4GetMovAvg(void) {
+    918              static uint32_t acc = RF_SYNC_PERIOD2;
+    919              uint16_t *pVal;
+    920              uint16_t i;
+    921          
+    922              pVal = tim4HistA;
+    923              acc = 0;
+    924              for (i = 0; i < 32; i++) {      // array size = 32
+    925                  acc += *pVal++;
+    926              }
+    927          
+    928              return (acc/32);
+    929          }
+    930          #endif
+    931          
+    932          /*******************************************************************************
+    933          * Description : Calculates Moving Average of TIM2 (10Hz Radio TX Inhibit Phase)
+    934          * Input       : -
+    935          * Return      :
+    936          *******************************************************************************/
+    937          uint16_t Tim2GetMovAvg(void) {
+    938              int32_t acc;
+    939              uint16_t *pVal;
+    940              uint16_t i;
+    941          
+    942              pVal = tim2HistA;
+    943              acc = 0;
+    944              for (i = 0; i < tim2_update_count; i++) {      // array size = 16
+    945                uint16_t val =  *pVal++;
+    946                if (val > (TIM_AUTORELOAD>>1)) {
+    947                  acc -=  (TIM_AUTORELOAD - val);
+    948                } else {
+    949                  acc += val;
+    950                }
+    951              }
+    952          
+    953              if (tim2_update_count) {
+    954                acc = (acc/tim2_update_count);
+    955              }
+    956              return acc;
+    957          
+    958          }
+    959          
+    960          /*******************************************************************************
+    961          * Description : This function handles I2Cx Error interrupt request.
+    962          * Priority    : 6
+    963          * Input       : -
+    964          * Return      : -
+    965          * must include EE_gettime? like in i2c_ee
+    966          *******************************************************************************/
+    967          void I2C1_ER_IRQHandler(void){ 
+    968            ENTER_ISR();
+    969            if(I2C_GetITStatus(I2C_EE, I2C_IT_SMBALERT)){
+    970          		I2C_ClearITPendingBit(I2C_EE, I2C_IT_SMBALERT);
+    971          	}
+    972          	if(I2C_GetITStatus(I2C_EE, I2C_IT_TIMEOUT)){
+    973          		I2C_ClearITPendingBit(I2C_EE, I2C_IT_TIMEOUT);
+    974          	}
+    975          	if(I2C_GetITStatus(I2C_EE,I2C_IT_PECERR)){
+    976          		I2C_ClearITPendingBit(I2C_EE, I2C_IT_PECERR);
+    977          	}
+    978          	if(I2C_GetITStatus(I2C_EE,I2C_IT_OVR)){
+    979          		I2C_ClearITPendingBit(I2C_EE, I2C_IT_OVR);
+    980          	}
+    981          	if (I2C_GetITStatus(I2C_EE, I2C_IT_AF)){
+    982          		I2C_ClearITPendingBit(I2C_EE, I2C_IT_AF);
+    983          	}
+    984          	if(I2C_GetITStatus(I2C_EE, I2C_IT_ARLO)){
+    985          		I2C_ClearITPendingBit(I2C_EE, I2C_IT_ARLO);
+    986          	}
+    987          	if(I2C_GetITStatus(I2C_EE, I2C_IT_BERR)){
+    988          		I2C_ClearITPendingBit(I2C_EE, I2C_IT_BERR);
+    989          	}
+    990            I2C_ERR=1;
+    991            ISR_SETFLAG(flagI2CMachineDone);
+    992            I2C_ITConfig(I2C_EE, I2C_IT_EVT|I2C_IT_ERR|I2C_IT_BUF, DISABLE);
+    993            EXIT_ISR();
+    994          }
+    995          
+    996          /*******************************************************************************
+    997          * Description : This function handles I2Cx Event interrupt request.
+    998          * Priority    : 6
+    999          * Input       : -
+   1000          * Return      : -
+   1001          * must include EE_gettime? like in i2c_ee
+   1002          *******************************************************************************/
+   1003          void I2C1_EV_IRQHandler(void){
+   1004            static volatile uint32_t check;
+   1005            ENTER_ISR();
+   1006            check = I2C_GetLastEvent(I2C_EE);
+   1007            switch(check){
+   1008              case I2C_EVENT_MASTER_MODE_SELECT:                                    //EV5
+   1009              //check write or read mode.
+   1010                if(I2CTxRxByteState == I2C_READ_MODE){
+   1011                  I2C_Send7bitAddress(I2C_EE, *pI2CTxBuf, I2C_Direction_Receiver);
+   1012                }
+   1013                else{ // if(I2CTxRxByteState == I2C_WRITE_MODE){
+   1014                  I2CTxRxByteCount--;
+   1015                  I2C_Send7bitAddress(I2C_EE, *(pI2CTxBuf++), I2C_Direction_Transmitter);
+   1016                }
+   1017                break;
+   1018          /* Master Receiver ------------------------------------------------------------*/
+   1019              case I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED:                         //EV6
+   1020                I2C_AcknowledgeConfig(I2C_EE, ENABLE); 
+   1021                break;
+   1022              case I2C_EVENT_MASTER_BYTE_RECEIVED:                                  //EV7
+   1023              case (I2C_EVENT_MASTER_BYTE_RECEIVED | 0x04):
+   1024            case (0x40):
+   1025                *(pI2CRxBuf++) = I2C_ReceiveData(I2C_EE);
+   1026                I2CTxRxByteCount--;
+   1027                if(I2CTxRxByteCount==1){
+   1028                  I2CTxRxByteState = I2C_INIT_MODE;
+   1029                  I2C_AcknowledgeConfig(I2C_EE, DISABLE);
+   1030                  I2C_GenerateSTOP(I2C_EE, ENABLE);
+   1031                }
+   1032                else if(I2CTxRxByteCount==0){
+   1033                  I2CTxRxByteState = I2C_INIT_MODE;
+   1034                  ISR_SETFLAG(flagI2CMachineDone);
+   1035                  I2C_AcknowledgeConfig(I2C_EE, ENABLE);
+   1036                  I2C_ITConfig(I2C_EE, (I2C_IT_EVT|I2C_IT_ERR|I2C_IT_BUF), DISABLE);
+   1037                }
+   1038                break;      
+   1039          /* Master Transmitter --------------------------------------------------------*/
+   1040              case I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED:                      //EV6
+   1041                if(I2CTxRxByteCount--){
+   1042                  I2C_SendData(I2C_EE, *(pI2CTxBuf++));        
+   1043                }
+   1044                if(I2CTxRxByteCount==0){
+   1045                  I2C_ITConfig(I2C_EE, I2C_IT_BUF, DISABLE);
+   1046                }
+   1047                break;
+   1048              case I2C_EVENT_MASTER_BYTE_TRANSMITTING:                              //EV8
+   1049                if(I2CTxRxByteCount--){
+   1050                  I2C_SendData(I2C_EE, *(pI2CTxBuf++));
+   1051                  if(I2CTxRxByteCount==0){
+   1052                    I2C_ITConfig(I2C_EE, I2C_IT_BUF, DISABLE);
+   1053                  }
+   1054                }
+   1055                break;
+   1056              case I2C_EVENT_MASTER_BYTE_TRANSMITTED:                               //EV8_2
+   1057                I2CTxRxByteState = I2C_INIT_MODE;
+   1058                I2C_GenerateSTOP(I2C_EE, ENABLE);
+   1059                ISR_SETFLAG(flagI2CMachineDone);
+   1060                I2C_ITConfig(I2C_EE, I2C_IT_EVT|I2C_IT_ERR|I2C_IT_BUF, DISABLE);
+   1061                break;
+   1062              default:
+   1063                //something wrong has occurred. undefined state ->something to look into if this occurs as it shouldn't occur
+   1064                //assert(0);
+   1065                I2C_ERR=1;
+   1066                ISR_SETFLAG(flagI2CMachineDone);
+   1067                I2C_ITConfig(I2C_EE, I2C_IT_EVT|I2C_IT_ERR|I2C_IT_BUF, DISABLE);
+   1068                break;
+   1069            }
+   1070            EXIT_ISR();
+   1071          }
+   1072          
+   1073          /*******************************************************************************
+   1074          * Description : This function handles TIM7 Update interrupt request.
+   1075          * Priority    : 10
+   1076          * Input       : -
+   1077          * Return      : -
+   1078          *******************************************************************************/
+   1079          void TIM7_IRQHandler(void){
+   1080          	ENTER_ISR();
+   1081            if(TIM_GetITStatus(TIM7, TIM_IT_Update) == SET) {
+   1082              /* Clear TIM7 Update interrupt pending bit */
+   1083          		TIM_Cmd(TIM7,DISABLE);
+   1084          		TIM7->CNT=0;
+   1085              TIM_ClearITPendingBit(TIM7, TIM_IT_Update);
+   1086              ISR_SETFLAG(flagTimeout_UI);
+   1087          	}
+   1088            EXIT_ISR();
+   1089          }
+   1090          
+   1091          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  BusFault_Handler
+        8  DMA1_Channel4_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> DMA_ClearITPendingBit
+              8 -> DMA_GetITStatus
+              8 -> HwSPISSDeAssert
+              8 -> assert_failed
+              8 -> isr_SetFlag
+        0  DebugMon_Handler
+        8  EXTI0_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> EXTI_ClearITPendingBit
+              8 -> isr_SetFlag
+        8  EXTI15_10_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> EXTI_ClearITPendingBit
+              8 -> EXTI_GetITStatus
+              8 -> isr_SetFlag
+       24  EXTI1_IRQHandler
+             24 -> CoEnterISR
+             24 -> CoExitISR
+             24 -> EXTI_ClearITPendingBit
+             24 -> TIM_GetCounter
+             24 -> TRACE
+             24 -> isr_SetFlag
+        8  EXTI2_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> CoGetOSTime
+              8 -> EXTI_ClearITPendingBit
+              8 -> TIM_GetITStatus
+              8 -> isr_PostSem
+        8  EXTI3_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> EXTI_ClearITPendingBit
+              8 -> isr_PostSem
+        0  HardFault_Handler
+        8  I2C1_ER_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> I2C_ClearITPendingBit
+              8 -> I2C_GetITStatus
+              8 -> I2C_ITConfig
+              8 -> isr_SetFlag
+        8  I2C1_EV_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> I2C_AcknowledgeConfig
+              8 -> I2C_GenerateSTOP
+              8 -> I2C_GetLastEvent
+              8 -> I2C_ITConfig
+              8 -> I2C_ReceiveData
+              8 -> I2C_Send7bitAddress
+              8 -> I2C_SendData
+              8 -> isr_SetFlag
+        0  MemManage_Handler
+        8  OTG_FS_IRQHandler
+              8 -> USBD_OTG_ISR_Handler
+        8  RFSyncPktRx
+              8 -> Tim2UpdMovAvg
+              8 -> Tim3UpdMovAvg
+        8  SPI3_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> HwGetSPISS
+              8 -> HwSPISSDeAssert
+              8 -> RFSyncPktRx
+              8 -> SPI_I2S_GetFlagStatus
+              8 -> SPI_I2S_ITConfig
+              8 -> SPI_I2S_ReceiveData
+              8 -> SPI_I2S_SendData
+              8 -> assert_failed
+              8 -> isr_SetFlag
+        0  SVC_Handler
+        8  TIM1_UP_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> TIM_ClearITPendingBit
+              8 -> TIM_GetITStatus
+              8 -> assert_failed
+        8  TIM2_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> TIM_ClearITPendingBit
+              8 -> TIM_GetITStatus
+              8 -> isr_SetFlag
+       24  TIM3_IRQHandler
+             24 -> CoEnterISR
+             24 -> CoExitISR
+             24 -> HwGPOHigh
+             24 -> HwGPOLow
+             24 -> HwGPOstatus
+             24 -> TIM_ClearITPendingBit
+             24 -> TIM_GetITStatus
+             24 -> assert_failed
+             24 -> isr_SetFlag
+        8  TIM5_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> TIM_ClearITPendingBit
+              8 -> TIM_GetITStatus
+              8 -> isr_SetFlag
+        8  TIM7_IRQHandler
+              8 -> CoEnterISR
+              8 -> CoExitISR
+              8 -> TIM_ClearITPendingBit
+              8 -> TIM_Cmd
+              8 -> TIM_GetITStatus
+              8 -> isr_SetFlag
+        4  Tim2GetMovAvg
+        0  Tim2UpdMovAvg
+        0  Tim3UpdMovAvg
+        0  Tim4GetMovAvg
+        0  UsageFault_Handler
+        0  hard_fault_handler_c
+              0 -> I2C_EE_BufferRead
+              0 -> I2C_EE_BufferWrite
+              0 -> I2C_ITConfig
+              0 -> I2C_SoftwareResetCmd
+              0 -> printf
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      12  ?<Constant "(%d %c)\n\r">
+      12  ?<Constant "AFSR = %x\n">
+      12  ?<Constant "BFAR = %x\n">
+     120  ?<Constant "C:\\Users\\kmak\\Documen...">
+      12  ?<Constant "CFSR = %x\n">
+      12  ?<Constant "DFSR = %x\n">
+      12  ?<Constant "HFSR = %x\n">
+      12  ?<Constant "LR = %x\n">
+      12  ?<Constant "PC = %x\n">
+      12  ?<Constant "PSR = %x\n">
+      12  ?<Constant "R0 = %x\n">
+      12  ?<Constant "R1 = %x\n">
+      12  ?<Constant "R12 = %x\n">
+      12  ?<Constant "R2 = %x\n">
+      12  ?<Constant "R3 = %x\n">
+      24  ?<Constant "[Hard fault handler]\n">
+       4  ??DataTable11
+       4  ??DataTable11_1
+       4  ??DataTable11_2
+       4  ??DataTable11_3
+       4  ??DataTable12
+       4  ??DataTable12_1
+       4  ??DataTable12_2
+       4  ??DataTable12_3
+       4  ??DataTable12_4
+       4  ??DataTable12_5
+       4  ??DataTable13
+       4  ??DataTable13_1
+       4  ??DataTable14
+       4  ??DataTable14_1
+       4  ??DataTable14_2
+       4  ??DataTable14_3
+       4  ??DataTable14_4
+       4  ??DataTable14_5
+       4  ??DataTable14_6
+       4  ??DataTable14_7
+       4  ??DataTable14_8
+       4  ??DataTable14_9
+       4  ??DataTable15
+       4  ??DataTable15_1
+       4  ??DataTable15_2
+       4  ??DataTable15_3
+       4  ??DataTable16
+       4  ??DataTable16_1
+       4  ??DataTable16_2
+       4  ??DataTable16_3
+       4  ??DataTable16_4
+       4  ??DataTable16_5
+       4  ??DataTable16_6
+       4  ??DataTable16_7
+       4  ??DataTable16_8
+       4  ??DataTable17
+       4  ??DataTable17_1
+       4  ??DataTable17_2
+       4  ??DataTable17_3
+       4  ??DataTable17_4
+       4  ??DataTable17_5
+       4  ??DataTable17_6
+       4  ??DataTable17_7
+       4  ??DataTable17_8
+       4  ??DataTable17_9
+       4  ??DataTable18
+       4  ??DataTable18_1
+       4  ??DataTable18_10
+       4  ??DataTable18_11
+       4  ??DataTable18_2
+       4  ??DataTable18_3
+       4  ??DataTable18_4
+       4  ??DataTable18_5
+       4  ??DataTable18_6
+       4  ??DataTable18_7
+       4  ??DataTable18_8
+       4  ??DataTable18_9
+       4  ??DataTable19
+       4  ??DataTable19_1
+       4  ??DataTable19_2
+       4  ??DataTable19_3
+       4  ??DataTable19_4
+       4  ??DataTable20
+       4  ??DataTable20_1
+       4  ??DataTable20_10
+       4  ??DataTable20_11
+       4  ??DataTable20_12
+       4  ??DataTable20_13
+       4  ??DataTable20_14
+       4  ??DataTable20_15
+       4  ??DataTable20_16
+       4  ??DataTable20_17
+       4  ??DataTable20_18
+       4  ??DataTable20_19
+       4  ??DataTable20_2
+       4  ??DataTable20_20
+       4  ??DataTable20_21
+       4  ??DataTable20_22
+       4  ??DataTable20_23
+       4  ??DataTable20_24
+       4  ??DataTable20_25
+       4  ??DataTable20_26
+       4  ??DataTable20_27
+       4  ??DataTable20_28
+       4  ??DataTable20_29
+       4  ??DataTable20_3
+       4  ??DataTable20_30
+       4  ??DataTable20_31
+       4  ??DataTable20_32
+       4  ??DataTable20_33
+       4  ??DataTable20_34
+       4  ??DataTable20_35
+       4  ??DataTable20_36
+       4  ??DataTable20_37
+       4  ??DataTable20_38
+       4  ??DataTable20_39
+       4  ??DataTable20_4
+       4  ??DataTable20_40
+       4  ??DataTable20_41
+       4  ??DataTable20_42
+       4  ??DataTable20_43
+       4  ??DataTable20_44
+       4  ??DataTable20_45
+       4  ??DataTable20_46
+       4  ??DataTable20_47
+       4  ??DataTable20_48
+       4  ??DataTable20_49
+       4  ??DataTable20_5
+       4  ??DataTable20_50
+       4  ??DataTable20_51
+       4  ??DataTable20_52
+       4  ??DataTable20_53
+       4  ??DataTable20_54
+       4  ??DataTable20_55
+       4  ??DataTable20_56
+       4  ??DataTable20_57
+       4  ??DataTable20_58
+       4  ??DataTable20_59
+       4  ??DataTable20_6
+       4  ??DataTable20_60
+       4  ??DataTable20_61
+       4  ??DataTable20_62
+       4  ??DataTable20_63
+       4  ??DataTable20_64
+       4  ??DataTable20_65
+       4  ??DataTable20_66
+       4  ??DataTable20_67
+       4  ??DataTable20_68
+       4  ??DataTable20_69
+       4  ??DataTable20_7
+       4  ??DataTable20_70
+       4  ??DataTable20_71
+       4  ??DataTable20_72
+       4  ??DataTable20_73
+       4  ??DataTable20_74
+       4  ??DataTable20_75
+       4  ??DataTable20_76
+       4  ??DataTable20_77
+       4  ??DataTable20_78
+       4  ??DataTable20_79
+       4  ??DataTable20_8
+       4  ??DataTable20_9
+       2  BusFault_Handler
+      60  DMA1_Channel4_IRQHandler
+       2  DebugMon_Handler
+      50  EXTI0_IRQHandler
+     142  EXTI15_10_IRQHandler
+     160  EXTI1_IRQHandler
+     344  EXTI2_IRQHandler
+      74  EXTI3_IRQHandler
+      20  HardFault_Handler
+     232  I2C1_ER_IRQHandler
+     410  I2C1_EV_IRQHandler
+       1  IMUPktNumAtSync
+       4  IMUSampleTime
+       2  MemManage_Handler
+       2  MsTimerAtSync
+      12  OTG_FS_IRQHandler
+      60  RFSyncPktRx
+     802  SPI3_IRQHandler
+       2  SVC_Handler
+     100  TIM1_UP_IRQHandler
+     200  TIM2_IRQHandler
+     498  TIM3_IRQHandler
+      46  TIM5_IRQHandler
+      54  TIM7_IRQHandler
+      90  Tim2GetMovAvg
+     100  Tim2UpdMovAvg
+     100  Tim3UpdMovAvg
+      58  Tim4GetMovAvg
+       2  UsageFault_Handler
+       4  acc
+       2  adjusted
+       1  adjusted_changed
+       1  ccaVal
+       4  check
+       4  counter
+       4  drift
+       1  dummy
+       4  frameId
+       4  frameIdAtSync
+       4  frameIdInced
+       8  frameTime
+     326  hard_fault_handler_c
+       4  hf_counter
+       2  idxA
+       2  idxA
+       4  imu_irq_cnt
+       4  irq_spi_dma
+       2  l
+       4  lastFrameIdAtCorrection
+       4  last_drift
+       2  last_reload
+       4  last_sec
+       4  last_sec
+       1  led_blinking
+       4  myold_t1
+       4  myt1
+       2  numTxRetries
+       4  old_t1
+       2  over1
+       1  part_time_adjust
+       4  real_sec
+       8  rxFIFOTime
+       4  rxPackets
+       4  rx_overflow
+       2  sampledCCA
+       4  sec
+       4  secs
+       8  semTime
+       8  semTime2
+       1  setIMUGRdy
+       4  spi3_errors
+       8  spiTime
+       4  stacked_lr
+       4  stacked_pc
+       4  stacked_psr
+       4  syncPackets
+      32  tim2HistA
+       1  tim2_update_count
+      32  tim3HistA
+       2  tim3PhaseAtSync
+       1  tim3_counter
+       1  tim3_update_count
+      64  tim4HistA
+       4  trace_irq
+       4  txFrmDoneCount
+       2  txRetryState
+       4  tx_overflow
+       2  whole_time_adjust
+
+ 
+   246 bytes in section .bss
+    68 bytes in section .data
+    12 bytes in section .noinit
+   312 bytes in section .rodata
+ 4 516 bytes in section .text
+ 
+ 4 516 bytes of CODE  memory
+   312 bytes of CONST memory
+   326 bytes of DATA  memory
+
+Errors: none
+Warnings: 5

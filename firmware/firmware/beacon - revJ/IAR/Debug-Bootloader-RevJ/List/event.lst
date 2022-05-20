@@ -1,0 +1,531 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     26/Oct/2019  13:14:13 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\e #
+#                    vent.c                                                   #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\e #
+#                    vent.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER -D         #
+#                    STM32F10X_CL -D COOS -D USE_MY_ASSERT -D _DEBUG -D       #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D BC_HW_REVJ   #
+#                    -lcN "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source  #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\event.lst            #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\event.o               #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\event.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       event.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      event management implementation code of CooCox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          
+     17          /*---------------------------- Include ---------------------------------------*/
+     18          #include <coocox.h>
+     19          
+     20          
+     21          /*---------------------------- Variable Define -------------------------------*/
+     22          #if CFG_EVENT_EN > 0
+     23          
+     24          ECB    EventTbl[CFG_MAX_EVENT]= {{0}};/*!< Table which save event control block.*/
+     25          P_ECB  FreeEventList = Co_NULL;        /*!< Pointer to free event control block. */
+     26          
+     27          
+     28          /**
+     29           *******************************************************************************
+     30           * @brief      Create a empty list of event control block
+     31           * @param[in]  None
+     32           * @param[out] None
+     33           * @retval     None
+     34           *
+     35           * @par Description
+     36           * @details    This function is called by OSInit() API to create a ECB list,supply
+     37           *             a  pointer to next event control block that not used.
+     38           *******************************************************************************
+     39           */
+     40          void CreateEventList(void)
+     41          {
+     42              U8  i;
+     43              P_ECB pecb1;
+     44          #if CFG_MAX_EVENT > 1
+     45              P_ECB pecb2;
+     46          #endif
+     47              i=0;
+     48              pecb1 = &EventTbl[0];               /* Get first item                     */
+     49          #if CFG_MAX_EVENT == 1                  /* Build event list for only one item */
+     50              pecb1->eventPtr  = Co_NULL;
+     51              pecb1->id        = i;               /* Assign ID.                         */
+     52              pecb1->eventType = EVENT_TYPE_INVALID;  /* Sign that not to use.          */
+     53          #endif
+     54          
+     55          #if CFG_MAX_EVENT > 1             /* Build event list for more than one item  */
+     56              pecb2 = &EventTbl[1];
+     57              for(;i< (CFG_MAX_EVENT-1);i++ )
+     58              {
+     59                  pecb1->eventPtr  = (void*)pecb2;      /* Set link for list            */
+     60                  pecb1->id        = i;                 /* Assign ID.                   */
+     61                  pecb1->eventType = EVENT_TYPE_INVALID;/* Sign that not to use.        */
+     62                  pecb1++;                              /* Get next item                */
+     63                  pecb2++;
+     64              }
+     65          	pecb1->eventType = EVENT_TYPE_INVALID;    /* Sign that not to use.        */
+     66              pecb1->eventPtr  = Co_NULL;                  /* Set link for last item       */
+     67              pecb1->id        = i;
+     68          #endif
+     69          
+     70              FreeEventList    = &EventTbl[0];          /* Set free event item          */
+     71          }
+     72          
+     73          
+     74          
+     75          /**
+     76           *******************************************************************************
+     77           * @brief      Release a ECB
+     78           * @param[in]  pecb     A pointer to event control block which be released.
+     79           * @param[out] None
+     80           * @retval     None
+     81           *
+     82           * @par Description
+     83           * @details    This function is called to release a event control block when a
+     84           *             event be deleted.
+     85           *******************************************************************************
+     86           */
+     87          static void ReleaseECB(P_ECB pecb)
+     88          {
+     89              pecb->eventType = EVENT_TYPE_INVALID;     /* Sign that not to use.        */
+     90              OsSchedLock();                            /* Lock schedule                */
+     91              pecb->eventPtr  = FreeEventList;          /* Release ECB that event hold  */
+     92              FreeEventList   = pecb;                   /* Reset free event item        */
+     93              OsSchedUnlock();                          /* Unlock schedule              */
+     94          }
+     95          
+     96          
+     97          
+     98          /**
+     99           *******************************************************************************
+    100           * @brief      Create a event
+    101           * @param[in]  eventType       The type of event which	being created.
+    102           * @param[in]  eventSortType   Event sort type.
+    103           * @param[in]  eventCounter    Event counter,ONLY for EVENT_TYPE_SEM.
+    104           * @param[in]  eventPtr        Event struct pointer,ONLY for Queue.Co_NULL for other
+    105           *                             event type.
+    106           * @param[out] None
+    107           * @retval     Co_NULL     Invalid pointer,create event fail.
+    108           * @retval     others   Pointer to event control block which had assigned right now.
+    109           *
+    110           * @par Description
+    111           * @details    This function is called by CreateSem(),...
+    112           *             to get a event control block and initial the event content.
+    113           *
+    114           * @note       This is a internal function of CooCox CoOS,User can't call.
+    115           *******************************************************************************
+    116           */
+    117          P_ECB CreatEvent(U8 eventType,U8 eventSortType,void* eventPtr)
+    118          {
+    119              P_ECB pecb;
+    120          
+    121              OsSchedLock();                      /* Lock schedule                      */
+    122              if(FreeEventList == Co_NULL)           /* Is there no free evnet item        */
+    123              {
+    124                  OsSchedUnlock();                /* Yes,unlock schedule                */
+    125                  return Co_NULL;                    /* Return error                       */
+    126              }
+    127              pecb          = FreeEventList;/* Assign the free event item to this event */
+    128              FreeEventList = FreeEventList->eventPtr;  /* Reset free event item        */
+    129              OsSchedUnlock();                    /* Unlock schedul                     */
+    130          
+    131              pecb->eventType     = eventType;    /* Initialize event item as user set  */
+    132              pecb->eventSortType = eventSortType;
+    133              pecb->eventPtr      = eventPtr;
+    134              pecb->eventTCBList  = Co_NULL;
+    135              return pecb;                        /* Return event item pointer          */
+    136          }
+    137          
+    138          
+    139          /**
+    140           *******************************************************************************
+    141           * @brief      Delete a event
+    142           * @param[in]  pecb     Pointer to event control block which will be deleted.
+    143           * @param[in]  opt      Delete option.
+    144           * @arg        == OPT_DEL_ANYWAY     Delete event always
+    145           * @arg        == OPT_DEL_NO_PEND	 Delete event only when no task pending on.
+    146           * @param[out] None
+    147           * @retval     E_INVALID_PARAMETER   Parameter passed is invalid,deleted fail.
+    148           * @retval     E_TASK_WAITTING       These are one more tasks waitting event.
+    149           * @retval     E_OK                  Delete event control block successful.
+    150           *
+    151           * @par Description
+    152           * @details    This function is called to delete a event from the event wait list
+    153           *             use specify option.
+    154           *
+    155           * @note       This is a internal function of Coocox CoOS,user can't call.
+    156           *******************************************************************************
+    157           */
+    158          StatusType DeleteEvent(P_ECB pecb,U8 opt)
+    159          {
+    160              P_OSTCB ptcb;
+    161              if(opt == OPT_DEL_NO_PEND)          /* Do delete event when no task pend? */
+    162              {
+    163                  if(pecb->eventTCBList != Co_NULL)  /* Yes,is there task pend this event? */
+    164                  {
+    165                      return E_TASK_WAITING;      /* Yes,error return                   */
+    166                  }
+    167                  else
+    168                  {
+    169                      ReleaseECB(pecb);           /* No,release resource that event hold*/
+    170                  }
+    171              }
+    172              else if(opt == OPT_DEL_ANYWAY)      /* Do delete event anyway?            */
+    173              {
+    174                  OsSchedLock();                      /* Lock schedule                  */
+    175                  while(pecb->eventTCBList != Co_NULL)   /* Is there task pend this event? */
+    176                  {                                   /* Yes,remove it                  */
+    177                      ptcb = pecb->eventTCBList;/* Get first task in event waiting list */
+    178                      if(ptcb->delayTick != INVALID_VALUE) /* Is task in delay list?    */
+    179                      {
+    180                          RemoveDelayList(ptcb);    /* Yes,remove task from delay list  */
+    181                      }
+    182          
+    183                      /* Set next item as event waiting list head */
+    184                      pecb->eventTCBList = ptcb->waitNext;
+    185                      ptcb->waitNext     = Co_NULL;  /* Clear link for event waiting list  */
+    186                      ptcb->eventID      = INVALID_ID;  /* Sign that not to use.        */
+    187          
+    188          		TASK_SEQ(ptcb); 	InsertToTCBRdyList(ptcb);         /* Insert task into ready list  */
+    189                  }
+    190                  OsSchedUnlock();                  /* Unlock schedule                  */
+    191                  ReleaseECB(pecb);                 /* Release resource that event hold */
+    192              }
+    193              return E_OK;                          /* Return OK                        */
+    194          }
+    195          
+    196          
+    197          /**
+    198           *******************************************************************************
+    199           * @brief      Insert a task to event wait list
+    200           * @param[in]  pecb    Pointer to event control block corresponding to the event.
+    201           * @param[in]  ptcb    Pointer to task that will be insert to event wait list.
+    202           * @param[out] None
+    203           * @retval     None
+    204           *
+    205           * @par Description
+    206           * @details   This function is called to insert a task by fllowing manner:
+    207           *            opt == EVENT_SORT_TYPE_FIFO   By FIFO.
+    208           *            opt == EVENT_SORT_TYPE_PRIO   By priority order,hghest priority
+    209           *                                          as head,lowest priority as end.
+    210           *                                          (Highest-->...-->Lowest-->Co_NULL)
+    211           *******************************************************************************
+    212           */
+    213          void EventTaskToWait(P_ECB pecb,P_OSTCB ptcb)
+    214          {
+    215              P_OSTCB ptcb1;
+    216          #if (CFG_EVENT_SORT == 2) || (CFG_EVENT_SORT == 3)
+    217              P_OSTCB ptcb2;
+    218          #endif
+    219          
+    220              OsSchedLock();                  /* Lock schedule                          */
+    221              ptcb1 = pecb->eventTCBList;     /* Get first task in event waiting list   */
+    222              ptcb->eventID = pecb->id;       /* Set event ID for task                  */
+    223          
+    224          #if CFG_EVENT_SORT == 3             /* Does event waiting list sort as FIFO?  */
+    225          
+    226              if(pecb->eventSortType == EVENT_SORT_TYPE_FIFO)
+    227          #endif
+    228          
+    229          #if (CFG_EVENT_SORT == 1) || (CFG_EVENT_SORT == 3)
+    230              {
+    231                  if(ptcb1 == Co_NULL)                 /* Is no item in event waiting list?*/
+    232                  {
+    233                      pecb->eventTCBList = ptcb;    /* Yes,set task as first item       */
+    234                  }
+    235                  else
+    236                  {
+    237                      while(ptcb1->waitNext != Co_NULL)/* No,insert task in last           */
+    238                      {
+    239                          ptcb1 = ptcb1->waitNext;
+    240                      }
+    241                      ptcb1->waitNext = ptcb;       /* Set link for list                */
+    242                      ptcb->waitPrev  = ptcb1;
+    243                  }
+    244              }
+    245          #endif
+    246          
+    247          #if CFG_EVENT_SORT ==3 /* Does event waiting list sort as preemptive priority?*/
+    248              else if(pecb->eventSortType == EVENT_SORT_TYPE_PRIO)
+    249          #endif
+    250          #if (CFG_EVENT_SORT == 2) || (CFG_EVENT_SORT == 3)
+    251              {
+    252                  if(ptcb1 == Co_NULL)               /* Is no item in event waiting list?  */
+    253                  {
+    254                      pecb->eventTCBList = ptcb;  /* Yes,set task as first item         */
+    255                  }
+    256                  /* Is PRI of task higher than list first item?                        */
+    257                  else if(ptcb1->prio > ptcb->prio)
+    258                  {
+    259                      pecb->eventTCBList = ptcb;  /* Reset task as first item           */
+    260                      ptcb->waitNext     = ptcb1; /* Set link for list                  */
+    261                      ptcb1->waitPrev    = ptcb;
+    262                  }
+    263                  else                            /* No,find correct place to insert    */
+    264                  {
+    265                      ptcb2 = ptcb1->waitNext;
+    266                      while(ptcb2 != Co_NULL)        /* Is last item?                      */
+    267                      {
+    268                          if(ptcb2->prio > ptcb->prio)  /* No,is correct place?         */
+    269                          {
+    270                              break;                    /* Yes,break Circulation        */
+    271                          }
+    272                          ptcb1 = ptcb2;                /* Save current item            */
+    273                          ptcb2 = ptcb2->waitNext;      /* Get next item                */
+    274                      }
+    275                      ptcb1->waitNext = ptcb;           /* Set link for list            */
+    276                      ptcb->waitPrev  = ptcb1;
+    277                      ptcb->waitNext  = ptcb2;
+    278                      if(ptcb2 != Co_NULL)
+    279                      {
+    280                          ptcb2->waitPrev = ptcb;
+    281                      }
+    282                  }
+    283              }
+    284          #endif
+    285              ptcb->state = TASK_WAITING; TASK_SEQ(ptcb);    /* Set task status to TASK_WAITING state  */
+    286              TaskSchedReq = Co_TRUE;
+    287              OsSchedUnlock();                /* Unlock schedule,and call task schedule */
+    288          }
+    289          
+    290          
+    291          /**
+    292           *******************************************************************************
+    293           * @brief      Move a task from event WAITING list to the DELAY list
+    294           * @param[in]  pecb    Pointer to event control block corresponding to the event.
+    295           * @param[out] None
+    296           * @retval     None
+    297           *
+    298           * @par Description
+    299           * @details    This function is called to remove a task from event wait list,and
+    300           *             then insert it into the READY list.
+    301           *******************************************************************************
+    302           */
+    303          void EventTaskToRdy(P_ECB pecb)
+    304          {
+    305              P_OSTCB ptcb;
+    306          #if CFG_QUEUE_EN >0
+    307              P_QCB   pqcb;
+    308          #endif
+    309              ptcb = pecb->eventTCBList;
+    310              if(ptcb == Co_NULL)
+    311                  return;
+    312          
+    313              pecb->eventTCBList = ptcb->waitNext;/* Get first task in event waiting list*/
+    314              if(pecb->eventTCBList != Co_NULL)      /* Is no item in event waiting list?  */
+    315              {
+    316                  pecb->eventTCBList->waitPrev = Co_NULL; /* No,clear link for first item  */
+    317              }
+    318          
+    319              ptcb->waitNext = Co_NULL;                /* Clear event waiting link for task*/
+    320              ptcb->eventID  = INVALID_ID;          /* Sign that not to use.            */
+    321          
+    322              if(ptcb->delayTick != INVALID_VALUE)  /* Is task in delay list?           */
+    323              {
+    324                  RemoveDelayList(ptcb);            /* Yes,remove task from DELAY list  */
+    325              }
+    326          #if CFG_MAILBOX_EN >0    
+    327              if(pecb->eventType == EVENT_TYPE_MBOX)/* Is it a mailbox event?           */
+    328              {
+    329                  ptcb->pmail    = pecb->eventPtr;  /* Yes,send mail to task            */
+    330                  pecb->eventPtr = Co_NULL;            /* Clear event sign                 */
+    331                  //pecb->eventCounter--;
+    332              }
+    333          #endif   
+    334          #if CFG_QUEUE_EN >0
+    335              else if(pecb->eventType == EVENT_TYPE_QUEUE)  /* Is it a queue event?     */
+    336              {
+    337                  pqcb        = (P_QCB)pecb->eventPtr;      /* Yes,get queue pointer    */
+    338                  ptcb->pmail = *(pqcb->qStart + pqcb->head);   /* Send mail to task    */
+    339                  //pqcb->head++;                             /* Clear event sign         */
+    340                  //pqcb->qSize--;
+    341                  //if(pqcb->head == pqcb->qMaxSize)
+    342                  //{
+    343                  //    pqcb->head = 0;
+    344                  //}
+    345              }
+    346          #endif
+    347          
+    348          #if CFG_SEM_EN >0
+    349              else if(pecb->eventType == EVENT_TYPE_SEM)/* Is it a semaphore event?     */
+    350              {
+    351                  //pecb->eventCounter--;                 /* Yes,clear event sign         */
+    352                  ptcb->pmail = Co_NULL; //(void*) INVALID_VALUE; //0xffffffff;      /* Indicate task woke by event  */
+    353              }
+    354          #endif
+    355          	if(ptcb == TCBRunning)
+    356          	{
+    357          		ptcb->state = TASK_RUNNING; TASK_SEQ(ptcb); 
+    358          	}
+    359          	else
+    360          	{
+    361          		TASK_SEQ(ptcb); InsertToTCBRdyList(ptcb);            /* Insert task into ready list  */
+    362          	}
+    363          }
+    364          
+    365          
+    366          
+    367          /**
+    368           *******************************************************************************
+    369           * @brief      Move a task from event wait list to the ready list
+    370           * @param[in]  pecb    Pointer to event control block corresponding to the event.
+    371           * @param[out] None
+    372           * @retval     None
+    373           *
+    374           * @par Description
+    375           * @details    This function is called to remove a task from event wait list,and
+    376           *             then insert it to the ready list.
+    377           *******************************************************************************
+    378           */
+    379          void RemoveEventWaittingList(P_OSTCB ptcb)
+    380          {
+    381              P_ECB pecb;
+    382              pecb = &EventTbl[ptcb->eventID];    /* Get event control block            */
+    383          
+    384              /* Is there only one item in event waiting list?                          */
+    385              if((ptcb->waitNext == Co_NULL) && (ptcb->waitPrev == Co_NULL))
+    386              {
+    387                  pecb->eventTCBList = Co_NULL;      /* Yes,set event waiting list as Co_NULL */
+    388              }
+    389              else if(ptcb->waitPrev == Co_NULL)/* Is the first item in event waiting list?*/
+    390              {
+    391                  /* Yes,remove task from list,and reset event waiting list             */
+    392                  ptcb->waitNext->waitPrev = Co_NULL;
+    393          		pecb->eventTCBList = ptcb->waitNext;
+    394                  ptcb->waitNext = Co_NULL;
+    395              }
+    396              else if(ptcb->waitNext == Co_NULL)/* Is the last item in event waiting list? */
+    397              {
+    398                  ptcb->waitPrev->waitNext = Co_NULL;  /* Yes,remove task form list        */
+    399                  ptcb->waitPrev = Co_NULL;
+    400              }
+    401              else                                  /* No, remove task from list        */
+    402              {
+    403                  ptcb->waitPrev->waitNext = ptcb->waitNext;
+    404                  ptcb->waitNext->waitPrev = ptcb->waitPrev;
+    405                  ptcb->waitPrev = Co_NULL;
+    406                  ptcb->waitNext = Co_NULL;
+    407              }
+    408              ptcb->eventID  = INVALID_ID;          /* Sign that not to use.            */
+    409          }
+    410          
+    411          #endif	 //CFG_EVENT_EN
+    412          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       24  CreatEvent
+             24 -> OsSchedUnlock
+        4  CreateEventList
+       16  DeleteEvent
+             16 -> InsertToTCBRdyList
+             16 -> OsSchedUnlock
+             16 -> ReleaseECB
+             16 -> RemoveDelayList
+       16  EventTaskToRdy
+             16 -> InsertToTCBRdyList
+             16 -> RemoveDelayList
+       24  EventTaskToWait
+             24 -> OsSchedUnlock
+        8  ReleaseECB
+              8 -> OsSchedUnlock
+        0  RemoveEventWaittingList
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable6
+       4  ??DataTable6_1
+       4  ??DataTable6_2
+       4  ??DataTable6_3
+       4  ??DataTable6_4
+       4  ??DataTable6_5
+      84  CreatEvent
+      68  CreateEventList
+     106  DeleteEvent
+     134  EventTaskToRdy
+     142  EventTaskToWait
+     160  EventTbl
+       4  FreeEventList
+      40  ReleaseECB
+      94  RemoveEventWaittingList
+
+ 
+ 164 bytes in section .bss
+ 692 bytes in section .text
+ 
+ 692 bytes of CODE memory
+ 164 bytes of DATA memory
+
+Errors: none
+Warnings: none

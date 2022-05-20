@@ -1,0 +1,99 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     19/Mar/2019  16:48:16 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\common\util.c                           #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\common\util.c" -D BEACON_APP -D        #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D BOOTLOADER -D   #
+#                    EE_M24C02 -D TASKS_PROFILE -D BATTERY_CHECK -D           #
+#                    CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D     #
+#                    OLD_CONFIG -D CIRCULAR_LOG -lcN                          #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\List\" -o  #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\"      #
+#                    --no_cse --no_unroll --no_inline --no_code_motion        #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\RevJ\RevJ Beacon\firmware\beacon\IAR\..\App\" -I       #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\CMSIS\CM3\Devi #
+#                    ceSupport\ST\STM32F10x\" -I                              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\STM32F10x_StdP #
+#                    eriph_Driver\inc\" -I "C:\Users\User\Documents\Cortex_gi #
+#                    t\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\..\.. #
+#                    \common\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex #
+#                    _git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\.. #
+#                    \..\common\CoOS\portable\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\..\common\" -I        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\USB-Device-CDC #
+#                    \" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Re #
+#                    vJ\RevJ Beacon\firmware\beacon\IAR\..\..\common\" -I     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\" -On --use_c++_inline -I   #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.4\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\List\util.l #
+#                    st                                                       #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\util.o  #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ Beacon\firmware\common\util.c
+      1          #include "util.h"
+      2          
+      3          #include "stm32f10x.h"
+      4          
+      5          uint8_t crc8(const void *vptr, uint8_t len)
+      6          {
+      7                  const uint8_t *data = vptr;
+      8                  uint16_t crc = 0;
+      9                  uint8_t i, j;
+     10          
+     11                  for (j = len; j; j--, data++) {
+     12                          crc ^= (*data << 8);
+     13                          for(i = 8; i; i--) {
+     14                                  if (crc & 0x8000)
+     15                                          crc ^= (0x1070 << 3);
+     16                                  crc <<= 1;
+     17                          }
+     18                  }
+     19          
+     20                  return (uint8_t)(crc >> 8);
+     21          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       12  crc8
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      66  crc8
+
+ 
+ 66 bytes in section .text
+ 
+ 66 bytes of CODE memory
+
+Errors: none
+Warnings: none

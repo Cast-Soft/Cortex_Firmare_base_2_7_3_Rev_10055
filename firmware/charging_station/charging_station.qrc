@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Styling/stylesheet.css</file>
+		<file>Battery/battery0.png</file>
+		<file>Battery/battery1.png</file>
+		<file>Battery/battery2.png</file>
+		<file>Battery/battery3.png</file>
+		<file>Battery/battery4.png</file>
+		<file>Battery/battery5.png</file>
+		<file>Img/Beacon_Active.png</file>
+		<file>Img/Beacon_Hover.png</file>
+		<file>Img/Beacon_Inactive.png</file>
+		<file>Img/Router_Active.png</file>
+		<file>Img/Router_Hover.png</file>
+		<file>Img/Router_Inactive.png</file>
+		<file>Img/Timekeeper_Active.png</file>
+		<file>Img/Timekeeper_Hover.png</file>
+		<file>Img/Timekeeper_Inactive.png</file>
+    </qresource>
+</RCC>

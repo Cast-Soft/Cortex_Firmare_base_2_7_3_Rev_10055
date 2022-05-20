@@ -1,0 +1,363 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+#include "verrsrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Charging STation Management"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
+    LTEXT           "cs_management, Version 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2013",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_CSM_DIALOG DIALOGEX 0, 0, 771, 399
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Charging Station Management"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "Single",IDC_CMD_APPLY_SINGLE,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,144,35,10
+    CONTROL         "Selected",IDC_CMD_APPLY_SELECTED,"Button",BS_AUTORADIOBUTTON,51,144,43,10
+    CONTROL         "All",IDC_CMD_APPLY_ALL,"Button",BS_AUTORADIOBUTTON,101,145,23,10
+    GROUPBOX        "Command applies on:",IDC_STATIC,6,132,122,30,0,WS_EX_TRANSPARENT
+    LISTBOX         IDC_LOG,239,36,272,84,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Log Data",IDC_LOG_DATA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,241,22,45,10,WS_EX_TRANSPARENT
+    CONTROL         "Write to File",IDC_LOG_TO_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,346,23,55,10,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Send Command",IDC_SEND_CMD,156,59,60,27
+    COMBOBOX        IDC_CMD_LIST,25,31,191,216,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Command:",IDC_STATIC,25,19,40,8
+    EDITTEXT        IDC_CMD_PARAM,25,71,123,14,ES_AUTOHSCROLL
+    LTEXT           "Parameters:",IDC_STATIC,25,59,40,8,0,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Read Image",IDC_BTN_READ_FW,568,22,60,20
+    CONTROL         "Upload after BC connected",IDC_FW_UPLOAD_ENABLE,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,614,7,102,16
+    PUSHBUTTON      "Upload Now",IDC_BTN_UPLOAD_NOW,631,22,60,20
+    GROUPBOX        "Firmware Update",IDC_STATIC,546,8,218,41,0,WS_EX_TRANSPARENT
+    GROUPBOX        "Legacy Commands",IDC_STATIC,8,7,217,88
+    GROUPBOX        "Configure device(s)",IDC_STATIC,546,131,218,264,0,WS_EX_TRANSPARENT
+    GROUPBOX        "Log",IDC_STATIC,231,7,288,122,0,WS_EX_TRANSPARENT
+    GROUPBOX        "Status of Current device",IDC_STATIC,132,132,92,31
+    PUSHBUTTON      "Get Configuration",IDC_GET_CONFIG,550,105,68,21
+    PUSHBUTTON      "Store Configuration",IDC_STORE_CONFIG,621,105,70,21
+    LTEXT           "Product Info:",IDC_STATIC,553,83,52,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_PRODUCTID,610,81,102,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_SET_PRODUCT_ID,718,63,36,31
+    LTEXT           "Serial Number:",IDC_STATIC,553,66,52,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_SERIAL_NUM,610,65,102,14,ES_AUTOHSCROLL
+    LTEXT           "Beacon ID:",IDC_STATIC,556,162,66,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_BEACON_ID,628,159,84,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_BT_SET_BEACONID,718,159,36,15
+    LTEXT           "Router Address:",IDC_STATIC,556,180,66,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_ROUTER_ADDR,628,178,84,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_SET_ROUTER_ADDR,718,178,36,15
+    LTEXT           "LED On Offset:",IDC_STATIC,561,199,61,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_LED_ON_OFFSET,628,196,84,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_BT_LEDON_OFFSET,718,196,36,15
+    LTEXT           "LED Off Offset:",IDC_STATIC,558,217,64,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_LED_OFF_OFFSET,628,213,84,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_BT_LEDOFF_OFFSET,718,213,36,15
+    LTEXT           "Wireless Channel:",IDC_STATIC,554,239,68,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    PUSHBUTTON      "Set",IDC_BT_SET_RF_CHANNEL,718,237,36,15
+    LTEXT           "Wireless Time Slot:",IDC_LB_TIME_SLOT,555,258,68,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    PUSHBUTTON      "Set",IDC_BT_SET_TIMESLOT,718,255,36,15
+    LTEXT           "LED ID 1:",IDC_LB_LED1_ID,583,276,39,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_LED1_ID,628,272,29,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_SET_LED1ID,718,272,36,15
+    LTEXT           "LED ID 2:",IDC_LB_LED2_ID,588,293,34,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_LED2_ID,628,292,29,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_LED2ID,718,290,36,15
+    LTEXT           "LED ID 3:",IDC_LB_LED3_ID,586,314,36,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_LED3_ID,628,311,29,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_LED3ID,718,311,36,15
+    LTEXT           "Transmit Power Level:",IDC_STATIC,550,358,72,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    PUSHBUTTON      "Set",IDC_BT_SET_POWER,718,354,36,15
+    PUSHBUTTON      "Default values",IDC_DEFAULT_CONFIG,696,105,58,20
+    COMBOBOX        IDC_CHANNEL,628,238,84,120,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TIME_SLOT,628,256,84,90,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TX_LEVEL,628,354,84,72,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Pan ID:",IDC_STATIC,552,143,70,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_PAN_ID,628,140,84,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_BT_SET_PANID,718,140,36,15
+    PUSHBUTTON      "Refresh",IDC_GET_STATUS,138,145,77,14
+    PUSHBUTTON      "Verify",IDC_FW_VERIFY,694,22,60,21
+    LTEXT           "Battery:",IDC_STATIC,130,14,28,8,NOT WS_VISIBLE,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_BATTERY,137,14,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE
+    LTEXT           "Enabled:",IDC_STATIC,161,16,29,8,NOT WS_VISIBLE,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_STATUS_ENABLED,114,14,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE
+    PUSHBUTTON      "Clear Log",IDC_CLEAR_LOG,461,20,50,14
+    CONTROL         "Firmware",IDC_UPDATE_TYPE,"Button",BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,633,7,45,10,WS_EX_TRANSPARENT
+    CONTROL         "Manufacturer Info",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | NOT WS_VISIBLE,661,7,75,10,WS_EX_TRANSPARENT
+    CONTROL         "",IDC_DEVICE_LIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,167,534,230
+    COMBOBOX        IDC_JUMP_ON_CONNECT,25,111,120,92,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "On Connect",IDC_STATIC,7,99,218,31
+    CONTROL         "Radio On",IDC_CHECK_RADIO_ON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,162,112,45,10
+    CONTROL         "Enable IMU",IDC_CHECK_ENABLE_IMU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,558,378,52,10
+    CONTROL         "Enable Button",IDC_CHECK_ENABLE_BTN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,612,378,61,10
+    CONTROL         "Enable Battery Check ",IDC_CHECK_ENABLE_BTRY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,674,378,87,10
+    EDITTEXT        IDC_EDIT_DEVICE_ID,382,142,143,14,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Product Information",IDC_STATIC,546,52,218,46
+    LTEXT           "Number of Bits:",IDC_STATIC,232,144,68,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    COMBOBOX        IDC_BITS,306,142,47,90,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Bits of Pattern:",IDC_STATIC,561,333,59,12
+    EDITTEXT        IDC_EDIT_NUM_BITS,629,331,40,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_LED1_PATTERN,661,272,50,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_LED2_PATTERN,661,292,50,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_LED3_PATTERN,662,311,49,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Set",IDC_BT_SET_HOP_CH,717,255,36,15
+    LTEXT           "Hop Channels(Hex):",IDC_LB_HOP_CH,552,259,71,12,0,WS_EX_TRANSPARENT | WS_EX_RIGHT
+    EDITTEXT        IDC_HOP_CH,628,256,40,14,ES_AUTOHSCROLL
+    CONTROL         "Log to Screen",IDC_LOG_TO_SCREEN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,286,23,60,10
+    PUSHBUTTON      "Flush File",IDC_FLUSH_BTN,402,20,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_CSM_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 764
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 392
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_CSM_DIALOG DLGINIT
+BEGIN
+    IDC_CHANNEL, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3731, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3831, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3931, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3032, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3132, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3232, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3332, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3432, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3532, "\000" 
+    IDC_CHANNEL, 0x403, 3, 0
+0x3632, "\000" 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0031, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0032, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0033, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0034, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0035, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0036, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0037, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0038, 
+    IDC_TIME_SLOT, 0x403, 2, 0
+0x0039, 
+    IDC_TIME_SLOT, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_TIME_SLOT, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_TIME_SLOT, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_TIME_SLOT, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_TIME_SLOT, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0031, 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0032, 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0033, 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0034, 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0035, 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0036, 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0037, 
+    IDC_TX_LEVEL, 0x403, 2, 0
+0x0038, 
+    IDC_JUMP_ON_CONNECT, 0x403, 8, 0
+0x6f4e, 0x4a20, 0x6d75, 0x0070, 
+    IDC_JUMP_ON_CONNECT, 0x403, 19, 0
+0x754a, 0x706d, 0x7420, 0x206f, 0x6f62, 0x746f, 0x6f6c, 0x6461, 0x7265, 
+"\000" 
+    IDC_JUMP_ON_CONNECT, 0x403, 22, 0
+0x754a, 0x706d, 0x7420, 0x206f, 0x614d, 0x6e69, 0x6620, 0x7269, 0x776d, 
+0x7261, 0x0065, 
+    IDC_BITS, 0x403, 2, 0
+0x0038, 
+    IDC_BITS, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_BITS, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_BITS, 0x403, 3, 0
+0x3631, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_ABOUTBOX            "&About Charging Station Management Console..."
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (Canada) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENC)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_CAN
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "#include ""verrsrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#include ""res\\cs_management.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""      // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\cs_management.ico"
+#endif    // English (Canada) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#include "res\cs_management.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"      // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

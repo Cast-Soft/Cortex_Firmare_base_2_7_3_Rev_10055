@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\BC-72.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>BC</name>
+      <member>
+        <project>BC-72</project>
+        <configuration>Debug-Bootloader</configuration>
+      </member>
+      <member>
+        <project>BC-72</project>
+        <configuration>Release-Bootloader</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

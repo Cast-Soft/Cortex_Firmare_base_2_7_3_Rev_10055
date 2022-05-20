@@ -1,0 +1,1389 @@
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\arch.o.
+              reference :  DlyList
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  TaskSchedReq
+              reference :  isr_TimeDispose
+              definition:  InitTaskContext
+              definition:  OSTickCnt
+              definition:  SysTick_Handler
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\basic_rf.o.
+              reference :  CoAcceptSingleFlag
+              reference :  CoClearFlag
+              reference :  CoCreateFlag
+              reference :  CoSchedLock
+              reference :  CoSchedUnlock
+              reference :  CoSetFlag
+              reference :  CoWaitForSingleFlag
+              reference :  HwGPOHigh
+              reference :  HwGPOLow
+              reference :  HwRadioEXTIInit
+              reference :  HwSPISSAssert
+              reference :  HwSPISSDeAssert
+              reference :  HwWait
+              reference :  SPI_I2S_ITConfig
+              reference :  SPI_I2S_SendData
+              reference :  Send_SPI_2byte
+              reference :  Send_SPI_byte
+              reference :  TK_BK_MEMWR16
+              reference :  TK_BK_MEMWR8
+              reference :  TK_BK_REGRD8
+              reference :  TK_BK_REGWR8
+              reference :  __aeabi_memcpy
+              reference :  assert_failed
+              reference :  config
+              reference :  printf
+              reference :  putchar
+              definition:  Enable_Osc
+              definition:  Load_2520_Defaults
+              definition:  RadioGetFLevel
+              definition:  RadioInit
+              definition:  RadioRxPkt
+              definition:  RadioSTXONBugFlush
+              definition:  RadioSetPanIdShortAddr
+              definition:  RadioSetRFChan
+              definition:  RadioSetRFLevel
+              definition:  RadioTxPkt
+              definition:  RadioTxTest
+              definition:  flagRadioRxFrame
+              definition:  flagRadioTxAllow
+              definition:  flagRadioTxDone
+              definition:  flagRadioTxDoneUser
+              definition:  memcpy
+              definition:  pSpiRxBuf
+              definition:  pSpiTxBuf
+              definition:  rxPkt
+              definition:  scratchBuf
+              definition:  spiTxRxByteCount
+              definition:  txInhibit
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\core.o.
+              reference :  CoIdleTask
+              reference :  CreateTCBList
+              reference :  CreateTask
+              reference :  Dec8
+              reference :  Inc8
+              reference :  IsrReq
+              reference :  RemoveFromTCBRdyList
+              reference :  RespondSRQ
+              reference :  Schedule
+              reference :  SetEnvironment
+              reference :  TCBNext
+              reference :  TCBRunning
+              reference :  TCBTbl
+              reference :  idle_stk
+              definition:  CoEnterISR
+              definition:  CoExitISR
+              definition:  CoGetOSVersion
+              definition:  CoInitOS
+              definition:  CoSchedLock
+              definition:  CoSchedUnlock
+              definition:  CoStartOS
+              definition:  OSIntNesting
+              definition:  OSSchedLock
+              definition:  OsSchedUnlock
+              definition:  TaskSchedReq
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\flag.o.
+              reference :  InsertDelayList
+              reference :  InsertInSRQ
+              reference :  InsertToTCBRdyList
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OsSchedUnlock
+              reference :  RemoveDelayList
+              reference :  TCBRunning
+              reference :  TaskSchedReq
+              definition:  CoAcceptMultipleFlags
+              definition:  CoAcceptSingleFlag
+              definition:  CoClearFlag
+              definition:  CoCreateFlag
+              definition:  CoDelFlag
+              definition:  CoSetFlag
+              definition:  CoWaitForMultipleFlags
+              definition:  CoWaitForSingleFlag
+              definition:  FlagCrl
+              definition:  RemoveLinkNode
+              definition:  isr_SetFlag
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\hardware.o.
+              reference :  ADC_Cmd
+              reference :  ADC_GetCalibrationStatus
+              reference :  ADC_GetFlagStatus
+              reference :  ADC_GetResetCalibrationStatus
+              reference :  ADC_Init
+              reference :  ADC_RegularChannelConfig
+              reference :  ADC_ResetCalibration
+              reference :  ADC_SoftwareStartConvCmd
+              reference :  ADC_StartCalibration
+              reference :  CoGetOSTime
+              reference :  DAC_Cmd
+              reference :  DAC_DeInit
+              reference :  DAC_Init
+              reference :  DBGMCU_Config
+              reference :  DMA_DeInit
+              reference :  DMA_ITConfig
+              reference :  DMA_Init
+              reference :  EXTI_ClearITPendingBit
+              reference :  EXTI_Init
+              reference :  GPIO_EXTILineConfig
+              reference :  GPIO_Init
+              reference :  GPIO_PinRemapConfig
+              reference :  NVIC_Init
+              reference :  NVIC_PriorityGroupConfig
+              reference :  RCC_ADCCLKConfig
+              reference :  RCC_AHBPeriphClockCmd
+              reference :  RCC_APB1PeriphClockCmd
+              reference :  RCC_APB2PeriphClockCmd
+              reference :  SPI_Cmd
+              reference :  SPI_I2S_DMACmd
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ITConfig
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_Init
+              reference :  TIM_ARRPreloadConfig
+              reference :  TIM_ClearITPendingBit
+              reference :  TIM_Cmd
+              reference :  TIM_ICInit
+              reference :  TIM_ITConfig
+              reference :  TIM_OC2Init
+              reference :  TIM_OC2PreloadConfig
+              reference :  TIM_OC3PreloadConfig
+              reference :  TIM_TimeBaseInit
+              reference :  USART_Cmd
+              reference :  USART_Init
+              definition:  BUTTON_CLK
+              definition:  BUTTON_PIN
+              definition:  BUTTON_PORT
+              definition:  BattUnion
+              definition:  COM_CLK
+              definition:  COM_PIN_RX
+              definition:  COM_PIN_TX
+              definition:  COM_PORT
+              definition:  COM_REMAP
+              definition:  COM_USART
+              definition:  COM_USART_CLK
+              definition:  GPI_CLK
+              definition:  GPI_PIN
+              definition:  GPI_PORT
+              definition:  GPI_TYPE
+              definition:  GPO_CLK
+              definition:  GPO_PIN
+              definition:  GPO_PORT
+              definition:  HwButtonInit
+              definition:  HwButtonPressed
+              definition:  HwCOMInit
+              definition:  HwGPIInit
+              definition:  HwGPIState
+              definition:  HwGPOHigh
+              definition:  HwGPOInit
+              definition:  HwGPOInitAF
+              definition:  HwGPOInitOC
+              definition:  HwGPOLow
+              definition:  HwGPOToggle
+              definition:  HwLEDInit
+              definition:  HwLEDOff
+              definition:  HwLEDOn
+              definition:  HwLEDToggle
+              definition:  HwPeriphInit
+              definition:  HwRadioEXTIInit
+              definition:  HwSPIInit
+              definition:  HwSPISSAssert
+              definition:  HwSPISSDeAssert
+              definition:  HwTimerExpired
+              definition:  HwTimerSet
+              definition:  HwWait
+              definition:  LED_CLK
+              definition:  LED_PIN
+              definition:  LED_PORT
+              definition:  SPI_CLK
+              definition:  SPI_PIN_MISO
+              definition:  SPI_PIN_MOSI
+              definition:  SPI_PIN_SCK
+              definition:  SPI_PORT
+              definition:  SPI_REMAP
+              definition:  SPI_SPI
+              definition:  SPI_SPI_CLK
+              definition:  SPI_SS_CLK
+              definition:  SPI_SS_PIN
+              definition:  SPI_SS_PORT
+              definition:  imu_data_test
+              definition:  pBattUnion
+              definition:  spiIMURxBuf
+              definition:  spiIMUTxBuf
+              definition:  __iar_cc..A1jGBL9$fs$
+              definition:  __iar_cc..Mmp$7Z5GpxD
+              definition:  __iar_cc.IRQn.Lszd1Ssa2Z8
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\hook.o.
+              definition:  CoIdleTask
+              definition:  CoStkOverflowHook
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\main.o.
+              reference :  CoCreateFlag
+              reference :  CoInitOS
+              reference :  CoStartOS
+              reference :  CreateTask
+              reference :  DAC_SetChannel2Data
+              reference :  HwLEDOff
+              reference :  HwLEDOn
+              reference :  HwPeriphInit
+              reference :  HwWait
+              reference :  RadioInit
+              reference :  Set_USBClock
+              reference :  SystemCoreClock
+              reference :  Task1
+              reference :  Task2
+              reference :  Task3
+              reference :  Task4
+              reference :  Task5
+              reference :  Task6
+              reference :  Task7
+              reference :  Task8
+              reference :  USB_Init
+              reference :  USB_Interrupts_Config
+              reference :  USB_Timer_Config
+              reference :  WriteConfig
+              reference :  __aeabi_memcpy
+              reference :  config
+              reference :  printf
+              definition:  AtoDtaskID
+              definition:  assert_failed
+              definition:  firmwareVersion
+              definition:  flagIMUNewData
+              definition:  flagRadioTxReq
+              definition:  led0Id
+              definition:  led1Id
+              definition:  led2Id
+              definition:  main
+              definition:  memcpy
+              definition:  task1Id
+              definition:  task2Id
+              definition:  task5Id
+              definition:  task7Id
+              definition:  __iar_cc.IRQn.Lszd1Ssa2Z8
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\misc.o.
+              definition:  NVIC_Init
+              definition:  NVIC_PriorityGroupConfig
+              definition:  NVIC_SetVectorTable
+              definition:  NVIC_SystemLPConfig
+              definition:  SysTick_CLKSourceConfig
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\otgd_fs_cal.o.
+              reference :  USB_OTG_BSP_uDelay
+              definition:  OTGD_FS_CoreInit
+              definition:  OTGD_FS_CoreInitDev
+              definition:  OTGD_FS_DisableGlobalInt
+              definition:  OTGD_FS_EP0Activate
+              definition:  OTGD_FS_EP0StartXfer
+              definition:  OTGD_FS_EPActivate
+              definition:  OTGD_FS_EPClearStall
+              definition:  OTGD_FS_EPDeactivate
+              definition:  OTGD_FS_EPSetStall
+              definition:  OTGD_FS_EPStartXfer
+              definition:  OTGD_FS_EnableDevInt
+              definition:  OTGD_FS_EnableGlobalInt
+              definition:  OTGD_FS_FlushRxFifo
+              definition:  OTGD_FS_FlushTxFifo
+              definition:  OTGD_FS_GetEPStatus
+              definition:  OTGD_FS_ReadCoreItr
+              definition:  OTGD_FS_ReadDevAllInEPItr
+              definition:  OTGD_FS_ReadDevAllOutEp_itr
+              definition:  OTGD_FS_ReadDevOutEP_itr
+              definition:  OTGD_FS_ReadOtgItr
+              definition:  OTGD_FS_ReadPacket
+              definition:  OTGD_FS_ResetRemoteWakeup
+              definition:  OTGD_FS_SetAddress
+              definition:  OTGD_FS_SetEPStatus
+              definition:  OTGD_FS_SetRemoteWakeup
+              definition:  OTGD_FS_WritePacket
+              definition:  USBD_FS_IsDeviceMode
+              definition:  USB_OTG_FS_regs
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\otgd_fs_dev.o.
+              reference :  OTGD_FS_EPStartXfer
+              reference :  OTGD_FS_EnableGlobalInt
+              reference :  OTGD_FS_GetEPStatus
+              reference :  OTGD_FS_SetEPStatus
+              reference :  PCD_DevConnect
+              reference :  PCD_DevDisconnect
+              reference :  PCD_EP0_OutStart
+              reference :  PCD_EP_Flush
+              reference :  PCD_EP_Open
+              reference :  PCD_GetInEP
+              reference :  PCD_GetOutEP
+              reference :  PCD_Init
+              definition:  ByteSwap
+              definition:  GetEPRxStatus
+              definition:  GetEPTxStatus
+              definition:  GetRxStallStatus
+              definition:  GetTxStallStatus
+              definition:  OTG_DEV_EP_Init
+              definition:  OTG_DEV_GetEPRxStatus
+              definition:  OTG_DEV_GetEPTxStatus
+              definition:  OTG_DEV_Init
+              definition:  OTG_DEV_SetEPRxStatus
+              definition:  OTG_DEV_SetEPTxStatus
+              definition:  SetEPRxCount
+              definition:  SetEPRxStatus
+              definition:  SetEPRxValid
+              definition:  SetEPTxCount
+              definition:  SetEPTxStatus
+              definition:  SetEPTxValid
+              definition:  ToWord
+              definition:  USB_DevConnect
+              definition:  USB_DevDisconnect
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\otgd_fs_int.o.
+              reference :  Device_Property
+              reference :  INTR_SOFINTR_Callback
+              reference :  In0_Process
+              reference :  NOP_Process
+              reference :  OTGD_FS_EP0Activate
+              reference :  OTGD_FS_FlushTxFifo
+              reference :  OTGD_FS_ReadDevAllInEPItr
+              reference :  OTGD_FS_ReadDevAllOutEp_itr
+              reference :  OTGD_FS_ReadDevOutEP_itr
+              reference :  OTGD_FS_ReadPacket
+              reference :  OTGD_FS_WritePacket
+              reference :  OTG_DEV_GetEPTxStatus
+              reference :  OTG_DEV_SetEPRxStatus
+              reference :  OTG_DEV_SetEPTxStatus
+              reference :  Out0_Process
+              reference :  PCD_EP0_OutStart
+              reference :  PCD_GetInEP
+              reference :  PCD_GetOutEP
+              reference :  Setup0_Process
+              reference :  USB_OTG_FS_regs
+              reference :  pEpInt_IN
+              reference :  pEpInt_OUT
+              definition:  IsocBuff
+              definition:  IsocBufferIdx
+              definition:  OTGD_FS_Handle_EOPF_ISR
+              definition:  OTGD_FS_Handle_EarlySuspend_ISR
+              definition:  OTGD_FS_Handle_EnumDone_ISR
+              definition:  OTGD_FS_Handle_GInNakEff_ISR
+              definition:  OTGD_FS_Handle_GOutNakEff_ISR
+              definition:  OTGD_FS_Handle_InEP_ISR
+              definition:  OTGD_FS_Handle_IncomplIsoIn_ISR
+              definition:  OTGD_FS_Handle_IncomplIsoOut_ISR
+              definition:  OTGD_FS_Handle_IsoOutDrop_ISR
+              definition:  OTGD_FS_Handle_OutEP_ISR
+              definition:  OTGD_FS_Handle_RxStatusQueueLevel_ISR
+              definition:  OTGD_FS_Handle_Sof_ISR
+              definition:  OTGD_FS_Handle_USBSuspend_ISR
+              definition:  OTGD_FS_Handle_UsbReset_ISR
+              definition:  OTGD_FS_Handle_Wakeup_ISR
+              definition:  SaveRState
+              definition:  SaveTState
+              definition:  USBD_Data_Buffer
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\otgd_fs_pcd.o.
+              reference :  OTGD_FS_CoreInit
+              reference :  OTGD_FS_CoreInitDev
+              reference :  OTGD_FS_DisableGlobalInt
+              reference :  OTGD_FS_EP0StartXfer
+              reference :  OTGD_FS_EPActivate
+              reference :  OTGD_FS_EPClearStall
+              reference :  OTGD_FS_EPDeactivate
+              reference :  OTGD_FS_EPSetStall
+              reference :  OTGD_FS_EPStartXfer
+              reference :  OTGD_FS_FlushRxFifo
+              reference :  OTGD_FS_FlushTxFifo
+              reference :  OTGD_FS_SetAddress
+              reference :  USB_OTG_BSP_uDelay
+              reference :  USB_OTG_FS_regs
+              definition:  PCD_DevConnect
+              definition:  PCD_DevDisconnect
+              definition:  PCD_EP0_OutStart
+              definition:  PCD_EP_Close
+              definition:  PCD_EP_ClrStall
+              definition:  PCD_EP_Flush
+              definition:  PCD_EP_Open
+              definition:  PCD_EP_Read
+              definition:  PCD_EP_SetAddress
+              definition:  PCD_EP_Stall
+              definition:  PCD_EP_Write
+              definition:  PCD_GetInEP
+              definition:  PCD_GetOutEP
+              definition:  PCD_Init
+              definition:  USB_OTG_PCD_dev
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\portForM3.o.
+              reference :  TCBRunning
+              reference :  TCBNext
+              reference :  OSSchedLock
+              definition:  Inc8
+              definition:  Dec8
+              definition:  IRQ_ENABLE_RESTORE
+              definition:  IRQ_DISABLE_SAVE
+              definition:  SwitchContext
+              definition:  PendSV_Handler
+              definition:  SetEnvironment
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\radio.o.
+              reference :  HwSPISSAssert
+              reference :  HwSPISSDeAssert
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_I2S_SendData
+              reference :  assert_failed
+              definition:  Send_SPI_2byte
+              definition:  Send_SPI_byte
+              definition:  TK_BK_MEMWR16
+              definition:  TK_BK_MEMWR8
+              definition:  TK_BK_REGRD8
+              definition:  TK_BK_REGWR8
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\serviceReq.o.
+              reference :  CoSetFlag
+              reference :  IRQ_DISABLE_SAVE
+              reference :  IRQ_ENABLE_RESTORE
+              reference :  Inc8
+              reference :  TimeDispose
+              definition:  InsertInSRQ
+              definition:  IsrReq
+              definition:  RespondSRQ
+              definition:  ServiceReq
+              definition:  TimeReq
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o.
+              reference :  __iar_program_start
+              reference :  SystemInit
+              definition:  __vector_table
+              weak def  :  Reset_Handler
+              weak def  :  NMI_Handler
+              weak def  :  HardFault_Handler
+              weak def  :  MemManage_Handler
+              weak def  :  BusFault_Handler
+              weak def  :  UsageFault_Handler
+              weak def  :  SVC_Handler
+              weak def  :  DebugMon_Handler
+              weak def  :  PendSV_Handler
+              weak def  :  SysTick_Handler
+              weak def  :  WWDG_IRQHandler
+              weak def  :  PVD_IRQHandler
+              weak def  :  TAMPER_IRQHandler
+              weak def  :  RTC_IRQHandler
+              weak def  :  FLASH_IRQHandler
+              weak def  :  RCC_IRQHandler
+              weak def  :  EXTI0_IRQHandler
+              weak def  :  EXTI1_IRQHandler
+              weak def  :  EXTI2_IRQHandler
+              weak def  :  EXTI3_IRQHandler
+              weak def  :  EXTI4_IRQHandler
+              weak def  :  DMA1_Channel1_IRQHandler
+              weak def  :  DMA1_Channel2_IRQHandler
+              weak def  :  DMA1_Channel3_IRQHandler
+              weak def  :  DMA1_Channel4_IRQHandler
+              weak def  :  DMA1_Channel5_IRQHandler
+              weak def  :  DMA1_Channel6_IRQHandler
+              weak def  :  DMA1_Channel7_IRQHandler
+              weak def  :  ADC1_2_IRQHandler
+              weak def  :  CAN1_TX_IRQHandler
+              weak def  :  CAN1_RX0_IRQHandler
+              weak def  :  CAN1_RX1_IRQHandler
+              weak def  :  CAN1_SCE_IRQHandler
+              weak def  :  EXTI9_5_IRQHandler
+              weak def  :  TIM1_BRK_IRQHandler
+              weak def  :  TIM1_UP_IRQHandler
+              weak def  :  TIM1_TRG_COM_IRQHandler
+              weak def  :  TIM1_CC_IRQHandler
+              weak def  :  TIM2_IRQHandler
+              weak def  :  TIM3_IRQHandler
+              weak def  :  TIM4_IRQHandler
+              weak def  :  I2C1_EV_IRQHandler
+              weak def  :  I2C1_ER_IRQHandler
+              weak def  :  I2C2_EV_IRQHandler
+              weak def  :  I2C2_ER_IRQHandler
+              weak def  :  SPI1_IRQHandler
+              weak def  :  SPI2_IRQHandler
+              weak def  :  USART1_IRQHandler
+              weak def  :  USART2_IRQHandler
+              weak def  :  USART3_IRQHandler
+              weak def  :  EXTI15_10_IRQHandler
+              weak def  :  RTCAlarm_IRQHandler
+              weak def  :  OTG_FS_WKUP_IRQHandler
+              weak def  :  TIM5_IRQHandler
+              weak def  :  SPI3_IRQHandler
+              weak def  :  UART4_IRQHandler
+              weak def  :  UART5_IRQHandler
+              weak def  :  TIM6_IRQHandler
+              weak def  :  TIM7_IRQHandler
+              weak def  :  DMA2_Channel1_IRQHandler
+              weak def  :  DMA2_Channel2_IRQHandler
+              weak def  :  DMA2_Channel3_IRQHandler
+              weak def  :  DMA2_Channel4_IRQHandler
+              weak def  :  DMA2_Channel5_IRQHandler
+              weak def  :  ETH_IRQHandler
+              weak def  :  ETH_WKUP_IRQHandler
+              weak def  :  CAN2_TX_IRQHandler
+              weak def  :  CAN2_RX0_IRQHandler
+              weak def  :  CAN2_RX1_IRQHandler
+              weak def  :  CAN2_SCE_IRQHandler
+              weak def  :  OTG_FS_IRQHandler
+              reference :  CSTACK$$Limit
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_adc.o.
+              reference :  RCC_APB2PeriphResetCmd
+              definition:  ADC_AnalogWatchdogCmd
+              definition:  ADC_AnalogWatchdogSingleChannelConfig
+              definition:  ADC_AnalogWatchdogThresholdsConfig
+              definition:  ADC_AutoInjectedConvCmd
+              definition:  ADC_ClearFlag
+              definition:  ADC_ClearITPendingBit
+              definition:  ADC_Cmd
+              definition:  ADC_DMACmd
+              definition:  ADC_DeInit
+              definition:  ADC_DiscModeChannelCountConfig
+              definition:  ADC_DiscModeCmd
+              definition:  ADC_ExternalTrigConvCmd
+              definition:  ADC_ExternalTrigInjectedConvCmd
+              definition:  ADC_ExternalTrigInjectedConvConfig
+              definition:  ADC_GetCalibrationStatus
+              definition:  ADC_GetConversionValue
+              definition:  ADC_GetDualModeConversionValue
+              definition:  ADC_GetFlagStatus
+              definition:  ADC_GetITStatus
+              definition:  ADC_GetInjectedConversionValue
+              definition:  ADC_GetResetCalibrationStatus
+              definition:  ADC_GetSoftwareStartConvStatus
+              definition:  ADC_GetSoftwareStartInjectedConvCmdStatus
+              definition:  ADC_ITConfig
+              definition:  ADC_Init
+              definition:  ADC_InjectedChannelConfig
+              definition:  ADC_InjectedDiscModeCmd
+              definition:  ADC_InjectedSequencerLengthConfig
+              definition:  ADC_RegularChannelConfig
+              definition:  ADC_ResetCalibration
+              definition:  ADC_SetInjectedOffset
+              definition:  ADC_SoftwareStartConvCmd
+              definition:  ADC_SoftwareStartInjectedConvCmd
+              definition:  ADC_StartCalibration
+              definition:  ADC_StructInit
+              definition:  ADC_TempSensorVrefintCmd
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_dac.o.
+              reference :  RCC_APB1PeriphResetCmd
+              definition:  DAC_Cmd
+              definition:  DAC_DMACmd
+              definition:  DAC_DeInit
+              definition:  DAC_DualSoftwareTriggerCmd
+              definition:  DAC_GetDataOutputValue
+              definition:  DAC_Init
+              definition:  DAC_SetChannel1Data
+              definition:  DAC_SetChannel2Data
+              definition:  DAC_SetDualChannelData
+              definition:  DAC_SoftwareTriggerCmd
+              definition:  DAC_StructInit
+              definition:  DAC_WaveGenerationCmd
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_dbgmcu.o.
+              definition:  DBGMCU_Config
+              definition:  DBGMCU_GetDEVID
+              definition:  DBGMCU_GetREVID
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_dma.o.
+              definition:  DMA_ClearFlag
+              definition:  DMA_ClearITPendingBit
+              definition:  DMA_Cmd
+              definition:  DMA_DeInit
+              definition:  DMA_GetCurrDataCounter
+              definition:  DMA_GetFlagStatus
+              definition:  DMA_GetITStatus
+              definition:  DMA_ITConfig
+              definition:  DMA_Init
+              definition:  DMA_SetCurrDataCounter
+              definition:  DMA_StructInit
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_exti.o.
+              definition:  EXTI_ClearFlag
+              definition:  EXTI_ClearITPendingBit
+              definition:  EXTI_DeInit
+              definition:  EXTI_GenerateSWInterrupt
+              definition:  EXTI_GetFlagStatus
+              definition:  EXTI_GetITStatus
+              definition:  EXTI_Init
+              definition:  EXTI_StructInit
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_flash.o.
+              definition:  FLASH_ClearFlag
+              definition:  FLASH_EnableWriteProtection
+              definition:  FLASH_EraseAllBank1Pages
+              definition:  FLASH_EraseAllPages
+              definition:  FLASH_EraseOptionBytes
+              definition:  FLASH_ErasePage
+              definition:  FLASH_GetBank1Status
+              definition:  FLASH_GetFlagStatus
+              definition:  FLASH_GetPrefetchBufferStatus
+              definition:  FLASH_GetReadOutProtectionStatus
+              definition:  FLASH_GetStatus
+              definition:  FLASH_GetUserOptionByte
+              definition:  FLASH_GetWriteProtectionOptionByte
+              definition:  FLASH_HalfCycleAccessCmd
+              definition:  FLASH_ITConfig
+              definition:  FLASH_Lock
+              definition:  FLASH_LockBank1
+              definition:  FLASH_PrefetchBufferCmd
+              definition:  FLASH_ProgramHalfWord
+              definition:  FLASH_ProgramOptionByteData
+              definition:  FLASH_ProgramWord
+              definition:  FLASH_ReadOutProtection
+              definition:  FLASH_SetLatency
+              definition:  FLASH_Unlock
+              definition:  FLASH_UnlockBank1
+              definition:  FLASH_UserOptionByteConfig
+              definition:  FLASH_WaitForLastBank1Operation
+              definition:  FLASH_WaitForLastOperation
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_gpio.o.
+              reference :  RCC_APB2PeriphResetCmd
+              definition:  GPIO_AFIODeInit
+              definition:  GPIO_DeInit
+              definition:  GPIO_ETH_MediaInterfaceConfig
+              definition:  GPIO_EXTILineConfig
+              definition:  GPIO_EventOutputCmd
+              definition:  GPIO_EventOutputConfig
+              definition:  GPIO_Init
+              definition:  GPIO_PinLockConfig
+              definition:  GPIO_PinRemapConfig
+              definition:  GPIO_ReadInputData
+              definition:  GPIO_ReadInputDataBit
+              definition:  GPIO_ReadOutputData
+              definition:  GPIO_ReadOutputDataBit
+              definition:  GPIO_ResetBits
+              definition:  GPIO_SetBits
+              definition:  GPIO_StructInit
+              definition:  GPIO_Write
+              definition:  GPIO_WriteBit
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o.
+              reference :  CoClearFlag
+              reference :  CoEnterISR
+              reference :  CoExitISR
+              reference :  DMA_ClearITPendingBit
+              reference :  DMA_Cmd
+              reference :  DMA_GetITStatus
+              reference :  EXTI_ClearITPendingBit
+              reference :  EXTI_GetITStatus
+              reference :  HwGPOHigh
+              reference :  HwGPOLow
+              reference :  HwSPISSAssert
+              reference :  HwSPISSDeAssert
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ITConfig
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_I2S_SendData
+              reference :  STM32_PCD_OTG_ISR_Handler
+              reference :  TIM_ClearITPendingBit
+              reference :  TIM_GetITStatus
+              reference :  assert_failed
+              reference :  flagIMUNewData
+              reference :  flagRadioRxFrame
+              reference :  flagRadioTxAllow
+              reference :  flagRadioTxDone
+              reference :  flagRadioTxDoneUser
+              reference :  isr_SetFlag
+              reference :  led0Id
+              reference :  led1Id
+              reference :  led2Id
+              reference :  pSpiRxBuf
+              reference :  pSpiTxBuf
+              reference :  putchar
+              reference :  rxPkt
+              reference :  scratchBuf
+              reference :  spiTxRxByteCount
+              reference :  txInhibit
+              definition:  BusFault_Handler
+              definition:  DMA1_Channel4_IRQHandler
+              definition:  DebugMon_Handler
+              definition:  EXTI1_IRQHandler
+              definition:  EXTI2_IRQHandler
+              definition:  EXTI9_5_IRQHandler
+              definition:  HardFault_Handler
+              definition:  IMUSampleTime
+              definition:  MemManage_Handler
+              definition:  MsTimerAtSync
+              definition:  NMI_Handler
+              definition:  OTG_FS_IRQHandler
+              definition:  SPI3_IRQHandler
+              definition:  SVC_Handler
+              definition:  TIM2_IRQHandler
+              definition:  TIM3_IRQHandler
+              definition:  TIM5_IRQHandler
+              definition:  TIM6_IRQHandler
+              definition:  Tim2GetMovAvg
+              definition:  Tim3GetMovAvg
+              definition:  Tim4GetMovAvg
+              definition:  UsageFault_Handler
+              definition:  frameIdAtSync
+              definition:  frameIdCorrection
+              definition:  numTxRetries
+              definition:  txRetryState
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_iwdg.o.
+              definition:  IWDG_Enable
+              definition:  IWDG_GetFlagStatus
+              definition:  IWDG_ReloadCounter
+              definition:  IWDG_SetPrescaler
+              definition:  IWDG_SetReload
+              definition:  IWDG_WriteAccessCmd
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_rcc.o.
+              definition:  RCC_ADCCLKConfig
+              definition:  RCC_AHBPeriphClockCmd
+              definition:  RCC_AHBPeriphResetCmd
+              definition:  RCC_APB1PeriphClockCmd
+              definition:  RCC_APB1PeriphResetCmd
+              definition:  RCC_APB2PeriphClockCmd
+              definition:  RCC_APB2PeriphResetCmd
+              definition:  RCC_AdjustHSICalibrationValue
+              definition:  RCC_BackupResetCmd
+              definition:  RCC_ClearFlag
+              definition:  RCC_ClearITPendingBit
+              definition:  RCC_ClockSecuritySystemCmd
+              definition:  RCC_DeInit
+              definition:  RCC_GetClocksFreq
+              definition:  RCC_GetFlagStatus
+              definition:  RCC_GetITStatus
+              definition:  RCC_GetSYSCLKSource
+              definition:  RCC_HCLKConfig
+              definition:  RCC_HSEConfig
+              definition:  RCC_HSICmd
+              definition:  RCC_I2S2CLKConfig
+              definition:  RCC_I2S3CLKConfig
+              definition:  RCC_ITConfig
+              definition:  RCC_LSEConfig
+              definition:  RCC_LSICmd
+              definition:  RCC_MCOConfig
+              definition:  RCC_OTGFSCLKConfig
+              definition:  RCC_PCLK1Config
+              definition:  RCC_PCLK2Config
+              definition:  RCC_PLL2Cmd
+              definition:  RCC_PLL2Config
+              definition:  RCC_PLL3Cmd
+              definition:  RCC_PLL3Config
+              definition:  RCC_PLLCmd
+              definition:  RCC_PLLConfig
+              definition:  RCC_PREDIV1Config
+              definition:  RCC_PREDIV2Config
+              definition:  RCC_RTCCLKCmd
+              definition:  RCC_RTCCLKConfig
+              definition:  RCC_SYSCLKConfig
+              definition:  RCC_WaitForHSEStartUp
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_spi.o.
+              reference :  RCC_APB1PeriphResetCmd
+              reference :  RCC_APB2PeriphResetCmd
+              reference :  RCC_GetClocksFreq
+              definition:  I2S_Cmd
+              definition:  I2S_Init
+              definition:  I2S_StructInit
+              definition:  SPI_BiDirectionalLineConfig
+              definition:  SPI_CalculateCRC
+              definition:  SPI_Cmd
+              definition:  SPI_DataSizeConfig
+              definition:  SPI_GetCRC
+              definition:  SPI_GetCRCPolynomial
+              definition:  SPI_I2S_ClearFlag
+              definition:  SPI_I2S_ClearITPendingBit
+              definition:  SPI_I2S_DMACmd
+              definition:  SPI_I2S_DeInit
+              definition:  SPI_I2S_GetFlagStatus
+              definition:  SPI_I2S_GetITStatus
+              definition:  SPI_I2S_ITConfig
+              definition:  SPI_I2S_ReceiveData
+              definition:  SPI_I2S_SendData
+              definition:  SPI_Init
+              definition:  SPI_NSSInternalSoftwareConfig
+              definition:  SPI_SSOutputCmd
+              definition:  SPI_StructInit
+              definition:  SPI_TransmitCRC
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_tim.o.
+              reference :  RCC_APB1PeriphResetCmd
+              reference :  RCC_APB2PeriphResetCmd
+              definition:  TIM_ARRPreloadConfig
+              definition:  TIM_BDTRConfig
+              definition:  TIM_BDTRStructInit
+              definition:  TIM_CCPreloadControl
+              definition:  TIM_CCxCmd
+              definition:  TIM_CCxNCmd
+              definition:  TIM_ClearFlag
+              definition:  TIM_ClearITPendingBit
+              definition:  TIM_ClearOC1Ref
+              definition:  TIM_ClearOC2Ref
+              definition:  TIM_ClearOC3Ref
+              definition:  TIM_ClearOC4Ref
+              definition:  TIM_Cmd
+              definition:  TIM_CounterModeConfig
+              definition:  TIM_CtrlPWMOutputs
+              definition:  TIM_DMACmd
+              definition:  TIM_DMAConfig
+              definition:  TIM_DeInit
+              definition:  TIM_ETRClockMode1Config
+              definition:  TIM_ETRClockMode2Config
+              definition:  TIM_ETRConfig
+              definition:  TIM_EncoderInterfaceConfig
+              definition:  TIM_ForcedOC1Config
+              definition:  TIM_ForcedOC2Config
+              definition:  TIM_ForcedOC3Config
+              definition:  TIM_ForcedOC4Config
+              definition:  TIM_GenerateEvent
+              definition:  TIM_GetCapture1
+              definition:  TIM_GetCapture2
+              definition:  TIM_GetCapture3
+              definition:  TIM_GetCapture4
+              definition:  TIM_GetCounter
+              definition:  TIM_GetFlagStatus
+              definition:  TIM_GetITStatus
+              definition:  TIM_GetPrescaler
+              definition:  TIM_ICInit
+              definition:  TIM_ICStructInit
+              definition:  TIM_ITConfig
+              definition:  TIM_ITRxExternalClockConfig
+              definition:  TIM_InternalClockConfig
+              definition:  TIM_OC1FastConfig
+              definition:  TIM_OC1Init
+              definition:  TIM_OC1NPolarityConfig
+              definition:  TIM_OC1PolarityConfig
+              definition:  TIM_OC1PreloadConfig
+              definition:  TIM_OC2FastConfig
+              definition:  TIM_OC2Init
+              definition:  TIM_OC2NPolarityConfig
+              definition:  TIM_OC2PolarityConfig
+              definition:  TIM_OC2PreloadConfig
+              definition:  TIM_OC3FastConfig
+              definition:  TIM_OC3Init
+              definition:  TIM_OC3NPolarityConfig
+              definition:  TIM_OC3PolarityConfig
+              definition:  TIM_OC3PreloadConfig
+              definition:  TIM_OC4FastConfig
+              definition:  TIM_OC4Init
+              definition:  TIM_OC4PolarityConfig
+              definition:  TIM_OC4PreloadConfig
+              definition:  TIM_OCStructInit
+              definition:  TIM_PWMIConfig
+              definition:  TIM_PrescalerConfig
+              definition:  TIM_SelectCCDMA
+              definition:  TIM_SelectCOM
+              definition:  TIM_SelectHallSensor
+              definition:  TIM_SelectInputTrigger
+              definition:  TIM_SelectMasterSlaveMode
+              definition:  TIM_SelectOCxM
+              definition:  TIM_SelectOnePulseMode
+              definition:  TIM_SelectOutputTrigger
+              definition:  TIM_SelectSlaveMode
+              definition:  TIM_SetAutoreload
+              definition:  TIM_SetClockDivision
+              definition:  TIM_SetCompare1
+              definition:  TIM_SetCompare2
+              definition:  TIM_SetCompare3
+              definition:  TIM_SetCompare4
+              definition:  TIM_SetCounter
+              definition:  TIM_SetIC1Prescaler
+              definition:  TIM_SetIC2Prescaler
+              definition:  TIM_SetIC3Prescaler
+              definition:  TIM_SetIC4Prescaler
+              definition:  TIM_TIxExternalClockConfig
+              definition:  TIM_TimeBaseInit
+              definition:  TIM_TimeBaseStructInit
+              definition:  TIM_UpdateDisableConfig
+              definition:  TIM_UpdateRequestConfig
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_usart.o.
+              reference :  RCC_APB1PeriphResetCmd
+              reference :  RCC_APB2PeriphResetCmd
+              reference :  RCC_GetClocksFreq
+              definition:  USART_ClearFlag
+              definition:  USART_ClearITPendingBit
+              definition:  USART_ClockInit
+              definition:  USART_ClockStructInit
+              definition:  USART_Cmd
+              definition:  USART_DMACmd
+              definition:  USART_DeInit
+              definition:  USART_GetFlagStatus
+              definition:  USART_GetITStatus
+              definition:  USART_HalfDuplexCmd
+              definition:  USART_ITConfig
+              definition:  USART_Init
+              definition:  USART_IrDACmd
+              definition:  USART_IrDAConfig
+              definition:  USART_LINBreakDetectLengthConfig
+              definition:  USART_LINCmd
+              definition:  USART_OneBitMethodCmd
+              definition:  USART_OverSampling8Cmd
+              definition:  USART_ReceiveData
+              definition:  USART_ReceiverWakeUpCmd
+              definition:  USART_SendBreak
+              definition:  USART_SendData
+              definition:  USART_SetAddress
+              definition:  USART_SetGuardTime
+              definition:  USART_SetPrescaler
+              definition:  USART_SmartCardCmd
+              definition:  USART_SmartCardNACKCmd
+              definition:  USART_StructInit
+              definition:  USART_WakeUpConfig
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\system_stm32f10x.o.
+              definition:  AHBPrescTable
+              definition:  SystemCoreClock
+              definition:  SystemCoreClockUpdate
+              definition:  SystemInit
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\task.o.
+              reference :  InitTaskContext
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OSTickCnt
+              reference :  OsSchedUnlock
+              reference :  RemoveDelayList
+              reference :  RemoveLinkNode
+              reference :  SwitchContext
+              reference :  TaskSchedReq
+              definition:  CoAwakeTask
+              definition:  CoDelTask
+              definition:  CoExitTask
+              definition:  CoGetCurTaskID
+              definition:  CoSetPriority
+              definition:  CoSuspendTask
+              definition:  CreateTCBList
+              definition:  CreateTask
+              definition:  FreeTCB
+              definition:  InsertToTCBRdyList
+              definition:  OSCheckTime
+              definition:  RemoveFromTCBRdyList
+              definition:  Schedule
+              definition:  TCBNext
+              definition:  TCBRdy
+              definition:  TCBRunning
+              definition:  TCBTbl
+              definition:  idle_stk
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\tasks.o.
+              reference :  ADC_GetConversionValue
+              reference :  ADC_SoftwareStartConvCmd
+              reference :  BattUnion
+              reference :  CoAwakeTask
+              reference :  CoSchedLock
+              reference :  CoSchedUnlock
+              reference :  CoSetFlag
+              reference :  CoSuspendTask
+              reference :  CoTickDelay
+              reference :  CoWaitForSingleFlag
+              reference :  DAC_SetChannel2Data
+              reference :  FLASH_ErasePage
+              reference :  FLASH_Lock
+              reference :  FLASH_ProgramHalfWord
+              reference :  FLASH_Unlock
+              reference :  HwButtonPressed
+              reference :  HwGPIState
+              reference :  HwGPOHigh
+              reference :  HwGPOLow
+              reference :  HwLEDOff
+              reference :  HwLEDOn
+              reference :  HwLEDToggle
+              reference :  HwSPISSAssert
+              reference :  HwSPISSDeAssert
+              reference :  IWDG_ReloadCounter
+              reference :  MsTimerAtSync
+              reference :  RadioGetFLevel
+              reference :  RadioRxPkt
+              reference :  RadioSetPanIdShortAddr
+              reference :  RadioSetRFChan
+              reference :  RadioSetRFLevel
+              reference :  RadioTxPkt
+              reference :  SPI_I2S_GetFlagStatus
+              reference :  SPI_I2S_ReceiveData
+              reference :  SPI_I2S_SendData
+              reference :  TIM_SetAutoreload
+              reference :  TIM_SetCompare2
+              reference :  TIM_SetCompare3
+              reference :  Tim2GetMovAvg
+              reference :  Tim3GetMovAvg
+              reference :  Tim4GetMovAvg
+              reference :  __aeabi_memcpy
+              reference :  flagIMUNewData
+              reference :  flagRadioTxReq
+              reference :  frameIdAtSync
+              reference :  frameIdCorrection
+              reference :  getchar
+              reference :  numTxRetries
+              reference :  printf
+              reference :  putchar
+              reference :  spiIMURxBuf
+              reference :  sscanf
+              reference :  task1Id
+              reference :  task2Id
+              reference :  task5Id
+              reference :  txRetryState
+              definition:  IMURegRd
+              definition:  IMUdbgPrt
+              definition:  RfTxLevel
+              definition:  Task1
+              definition:  Task2
+              definition:  Task3
+              definition:  Task4
+              definition:  Task5
+              definition:  Task6
+              definition:  Task7
+              definition:  Task8
+              definition:  WriteConfig
+              definition:  config
+              definition:  date_str
+              definition:  memcpy
+              definition:  test_imu_pkt_ctr
+              definition:  time_str
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\time.o.
+              reference :  InsertToTCBRdyList
+              reference :  IsrReq
+              reference :  OSIntNesting
+              reference :  OSSchedLock
+              reference :  OSTickCnt
+              reference :  OsSchedUnlock
+              reference :  RemoveLinkNode
+              reference :  TCBRunning
+              reference :  TCBTbl
+              reference :  TaskSchedReq
+              reference :  TimeReq
+              definition:  CoGetOSTime
+              definition:  CoResetTaskDelayTick
+              definition:  CoTickDelay
+              definition:  DlyList
+              definition:  InsertDelayList
+              definition:  RemoveDelayList
+              definition:  TimeDispose
+              definition:  isr_TimeDispose
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_core.o.
+              reference :  ByteSwap
+              reference :  Device_Property
+              reference :  Device_Table
+              reference :  OTGD_FS_EP0StartXfer
+              reference :  OTG_DEV_GetEPRxStatus
+              reference :  OTG_DEV_GetEPTxStatus
+              reference :  OTG_DEV_SetEPRxStatus
+              reference :  OTG_DEV_SetEPTxStatus
+              reference :  PCD_EP_Read
+              reference :  PCD_EP_SetAddress
+              reference :  PCD_EP_Write
+              reference :  PCD_GetInEP
+              reference :  PCD_GetOutEP
+              reference :  SaveRState
+              reference :  SaveTState
+              reference :  SetEPRxCount
+              reference :  SetEPTxCount
+              reference :  SetEPTxStatus
+              reference :  pInformation
+              reference :  pProperty
+              reference :  pUser_Standard_Requests
+              definition:  Data_Mul_MaxPacketSize
+              definition:  In0_Process
+              definition:  NOP_Process
+              definition:  Out0_Process
+              definition:  Post0_Process
+              definition:  SetDeviceAddress
+              definition:  Setup0_Process
+              definition:  Standard_ClearFeature
+              definition:  Standard_GetConfiguration
+              definition:  Standard_GetDescriptorData
+              definition:  Standard_GetInterface
+              definition:  Standard_GetStatus
+              definition:  Standard_SetConfiguration
+              definition:  Standard_SetDeviceFeature
+              definition:  Standard_SetEndPointFeature
+              definition:  Standard_SetInterface
+              definition:  StatusInfo
+              definition:  __iar_cc._CONTROL_STATE.g_B6kKevrwB
+              definition:  __iar_cc._STANDARD_REQUESTS.jXKGP7aVE5_
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_desc.o.
+              definition:  Virtual_Com_Port_ConfigDescriptor
+              definition:  Virtual_Com_Port_DeviceDescriptor
+              definition:  Virtual_Com_Port_StringLangID
+              definition:  Virtual_Com_Port_StringProduct
+              definition:  Virtual_Com_Port_StringSerial
+              definition:  Virtual_Com_Port_StringVendor
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_endp.o.
+              reference :  Handle_USBAsynchXfer
+              reference :  USART_Rx_Buffer
+              reference :  USART_Rx_length
+              reference :  USART_Rx_ptr_out
+              reference :  USB_SIL_Read
+              reference :  USB_SIL_Write
+              reference :  USB_To_USART_Send_Data
+              reference :  USB_Tx_State
+              reference :  bDeviceState
+              definition:  EP1_IN_Callback
+              definition:  EP3_OUT_Callback
+              definition:  EP5_OUT_Callback
+              definition:  EP7_IN_Callback
+              definition:  INTR_SOFINTR_Callback
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_hw_config.o.
+              reference :  Device_Info
+              reference :  NVIC_Init
+              reference :  NVIC_PriorityGroupConfig
+              reference :  RCC_AHBPeriphClockCmd
+              reference :  RCC_APB1PeriphClockCmd
+              reference :  RCC_OTGFSCLKConfig
+              reference :  TIM_Cmd
+              reference :  TIM_TimeBaseInit
+              reference :  USB_SIL_Write
+              reference :  Virtual_Com_Port_StringSerial
+              reference :  bDeviceState
+              definition:  Enter_LowPowerMode
+              definition:  Get_SerialNum
+              definition:  Handle_USBAsynchXfer
+              definition:  Leave_LowPowerMode
+              definition:  Set_USBClock
+              definition:  USART_Rx_Buffer
+              definition:  USART_Rx_length
+              definition:  USART_Rx_ptr_out
+              definition:  USB_Interrupts_Config
+              definition:  USB_OTG_BSP_uDelay
+              definition:  USB_Timer_Config
+              definition:  USB_To_USART_Send_Data
+              definition:  USB_Tx_State
+              definition:  __read
+              definition:  __write
+              definition:  __iar_cc.IRQn.Lszd1Ssa2Z8
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_init.o.
+              reference :  Device_Property
+              reference :  User_Standard_Requests
+              definition:  Device_Info
+              definition:  EPindex
+              definition:  SaveState
+              definition:  USB_Init
+              definition:  pInformation
+              definition:  pProperty
+              definition:  pUser_Standard_Requests
+              definition:  wInterrupt_Mask
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_istr.o.
+              reference :  EP1_IN_Callback
+              reference :  EP3_OUT_Callback
+              reference :  EP5_OUT_Callback
+              reference :  EP7_IN_Callback
+              reference :  NOP_Process
+              reference :  OTGD_FS_Handle_EnumDone_ISR
+              reference :  OTGD_FS_Handle_InEP_ISR
+              reference :  OTGD_FS_Handle_OutEP_ISR
+              reference :  OTGD_FS_Handle_RxStatusQueueLevel_ISR
+              reference :  OTGD_FS_Handle_Sof_ISR
+              reference :  OTGD_FS_Handle_USBSuspend_ISR
+              reference :  OTGD_FS_Handle_UsbReset_ISR
+              reference :  OTGD_FS_Handle_Wakeup_ISR
+              reference :  OTGD_FS_ReadCoreItr
+              reference :  Resume
+              reference :  Suspend
+              reference :  USBD_FS_IsDeviceMode
+              reference :  fSuspendEnabled
+              definition:  STM32_PCD_OTG_ISR_Handler
+              definition:  bIntPackSOF
+              definition:  pEpInt_IN
+              definition:  pEpInt_OUT
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_prop.o.
+              reference :  Device_Info
+              reference :  Get_SerialNum
+              reference :  NOP_Process
+              reference :  OTG_DEV_EP_Init
+              reference :  PowerOn
+              reference :  Standard_GetDescriptorData
+              reference :  USB_SIL_Init
+              reference :  Virtual_Com_Port_ConfigDescriptor
+              reference :  Virtual_Com_Port_DeviceDescriptor
+              reference :  Virtual_Com_Port_StringLangID
+              reference :  Virtual_Com_Port_StringProduct
+              reference :  Virtual_Com_Port_StringSerial
+              reference :  Virtual_Com_Port_StringVendor
+              reference :  bDeviceState
+              reference :  pInformation
+              definition:  Device_Property
+              definition:  Device_Table
+              definition:  User_Standard_Requests
+              definition:  Virtual_Com_Port_Data_Setup
+              definition:  Virtual_Com_Port_GetConfigDescriptor
+              definition:  Virtual_Com_Port_GetDeviceDescriptor
+              definition:  Virtual_Com_Port_GetLineCoding
+              definition:  Virtual_Com_Port_GetStringDescriptor
+              definition:  Virtual_Com_Port_Get_Interface_Setting
+              definition:  Virtual_Com_Port_NoData_Setup
+              definition:  Virtual_Com_Port_Reset
+              definition:  Virtual_Com_Port_SetConfiguration
+              definition:  Virtual_Com_Port_SetDeviceAddress
+              definition:  Virtual_Com_Port_SetLineCoding
+              definition:  Virtual_Com_Port_Status_In
+              definition:  Virtual_Com_Port_Status_Out
+              definition:  Virtual_Com_Port_init
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_pwr.o.
+              reference :  Enter_LowPowerMode
+              reference :  Leave_LowPowerMode
+              reference :  OTGD_FS_ResetRemoteWakeup
+              reference :  OTGD_FS_SetRemoteWakeup
+              definition:  PowerOn
+              definition:  Resume
+              definition:  ResumeS
+              definition:  Resume_Init
+              definition:  Suspend
+              definition:  bDeviceState
+              definition:  fSuspendEnabled
+Loading object C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_sil.o.
+              reference :  OTG_DEV_Init
+              reference :  PCD_EP_Read
+              reference :  PCD_EP_Write
+              reference :  PCD_GetOutEP
+              definition:  USB_SIL_Init
+              definition:  USB_SIL_Read
+              definition:  USB_SIL_Write
+Selecting member cstartup_M.o(rt7M_tl.a) to define __iar_program_start.
+              reference :  __cmain
+              reference :  __vector_table
+              weak ref  :  __iar_init_core
+              weak ref  :  __iar_init_vfp
+              definition:  __iar_program_start
+Selecting member ABImemcpy.o(rt7M_tl.a) to define __aeabi_memcpy.
+              definition:  __aeabi_memcpy
+              definition:  __aeabi_memcpy4
+              definition:  __aeabi_memcpy8
+Selecting member printf.o(dl7M_tln.a) to define printf.
+              reference :  _Printf
+              reference :  _Prout
+              definition:  __iar_default_requirements$$_Printf<unknown>printf
+              definition:  printf
+Selecting member putchar.o(dl7M_tln.a) to define putchar.
+              reference :  __write
+              definition:  putchar
+Selecting member getchar.o(dl7M_tln.a) to define getchar.
+              reference :  __read
+              definition:  __ungetchar
+              definition:  getchar
+Selecting member sscanf.o(dl7M_tln.a) to define sscanf.
+              reference :  _SScin
+              reference :  _Scanf
+              definition:  __iar_default_requirements$$_Scanf<unknown>sscanf
+              definition:  sscanf
+Selecting member cmain.o(rt7M_tl.a) to define __cmain.
+              weak ref  :  __iar_data_init3
+              reference :  __low_level_init
+              reference :  main
+              reference :  exit
+              definition:  __cmain
+              definition:  ?main
+              definition:  _main
+              definition:  _call_main
+Selecting member xprout.o(dl7M_tln.a) to define _Prout.
+              reference :  putchar
+              definition:  _Prout
+Selecting member xsscin.o(dl7M_tln.a) to define _SScin.
+              definition:  _SScin
+Selecting member low_level_init.o(dl7M_tln.a) to define __low_level_init.
+              definition:  __low_level_init
+Selecting member exit.o(dl7M_tln.a) to define exit.
+              reference :  _exit
+              definition:  exit
+Selecting member cexit.o(rt7M_tl.a) to define _exit.
+              weak ref  :  __call_dtors
+              weak ref  :  _Close_all
+              weak ref  :  __iar_clearlocks
+              reference :  __exit
+              definition:  _exit
+              definition:  __cexit_call_dtors
+              definition:  __cexit_closeall
+              definition:  __cexit_clearlocks
+Selecting member XXexit.o(rt7M_tl.a) to define __exit.
+              definition:  __exit
+Selecting member xprintfsmall.o(dl7M_tln.a) to define _PrintfSmall.
+              reference :  __iar_Memchr
+              reference :  __iar_Strchr
+              reference :  strlen
+              definition:  _PrintfSmall
+              definition:  __iar_provide$$_Printf<flags,int_specials,qualifiers,widths>_PrintfSmall
+Selecting member xscanfsmall_nomb.o(dl7M_tln.a) to define _ScanfSmallNoMb.
+              reference :  __iar_Stolx
+              reference :  __iar_Stoul
+              reference :  __iar_Strchr
+              definition:  _ScanfSmallNoMb
+              definition:  __iar_provide$$_Scanf<>_ScanfSmallNoMb
+Selecting member memchr.o(rt7M_tl.a) to define __iar_Memchr.
+              definition:  memchr
+              definition:  __iar_Memchr
+Selecting member strchr.o(rt7M_tl.a) to define __iar_Strchr.
+              definition:  strchr
+              definition:  __iar_Strchr
+Selecting member strlen.o(rt7M_tl.a) to define strlen.
+              definition:  strlen
+Selecting member xstol.o(dl7M_tln.a) to define __iar_Stolx.
+              reference :  __aeabi_errno_addr
+              reference :  __iar_Stoulx
+              definition:  __iar_Stolx
+Selecting member xstoul.o(dl7M_tln.a) to define __iar_Stoul.
+              reference :  __aeabi_errno_addr
+              reference :  __iar_Memchr
+              definition:  __iar_Stoul
+              definition:  __iar_Stoulx
+Selecting member errno.o(dl7M_tln.a) to define __aeabi_errno_addr.
+              reference :  __iar_dlib_perthread_access
+              definition:  __aeabi_EDOM
+              definition:  __aeabi_EFPOS
+              definition:  __aeabi_EILSEQ
+              definition:  __aeabi_ERANGE
+              definition:  __aeabi_ERRMAX
+              definition:  __aeabi_errno_addr
+              definition:  __iar_Errno
+Selecting member xtls.o(dl7M_tln.a) to define __iar_dlib_perthread_access.
+              definition:  __iar_dlib_perthread_access
+Selecting member data_init3.o(rt7M_tl.a) to define __iar_data_init3 (optional).
+              definition:  __iar_data_init3
+              reference :  Region$$Table$$Base
+              reference :  Region$$Table$$Limit
+Selecting member zero_init3.o(rt7M_tl.a) to define __iar_zero_init3 (optional).
+              definition:  __iar_SB
+              definition:  __iar_zero_init3
+Selecting member copy_init3.o(rt7M_tl.a) to define __iar_copy_init3 (optional).
+              definition:  __iar_SB
+              definition:  __iar_copy_init3
+Selecting member rle_init3.o(rt7M_tl.a) to define __iar_rle_init3 (optional).
+              definition:  __iar_SB
+              definition:  __iar_rle_init3
+Selecting member packbits_init3.o(rt7M_tl.a) to define __iar_packbits_init3 (optional).
+              definition:  __iar_SB
+              definition:  __iar_packbits_init3
+Selecting member lzw_init3c.o(rt7M_tl.a) to define __iar_lzw_init3 (optional).
+              reference :  abort
+              definition:  __iar_SB
+              definition:  __iar_lzw_init3
+Selecting member bwt_init3c.o(rt7M_tl.a) to define __iar_bwt_init3 (optional).
+              reference :  __aeabi_memclr4
+              reference :  abort
+              definition:  __iar_SB
+              definition:  __iar_bwt_init3
+Selecting member abort.o(dl7M_tln.a) to define abort (optional).
+              reference :  __exit
+              definition:  abort
+Selecting member ABImemclr4.o(rt7M_tl.a) to define __aeabi_memclr4 (optional).
+              reference :  __iar_Memset4_word
+              definition:  __aeabi_memclr4
+Selecting member ABImemset48.o(rt7M_tl.a) to define __iar_Memset4_word (optional).
+              definition:  __aeabi_memset4
+              definition:  __aeabi_memset8
+              definition:  __iar_Memset4_word
+              definition:  __iar_Memset8_word
+Resolving duplicate symbol definitions
+  Picking DebugMon_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing DebugMon_Handler [s15 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI2_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing EXTI2_IRQHandler [s26 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking HardFault_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing HardFault_Handler [s10 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI9_5_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing EXTI9_5_IRQHandler [s41 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking NMI_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing NMI_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking OTG_FS_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing OTG_FS_IRQHandler [s78 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking SVC_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing SVC_Handler [s14 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking TIM6_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing TIM6_IRQHandler [s65 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking BusFault_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing BusFault_Handler [s12 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking DMA1_Channel4_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing DMA1_Channel4_IRQHandler [s32 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking MemManage_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing MemManage_Handler [s11 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking SPI3_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing SPI3_IRQHandler [s62 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking UsageFault_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing UsageFault_Handler [s13 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking PendSV_Handler [s6 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\portForM3.o]
+    Suppressing PendSV_Handler [s16 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking EXTI1_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing EXTI1_IRQHandler [s25 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking TIM2_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing TIM2_IRQHandler [s46 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking SysTick_Handler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\arch.o]
+    Suppressing SysTick_Handler [s17 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking TIM3_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing TIM3_IRQHandler [s47 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking TIM5_IRQHandler [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\stm32f10x_it.o]
+    Suppressing TIM5_IRQHandler [s61 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\startup_stm32f10x_cl.o]
+  Picking __iar_SB [s7 bwt_init3c.o(rt7M_tl.a)]
+    Suppressing __iar_SB [s7 zero_init3.o(rt7M_tl.a)]
+    Suppressing __iar_SB [s7 copy_init3.o(rt7M_tl.a)]
+    Suppressing __iar_SB [s7 rle_init3.o(rt7M_tl.a)]
+    Suppressing __iar_SB [s7 packbits_init3.o(rt7M_tl.a)]
+    Suppressing __iar_SB [s7 lzw_init3c.o(rt7M_tl.a)]
+  Picking __iar_cc.IRQn.Lszd1Ssa2Z8 [s88 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\usb_hw_config.o]
+    Suppressing __iar_cc.IRQn.Lszd1Ssa2Z8 [s229 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\hardware.o]
+    Suppressing __iar_cc.IRQn.Lszd1Ssa2Z8 [s57 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\main.o]
+  Picking memcpy [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\tasks.o]
+    Suppressing memcpy [s9 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\basic_rf.o]
+    Suppressing memcpy [s13 C:\projects\blackbox\trunk\firmware\beacon\IAR\Obj\main.o]

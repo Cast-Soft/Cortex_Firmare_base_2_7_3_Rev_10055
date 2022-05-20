@@ -1,0 +1,4104 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     21/Mar/2019  16:04:23 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\App\tasks.c                                         #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\App\tasks.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER  #
+#                    -D STM32F10X_CL -D COOS -D USE_MY_ASSERT -D BC_HW_REVJ   #
+#                    -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE    #
+#                    -D BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4  #
+#                    -D WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D           #
+#                    msgmethod1 -lcN "C:\Users\User\Documents\Cortex_git\BLKT #
+#                    -01.git\Source Code\BLKT-01                              #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    Copy\IAR\Debug-Bootloader\List\" -o                      #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\" --no_cse --no_unroll     #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --fpu=None --dlib_config "C:\Program Files (x86)\IAR  #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\Source Code\BLKT-01 Beacon\Source\firmware\beacon -    #
+#                    Copy\IAR\..\App\" -I "C:\Users\User\Documents\Cortex_git #
+#                    \BLKT-01.git\Source Code\BLKT-01                         #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    Copy\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\ #
+#                    Source Code\BLKT-01 Beacon\Source\firmware\beacon -      #
+#                    Copy\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sourc #
+#                    e Code\BLKT-01 Beacon\Source\firmware\beacon -           #
+#                    Copy\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\" -I "C:\Users\User\Documents\Cort #
+#                    ex_git\BLKT-01.git\Source Code\BLKT-01                   #
+#                    Beacon\Source\firmware\beacon - Copy\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\tasks.lst                 #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\tasks.o                    #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon - Copy\App\tasks.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : tasks.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : All the various System Tasks
+      9          *******************************************************************************/
+     10          
+     11          #include "VersionNo.h"
+     12          
+     13          /* INCLUDES ------------------------------------------------------------------*/
+     14          
+     15          #include "tasks.h"
+     16          #include "CoOS.h"
+     17          #include "hardware.h"
+     18          #include "basic_rf.h"
+     19          #include "radio.h"
+     20          #include "stm32f10x_it.h"
+     21          #include "stm32f10x_iwdg.h"
+     22          #include "stm32f10x_flash.h"
+     23          #include "stm32f10x_adc.h"
+     24          #include "i2c_ee.h"
+     25          #include <stdio.h>
+     26          #include <string.h>
+     27          #include <ctype.h>
+     28          
+     29          #include "radio.h"
+     30          #include "radio_defs.h"
+     31          #include "packets.h"
+     32          #include "flash_map.h"
+     33          #include "util.h"
+     34          #include "config.h"
+     35          #include "console_tail.h"
+     36          
+     37          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     38          
+     39          typedef struct {
+     40              uint16_t    dstAddr;
+     41              uint8_t     payloadSize;
+     42              uint8_t     payload[FRAME_LENGTH_MAX - MHR_SIZE - MFR_SIZE];
+     43          } txPktRec_t;
+     44          
+     45          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     46          
+     47          #ifdef STDIO_TO_USART
+     48          #define DISABLE_PWR_SW
+     49          #endif
+     50          
+     51          #define PINGER_ADDR         0x1234
+     52          #define TX_PKT_QUEUE_SIZE   8
+     53          
+     54          #define UPDATE_FLAG_PANID       0x01
+     55          #define UPDATE_FLAG_DSTADDR     0x02
+     56          #define UPDATE_FLAG_DAC         0x04
+     57          #define UPDATE_FLAG_RFCHAN      0x08
+     58          #define UPDATE_FLAG_TXLEVEL     0x10
+     59          
+     60          /*
+     61           Beacon Pkt Duration = 0.70ms
+     62           Max TX Pkt Duration = 3.5ms
+     63           Inhibit Guard-Band Pre = 4.0ms
+     64           Inhibit Guard-Band Post = 0.5ms
+     65          */
+     66          #define SOH 0x01
+     67          #define EOT 0x04
+     68          #define ACK 0x06
+     69          
+     70          /**  IMU LSM330DLC definitions **/
+     71          
+     72          #define IMU_CTRL_REG1         0x20
+     73          #define IMU_CTRL_REG2         0x21
+     74          #define IMU_CTRL_REG3         0x22
+     75          #define IMU_CTRL_REG4         0x23
+     76          #define IMU_CTRL_REG5         0x24
+     77          #define IMU_WHOAMI_REG        0x0F
+     78          #define IMU_IM_LSM330         0xD4
+     79          
+     80          #define IMU_A_RATE_1HZ          0x10
+     81          #define IMU_A_RATE_10HZ         0x20
+     82          #define IMU_A_RATE_25HZ         0x30
+     83          #define IMU_A_RATE_50HZ         0x40
+     84          #define IMU_A_RATE_100HZ        0x50
+     85          #define IMU_A_RATE_200HZ        0x60
+     86          #define IMU_A_RATE_400HZ        0x70
+     87          
+     88          #define IMU_A_AXIS_X_EN         0x01
+     89          #define IMU_A_AXIS_Y_EN         0x02
+     90          #define IMU_A_AXIS_Z_EN         0x04
+     91          
+     92          #define IMU_BIG_ENDIAN          0x40
+     93          #define IMU_H_RESOL             0x08
+     94          
+     95          #define BTNPRESSED    1
+     96          #define BTNDEPRESSED  0
+     97          
+     98          #define BTN_BURST_SEND 5
+     99          
+    100          #define NUM_TX_RETRIES 4
+    101          
+    102          #define DEBOUNCE_MIN    1
+    103          #define DEBOUNCE_MAX    9
+    104          #define DBLCLICK_MIN_TIME       1
+    105          #define DBLCLICK_MAX_TIME       9
+    106          
+    107          /* PRIVATE MACROS ------------------------------------------------------------*/
+    108          
+    109          /* EXTERN VARIABLES ----------------------------------------------------------*/
+    110          
+    111          
+    112          /* Variables Defined in main.c */
+    113          
+    114          extern char firmwareVersion[];
+    115          extern uint8_t radio_off;
+    116          
+    117          extern uint32_t txFrmDoneCount;
+    118          extern uint32_t irq_spi_dma;
+    119          //uint32_t task2Counter;
+    120          extern StatusType task2StatusType;
+    121          extern uint32_t task2enter;
+    122          
+    123          extern OS_TID task1Id;
+    124          extern OS_TID taskRadioRxId;
+    125          extern OS_TID task3Id;
+    126          extern OS_TID taskConfigId;
+    127          extern OS_TID taskRadioTxId;
+    128          extern OS_TID task8Id;
+    129          extern OS_TID taskIMUGId;
+    130          
+    131          extern OS_FlagID flagIMUNewData;
+    132          extern OS_FlagID flagIMU_G_DRDY;
+    133          extern OS_FlagID flagRadioTxReq;
+    134          extern OS_FlagID flagIMUTimeToSend;
+    135          extern OS_FlagID flagRadioCCA;
+    136          
+    137          extern uint32_t drift;
+    138          extern int32_t last_drift;
+    139          
+    140          extern OS_EventID semIMUAllow;
+    141          extern OS_FlagID   flagIMUDataReady;
+    142          extern OS_FlagID   flagBtnDataReady;
+    143          extern OS_FlagID   flagBatDataReady;
+    144          extern OS_FlagID   flagLEDDataReady;
+    145          
+    146          extern volatile uint32_t IMUSampleTime;
+    147          extern volatile uint16_t MsTimerAtSync;
+    148          extern volatile uint8_t IMUPktNumAtSync;
+    149          
+    150          extern Batt_Union_t BattUnion, *pBattUnion;
+    151          //extern SPI3_CS_TypeDef SPI3_CS;
+    152          
+    153          extern uint32_t rxErrors;
+    154          extern uint32_t sec;
+    155          extern struct realTime semTime2;
+    156          extern struct realTime rxFIFOTime;
+    157          
+    158          extern volatile uint16_t tasksWDT;
+    159          #if (defined USE_MY_ASSERT) || (defined USE_FULL_ASSERT)
+    160          extern uint8_t  assert_loop;
+    161          #endif
+    162          extern uint16_t routerAddr;
+    163          extern uint8_t asserted;
+    164          extern uint8_t cc2520_flags0;
+    165          extern uint8_t cc2520_flags1;
+    166          extern uint8_t cc2520_flags2;
+    167          extern uint16_t sampledCCA;
+    168          
+    169          #ifdef CIRCULAR_LOG
+    170          tLogStruct log[LOG_SIZE/sizeof(tLogStruct)];
+    171          uint16_t  log_index_in;
+    172          #endif
+    173          
+    174          uint8_t last_percents;
+    175          uint32_t Valids;
+    176          uint32_t notValids;
+    177          uint32_t lostSync;
+    178          uint32_t changeClocks;
+    179          uint32_t newbcn;
+    180          uint32_t frameIdCorrectionCount;
+    181          //uint8_t TRACE_ADJUST = 0;
+    182          uint32_t oldFrameIdAtSync, newFrameIdAtSync;
+    183          
+    184          //extern uint32_t rx_overflow;
+    185          //extern uint32_t tx_overflow;
+    186          extern uint16_t tim2_phase;
+    187          extern uint16_t tim3_phase;
+    188          //extern uint32_t syncPackets;
+    189          
+    190          extern uint16_t adjusted;
+    191          extern uint8_t adjusted_changed;
+    192          
+    193          
+    194          int TRACE(char* fmt, ...);
+    195          size_t __writeIMU(const unsigned char *buffer, size_t size);
+    196          extern void RadioIMU_WaitGrabSPI();
+    197          extern void RadioIMU_ReleaseSPI(void);
+    198          
+    199          void IMUWaitGrabSPI();
+    200          void IMUReleaseSPI();
+    201          
+    202          size_t __writeCmdLineRespPacket(const unsigned char *buffer, size_t size, uint8_t contentType);
+    203          uint16_t tim_at_sec;
+    204          
+    205          uint32_t rt_flags;
+    206          
+    207          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+    208          //static uint16_t tim4MovAvgMin = UINT16_MAX, tim4MovAvgMax = 0;
+    209          static volatile uint16_t halted = 0;
+    210          static uint8_t beaconInSync = 0;
+    211          static uint16_t txCount;        // ping count
+    212          static uint8_t txTestStr[] = {0xAA, 0x55, 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF};
+    213          static uint8_t txBuf[FRAME_LENGTH_MAX - MHR_SIZE - MFR_SIZE];  // tx-payload buffer
+    214          static uint8_t rfChan;
+    215          static uint8_t beaconRSSI;
+    216          static txPktRec_t txPktQueue[TX_PKT_QUEUE_SIZE];
+    217          static uint16_t inIdx = 0;
+    218          static uint16_t outIdx = 0;
+    219          static struct realTime startRadioTx;
+    220          static struct realTime endRadioTx;
+    221          static uint8_t queue_full;
+    222          //static uint8_t send_battery_info = 1;
+    223          
+    224          volatile int32_t remainOutOfSyncTime;
+    225          
+    226          static struct Beacon_BatData lastBatStatus;
+    227          
+    228          uint8_t          frameIdFlag = 1;
+    229          uint32_t         errorFrameId;
+    230          
+    231          //#define EIGHTSAMPLEOFFSET 48299   // 80.5mS / 1.666 uS
+    232          #define EIGHTSAMPLEOFFSET 48089   // 80.0mS / 1.666 uS
+    233          #define FIVESAMPLEOFFSET  0   // 3.5mS / 1.666 uS
+    234          
+    235          // Timeslots in uS
+    236          //  0, 876, 5,532, 10,188, 14,844, 19,500, 24,156, 28,812, 33,468, 38,124, 42,780
+    237          //  47,436, 52,092, 56,748, 61,404, 66,060, 70,716, 75,372, 80,028, 84,684, 89,340
+    238          //  93,996
+    239          // timeslot offset run from 1.666uS counter
+    240          //
+    241          /*uint16_t TimeSlotVals[] = {0, 525, 3319, 6112, 8906, 11700, 14493, 17287, 20080, 22874,
+    242                    25667, 28461, 31254, 34048, 36841, 39635, 42429, 45222, 48016, 50809,
+    243                  53603, 56396 };*/
+    244          
+    245          /* same as above but now using 3.0 ms time slots instead of 4.65ms
+    246          1800 counts per 3.0ms*/
+    247          
+    248          //3.5ms slots
+    249          /*uint16_t TimeSlotVals[] = {0,   525,  2625, 4725, 6825, 8925,11025,13125,15225,17325,
+    250                                    19425,21525,23625,25725,};*/
+    251          static uint16_t TimeSlotVals[] = {0,   0, 2100, 4200, 6300, 8400,10500,12600,14700,16800,
+    252                                    18900,21000,23100,25200, 27300, 29400};
+    253          
+    254          #define MAX_NUMBER_OF_TIMESLOTS sizeof(TimeSlotVals) / sizeof(uint16_t)
+    255          
+    256          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+    257          
+    258          
+    259          __no_init uint32_t random;
+    260          
+    261          config_t config;
+    262          tButton buttonA;
+    263          tButton buttonB;
+    264          
+    265          struct realTime oldFrameTime;
+    266          struct realTime newFrameTime;
+    267          
+    268          uint32_t realFrameId;
+    269          uint32_t lastFrameIdAtSync;
+    270          uint32_t lastFrameIdCorrection;
+    271          int8_t frameAdjust = 4;
+    272          uint32_t successBeacons;
+    273          uint16_t routerAddr = 0;
+    274          uint8_t use_sync = 1;
+    275          uint16_t RfTxLevel;
+    276          uint32_t IMUdbgPrt = 0;
+    277          uint16_t frameOffset;
+    278          uint8_t bat_slot_numbers;
+    279          static uint32_t bat_send_time;
+    280          
+    281          tBtn_State btnA;
+    282          tBtn_State btnB;
+    283          //IMUData IMU_Packets;
+    284          
+    285          //I2C_ADDR_TypeDef ADDR_I2C;
+    286          
+    287          uint8_t button_state;
+    288          uint32_t last_bat_sent;
+    289          
+    290          uint8_t IMUPresent = 0;   // imu present absent flag
+    291          uint8_t test_imu_pkt_ctr = 0; // IMU packet ctr from IMU interrupt
+    292          
+    293          uint16_t txTimeSlot = 40000;
+    294          
+    295          uint8_t firstTime = 1;  // first need to initialize timer of time slot
+    296          uint16_t random_slot1 = 0xFFFF;
+    297          uint16_t random_slot2 = 0xFFFF;
+    298          
+    299          /* EXTERNAL FUNCTION PROTOTYPES ---------------------------------------------*/
+    300          uint8_t IMURegRd(uint8_t addr, HwSPI_TypeDef Sensor);
+    301          void IMURegWr(uint8_t addr, HwSPI_TypeDef Sensor, uint8_t val);
+    302          
+    303          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+    304          static void GetAverageImuData(uint16_t *pBuff);
+    305          static void InputDataIntoBuffer(uint8_t volatile *pImuData);
+    306          
+    307          static void mygets(char *str);
+    308          //static void IMURegWr(uint8_t addr, uint16_t val);
+    309          //static uint16_t IMURegRd(uint8_t addr);
+    310          static void SetConfig(uint16_t idx, uint32_t val, uint32_t pattern, uint8_t ledBits, uint8_t ledId);
+    311          static void PrintConfig(void);
+    312          
+    313          static uint8_t RadioTxPktQueue(uint16_t dstAddr, uint8_t payloadSize, uint8_t *payload);
+    314          uint16_t fastdivide250(uint16_t);
+    315          
+    316          static uint8_t __task1_imu_pack(uint8_t * ptr);
+    317          static uint8_t __task1_btn_pack(uint8_t * ptr);
+    318          static uint8_t __task1_btnimu_pack(uint8_t * ptr);
+    319          static uint8_t __task1_bat_pack(uint8_t * ptr);
+    320          static uint8_t __task1_batimu_pack(uint8_t * ptr);
+    321          static uint8_t __task1_batbtn_pack(uint8_t * ptr);
+    322          static uint8_t __task1_batbtnimu_pack(uint8_t * ptr);
+    323          static uint8_t __task1_led_pack(uint8_t * ptr);
+    324          static uint8_t __task1_ledimu_pack(uint8_t * ptr);
+    325          static uint8_t __task1_ledbtn_pack(uint8_t * ptr);
+    326          static uint8_t __task1_ledbtnimu_pack(uint8_t * ptr);
+    327          static uint8_t __task1_ledbat_pack(uint8_t * ptr);
+    328          static uint8_t __task1_ledbatimu_pack(uint8_t * ptr);
+    329          static uint8_t __task1_ledbatbtn_pack(uint8_t * ptr);
+    330          static uint8_t __task1_ledbatbtnimu_pack(uint8_t * ptr);
+    331          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+    332          
+    333          /*******************************************************************************
+    334          * Description : Sets Outgoing Tx Timeslot
+    335          * Input       :
+    336          * Return      : -
+    337          *******************************************************************************/
+    338          void SetTimeSlot(void){
+    339          
+    340          uint16_t TimeSlotTemp = 40000;
+    341          
+    342            if((config.rfTimeSlot > 1) && (config.rfTimeSlot < MAX_NUMBER_OF_TIMESLOTS))
+    343            {
+    344              TimeSlotTemp = TimeSlotVals[config.rfTimeSlot];
+    345              //TimeSlotTemp -= FIVESAMPLEOFFSET;
+    346              /*if(TimeSlotTemp > FIVESAMPLEOFFSET)
+    347              {
+    348                  TimeSlotTemp -= FIVESAMPLEOFFSET;
+    349              }
+    350              else
+    351              {
+    352                TimeSlotTemp = FIVESAMPLEOFFSET -  (TimeSlotVals[config.rfTimeSlot]);
+    353                TimeSlotTemp = 60000 - TimeSlotTemp;
+    354              }*/
+    355              txTimeSlot =TimeSlotTemp;
+    356              firstTime = 1;           // reset timeslot
+    357            }
+    358            else
+    359            {
+    360              config.rfTimeSlot = 2;
+    361              //recursive call
+    362              SetTimeSlot();
+    363            }
+    364          }
+    365          
+    366          
+    367          /*******************************************************************************
+    368          * Description : Get a line from STDIN
+    369          * Input       :
+    370          * Return      : -
+    371          *******************************************************************************/
+    372          static void mygets(char *str) {
+    373              char *tmp = str;
+    374              int c;
+    375              SAVE_POINT
+    376              do {
+    377                  while( (c = getchar()) == EOF ) {
+    378                      SAVE_POINT
+    379                      CoTickDelay(10);
+    380                      SAVE_POINT
+    381                      // reset tasksWDT
+    382                      tasksWDT |= 0x0002;
+    383                  }
+    384                  putchar(c);
+    385                  *tmp++ = (char) c;
+    386              } while (c != '\r');
+    387              SAVE_POINT
+    388          
+    389              putchar('\n');
+    390              *(--tmp) = '\0';
+    391          }
+    392          /*******************************************************************************
+    393          * Description : Write to an IMU Register
+    394          * Input       :
+    395          * Return      : -
+    396          *******************************************************************************/
+    397          void IMURegWr(uint8_t addr, HwSPI_TypeDef Sensor, uint8_t val) {
+    398              SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI); // flush RXNE
+    399          
+    400              // write LSB
+    401              HwSPISSAssert(Sensor);
+    402              SPI_I2S_SendData(SPI_RADIO_IMU_SPI, ((addr << 8) | val) );
+    403              //TK_BK_SPI_WAIT_RXRDY();
+    404              while (SPI_I2S_GetFlagStatus(SPI_RADIO_IMU_SPI, SPI_I2S_FLAG_RXNE) == RESET);
+    405              SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI); // flush RXNE
+    406              HwSPISSDeAssert(Sensor);
+    407          }
+    408          
+    409          #define AIRCR_VECTKEY_MASK    ((u32)0x05FA0000)
+    410          
+    411          /*******************************************************************************
+    412          * Function Name  : NVIC_GenerateSystemReset
+    413          * Description    : Generates a system reset.
+    414          * Input          : None
+    415          * Output         : None
+    416          * Return         : None
+    417          *******************************************************************************/
+    418          void NVIC_GenerateSystemReset(void)
+    419          {
+    420            SCB->AIRCR = AIRCR_VECTKEY_MASK | (u32)0x04;
+    421          }
+    422          
+    423          
+    424          /*******************************************************************************
+    425          * Description : Read from an IMU Register
+    426          * Input       :
+    427          * Return      : -
+    428          *******************************************************************************/
+    429          uint8_t IMURegRd(uint8_t addr, HwSPI_TypeDef Sensor) {
+    430          
+    431              uint16_t value;
+    432          
+    433              SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI); // flush RXNE
+    434          
+    435              // send register addr
+    436              HwSPISSAssert(Sensor);
+    437              // With Read Bit set 0x8000
+    438              SPI_I2S_SendData(SPI_RADIO_IMU_SPI, 0x8000 | (addr << 8));
+    439              // TK_BK_SPI_WAIT_RXRDY();
+    440              while (SPI_I2S_GetFlagStatus(SPI_RADIO_IMU_SPI, SPI_I2S_FLAG_RXNE) == RESET);
+    441              value = SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI);
+    442              HwSPISSDeAssert(Sensor);
+    443          
+    444              return (uint8_t)value;
+    445          }
+    446          /*******************************************************************************
+    447          * Description : Reads all the IMU buffered data and averages it
+    448          * Input       :
+    449          * Return      : - Averaged and packed data according to old ADI format
+    450          *                 BK_IMUData.
+    451          *******************************************************************************/
+    452          static void GetAverageImuData(uint16_t *pBuff)
+    453          {
+    454            // Get Data from Gyro Buffer
+    455            //x__disable_interrupt();
+    456            pBuff[0] = ImuGyroBuffer.xSum;
+    457            pBuff[1] = ImuGyroBuffer.ySum;
+    458            pBuff[2] = ImuGyroBuffer.zSum;
+    459            pBuff[3] = ImuAccelBuffer.xSum;
+    460            pBuff[4] = ImuAccelBuffer.ySum;
+    461            pBuff[5] = ImuAccelBuffer.zSum;
+    462            //x__enable_interrupt();
+    463          }
+    464          
+    465          
+    466          uint16_t fastdivide250(uint16_t val){
+    467            uint32_t x = ((val*0x8312)>>16)>>7;
+    468            return (uint16_t) x;
+    469          }
+    470          /*******************************************************************************
+    471          * Description : Inputs the XYZ data into IMU Buffer
+    472          * Input       :   Buffer of Data and Buffer
+    473          * Return      : -
+    474          *******************************************************************************/
+    475          static void InputDataIntoBuffer(uint8_t volatile *pImuData)
+    476          {
+    477          	ImuBuffer_t volatile *pImuBuff = &ImuGyroBuffer;
+    478          	pImuBuff->xSum = (*(uint16_t*)&pImuData[6])/250;
+    479          	pImuBuff->ySum = (*(uint16_t*)&pImuData[8])/250;
+    480          	pImuBuff->zSum = (*(uint16_t*)&pImuData[10])/250;
+    481          	pImuBuff->count = 1;
+    482          	
+    483          	pImuBuff = &ImuAccelBuffer;
+    484          	pImuBuff->xSum = *((uint16_t*)&pImuData[0]) >>1;
+    485          	pImuBuff->ySum = *((uint16_t*)&pImuData[2]) >>1;
+    486          	pImuBuff->zSum = *((uint16_t*)&pImuData[4]) >>1;
+    487          	pImuBuff->count = 1;
+    488            //x__disable_interrupt();
+    489            
+    490            
+    491            //x__enable_interrupt();
+    492          }
+    493          
+    494          /*******************************************************************************
+    495          * Description : Set Configuration
+    496          * Input       :
+    497          * Return      : -
+    498          *******************************************************************************/
+    499          static void SetConfig(uint16_t idx, uint32_t val, uint32_t pattern, uint8_t ledBits, uint8_t ledId) {
+    500              SAVE_POINT
+    501              switch (idx) {
+    502                  /*
+    503                      0 : productID
+    504                      1 : serialNum
+    505                      2 : panId
+    506                      3 : mySrcAddr
+    507                      4 : tkDstAddr
+    508                      5 : ledOnOffs
+    509                      6 : ledOffOffs
+    510                      7 : ledDAC
+    511                      8 : rfChan
+    512                      9 : led0Id
+    513                      A : led1Id
+    514                      B : led2Id
+    515                      C : TestMode
+    516                  */
+    517                  case 0x0:
+    518                      config.productID = val;
+    519                      break;
+    520                  case 0x1:
+    521                      config.serialNum = val;
+    522                      break;
+    523                  case 0x2:
+    524                      config.panId = val;
+    525                      RadioSetPanIdShortAddr(config.panId, config.mySrcAddr);
+    526                      break;
+    527                  case 0x3:
+    528                      config.mySrcAddr = val;
+    529                      RadioSetPanIdShortAddr(config.panId, config.mySrcAddr);
+    530                      SAVE_POINT
+    531                      break;
+    532                  case 0x4:
+    533                      config.routerDstAddr = val;
+    534                      break;
+    535                  case 0x5:
+    536                      config.ledOnOffs = val;
+    537                      break;
+    538                  case 0x6:
+    539                      config.ledOffOffs = val;
+    540                      break;
+    541                  case 0x7:
+    542                      config.ledDAC = val;
+    543                      DAC_SetChannel2Data(DAC_Align_12b_R, val);
+    544                      break;
+    545                  case 0x8:
+    546                      if(val >= OLD_RF_CHANNEL_MIN && val <= OLD_RF_CHANNEL_MAX)
+    547                      {
+    548                        config.rfChan = val;
+    549                        SAVE_POINT
+    550                        RadioSetRFChan(val);
+    551                      }
+    552                      break;
+    553                  case 0x9:
+    554                      config.led0Id = val;
+    555                      break;
+    556                  case 0xA:
+    557                      config.led1Id = val;
+    558                      break;
+    559                  case 0xB:
+    560                      config.led2Id = val;
+    561                      break;
+    562                  case 0xC:
+    563                    config.TestMode = val;
+    564                    break;
+    565                  case 0xD:
+    566                    config.rfTimeSlot = val;
+    567                    SetTimeSlot();
+    568                    break;
+    569                 case 0xE:
+    570                    config.TxLevel = val;
+    571                    SAVE_POINT
+    572                    RadioSetRFLevel(config.TxLevel);
+    573                    SAVE_POINT
+    574                    break;
+    575              case 0x10:
+    576                    config.radioPacketFlags = val;
+    577                    break;
+    578              case 0x13:
+    579                    config.led0IdPattern = pattern;
+    580                    config.led0Index = val;
+    581                    config.frameBits = ledBits;
+    582                    config.led0Id = ledId;
+    583                   break;
+    584              case 0x14:
+    585                    config.led1IdPattern = pattern;
+    586                    config.led1Index = val;
+    587                    config.frameBits = ledBits;
+    588                    config.led1Id = ledId;
+    589                    break;
+    590              case 0x15:
+    591                    config.led2IdPattern = pattern;
+    592                    config.led2Index = val;
+    593                    config.frameBits = ledBits;
+    594                    config.led2Id = ledId;
+    595                    break;
+    596              case 22:
+    597                      if(val >= RF_CHANNEL_MIN && val <= RF_CHANNEL_MAX)
+    598                      {
+    599                        config.rfChan = val;
+    600                        SAVE_POINT
+    601                        RadioSetRFChan(val);
+    602                      }
+    603                      break;
+    604          #ifndef OLD_CONFIG
+    605              case 24:
+    606                    if (val >= DEBOUNCE_MIN && val <= DEBOUNCE_MAX) {
+    607                      config.debounce_time = val;
+    608                    }
+    609                    break;
+    610              case 25:
+    611                    if (val >= DBLCLICK_MIN_TIME && val <= DBLCLICK_MAX_TIME) {
+    612                      config.doubleclick_time = val;
+    613                    }
+    614                    break;
+    615          #endif
+    616              default:
+    617                      TRACE("**ERROR** Unrecognized Configuration Setting\n\r");
+    618                      break;
+    619          
+    620              }
+    621          }
+    622          /*******************************************************************************
+    623          * Description : Print Configuration
+    624          * Input       : -
+    625          * Return      : -
+    626          *******************************************************************************/
+    627          static void PrintConfig(void) {
+    628              SAVE_POINT
+    629          
+    630          
+    631          #ifdef _DEBUG
+    632              TRACE("\n\r FIRMWARE VERSION: " STRINGIFY(THIS_MAJOR) "." STRINGIFY(THIS_MINOR) "." STRINGIFY(THIS_PATCH) "." STRINGIFY(THIS_REVISION) " BC DEBUG \n\r\n\r");
+    633          #else
+    634              TRACE("\n\r FIRMWARE VERSION: " STRINGIFY(THIS_MAJOR) "." STRINGIFY(THIS_MINOR) "." STRINGIFY(THIS_PATCH) "." STRINGIFY(THIS_REVISION) " BC RELEASE \n\r\n\r");
+    635          #endif
+    636              TRACE(" "__DATE__" : "__TIME__" \n\n\r");
+    637              TRACE("ARM Serial Number 0x%X,0x%X,0x%X \n\n\r",ARM_proc_SN.a,ARM_proc_SN.b, ARM_proc_SN.c);
+    638          
+    639              if(IMUPresent){
+    640                 TRACE("IMU Present\n\n\r");
+    641              }else{
+    642                TRACE(" No IMU Installed\n\n\r");
+    643              }
+    644          
+    645          TRACE("[0] productID   : %X\n\r", config.productID);
+    646          TRACE("[1] serialNum   : %X\n\r", config.serialNum);
+    647          TRACE("[2] panId       : %04X\n\r", config.panId);
+    648          TRACE("[3] mySrcAddr   : %04X\n\r", config.mySrcAddr);
+    649          TRACE("[4] routerDstAddr   : %04X\n\r", config.routerDstAddr);
+    650          TRACE("[5] ledOnOffs   : %X\n\r", config.ledOnOffs);
+    651          TRACE("[6] ledOffOffs  : %X\n\r", config.ledOffOffs);
+    652          TRACE("[7] ledDAC      : %X\n\r", config.ledDAC);
+    653          TRACE("[8] rfChan      : %02X\n\r", config.rfChan);
+    654          TRACE("[?] rfTimeSlot  : %02X\n\r", config.rfTimeSlot);
+    655          TRACE("[9] led0Id      : %02X\n\r", config.led0Id);
+    656          TRACE("[A] led1Id      : %02X\n\r", config.led1Id);
+    657          TRACE("[B] led2Id      : %02X\n\r", config.led2Id);
+    658          TRACE("[C] TestMode    : %d\n\r", config.TestMode);
+    659          TRACE("[J] led0IdPattern : %08X\n\r", config.led0IdPattern);
+    660          TRACE("[K] led1IdPattern : %08X\n\r", config.led1IdPattern);
+    661          TRACE("[L] led2IdPattern : %08X\n\r", config.led2IdPattern);
+    662          TRACE("[M] led0Index : %08X\n\r", config.led0Index);
+    663          TRACE("[N] led1Index : %08X\n\r", config.led1Index);
+    664          TRACE("[O] led2Index : %08X\n\r", config.led2Index);
+    665          TRACE("[Y] frameBits   : %d\n\r", config.frameBits);
+    666          TRACE("[Z] Tx RF Level : %X\n\r", TxAmpValues[config.TxLevel]);
+    667          TRACE("[X] Radio: %s\n\r", radio_off == 0? "on":"off");
+    668          
+    669            TRACE("Built on "__DATE__" "__TIME__"\n\r");
+    670            TRACE("Flags = 0x%08X \r\n", config.flags);
+    671            TRACE("Timer adjust: %d\n\r", config.time_adjust);
+    672            TRACE("Timekeeper sync: %s\n\r", use_sync?"yes":"no");
+    673            TRACE("No sync timeout sec: %d\n\r", config.frameCountNoSync/10);
+    674          #ifndef OLD_CONFIG
+    675            TRACE("FrameId 24 bits wrap around: %s\n\r", (config.flags & FLAG_FRAMEID_24BITS)?"yes":"no");
+    676            TRACE("Debounce value[1-9]: %u, doubleclick value[1-9]: %u\r\n", config.debounce_time,
+    677                  config.doubleclick_time);
+    678          #endif
+    679          }
+    680          
+    681          
+    682          uint32_t txCalls;
+    683          uint32_t txCalls2;
+    684          StatusType setRadioTx;
+    685          
+    686          /*******************************************************************************
+    687          * Description : Add Packet to Radio Transmit Queue
+    688          * Input       : -
+    689          * Return      : 0 if buffer full otherwise just returns payloadSize back
+    690          *******************************************************************************/
+    691          static uint8_t RadioTxPktQueue(uint16_t dstAddr, uint8_t payloadSize, uint8_t *payload) {
+    692              // critical section.
+    693              SAVE_POINT
+    694          
+    695              __disable_interrupt();
+    696              if ( ((inIdx + 1) % TX_PKT_QUEUE_SIZE) == outIdx )
+    697              {
+    698                  __enable_interrupt();
+    699                    SAVE_POINT
+    700                    return 0; // queue is full => ignore request
+    701              }
+    702              txCalls++;
+    703              txPktQueue[inIdx].dstAddr = dstAddr;
+    704              txPktQueue[inIdx].payloadSize = payloadSize;
+    705              memcpy((void *)txPktQueue[inIdx].payload, (void *)payload, payloadSize);
+    706              inIdx = (inIdx + 1) % TX_PKT_QUEUE_SIZE;
+    707          
+    708              __enable_interrupt();
+    709          
+    710              setRadioTx = CoSetFlag(flagRadioTxReq);  // Wake up TX task if it is waiting for sending
+    711              txCalls2++;
+    712              return payloadSize;
+    713          }
+    714          
+    715          uint32_t calls;
+    716          uint32_t pushed_times;
+    717          
+    718          StatusType semAllowPostTask;
+    719          uint8_t semAllow = 0;
+    720          
+    721          /* PUBLIC FUNCTIONS ----------------------------------------------------------*/
+    722          extern uint32_t secs;
+    723          
+    724          
+    725          /*
+    726          #define RADIOPACKET_IMU         0x01
+    727          #define RADIOPACKET_BUTTONPRESS 0x02
+    728          #define RADIOPACKET_BATTERY     0x04
+    729          */
+    730          typedef enum{
+    731            no_msg_flag     = 0x00,
+    732            imu_packet_flag = 0x01,
+    733            btn_packet_flag = 0x02,
+    734            bat_packet_flag = 0x04,
+    735            led_packet_flag = 0x08
+    736          }packetdatacheck;
+    737          
+    738          typedef enum{
+    739            no_msg =0,
+    740            imu_msg=1,
+    741            btn_msg=2,
+    742            btn_imu_msg=3,
+    743            bat_msg=4,
+    744            bat_imu_msg=5,
+    745            bat_btn_msg=6,
+    746            bat_btn_imu_msg=7,
+    747            led_msg=8,
+    748            led_imu_msg=9,
+    749            led_btn_msg=10,
+    750            led_btn_imu_msg=11,
+    751            led_bat_msg=12,
+    752            led_bat_imu_msg=13,
+    753            led_bat_btn_msg=14,
+    754            led_bat_btn_imu_msg=15
+    755          }messagetype;
+    756          
+    757          
+    758          uint8_t filltxbuf(uint8_t messagetype,uint8_t * ptr){
+    759            uint8_t size=0;
+    760            switch(messagetype){
+    761              case  imu_msg:
+    762                size = __task1_imu_pack(ptr);
+    763                break;
+    764              case  btn_msg:
+    765                size = __task1_btn_pack(ptr);
+    766                break;
+    767              case  btn_imu_msg:
+    768                size = __task1_btnimu_pack(ptr);
+    769                break;
+    770              case  bat_msg:
+    771                size = __task1_bat_pack(ptr);
+    772                break;
+    773              case  bat_imu_msg:
+    774                size = __task1_batimu_pack(ptr);
+    775                break;
+    776              case  bat_btn_msg:
+    777                size = __task1_batbtn_pack(ptr);
+    778                break;
+    779              case  bat_btn_imu_msg:
+    780                size = __task1_batbtnimu_pack(ptr);
+    781                break;
+    782              case  led_msg:
+    783                size = __task1_led_pack(ptr);
+    784                break;
+    785              case  led_imu_msg:
+    786                size = __task1_ledimu_pack(ptr);
+    787                break;
+    788              case  led_btn_msg:
+    789                size = __task1_ledbtn_pack(ptr);
+    790                break;
+    791              case  led_btn_imu_msg:
+    792                size = __task1_ledbtnimu_pack(ptr);
+    793                break;
+    794              case  led_bat_msg:
+    795                size = __task1_ledbat_pack(ptr);
+    796                break;
+    797              case  led_bat_imu_msg:
+    798                size = __task1_ledbatimu_pack(ptr);
+    799                break;
+    800              case  led_bat_btn_msg:
+    801                size = __task1_ledbatbtn_pack(ptr);
+    802                break;
+    803              case  led_bat_btn_imu_msg:
+    804                size = __task1_ledbatbtnimu_pack(ptr);
+    805                break; 
+    806              default:
+    807                size = 0;
+    808                break;  
+    809            }
+    810            return size;
+    811          }
+    812          
+    813          void fillmsgPreamble(uint8_t*ptr,uint8_t msgtype){
+    814            static uint8_t seqNum = 0;
+    815            SAVE_POINT
+    816          #ifdef msgmethod1
+    817            ptr[0]= seqNum;
+    818            ptr[1]= msgtype;
+    819            ptr[2]= beaconRSSI;
+    820            ptr[3]= frameIdAtSync;
+    821            ptr[4]= MsTimerAtSync;
+    822            ptr[5]= IMUPktNumAtSync;
+    823          #else
+    824            struct Beacon_Preamble * dataptr;
+    825            dataptr = (struct Beacon_Preamble*) ptr;
+    826          
+    827            dataptr->seq_Num= seqNum;
+    828            dataptr->type = msgtype;
+    829            dataptr->BeaconRSSI= beaconRSSI;
+    830            pBeacon_Data_pkt->SyncFrameIMU=frameIdAtSync;
+    831            pBeacon_Data_pkt->MsTimerIMU=MsTimerAtSync;
+    832            pBeacon_Data_pkt->IMUPktNum=IMUPktNumAtSync;
+    833          #endif
+    834            SAVE_POINT
+    835            seqNum++;
+    836          }
+    837          #if 0
+    838          void fillmsgIMU(struct BK_IMUData*ptr){
+    839            uint16_t * dataptr;
+    840            uint8_t i = 0;
+    841            uint8_t last_test_imu_pkt_ctr = 255;
+    842          
+    843            while(i < NUM_OF_IMU_PKTS_IN_RF_PKT){
+    844                SAVE_POINT
+    845                dataptr = (uint16_t*) &ptr->gyroscopeX;
+    846                CoWaitForSingleFlag(flagIMUDataReady,0);
+    847                CoClearFlag(flagIMUDataReady);
+    848                GetAverageImuData(dataptr);
+    849                last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+    850                dataptr->Timestamp = test_imu_pkt_ctr;
+    851            }
+    852            SAVE_POINT
+    853          }
+    854          #endif
+    855          
+    856          void fillmsgBTN(uint8_t*ptr){
+    857            SAVE_POINT
+    858          #ifdef msgmethod1
+    859            ptr[0] = btnA.message;      //button A event
+    860            ptr[1] = btnB.message;      //button B event
+    861            ptr[2] = btnA.sequence;     //button A sequence 
+    862            ptr[3] = btnB.sequence;     //button B sequence
+    863          #else
+    864            struct BK_BTNData * dataptr;
+    865            dataptr = (struct BK_BTNData*) ptr;
+    866            dataptr->buttonA_events = btnA.message;
+    867            dataptr->buttonB_events = btnB.message;
+    868            dataptr->buttonA_tick = btnA.sequence;
+    869            dataptr->buttonB_tick = btnB.sequence;
+    870          #endif
+    871            SAVE_POINT
+    872            if(btnA.mcount!=0) btnA.mcount--;
+    873            if(btnB.mcount!=0) btnB.mcount--;
+    874            if(btnA.mcount==0 && btnB.mcount==0){
+    875              CoClearFlag(flagBtnDataReady);
+    876            }
+    877            SAVE_POINT
+    878          }
+    879          void fillmsgBAT(uint8_t*ptr){
+    880          #ifdef msgmethod1
+    881            ptr[0] = 0;               //battery_lev
+    882            ptr[1] = 0;               //charge_cycle
+    883          #else 
+    884            struct BK_BATData * dataptr;
+    885            dataptr = (struct BK_BATData*) ptr;
+    886            dataptr->Battery_lev = 0; //TBA
+    887            dataptr->charge_cycle = 0;//TBA
+    888          #endif
+    889            CoClearFlag(flagBatDataReady);
+    890            SAVE_POINT
+    891          }
+    892          
+    893          void fillmsgLED(uint8_t*ptr){
+    894            SAVE_POINT
+    895          #ifdef msgmethod1
+    896            ptr[0]= 0;              //led1id tbd
+    897            ptr[1]= 0;              //led2id tbd
+    898            ptr[2]= 0;              //led3id tbd
+    899            ptr[3]= 0;              //led1stat tbd
+    900            ptr[4]= 0;              //led2stat tbd
+    901            ptr[5]= 0;              //led3stat tbd
+    902          #else 
+    903            struct BK_LEDData * dataptr;
+    904            dataptr = (struct BK_LEDData*) ptr;
+    905            dataptr->led1ID = 0;
+    906            dataptr->led2ID = 0;
+    907            dataptr->led3ID = 0;
+    908            dataptr->led1stat = 0;
+    909            dataptr->led2stat = 0;
+    910            dataptr->led3stat = 0;
+    911          #endif
+    912            CoClearFlag(flagLEDDataReady);
+    913            SAVE_POINT
+    914          }
+    915          
+    916          static uint8_t __task1_imu_pack(uint8_t * ptr){
+    917            struct IMU_Data_pkt *pData_pkt;
+    918            pData_pkt = (struct IMU_Data_pkt*) ptr;
+    919            uint16_t * pBuf;
+    920            uint8_t i=0;
+    921            uint8_t last_test_imu_pkt_ctr = 255;
+    922          
+    923            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_IMU_PacketFrame);
+    924            while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+    925              SAVE_POINT
+    926              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+    927              CoWaitForSingleFlag(flagIMUDataReady, 0);
+    928              SAVE_POINT
+    929              GetAverageImuData(pBuf);
+    930              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+    931              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+    932              ++i;
+    933            }
+    934            return sizeof(struct IMU_Data_pkt);
+    935          }
+    936          
+    937          static uint8_t __task1_btn_pack(uint8_t * ptr){
+    938            struct BTN_Data_pkt *pData_pkt;
+    939            pData_pkt = (struct BTN_Data_pkt*) ptr;
+    940            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_BTN_PacketFrame);
+    941            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+    942          
+    943            return sizeof(struct BTN_Data_pkt);
+    944          }
+    945          
+    946          static uint8_t __task1_btnimu_pack(uint8_t * ptr){
+    947            struct BTN_IMU_Data_pkt *pData_pkt;
+    948            pData_pkt = (struct BTN_IMU_Data_pkt*) ptr;
+    949            uint16_t * pBuf;
+    950            uint8_t i=0;
+    951            uint8_t last_test_imu_pkt_ctr = 255;
+    952            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_BTN_IMU_PacketFrame);
+    953          
+    954            while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+    955              SAVE_POINT
+    956              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+    957              CoWaitForSingleFlag(flagIMUDataReady, 0);
+    958              SAVE_POINT
+    959              GetAverageImuData(pBuf);
+    960              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+    961              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+    962              ++i;
+    963            }
+    964            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+    965          
+    966            return sizeof(struct BTN_IMU_Data_pkt);
+    967          }
+    968          
+    969          static uint8_t __task1_bat_pack(uint8_t * ptr){
+    970            struct BAT_Data_pkt *pData_pkt;
+    971            pData_pkt = (struct BAT_Data_pkt*) ptr; 
+    972            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_BAT_PacketFrame);
+    973          
+    974            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+    975          
+    976            return sizeof(struct BAT_Data_pkt);
+    977          }
+    978          
+    979          static uint8_t __task1_batimu_pack(uint8_t * ptr){
+    980            struct BAT_IMU_Data_pkt *pData_pkt;
+    981            pData_pkt = (struct BAT_IMU_Data_pkt*) ptr;
+    982            uint16_t * pBuf;
+    983            uint8_t i=0;
+    984            uint8_t last_test_imu_pkt_ctr = 255;
+    985            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_BAT_IMU_PacketFrame);
+    986          
+    987            while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+    988              SAVE_POINT
+    989              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+    990              CoWaitForSingleFlag(flagIMUDataReady, 0);
+    991              SAVE_POINT
+    992              GetAverageImuData(pBuf);
+    993              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+    994              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+    995              ++i;
+    996            }
+    997            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+    998          
+    999            return sizeof(struct BAT_IMU_Data_pkt);
+   1000          }
+   1001          
+   1002          static uint8_t __task1_batbtn_pack(uint8_t * ptr){
+   1003            struct BAT_BTN_Data_pkt *pData_pkt;
+   1004            pData_pkt = (struct BAT_BTN_Data_pkt*) ptr;
+   1005            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_BAT_BTN_PacketFrame);
+   1006          
+   1007            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+   1008            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+   1009          
+   1010            return sizeof(struct BAT_BTN_Data_pkt);
+   1011          }
+   1012          
+   1013          static uint8_t __task1_batbtnimu_pack(uint8_t * ptr){
+   1014            struct BAT_BTN_IMU_Data_pkt *pData_pkt;
+   1015            pData_pkt = (struct BAT_BTN_IMU_Data_pkt*) ptr;
+   1016            uint16_t * pBuf;
+   1017            uint8_t i=0;
+   1018            uint8_t last_test_imu_pkt_ctr = 255;
+   1019            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_BAT_BTN_IMU_PacketFrame);
+   1020          
+   1021            while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+   1022              SAVE_POINT
+   1023              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+   1024              CoWaitForSingleFlag(flagIMUDataReady, 0);
+   1025              SAVE_POINT
+   1026              GetAverageImuData(pBuf);
+   1027              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+   1028              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+   1029              ++i;
+   1030            }
+   1031            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+   1032            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+   1033          
+   1034            return sizeof(struct BAT_BTN_IMU_Data_pkt);
+   1035          }
+   1036          
+   1037          static uint8_t __task1_led_pack(uint8_t * ptr){
+   1038            struct LED_Data_pkt *pData_pkt;
+   1039            pData_pkt = (struct LED_Data_pkt*) ptr;
+   1040            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_PacketFrame);
+   1041          
+   1042            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1043          
+   1044            return sizeof(struct LED_Data_pkt);
+   1045          }
+   1046          
+   1047          static uint8_t __task1_ledimu_pack(uint8_t * ptr){
+   1048            struct LED_IMU_Data_pkt *pData_pkt;
+   1049            pData_pkt = (struct LED_IMU_Data_pkt*) ptr;
+   1050            uint16_t * pBuf;
+   1051            uint8_t i=0;
+   1052            uint8_t last_test_imu_pkt_ctr = 255;
+   1053            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_IMU_PacketFrame);
+   1054          
+   1055            while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+   1056              SAVE_POINT
+   1057              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+   1058              CoWaitForSingleFlag(flagIMUDataReady, 0);
+   1059              SAVE_POINT
+   1060              GetAverageImuData(pBuf);
+   1061              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+   1062              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+   1063              ++i;
+   1064            }
+   1065            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1066          
+   1067            return sizeof(struct LED_IMU_Data_pkt);
+   1068          }
+   1069          
+   1070          static uint8_t __task1_ledbtn_pack(uint8_t * ptr){
+   1071            struct LED_BTN_Data_pkt *pData_pkt;
+   1072            pData_pkt = (struct LED_BTN_Data_pkt*) ptr;
+   1073            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_BTN_PacketFrame);
+   1074          
+   1075            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+   1076            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1077          
+   1078            return sizeof(struct LED_BTN_Data_pkt);
+   1079          }
+   1080          
+   1081          static uint8_t __task1_ledbtnimu_pack(uint8_t * ptr){
+   1082            struct LED_BTN_IMU_Data_pkt *pData_pkt;
+   1083            pData_pkt = (struct LED_BTN_IMU_Data_pkt*) ptr;
+   1084            uint16_t * pBuf;
+   1085            uint8_t i=0;
+   1086            uint8_t last_test_imu_pkt_ctr = 255;
+   1087            
+   1088            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_BTN_IMU_PacketFrame);
+   1089          
+   1090            while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+   1091              SAVE_POINT
+   1092              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+   1093              CoWaitForSingleFlag(flagIMUDataReady, 0);
+   1094              SAVE_POINT
+   1095              GetAverageImuData(pBuf);
+   1096              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+   1097              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+   1098              ++i;
+   1099            }
+   1100            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+   1101            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1102          
+   1103            return sizeof(struct LED_BTN_IMU_Data_pkt);
+   1104          }
+   1105          
+   1106          static uint8_t __task1_ledbat_pack(uint8_t * ptr){
+   1107            struct LED_BAT_Data_pkt *pData_pkt;
+   1108            pData_pkt = (struct LED_BAT_Data_pkt*) ptr;  
+   1109            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_BAT_PacketFrame);
+   1110          
+   1111            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+   1112            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1113          
+   1114            return sizeof(struct LED_BAT_Data_pkt);
+   1115          }
+   1116          
+   1117          static uint8_t __task1_ledbatimu_pack(uint8_t * ptr){
+   1118            struct LED_BAT_IMU_Data_pkt *pData_pkt;
+   1119            pData_pkt = (struct LED_BAT_IMU_Data_pkt*) ptr;
+   1120            uint16_t * pBuf;
+   1121            uint8_t i=0;
+   1122            uint8_t last_test_imu_pkt_ctr = 255;
+   1123            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_BAT_IMU_PacketFrame);
+   1124          
+   1125            while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+   1126              SAVE_POINT
+   1127              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+   1128              CoWaitForSingleFlag(flagIMUDataReady, 0);
+   1129              SAVE_POINT
+   1130              GetAverageImuData(pBuf);
+   1131              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+   1132              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+   1133              ++i;
+   1134            }
+   1135            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+   1136            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1137          
+   1138            return sizeof(struct LED_BAT_IMU_Data_pkt);
+   1139          }
+   1140          
+   1141          static uint8_t __task1_ledbatbtn_pack(uint8_t * ptr){
+   1142            struct LED_BAT_BTN_Data_pkt *pData_pkt;
+   1143            pData_pkt = (struct LED_BAT_BTN_Data_pkt*) ptr;
+   1144            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_BAT_BTN_PacketFrame);
+   1145          
+   1146            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+   1147            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+   1148            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1149          
+   1150            return sizeof(struct LED_BAT_BTN_Data_pkt);
+   1151          }
+   1152          
+   1153          static uint8_t __task1_ledbatbtnimu_pack(uint8_t * ptr){
+   1154            struct LED_BAT_BTN_IMU_Data_pkt *pData_pkt;
+   1155            pData_pkt = (struct LED_BAT_BTN_IMU_Data_pkt*) ptr; 
+   1156            uint16_t * pBuf;
+   1157            uint8_t i=0;
+   1158            uint8_t last_test_imu_pkt_ctr = 255;
+   1159            
+   1160            fillmsgPreamble(&pData_pkt->BK_Preamble.Seq_Num,BC_LED_BAT_BTN_IMU_PacketFrame);
+   1161          while(i< NUM_OF_IMU_PKTS_IN_RF_PKT){
+   1162              SAVE_POINT
+   1163              pBuf = (uint16_t*) &pData_pkt->BeaconIMUData[i].gyroscopeX;
+   1164              CoWaitForSingleFlag(flagIMUDataReady, 0);
+   1165              SAVE_POINT
+   1166              GetAverageImuData(pBuf);
+   1167              last_test_imu_pkt_ctr = test_imu_pkt_ctr;
+   1168              pData_pkt->BeaconIMUData[i].Timestamp = test_imu_pkt_ctr;
+   1169              ++i;
+   1170            }
+   1171            fillmsgBTN((uint8_t*) &pData_pkt->BeaconBTNData.buttonA_events);
+   1172            fillmsgBAT((uint8_t*) &pData_pkt->BeaconBATData.Battery_lev);
+   1173            fillmsgLED((uint8_t*) &pData_pkt->BeaconLEDData.led1ID);
+   1174          
+   1175            return sizeof(struct LED_BAT_BTN_IMU_Data_pkt);
+   1176          }
+   1177          /*******************************************************************************
+   1178          * Description    : [Task] Process and Send each new IMU data sample
+   1179          * Input          :
+   1180          * Return         :
+   1181          *******************************************************************************/
+   1182          void Task1(void* pdata){
+   1183            uint8_t messagetype;
+   1184            static uint16_t *pBuf;
+   1185            static uint8_t bufsize;
+   1186            StatusType err_det;
+   1187            static uint32_t target;
+   1188          
+   1189            while (1) {
+   1190              RELOAD_WATCHDOG
+   1191              SAVE_POINT
+   1192              //wait for a message that came from other tasks
+   1193              messagetype = no_msg_flag;
+   1194              if(!(config.radioPacketFlags & RADIOPACKET_IMU)){
+   1195                target = CoWaitForMultipleFlags(flagIMUDataReady|flagBtnDataReady|flagLEDDataReady|flagBatDataReady,
+   1196                                                OPT_WAIT_ANY,     //waits for any of the flags to occur
+   1197                                                0,                //wait indefinitely until a flag occurs
+   1198                                                &err_det);        //error pointer
+   1199                if(target == flagIMUDataReady){
+   1200                  messagetype |= imu_packet_flag;   //in case config flag was asserted during waiting period & no other event occurs
+   1201                }
+   1202              }
+   1203              else{
+   1204                messagetype |= imu_packet_flag;
+   1205              }
+   1206              if(CoAcceptSingleFlag(flagBtnDataReady)==E_OK){
+   1207                messagetype |= btn_packet_flag;
+   1208              }
+   1209              if(CoAcceptSingleFlag(flagBatDataReady)==E_OK){
+   1210                messagetype |= bat_packet_flag;
+   1211              }
+   1212              if(CoAcceptSingleFlag(flagLEDDataReady)==E_OK){
+   1213                messagetype |= led_packet_flag;
+   1214              }
+   1215              SAVE_POINT 
+   1216              bufsize = filltxbuf(messagetype, txBuf); //Fill out temp buffer with the appropriate data.  
+   1217          
+   1218              SAVE_POINT
+   1219              if(bufsize != 0){     //no message found. for peace of mind.
+   1220                CoPendSem(semIMUAllow, 0);
+   1221                SAVE_POINT
+   1222                calls++;
+   1223                uint8_t pushed = 0;
+   1224                if (IMUdbgPrt) {         // It is for USB output now
+   1225                  __writeIMU((unsigned char*) txBuf, bufsize);
+   1226                }
+   1227                else {
+   1228                  // conditional send based on radio packets flags;
+   1229                  if(!(pushed = RadioTxPktQueue(routerAddr, bufsize , txBuf))) {
+   1230                     if (config.flags & FLAG_TRACE_IMU_QUEUE_FULL) {
+   1231                        TRACE("ERROR! Tx Buffer full\n\r");
+   1232                     }
+   1233                    SAVE_LINE
+   1234                  } else {
+   1235                    pushed_times++;
+   1236                    SAVE_LINE
+   1237                  }
+   1238                  SAVE_FUNC
+   1239                }
+   1240                if (!pushed || radio_off) {
+   1241                  semAllowPostTask = CoPostSem(semIMUAllow);
+   1242                  semAllow = 2;
+   1243                }
+   1244              }
+   1245              SAVE_POINT
+   1246              //last_button_state = pBeacon_Data_pkt->BK_Preamble.button_pr;
+   1247              //battery_minutes =  secs/600;
+   1248              // reset tasksWDT
+   1249              tasksWDT |= 0x0001;
+   1250            }
+   1251          }
+   1252          uint32_t now_sec;
+   1253          uint32_t tim;
+   1254          uint32_t old_sec;
+   1255          uint32_t old_tim;
+   1256          
+   1257          #ifndef STM3210C_EVAL
+   1258          extern OS_EventID semRFRxFrames;
+   1259          StatusType task2StatusType;
+   1260          uint32_t task2enter;
+   1261          uint8_t rx_reload;
+   1262          uint32_t rxReloaded;
+   1263          uint32_t task2_errors;
+   1264          extern uint8_t rxCount;
+   1265          
+   1266          struct realTime radioRxStart;
+   1267          struct realTime radioRxEnd;
+   1268          struct realTime radioRxWait;
+   1269          
+   1270          uint32_t rxTotalRcvd;
+   1271          uint32_t rxNotEmpty;
+   1272          extern uint32_t rxPackets;
+   1273          uint32_t lastTime;
+   1274          uint32_t span;
+   1275          uint16_t tim4_phase;
+   1276          
+   1277          int32_t acc_time_adjust;
+   1278          uint8_t  acc_adjust_count;
+   1279          uint8_t acc_done = 0;
+   1280          
+   1281          int16_t accs[32];
+   1282          struct realTime lastFrameTime;
+   1283          extern struct realTime frameTime;
+   1284          uint32_t savedFrameIdAtSync;
+   1285          uint16_t newTim3Phase, oldTim3Phase, lastTim3Phase;
+   1286          extern uint32_t trace_irq;
+   1287          uint8_t got_beacon = 0;
+   1288          
+   1289          extern int frameIdInced;
+   1290          
+   1291          /*******************************************************************************
+   1292          * Description    : [Task] Process Incoming Radio Packets
+   1293          * Input          :
+   1294          * Return         :
+   1295          *******************************************************************************/
+   1296          void TaskRadioRx(void* pdata) {
+   1297          
+   1298              static rxPkt_t *pRxPkt;
+   1299              static uint8_t lastFrameClock = 0;
+   1300          
+   1301              while (1) {
+   1302                RELOAD_WATCHDOG
+   1303                SAVE_POINT
+   1304                radioRxWait.sec = sec;
+   1305                radioRxWait.uSec = TIM1->CNT;
+   1306                frameIdFlag = 1;
+   1307                task2StatusType = CoPendSem(semRFRxFrames, 0);
+   1308                SAVE_POINT
+   1309                radioRxStart.sec = sec;
+   1310                radioRxStart.uSec = TIM1->CNT;
+   1311                assert(task2StatusType == E_OK);
+   1312          
+   1313                SAVE_POINT
+   1314                RadioIMU_WaitGrabSPI();
+   1315                SAVE_POINT
+   1316                if (rxFIFOError) {
+   1317                  rxFIFOError = 0;
+   1318                  ProcessRXError();
+   1319                  pRxPkt = NULL;
+   1320                } else {
+   1321                  pRxPkt = RadioRxPkt();
+   1322                  rxTotalRcvd++;
+   1323                }
+   1324                SAVE_POINT
+   1325          
+   1326                radioRxEnd.sec = sec;
+   1327                radioRxEnd.uSec = TIM1->CNT;
+   1328                RadioIMU_ReleaseSPI();
+   1329                if (pRxPkt != NULL) {
+   1330                    SAVE_LINE
+   1331                    rxNotEmpty++;
+   1332                    // Check for Beacon frame types from the TimeKeeper.  Ignore other data packets
+   1333                    // from beacons
+   1334                      if ((pRxPkt->fcf0 & 0x07) == 0 && pRxPkt->panId == config.panId
+   1335                          && (pRxPkt->destAddr == 0xFFFF)) { // FCF[2:0] = 802.15.4 Beacon Frame Type
+   1336                            //additional check may be on source address
+   1337                          /* RF Sync (Beacon) Packet */
+   1338          #ifdef NEW_BEACON
+   1339                          /* RF Sync (Beacon) Packet */
+   1340                          if (pRxPkt->payloadSize == sizeof(struct BeaconOldStruct)) {
+   1341                              //check for new structure
+   1342                              // uint32_t frameId
+   1343                              // uint8_t  0xA5 //magic for this packet version
+   1344                              // uint8_t sec;  // consecutive sec, increments every sec
+   1345                              // uint8_t frameClock; //100, 120, 180, 240 support
+   1346                              // uint8_t crc8
+   1347          
+   1348                              struct BeaconOldStruct *beacon = (struct BeaconOldStruct*) pRxPkt->payload;
+   1349                              if (beacon->magic != 'BT') {
+   1350                                notValids++;
+   1351                                TRACE("Beacon received: unknown magic 0x%04X\n\r", beacon->magic);
+   1352                                continue;
+   1353                              }
+   1354                              uint8_t check = crc8(pRxPkt->payload, sizeof(struct BeaconOldStruct) - 1);
+   1355                              if (check != beacon->crc8) {
+   1356                                notValids++;
+   1357                                TRACE("Beacon received: CRC8 failed \r\n");
+   1358                                continue;
+   1359                              }
+   1360                              switch (beacon->frameClock) {
+   1361                              case FRAME_CLOCK_100:
+   1362                              case FRAME_CLOCK_120:
+   1363                              case FRAME_CLOCK_180:
+   1364                              case FRAME_CLOCK_240:
+   1365                                break;
+   1366                              default:
+   1367                                TRACE("Beacon received: Unsupported frame clock %d\n\r", beacon->frameClock);
+   1368                                notValids++;
+   1369                                continue;
+   1370                              }
+   1371                              static uint32_t lastFrameId = 0;
+   1372                              static uint8_t lastTick = 0;
+   1373                              static uint8_t changeFrameClock = 0;
+   1374                              uint8_t valid = 0;
+   1375          
+   1376                              if (lastFrameClock == beacon->frameClock ) {
+   1377                                if (beacon->tick > lastTick) {
+   1378                                  uint32_t diff = beacon->tick - lastTick;
+   1379                                  diff *= lastFrameClock;
+   1380                                  if ((beacon->frameId - lastFrameId) == diff) {
+   1381                                    valid = 1;
+   1382                                    if (changeFrameClock) {
+   1383                                      // TODO
+   1384                                      TRACE("Beacon: changing frameClock to %u\n\r", lastFrameClock);
+   1385                                    }
+   1386                                    changeFrameClock = 0;
+   1387                                  }
+   1388                                }
+   1389                              } else {
+   1390                                changeFrameClock = 1;
+   1391                                if (lastFrameId != 0) {
+   1392                                  changeClocks++;
+   1393                                }
+   1394                              }
+   1395                              int32_t diffFrameId = beacon->frameId - lastFrameId;
+   1396                              uint16_t diffTick = (((uint16_t) beacon->tick + 256) - lastTick)%256;
+   1397                              /*Here seems is a problem:
+   1398                                When signal weak, it may catch lost sync, then before ticks
+   1399                                run off 256 (less then 256 sec later) it catches another sync,
+   1400                                by that time frameId may be already off by 1, if it receives consecutive sync
+   1401                                it may recover, but if not, it may stack with 1 frame offset.
+   1402                              Solution: limit valid span for consecutive syncs to 10 sec,
+   1403                               use diffSec*/
+   1404                              uint32_t diffSec = diffFrameId/beacon->frameClock;
+   1405                              if ((diffTick * beacon->frameClock) == diffFrameId && diffSec < 10) {
+   1406                                valid = 1;
+   1407                                Valids++;
+   1408                              }
+   1409                              if (!valid && lastFrameId != 0) {
+   1410          
+   1411                                  TRACE("New bcn id:%u>%u tick:%u>%u clk:%u>%u\r\n",
+   1412                                      lastFrameId, beacon->frameId, lastTick, beacon->tick,
+   1413                                      lastFrameClock, beacon->frameClock);
+   1414                                newbcn++;
+   1415                              }
+   1416          
+   1417                              if (lastFrameId != beacon->frameId ||
+   1418                                  lastFrameClock != beacon->frameClock ||
+   1419                                  lastTick != beacon->tick) {
+   1420                                    lastFrameId = beacon->frameId;
+   1421                                    lastFrameClock = beacon->frameClock;
+   1422                                    lastTick = beacon->tick;
+   1423                              }
+   1424                              if (!valid) {
+   1425          
+   1426                                continue;
+   1427                              }
+   1428                            } else /*if (pRxPkt->payloadSize != 4)*/{
+   1429                              continue;
+   1430                            }
+   1431          
+   1432          #endif
+   1433                        if (use_sync) {
+   1434                          got_beacon = 0; //effectively disables frame correction in TIM3 interrupt
+   1435                          tim2_phase = TIM2->CCR1;
+   1436                          tim3_phase = TIM3->CCR1;
+   1437                          trace_irq = 1;
+   1438                          TIM2->CCR1 = 0;
+   1439                          TIM3->CCR1 = 0;
+   1440                          tim4_phase = TIM4->CCR1;
+   1441                        }
+   1442                          if (firstTime == 1) {
+   1443                              TIM_SetAutoreload(TIM3, TIM3_AUTORELOAD);
+   1444                              TIM_SetAutoreload(TIM2, TIM_AUTORELOAD);
+   1445                              TIM_SetCompare2(TIM3, TIM3_AUTORELOAD - (config.ledOnOffs >> 1));
+   1446                              TIM_SetCompare3(TIM3, TIM3_AUTORELOAD - (config.ledOffOffs >> 1));
+   1447                              // Instead of modulus maybe boundry check!
+   1448                              TIM_SetCompare3(TIM2, ( (uint16_t)(txTimeSlot) ) );
+   1449                              // Second 50ms (or half of a TK Tx Beacon interval later) - 3000 (5ms)
+   1450                              // 5ms is the combination of the first two time slots which don't get a
+   1451                              // Edit -- Can't subtract 5ms off second because it takes 47.5ms before
+   1452                              // the next set of 5 IMU packets are ready.  This is a waste of BW.
+   1453                              // maybe could use it some other way.
+   1454                              // second transmission per frame.
+   1455                              TIM_SetCompare4(TIM2, ( (uint16_t)((((TIM_AUTORELOAD + 1) >> 1) + txTimeSlot) - 0) ) );
+   1456                              firstTime = 0;
+   1457                          }
+   1458          
+   1459                          // synchronize local to remote FrameIDs
+   1460                          if (*(uint32_t*)pRxPkt->payload) { // ignore stale FrameIDs
+   1461                            realFrameId = *(uint32_t*)pRxPkt->payload;
+   1462                              frameIdCorrection = *(uint32_t*)pRxPkt->payload - frameIdAtSync + frameAdjust;/* - 4*/;//  + 2;
+   1463          #ifdef CIRCULAR_LOG
+   1464                              __disable_interrupt();
+   1465                              W_LOG(CoGetOSTime(), LOG_TYPE_FRAMEADJUST, realFrameId);
+   1466                              W_LOG(CoGetOSTime(), LOG_TYPE_CAPTURE, tim3_phase);
+   1467                              W_LOG(CoGetOSTime(), LOG_TYPE_FRAMEDIFF, frameIdCorrection);
+   1468                              __enable_interrupt();
+   1469          #endif
+   1470                              int corrected = 0;
+   1471          
+   1472                              if (/*(frameIdCorrection < 0) &&*/ (tim3_phase > (TIM3_AUTORELOAD >> 1))) {
+   1473                                frameIdCorrection++;
+   1474                                corrected = 1;
+   1475                              }
+   1476                              
+   1477                              if (config.flags & FLAG_TRACE_SYNC) {
+   1478                                TRACE(" Phase=%u inced=%u corr=%d\n\r", tim3_phase, frameIdInced, corrected);
+   1479                              }
+   1480                              
+   1481                              if (config.flags & FLAG_DEBUG) {
+   1482                                uint32_t tr = trace_irq;
+   1483                                TRACE("trace_irq=%d frIdCor=%d at tim3_phase=%u\n\r", tr, frameIdCorrection, tim3_phase);
+   1484                                TRACE("realFrameId=%u frameIdAtSync=%u\n\r", realFrameId, frameIdAtSync);
+   1485                              }
+   1486                              if (frameIdCorrection != lastFrameIdCorrection || corrected) {
+   1487                                oldFrameTime = lastFrameTime;
+   1488                                newFrameTime = frameTime;
+   1489                                newFrameIdAtSync = frameIdAtSync;
+   1490                                oldFrameIdAtSync = savedFrameIdAtSync;
+   1491                                newTim3Phase = tim3_phase;
+   1492                                oldTim3Phase = lastTim3Phase;
+   1493                                
+   1494                                if (config.flags & FLAG_TRACE_SYNC) {                      
+   1495                                  TRACE("frIdCorr=%d lastFrIdCorr=%d @%d last @%d tim3_ph=%d\r\n", frameIdCorrection,
+   1496                                        lastFrameIdCorrection, sec, lastTime, tim3_phase);
+   1497                                  TRACE("realFrameId=%u frameIdAtSync=%u\n\r", realFrameId, frameIdAtSync);
+   1498                                }
+   1499                                
+   1500                                if (frameIdCorrection != 0 && sec > 20) {
+   1501                                  frameIdCorrectionCount++;
+   1502                                }
+   1503          
+   1504                              } else {
+   1505                                static uint8_t seek = 0;
+   1506                                uint32_t rsec  = (frameIdAtSync-lastFrameIdAtSync)/lastFrameClock;
+   1507                                int32_t cur_diff = (tim3_phase/rsec);
+   1508                                lastFrameTime = frameTime;
+   1509                                savedFrameIdAtSync = frameIdAtSync;
+   1510                                lastTim3Phase = tim3_phase;
+   1511          
+   1512                              }
+   1513                              if (config.flags & FLAG_TRACE_ADJUST) {
+   1514                                TRACE("adjust=%d tim3_phase=%u tim4_phase=%u @%d.%d\r\n",
+   1515                                      config.time_adjust,
+   1516                                      tim3_phase, tim4_phase, sec, TIM1->CNT);
+   1517                              }
+   1518                              lastFrameIdCorrection = frameIdCorrection;
+   1519                              lastFrameIdAtSync = frameIdAtSync;
+   1520                              if ((sec - lastTime) > span) {
+   1521                                span = sec - lastTime;
+   1522                                TRACE("No TK sync for %d sec @ %d\r\n", span, sec);
+   1523                              }
+   1524                              lastTime = sec;
+   1525                              frameOffset = TIM1->CNT;
+   1526                              successBeacons++;
+   1527                              frameIdFlag = 1;
+   1528                              got_beacon = 1;
+   1529                          }
+   1530          
+   1531                          // record RSSI of Sync Packet to relay back to TK
+   1532                          beaconRSSI =  0x5A; // temp change to store signature. // pRxPkt->rssi;
+   1533          
+   1534                          // allow up to 3 tx pkts per sync pkt
+   1535                          beaconInSync++;
+   1536                          if(beaconInSync > 3)
+   1537                          {
+   1538                            beaconInSync = 3;
+   1539                          }
+   1540          
+   1541                          //HwLEDToggle(LED4);
+   1542                          //HwLEDOn(LED3);
+   1543                        // Issue TODO - if Beacon out of syncronization,
+   1544                        // it keeps trying to send (Task 6), may not receive
+   1545                        // anything, as this task has lower priority
+   1546                       //   CoAwakeTask(task1Id);
+   1547                       //   CoAwakeTask(taskRadioTxId);
+   1548                      }
+   1549                } else {
+   1550                  if (!radio_off) {
+   1551                  TRACE("NULL packet, rxCount=%u @sec=%d\r\n", rxCount, sec);
+   1552                  }
+   1553                }
+   1554              }
+   1555          }
+   1556          
+   1557          /*******************************************************************************
+   1558          * Description    : [Function] controls the targeted button's state machine
+   1559          * Input          :
+   1560          * Return         :
+   1561          *******************************************************************************/
+   1562          uint8_t chkbtnstate(tBtn_State *pbtn, uint8_t btnval){
+   1563            uint8_t val =0;
+   1564            switch(pbtn->state){
+   1565              case BTNSTATE_OFF:
+   1566                if(btnval == BTNPRESSED){
+   1567                  pbtn->state = BTNSTATE_ON;
+   1568                  pbtn->hcount=1;
+   1569                  pbtn->prevstate=BTNSTATE_OFF;
+   1570                }
+   1571                break;
+   1572              case BTNSTATE_ON:
+   1573                if(btnval == BTNPRESSED){
+   1574                  pbtn->hcount++;
+   1575                  if(pbtn->hcount > 10){
+   1576                    pbtn->state = BTNSTATE_HOLD;
+   1577                    pbtn->hcount=0;
+   1578                  }
+   1579                }
+   1580                else{
+   1581                  pbtn->state = BTNSTATE_PRESSDETECT;
+   1582                  pbtn->hcount = 0;
+   1583                }
+   1584                break;
+   1585              case BTNSTATE_HOLD:
+   1586                //configure sending message
+   1587                //enable sending with holding state.
+   1588                if(pbtn->prevstate == BTNSTATE_OFF){
+   1589                  pbtn->prevstate = BTNSTATE_HOLD;
+   1590                  //val=1;  //let task3 know to send msg. outside SOW;
+   1591                  //pbtn->message = BTNMSG_HOLD;
+   1592                }
+   1593                if(btnval!=BTNPRESSED){
+   1594                  pbtn->prevstate = BTNSTATE_OFF;
+   1595                  pbtn->state = BTNSTATE_OFF;     //return to initialstate
+   1596                  //pbtn->message = BTNMSG_RELEASE;
+   1597                } 
+   1598                break;
+   1599              case BTNSTATE_PRESSDETECT:
+   1600                if(btnval==BTNPRESSED){
+   1601                //configure sending message to doublepress
+   1602                //enable sending with this message
+   1603                  //val=1;  //Let task3 know to send msg. ouside SOW;
+   1604                  pbtn->prevstate = BTNSTATE_PRESSDETECT;
+   1605                  pbtn->state = BTNSTATE_OFF;
+   1606                  //pbtn->message = BTNMSG_DBLCLK;
+   1607                }
+   1608                else{
+   1609                //configure sending message to singlepress
+   1610                //enable sending with this message
+   1611                  val=1;
+   1612                  pbtn->prevstate = BTNSTATE_OFF;
+   1613                  pbtn->state = BTNSTATE_OFF;
+   1614                  pbtn->message = BTNMSG_PRESS;
+   1615                  pbtn->mcount = BTN_BURST_SEND;
+   1616                }
+   1617                //return to initialstate
+   1618                break;
+   1619              case BTNSTATE_UICTRL:
+   1620                break;
+   1621            }
+   1622            return val;
+   1623          }
+   1624          
+   1625          /*******************************************************************************
+   1626          * Description    : [Task] RF Chan Scan, then Monitor GPO_PWRON Power Switch
+   1627          * Input          :
+   1628          * Return         :
+   1629          *******************************************************************************/
+   1630          void Task3(void* pdata){
+   1631            static uint16_t pwr_holdCount = 0;
+   1632            static uint32_t btnval;
+   1633            static uint8_t btnmsg1;
+   1634            static uint8_t btnmsg2;
+   1635          
+   1636          
+   1637            rfChan = config.rfChan;
+   1638            /* search for RF Chan on Power-Up */
+   1639            static int wait_cnt = 0;
+   1640          
+   1641            while (1) {
+   1642              RELOAD_WATCHDOG
+   1643              SAVE_POINT
+   1644              if ((HwGPIState(GPI_SW_PWR))||((BattUnion.BatteryLevel[1])<=0xBB)){
+   1645          #ifdef DISABLE_PWR_SW
+   1646                pwr_holdCount = 0;
+   1647          #endif
+   1648                if (pwr_holdCount++ > 2) {
+   1649                  CoSchedLock();
+   1650                  //HwLEDOff(LED1); HwLEDOff(LED2); HwLEDOff(LED3); HwLEDOff(LED4);HwLEDOff(LED5);
+   1651          #ifndef BC_HW_REVB
+   1652                  HwGPOLow(GPO_5V_IMU_EN);
+   1653                  HwGPOLow(GPO_RF_EN);
+   1654                  HwGPOLow(GPO_VBATT_ADC_EN);
+   1655                  HwGPOInitOC(GPO_USB_VBUS); // init the Vbus pin as output
+   1656                  HwGPOLow(GPO_USB_VBUS);  // and then pull it low to ensure turnoff
+   1657          #endif
+   1658                  SAVE_POINT
+   1659                  HwGPOLow(GPO_PWRON) ; // turn board OFF
+   1660                  while (1);
+   1661                }
+   1662              }
+   1663              else{
+   1664                pwr_holdCount = 0;
+   1665              }
+   1666              break;
+   1667          		
+   1668          		//note that the IMU is already initialized prior to multithread start. it has already been counting.
+   1669          		for(wait_cnt =0;wait_cnt < 40; wait_cnt++){
+   1670                CoTickDelay(10);
+   1671                SAVE_POINT
+   1672                if(test_imu_pkt_ctr >= 1) break;      // was > 10. Maybe the IMU interrupt is not enable ... TODO!!! check
+   1673              }
+   1674              //HwLEDToggle(LED2); HwLEDToggle(LED4);
+   1675              assert(test_imu_pkt_ctr >= 1);          // was > 10
+   1676              if(test_imu_pkt_ctr >= 1){              // was > 10
+   1677                IMUPresent=1;
+   1678                break;
+   1679              }else{
+   1680                IMUPresent=0;
+   1681                 //EXTI->IMR &= ~GPI_IMU_DIO1_EXTI_LINE; // kill the interrupt
+   1682                halted=1;  // no imu tx
+   1683                break;
+   1684              }
+   1685          	}
+   1686            routerAddr = config.routerDstAddr;  // NO RF Scan => send IMU data to TK address stored in FLASH Config
+   1687            SetTimeSlot();
+   1688            /* we're now in business */
+   1689            TRACE("RF CHAN: %d\n\r", rfChan);
+   1690          
+   1691            CoAwakeTask(task1Id);  // start imu process
+   1692            CoAwakeTask(taskRadioRxId);
+   1693            CoAwakeTask(taskIMUGId);
+   1694            
+   1695            btnA.state = BTNSTATE_OFF;
+   1696            btnB.state = BTNSTATE_OFF;
+   1697          	while (1) {
+   1698          		SAVE_POINT
+   1699             	CoTickDelay(100);  //either wait for an event or timeout to check Battery level
+   1700          		SAVE_POINT
+   1701          		RELOAD_WATCHDOG
+   1702          #ifndef DISABLE_PWR_SW
+   1703          		if ((HwGPIState(GPI_SW_PWR))||((BattUnion.BatteryLevel[1])<=0xBB)) {
+   1704          			if (pwr_holdCount++ > 10) {
+   1705          				CoSchedLock();
+   1706                  //HwLEDOff(LED1); HwLEDOff(LED2); HwLEDOff(LED3); HwLEDOff(LED4);HwLEDOff(LED5);
+   1707                  // This where we should sense if we are connected to the USB charger input
+   1708                  // if so...we can't turn off so should go into some sort of low power mode
+   1709                  // perhaps set the USB power in as an interrupt so if it goes away we can really shut down
+   1710          				HwGPOLow(GPO_5V_IMU_EN);
+   1711          				HwGPOLow(GPO_RF_EN);
+   1712          				HwGPOLow(GPO_VBATT_ADC_EN);
+   1713          				HwGPOInitOC(GPO_USB_VBUS);// init the Vbus pin as output
+   1714          				HwGPOLow(GPO_USB_VBUS);// and then pull it low to ensure turnoff
+   1715          				HwGPOLow(GPO_PWRON); // turn board OFF
+   1716          				while (1);
+   1717                }
+   1718          		} else {
+   1719          			pwr_holdCount = 0;
+   1720          		}
+   1721          #endif // disable power switch
+   1722              SAVE_POINT
+   1723              btnmsg1=0;
+   1724              btnmsg2=0;
+   1725          
+   1726              btnval = HwButtonPressed(BUTTON1);
+   1727              btnmsg1=chkbtnstate(&btnA, btnval);
+   1728              SAVE_POINT
+   1729              btnval = HwButtonPressed(BUTTON2);
+   1730              btnmsg2=chkbtnstate(&btnB, btnval);
+   1731              SAVE_POINT
+   1732          
+   1733              if((btnmsg1||btnmsg2)&&config.radioPacketFlags & RADIOPACKET_BUTTONPRESS){ 
+   1734                CoSetFlag(flagBtnDataReady);
+   1735              }
+   1736              SAVE_POINT
+   1737              
+   1738          #if 0
+   1739                  if (IMUdbgPrt) {         // It is for USB output now
+   1740                      __writeIMU((unsigned char*) pBeacon_Data_pkt, sizeof(struct Beacon_Data_pkt));
+   1741                  }
+   1742                  else {
+   1743          
+   1744                    // conditional send based on radio packets flags;
+   1745                    if ((config.radioPacketFlags & RADIOPACKET_IMU)) {
+   1746                        if(!(pushed = RadioTxPktQueue(routerAddr, sizeof(struct Beacon_Data_pkt) , txBuf))) {
+   1747                          if (config.flags & FLAG_TRACE_IMU_QUEUE_FULL) {
+   1748                              TRACE("ERROR! Tx Buffer full\n\r");
+   1749                          }
+   1750                          SAVE_LINE
+   1751                        } else {
+   1752                          pushed_times++;
+   1753                          SAVE_LINE
+   1754                        }
+   1755                       SAVE_FUNC
+   1756                    }
+   1757                  }
+   1758                    if (!pushed || radio_off) {
+   1759                      semAllowPostTask = CoPostSem(semIMUAllow);
+   1760                      semAllow = 2;
+   1761                    }
+   1762          
+   1763                    last_button_state = pBeacon_Data_pkt->BK_Preamble.button_pr;
+   1764                    battery_minutes =  secs/600;
+   1765                    // reset tasksWDT
+   1766                    tasksWDT |= 0x0001;
+   1767              }
+   1768          #endif
+   1769          #if 0
+   1770          	  //if(config.radioPacketFlags & RADIOPACKET_BUTTONPRESS && last_button_state != pBeacon_Data_pkt->BK_Preamble.button_pr) 
+   1771              //((config.radioPacketFlags & RADIOPACKET_BUTTONPRESS) && (last_button_state != pBeacon_Data_pkt->BK_Preamble.button_pr)
+   1772              if (button_state) {
+   1773          		  static uint8_t tick;
+   1774          		  struct ButtonClick btnClick;
+   1775          		  btnClick.button_events = button_state;
+   1776          		  btnClick.tick = tick++;
+   1777          		  btnClick.type = 0xBC;
+   1778          		  btnClick.version = PACKET_VERSION;
+   1779          		  btnClick.crc8 = crc8(&btnClick.type, sizeof(btnClick) - 1);
+   1780          	  	if (config.flags & FLAG_TRACE_ASYNC) {
+   1781          	  		TRACE("BtnClick 0x%02X\r\n", btnClick.button_events);
+   1782          	  	}
+   1783          	  	RadioTxPktQueue(config.routerDstAddr, sizeof(btnClick), (uint8_t *) &btnClick);
+   1784              }
+   1785              //Trace to debug
+   1786              if ((button_state & BUTTON_A)) {
+   1787                if (config.flags & FLAG_TRACE_ASYNC) {
+   1788                  switch (button_state & BUTTON_A) {
+   1789                    case BUTTON_PRESS:
+   1790                      TRACE("Btn A PRESS\r\n");
+   1791                      break;
+   1792                    case BUTTON_CLICK:
+   1793                      TRACE("Btn A CLICK\r\n");
+   1794          					  break;
+   1795                    case BUTTON_DBLCLICK:
+   1796                      TRACE("Btn A dblClick\r\n");
+   1797                      break;
+   1798                    case BUTTON_RELEASE:
+   1799                      TRACE("Btn A Release\r\n");
+   1800                      break;
+   1801              		}
+   1802          		  }
+   1803                button_state &= BUTTON_B;
+   1804              }
+   1805              if ((button_state & BUTTON_B)) {
+   1806                if (config.flags & FLAG_TRACE_ASYNC) {
+   1807                  switch ((button_state & BUTTON_B) >>4) {
+   1808                    case BUTTON_PRESS:
+   1809                      TRACE("Btn B PRESS\r\n");
+   1810                      break;
+   1811                    case BUTTON_CLICK:
+   1812                      TRACE("Btn B CLICK\r\n");
+   1813                      break;
+   1814                    case BUTTON_DBLCLICK:
+   1815                      TRACE("Btn B dblClick\r\n");
+   1816                      break;
+   1817                    case BUTTON_RELEASE:
+   1818                      TRACE("Btn B Release\r\n");
+   1819                      break;
+   1820                  }
+   1821                }
+   1822                button_state &= BUTTON_A;
+   1823              } 
+   1824          #endif   
+   1825            }
+   1826          }
+   1827          
+   1828          #endif
+   1829          
+   1830          /*******************************************************************************
+   1831          * Description : Write Configuration to FLASH
+   1832          * Input       : -
+   1833          * Return      : -
+   1834          *******************************************************************************/
+   1835          #define FLASH_NO_ADDRESS_CHECK
+   1836          
+   1837          uint32_t WritePage(tPage *page) {
+   1838          
+   1839            uint8_t *pointer = (uint8_t*) page->address;
+   1840            uint32_t result = 0;
+   1841            uint16_t cycles = (page->count + 3)/4;
+   1842          
+   1843            FLASH_Unlock();
+   1844          
+   1845            do {
+   1846          #ifndef FLASH_NO_ADDRESS_CHECK
+   1847              if (page->address < APP_UPLOAD_ADDRESS || page->address > 0x803FFFF) {
+   1848                page->count = 0;
+   1849                result = ERROR_FLASH_ADDRESS;
+   1850                break;
+   1851              }
+   1852          #endif
+   1853              if ((result = FLASH_ErasePage(page->address)) != FLASH_COMPLETE) {
+   1854                page->count = 0;
+   1855                break;
+   1856              }
+   1857          
+   1858              result = 0;
+   1859              for (uint16_t i = 0; i < cycles; i++) {
+   1860                uint32_t offset = i << 2;
+   1861                uint32_t word = page->data[offset + 3] << 24;
+   1862                word |= page->data[offset + 2] << 16;
+   1863                word |= page->data[offset + 1] << 8;
+   1864                word |= page->data[offset];
+   1865          
+   1866                  if ((result = FLASH_ProgramWord(page->address + offset, word)) != FLASH_COMPLETE) {
+   1867                      page->count = offset;
+   1868                      break;
+   1869                  }
+   1870              }
+   1871              result = 0;
+   1872              // verification
+   1873              for (uint16_t i = 0; i < page->count; i++) {
+   1874                if (*(pointer) != page->data[i]) {
+   1875                  result = ERROR_FLASH_VERIFICATION;
+   1876                  page->count = i;
+   1877                  break;
+   1878                }
+   1879                pointer++;
+   1880              }
+   1881          
+   1882            } while (0);
+   1883          
+   1884            FLASH_Lock();
+   1885          
+   1886            return result;
+   1887          }
+   1888          
+   1889          #if 1
+   1890          
+   1891          uint32_t ReadPage(tPage *page) {
+   1892          
+   1893            uint8_t *pointer = (uint8_t *) page->address;
+   1894            uint32_t result = 0;
+   1895          
+   1896          
+   1897            do {
+   1898          #ifndef FLASH_NO_ADDRESS_CHECK
+   1899              if (page->address < 0x8000000 || page->address > 0x803FFFF) {
+   1900                page->count = 0;
+   1901                result = ERROR_FLASH_ADDRESS;
+   1902                break;
+   1903              }
+   1904          #endif
+   1905              // verification
+   1906              for (uint16_t i = 0; i < page->count; i++) {
+   1907                page->data[i] = *pointer;
+   1908                pointer++;
+   1909              }
+   1910          
+   1911            } while (0);
+   1912          
+   1913            return result;
+   1914          
+   1915          }
+   1916          #endif
+   1917          
+   1918          /**
+   1919            * @brief  Download a file via serial port
+   1920            * @param  None
+   1921            * @retval None
+   1922            */
+   1923          uint8_t tab_1024[1024];
+   1924          
+   1925          static tPage page = {FLASH_PROD_AREA};
+   1926          //static uint32_t CurrentUploadAddress = APP_UPLOAD_ADDRESS;
+   1927          static uint16_t CurrentDataPointer = 0x00;
+   1928          //static uint8_t mem_data[PAGE_SIZE];
+   1929          static uint16_t packet = 0;
+   1930          
+   1931          static struct PacketHeader *header;
+   1932          uint32_t SerialDownload(const char* decoded, uint16_t len, uint8_t type)
+   1933          {
+   1934            struct FirmwarePacketHeader *frmHeader;
+   1935          
+   1936            uint8_t copy_len = 0;
+   1937          
+   1938            uint32_t ret = 0;
+   1939            // Data comes in format:
+   1940            //U 0 0 DATA\r\n
+   1941            // so, DATA starts from 6th index
+   1942            do {
+   1943              if (len < (sizeof(struct FirmwarePacketHeader))) {
+   1944                ret = ERROR_WRONG_PACKET;
+   1945                break;
+   1946              }
+   1947              frmHeader = (struct FirmwarePacketHeader *) (decoded);
+   1948              copy_len = header->size - /*7*/ (sizeof(struct PacketHeader) + sizeof(struct FirmwarePacketHeader));
+   1949              if (
+   1950                  ((type == DEV_CMD_SET_PROD_AREA) &&
+   1951                  (copy_len > 128 || (copy_len + CurrentDataPointer) > (FLASH_PROD_AREA + FLASH_PROD_AREA_SIZE)))
+   1952                  ||
+   1953                  frmHeader->index != packet) {
+   1954                ret = ERROR_WRONG_PACKET;
+   1955                break;
+   1956              }
+   1957              if (copy_len) {
+   1958                memcpy(&page.data[CurrentDataPointer], (decoded + /*4*/ sizeof(struct FirmwarePacketHeader)), copy_len);
+   1959                CurrentDataPointer += copy_len;
+   1960                page.count += copy_len;
+   1961                if ((frmHeader->index + 1) == frmHeader->count || CurrentDataPointer == sizeof(page.data)) {
+   1962                  //time to write
+   1963                  WritePage(&page);
+   1964                  page.address = FLASH_PROD_AREA;
+   1965                  CurrentDataPointer = 0;
+   1966                  page.count = 0;
+   1967                  if ((frmHeader->index + 1) == frmHeader->count) {
+   1968                    // finished
+   1969                    page.address = FLASH_PROD_AREA;
+   1970                  }
+   1971                }
+   1972              }
+   1973              ret = frmHeader->index << 16;
+   1974            } while (0);
+   1975            // reset for error
+   1976            if (ret & 0xFFFF) {
+   1977              CurrentDataPointer = 0;
+   1978              page.address = FLASH_PROD_AREA;
+   1979              page.count = 0;
+   1980              packet = 0;
+   1981            } else {
+   1982              packet++;
+   1983            }
+   1984            return ret;
+   1985          }
+   1986          
+   1987          tPage page;
+   1988          extern uint16_t tim3_at_radio;
+   1989          uint16_t use_tim3_phase = 0;
+   1990          
+   1991          /*******************************************************************************
+   1992          * Description    : [Task] Implements Simple Text Command Console
+   1993          * Input          :
+   1994          * Return         :
+   1995          *******************************************************************************/
+   1996          void TaskConfig(void* pdata) {
+   1997              static char buff[512] = "";
+   1998              char *s = buff;
+   1999          //    static int i;
+   2000              static char cmd;
+   2001              static int addr;
+   2002              static int32_t value;
+   2003          
+   2004              while (1) {
+   2005                  SAVE_POINT
+   2006                  // get a line of values from stdin
+   2007                  s = buff;
+   2008                  mygets(s); 	
+   2009                  if (ValidateCommandLine(s, strlen(s)) == 0) {
+   2010                    TRACE("Incorrect packet\r\n");
+   2011                    continue;
+   2012                  }
+   2013                      
+   2014                  SAVE_POINT
+   2015                  RELOAD_WATCHDOG
+   2016                  // parse the line of hexadecimal values
+   2017                  //i = sscanf(s, "%c %d %d", &cmd, &addr, &value);
+   2018                  //if (i < 1) continue;
+   2019                  cmd = *s;
+   2020                  switch (cmd) {
+   2021                      case '2':
+   2022                        RadioPrint2520Registers(addr);
+   2023                        SAVE_POINT
+   2024                          break;
+   2025                      case 'd': // Display configuration
+   2026                          //if (i != 1) continue;
+   2027                          PrintConfig();
+   2028                          SAVE_POINT
+   2029                          break;
+   2030                      case '1':
+   2031                          // Test Reading IMU DMA frame   // TODO!!! IMU accessing must be critical section
+   2032                          CoClearFlag(flagIMUNewData);
+   2033                          
+   2034          				RadioIMU_WaitGrabSPI();
+   2035          				IMUProcess();
+   2036                          TRACE("%X, %X, %X\n\r",*(uint16_t*)&IMU_RawData[0], *(uint16_t*)&IMU_RawData[2], *(uint16_t*)&IMU_RawData[4]);
+   2037                          TRACE("%X, %X, %X\n\r",*(uint16_t*)&IMU_RawData[6], *(uint16_t*)&IMU_RawData[8], *(uint16_t*)&IMU_RawData[10]);
+   2038                          SAVE_POINT
+   2039          				RadioIMU_ReleaseSPI();
+   2040                          SAVE_POINT
+   2041                          break;
+   2042                      case 's': // Set configuration
+   2043                        {
+   2044                            uint32_t      pattern = 0;
+   2045                            uint8_t       ledBits = 0;
+   2046                            uint8_t       ledId  = 0;
+   2047                         // if (addr >= 19 && addr <= 21) {
+   2048                            //need to do additional scanf - it has form of
+   2049                            //s 19 8bit 32bit 8bit
+   2050                            // all values are decimal
+   2051                            //uint8_t       ledId = value;
+   2052                            char *p = s;
+   2053                            //skip s addr value
+   2054                            while (*p != 0 &&!isspace(*p)) { p++;} p++;
+   2055                            addr = strtoul(p, NULL, 10);
+   2056                            while (*p != 0 &&!isspace(*p)) { p++;} p++;
+   2057                            value = strtoul(p, NULL, 10);
+   2058                            while (*p != 0 &&!isspace(*p)) { p++;} p++;
+   2059                            pattern = strtoul(p, NULL, 10);
+   2060                            while (*p != 0 &&!isspace(*p)) { p++;} p++;
+   2061                            ledBits = strtoul(p, NULL, 10);
+   2062                            while (*p != 0 &&!isspace(*p)) { p++;} p++;
+   2063                            ledId = strtoul(p, NULL, 10);
+   2064                         // }
+   2065                          SetConfig(addr, value,  pattern, ledBits, ledId);
+   2066                        }
+   2067                          SAVE_POINT
+   2068                          break;
+   2069                      case 'v': // saVe configuration
+   2070                          //if (i != 1) continue;
+   2071                          SaveConfig(&config);
+   2072                          break;
+   2073                      case 'h': // Halt IMU Tx
+   2074                          //if (i != 1) continue;
+   2075                          //EXTI->IMR &= ~GPI_IMU_DIO1_EXTI_LINE;
+   2076          				EXTI->IMR &= ~GPI_IMU_INT_EXTI_LINE;
+   2077                          halted = 1;
+   2078                          break;
+   2079                      case 'c': // Continue IMU Tx
+   2080                          //if (i != 1) continue;
+   2081                          //EXTI->IMR |= GPI_IMU_DIO1_EXTI_LINE;
+   2082                          //EXTI->IMR |= GPI_IMU_DIO2_EXTI_LINE;
+   2083                          EXTI->IMR |= GPI_IMU_INT_EXTI_LINE;
+   2084          				halted = 0;
+   2085                          break;
+   2086          #if 0
+   2087                      case 'w': // Write IMU_A-Reg
+   2088                          //if (i != 3) continue;
+   2089                          //CoTickDelay(2);
+   2090                          IMURegWr(addr, SPI_A_IMU, value);
+   2091                          break;
+   2092                      case 'r': // Read IMU_A-Reg
+   2093                          //if (i != 2) continue;
+   2094                          //CoTickDelay(2);
+   2095                          TRACE("Accel Reg%02X = %04X\n\r", addr, (int)IMURegRd(addr, SPI_A_IMU));
+   2096                          break;
+   2097                      case 'W': // Write IMU_G-Reg
+   2098                          //if (i != 3) continue;
+   2099                          //CoTickDelay(2);
+   2100                          IMURegWr(addr, SPI_G_IMU, value);
+   2101                          break;
+   2102                      case 'R': // Read IMU_G-Reg
+   2103                          //if (i != 2) continue;
+   2104                          //CoTickDelay(2);
+   2105                          TRACE("Gyro Reg%02X = %04X\n\r", addr, (int)IMURegRd(addr, SPI_G_IMU));
+   2106                          break;
+   2107          #endif
+   2108                      case '-':  // dec Tx power
+   2109                         if(config.TxLevel ==0 ||config.TxLevel > 8 ){
+   2110                          config.TxLevel =8; // sizeof(uint8_t TxAmpValues);
+   2111                          }else{
+   2112                            config.TxLevel--;
+   2113                          }
+   2114                          RadioSetRFLevel(config.TxLevel);
+   2115                         SAVE_POINT
+   2116                          TRACE("RF Tx Level: %X\n\r", TxAmpValues[config.TxLevel]);
+   2117                          break;
+   2118                      case '+':  // increment Tx power
+   2119                          if(config.TxLevel >= 8){
+   2120                          config.TxLevel = 0; // sizeof(uint8_t TxAmpValues);
+   2121                          }else{
+   2122                            config.TxLevel++;
+   2123                          }
+   2124                          RadioSetRFLevel(config.TxLevel);
+   2125                          SAVE_POINT
+   2126                          TRACE("RF Tx Level: %X\n\r", TxAmpValues[config.TxLevel]);
+   2127                          break;
+   2128                  case '.': // IMU debug print
+   2129                           //if (i != 1) continue;
+   2130                           TRACE("IMU Debug print:\n\r");
+   2131                           IMUdbgPrt = !IMUdbgPrt;
+   2132                            break;
+   2133          
+   2134                  case 'y': // Serial Number printout
+   2135                           //if (i != 1) continue;
+   2136                           TRACE("CPU Serial #%04x:%04x:%04x \n\r",ARM_proc_SN.a,ARM_proc_SN.b,ARM_proc_SN.c );
+   2137                            break;
+   2138                  case 'F':
+   2139                    TRACE("Framebits: %d\r\n", config.frameBits);
+   2140                    break;
+   2141          #if 0
+   2142                  case '~':  // reset default settings
+   2143                      TRACE("Restoring Default Settings \n\r");
+   2144                      memcpy((void *)&config, (void *)&backup_config, sizeof(config));
+   2145                      break;
+   2146          #endif
+   2147                  case 't':   // trace / debug
+   2148                      {
+   2149                        char *p = NULL;
+   2150                          while (*s && isspace(*(++s)));
+   2151                                 if (!*s) {
+   2152                                   break;
+   2153                                 }
+   2154                              addr = strtoul(s, &p, 10);
+   2155                          while (*p && isspace(*(++p)));
+   2156                                 if (*p) {
+   2157                                  value = strtoul(p, NULL, 10);
+   2158                                 } else {
+   2159                                  value = 0;
+   2160                                 }
+   2161                          switch (addr) {
+   2162                                          case 0:
+   2163                            {
+   2164                              config.flags ^= FLAG_TRACE_ENABLE;
+   2165                            }
+   2166                            break;
+   2167                          case 1:
+   2168                            {
+   2169                              config.flags ^= FLAG_TRACE_TIMESLOT;
+   2170                            }
+   2171                          break;
+   2172                          case 2:
+   2173                            {
+   2174                              config.flags ^= FLAG_TRACE_SYNC;
+   2175                            }
+   2176                            break;
+   2177                          case 3:
+   2178                            {
+   2179                              config.flags ^= FLAG_TRACE_IMU_QUEUE_FULL;
+   2180                            }
+   2181                            break;
+   2182                          case 4:
+   2183                            {
+   2184                              config.flags ^= FLAG_TRACE_USE_TIMESLOT;
+   2185                            }
+   2186                            break;
+   2187                          case 5:
+   2188                            {
+   2189                              config.flags ^= FLAG_TRACE_USE_PROTO_CMD_LINE_RESP;
+   2190                            }
+   2191                            break;
+   2192                          case 6:
+   2193                            {
+   2194                              // radio off
+   2195                              radio_off = 1;
+   2196                            }
+   2197                            break;
+   2198                          case 7:
+   2199                            {
+   2200                              // radio on
+   2201                              radio_off = 0;
+   2202                            }
+   2203                            break;
+   2204                          case 8:
+   2205                            {
+   2206                              struct WhoAmI me;
+   2207                              memcpy(me.id, (uint8_t *)(0x1FFFF7E8), 12);
+   2208                              me.type = 3; // beacon
+   2209                              me.module = 2;
+   2210                              __writeCmdLineRespPacket((void *)&me,  sizeof(me), DEV_RESP_WHOAMI);
+   2211                            }
+   2212                            break;
+   2213                          case 9:
+   2214                            {
+   2215                              config.flags ^= FLAG_TRACE_BEACON;
+   2216                            }
+   2217                            break;
+   2218                          case 10:
+   2219                            {
+   2220                              config.flags ^= FLAG_TRACE_ASYNC;
+   2221                            }
+   2222                            break;
+   2223                          case 11:
+   2224                            {
+   2225                              config.flags ^= FLAG_TRACE_CRC;
+   2226                            }
+   2227                            break;
+   2228                          case 12:
+   2229                            {
+   2230                              //send_battery_info = 0;
+   2231                              config.flags &= ~FLAG_SEND_BATTERY_INFO;
+   2232                            }
+   2233                            break;
+   2234                          case 13:
+   2235                            {
+   2236                              //send_battery_info = 1;
+   2237                              config.flags |= FLAG_SEND_BATTERY_INFO;
+   2238                            }
+   2239                            break;
+   2240                          case 17: {
+   2241                              config.time_adjust = (int16_t) value;
+   2242                              //I2C_EE_BufferWrite((uint8_t*) &time_adjust, 126, 2);
+   2243                              SaveConfig(&config);
+   2244                              whole_time_adjust = config.time_adjust/10;
+   2245                              part_time_adjust = config.time_adjust%10;
+   2246                            }
+   2247                          case 18:
+   2248                            {
+   2249                              use_sync = 0;
+   2250                            }
+   2251                            break;
+   2252                          case 19:
+   2253                            {
+   2254                              use_sync = 1;
+   2255                            }
+   2256                            break;
+   2257                          case 20:
+   2258                            {
+   2259                              config.frameCountNoSync = value;
+   2260                              SaveConfig(&config);
+   2261                            }
+   2262                            break;
+   2263                          case 41:
+   2264                          {
+   2265                            use_tim3_phase = value;
+   2266                            break;
+   2267                          }
+   2268                          case 42:
+   2269                            {
+   2270                              config.flags ^= FLAG_DEBUG;
+   2271                            }
+   2272                            break;
+   2273                          case 43:
+   2274                            {
+   2275                              TRACE("oldFrameTime @%d.%d frame=%u, tim3_at_radio=%u\n\r", oldFrameTime.sec, oldFrameTime.uSec, oldFrameIdAtSync, tim3_at_radio);
+   2276                              TRACE("newFrameTime @%d.%d frame=%u MsTimerAtSync=%u\n\r", newFrameTime.sec, newFrameTime.uSec, newFrameIdAtSync, MsTimerAtSync);
+   2277                              TRACE("oldTim3Phase=%u newTim3Phase=%u tim_at_sec=%u\n\r", oldTim3Phase, newTim3Phase, tim_at_sec);
+   2278                            }
+   2279                            break;
+   2280                          case 44:
+   2281                            {
+   2282                              config.flags |= FLAG_TRACE_ADJUST;
+   2283                            }
+   2284                          break;
+   2285                          case 45:
+   2286                            {
+   2287                              config.flags &= ~FLAG_TRACE_ADJUST;
+   2288                            }
+   2289                          break;
+   2290                          case 46:
+   2291                            {
+   2292                              TRACE("rxPkts=%u rxTotal=%u rxNotEmpty=%u sec=%u\r\n", rxPackets, rxTotalRcvd, rxNotEmpty, sec);
+   2293                            }
+   2294                            break;
+   2295                          case 47:
+   2296                            {
+   2297                              frameAdjust = (int8_t) value;
+   2298                            }
+   2299                            break;
+   2300                          case 48:
+   2301                            {
+   2302                              config.flags ^= FLAG_FRAMEID_24BITS;
+   2303                              SaveConfig(&config);
+   2304                            }
+   2305                            break;
+   2306                          case 49:
+   2307                            {
+   2308                              TRACE(": rxWait @ %d.%d rxStart @ %d.%d\n\r", radioRxWait.sec, radioRxWait.uSec, radioRxStart.sec, radioRxStart.uSec);
+   2309                              TRACE(": txStart @ %d.%d txEnd @ %d.%d queue_full=%d queue_size=%d\n\r", startRadioTx.sec, startRadioTx.uSec, endRadioTx.sec, endRadioTx.uSec, queue_full, inIdx);
+   2310                              TRACE(": rxCount=%d rxFIFOError=%d rxErrors=%d\n\r", rxCount, rxFIFOError, rxErrors);
+   2311                              CoTickDelay(10);
+   2312                              TRACE(": rxFIFOTime %d.%d semTime2 %d.%d\n\r", rxFIFOTime.sec, rxFIFOTime.uSec, semTime2.sec, semTime2.uSec);
+   2313                              TRACE(": excFlag0=0x%02X excFlag1=0x%02X excFlag2=0x%02X\n\r",cc2520_flags0, cc2520_flags1, cc2520_flags2);
+   2314                              TRACE(": successBeacons=%d frameOffset=%d frameAdjust=%d\n\r", successBeacons, frameOffset, frameAdjust);
+   2315                              TRACE(": remainOutOfSyncTime=%d frameIdCorrection=%d\n\r", remainOutOfSyncTime, lastFrameIdCorrection);
+   2316                              CoTickDelay(10);
+   2317                              TRACE(": realFrameId=%d lastFrIdAtSync=%d asserted=%d\r\n", realFrameId, lastFrameIdAtSync, asserted);
+   2318                              TRACE("errorFrameId=%u valids=%d notValids=%d lostSync=%d\r\n", errorFrameId, Valids, notValids, lostSync);
+   2319                              TRACE("changeClocks=%d newbcn=%d corCount=%d drifts=%u last_drift=%d\r\n", changeClocks, newbcn, frameIdCorrectionCount, drift, last_drift);
+   2320                             extern uint8_t led_blinking;
+   2321                              TRACE("led blinking=%d\r\n", led_blinking);
+   2322                            }
+   2323                            break;
+   2324                          case 50:
+   2325                            {
+   2326                              switch (value) {
+   2327                              case 2:
+   2328                                //HwLEDToggle(LED2);
+   2329                                break;
+   2330                              case 3:
+   2331                                //HwLEDToggle(LED3);
+   2332                                break;
+   2333                              case 4:
+   2334                                //HwLEDToggle(LED4);
+   2335                                break;
+   2336                              default:
+   2337                                //HwLEDToggle(LED1);
+   2338                              }
+   2339                            }
+   2340                            break;
+   2341                          case 52:
+   2342                            {
+   2343                              uint32_t ram = (uint32_t) value & 0xFFFFFFFE;
+   2344                              if (ram >= 0x20000000 && ram <= 0x2000ffff) {
+   2345                                uint32_t atRam = *((uint32_t*) (ram));
+   2346                                TRACE("Mem at 0x%08X=0x%08X\n\r", ram, atRam);
+   2347                              } else {
+   2348                                TRACE("Mem addr error\n\r");
+   2349                              }
+   2350                            }
+   2351                            break;
+   2352                          case 54:
+   2353                            {
+   2354                              RadioPrint2520Registers(addr);
+   2355                            }
+   2356                            break;
+   2357                          case 55:
+   2358                            {
+   2359                              if (value > 0 && value < 30000) {
+   2360                                txTimeSlot = value;
+   2361                                firstTime = 1;
+   2362                                TRACE("New timeslot offset = %u\r\n", txTimeSlot);
+   2363                              }
+   2364                            }
+   2365                            break;
+   2366          #ifdef CIRCULAR_LOG
+   2367                          case 56:
+   2368                            {
+   2369                              uint16_t indx = 0;
+   2370                              uint16_t size = (LOG_SIZE/sizeof(tLogStruct));
+   2371                              TRACE("Current SysTickCount: %d, size=%d\n\r", (uint32_t) CoGetOSTime(), LOG_SIZE/sizeof(tLogStruct));
+   2372                              for (; (indx < size) && (log[indx].type); indx++) {
+   2373                                if ((indx & 0x07 == 0)) {
+   2374                                  CoTickDelay(20);
+   2375                                }
+   2376                                TRACE(":%u @%u t:%d d:%u\n\r", indx, log[indx].timestamp, log[indx].type, log[indx].frameId);
+   2377                                CoTickDelay(2);
+   2378                              }
+   2379                            }
+   2380                            break;
+   2381                          case 57:
+   2382                            {
+   2383                              if (value ==1313) {
+   2384                                __disable_interrupt();
+   2385                                memset((void*) log, 0, LOG_SIZE);
+   2386                                log_index_in = 0;
+   2387                                __enable_interrupt();
+   2388                                TRACE("Erased\n\r");
+   2389                              } else {
+   2390                                TRACE("ooopss.. wrong value\n\r");
+   2391                              }
+   2392                            }
+   2393                            break;
+   2394          #endif
+   2395          
+   2396                          case 94:
+   2397                            {
+   2398                              if (value == 16385) {
+   2399                                TRACE("Generating hard fault\r\n");
+   2400                                CoTickDelay(100);
+   2401                                uint32_t *p = (uint32_t*) 0xDE002319;
+   2402                                uint32_t j = *p;
+   2403                              }
+   2404                            }
+   2405                            break;
+   2406                          case 95:
+   2407                            {
+   2408                              watchdog_active = value;
+   2409                              TRACE("Watchdog is %s\r\n", value?"active":"not active");
+   2410                            }
+   2411                            break;
+   2412                          case 96:
+   2413                            {
+   2414                              extern uint32_t stacked_lr, stacked_pc, stacked_psr;
+   2415                              uint32_t saved_lr, saved_pc, saved_psr;
+   2416                              uint32_t fault_counter;
+   2417                              I2C_EE_BufferRead((uint8_t*) &saved_lr, EEPROM_DEBUG_STACKED_LR, EEPROM_DEBUG_STACKED_LR_SIZE);
+   2418                              I2C_EE_BufferRead((uint8_t*) &saved_pc, EEPROM_DEBUG_STACKED_PC, EEPROM_DEBUG_STACKED_PC_SIZE);
+   2419                              I2C_EE_BufferRead((uint8_t*) &saved_psr, EEPROM_DEBUG_STACKED_PSR, EEPROM_DEBUG_STACKED_PSR_SIZE);
+   2420                              I2C_EE_BufferRead((uint8_t*) &fault_counter, EEPROM_DEBUG_COUNTER, EEPROM_DEBUG_COUNTER_SIZE);
+   2421          
+   2422                              TRACE("stacked_lr=0x%08X stacked_pc=0x%08X\r\n",
+   2423                                    stacked_lr, stacked_pc);
+   2424                              TRACE("stacked_psr=0x%08X saved_lr=0x%08X\r\n",
+   2425                                    stacked_psr, saved_lr);
+   2426                              TRACE("saved_pc=0x%08X saved_psr=0x%08X\r\n", saved_pc, saved_psr);
+   2427                              TRACE("fault_counter = %u\r\n", fault_counter);
+   2428                            }
+   2429                            break;
+   2430                          case 97:
+   2431                            {
+   2432                              stacked_lr = stacked_pc = stacked_psr = 0;
+   2433                            }
+   2434                          break;
+   2435          #ifdef TASKS_PROFILE
+   2436                          case 98:
+   2437                            {
+   2438                                __disable_interrupt();
+   2439                                uint32_t stack1              = CoGetStackDepth(task1Id);
+   2440                                uint32_t perfTask1           = CoGetTaskScheduledCount(task1Id);
+   2441                                uint16_t lineTask1           = CoGetTaskLine(task1Id);
+   2442                                const char *funcTask1        = CoGetTaskFunc(task1Id);
+   2443                                uint32_t stackRadioRx        = CoGetStackDepth(taskRadioRxId);
+   2444                                uint32_t perfRadioRx         = CoGetTaskScheduledCount(taskRadioRxId);
+   2445                                uint16_t lineRadioRx         = CoGetTaskLine(taskRadioRxId);
+   2446                                const char *funcRadioRx      = CoGetTaskFunc(taskRadioRxId);
+   2447                                uint32_t stack3              = CoGetStackDepth(task3Id);
+   2448                                uint32_t perfTask3           = CoGetTaskScheduledCount(task3Id);
+   2449                                uint16_t lineTask3           = CoGetTaskLine(task3Id);
+   2450                                const char *funcTask3        = CoGetTaskFunc(task3Id);
+   2451          
+   2452                                uint32_t stackConfig         = CoGetStackDepth(taskConfigId);
+   2453                                uint32_t perfTaskConfig      = CoGetTaskScheduledCount(taskConfigId);
+   2454                                uint16_t lineTaskConfig      = CoGetTaskLine(taskConfigId);
+   2455                                const char *funcTaskConfig   = CoGetTaskFunc(taskConfigId);
+   2456                                uint32_t stackRadioTx        = CoGetStackDepth(taskRadioTxId);
+   2457                                uint32_t perfRadioTx         = CoGetTaskScheduledCount(taskRadioTxId);
+   2458                                uint16_t lineRadioTx         = CoGetTaskLine(taskRadioTxId);
+   2459                                const char *funcRadioTx      = CoGetTaskFunc(taskRadioTxId);
+   2460          
+   2461                                uint32_t stack8              = CoGetStackDepth(task8Id);
+   2462                                uint32_t perfTask8           = CoGetTaskScheduledCount(task8Id);
+   2463                                uint16_t lineTask8           = CoGetTaskLine(task8Id);
+   2464                                const char *funcTask8        = CoGetTaskFunc(task8Id);
+   2465                                uint32_t stackIMU            = CoGetStackDepth(taskIMUGId);
+   2466                                uint32_t perfTaskIMU         = CoGetTaskScheduledCount(taskIMUGId);
+   2467                                uint16_t lineTaskIMU         = CoGetTaskLine(taskIMUGId);
+   2468                                const char *funcTaskIMU      = CoGetTaskFunc(taskIMUGId);
+   2469          
+   2470                                __enable_interrupt();
+   2471          
+   2472          
+   2473                                TRACE("Task1 [avail stack:%d]:%d @ %s():%d\n\r", stack1, perfTask1, funcTask1, lineTask1);
+   2474                                TRACE("RadioRxTask [avail stack:%d]:%d @ %s():%d\n\r", stackRadioRx, perfRadioRx, funcRadioRx, lineRadioRx);
+   2475                                TRACE("Task3 [avail stack:%d]:%d @ %s():%d\n\r", stack3, perfTask3, funcTask3, lineTask3);
+   2476                                TRACE("TaskConfig [avail stack:%d]:%d @ %s():%d\n\r", stackConfig, perfTaskConfig, funcTaskConfig, lineTaskConfig);
+   2477                                TRACE("RadioTxTask [avail stack:%d]:%d @ %s():%d\n\r", stackRadioTx, perfRadioTx, funcRadioTx, lineRadioTx);
+   2478                                TRACE("Task8 [avail stack:%d]:%d @ %s():%d\n\r", stack8, perfTask8, funcTask8, lineTask8);
+   2479                                TRACE("TaskIMU [avail stack:%d]:%d @ %s():%d\n\r", stackIMU, perfTaskIMU, funcTaskIMU, lineTaskIMU);
+   2480          
+   2481                          }
+   2482                          break;
+   2483                          case 99:
+   2484                            {
+   2485                            uint32_t scheduled_idle = CoGetTaskScheduledCount(0);
+   2486                            uint32_t scheduled_task1 = CoGetTaskScheduledCount(task1Id);
+   2487                            uint32_t scheduled_taskRadioRx = CoGetTaskScheduledCount(taskRadioRxId);
+   2488                            uint32_t scheduled_task3 = CoGetTaskScheduledCount(task3Id);
+   2489                            uint32_t scheduled_taskConfig = CoGetTaskScheduledCount(taskConfigId);
+   2490                            uint32_t scheduled_taskRadioTx = CoGetTaskScheduledCount(taskRadioTxId);
+   2491                            uint32_t scheduled_task8 = CoGetTaskScheduledCount(task8Id);
+   2492                            uint32_t scheduled_taskIMU_G = CoGetTaskScheduledCount(taskIMUGId);
+   2493                            TRACE("PERF: IdleTask: %u Task1: %u RxTask: %u Task3: %u\n\r",
+   2494                                  scheduled_idle, scheduled_task1, scheduled_taskRadioRx, scheduled_task3);
+   2495                            TRACE("PERF: TaskConfig: %u TxTask: %u\n\r",
+   2496                                  scheduled_taskConfig, scheduled_taskRadioTx);
+   2497                            TRACE("PERF: Task8: %u TaskIMU: %u\n\r", scheduled_task8, scheduled_taskIMU_G);
+   2498                          }
+   2499                          break;
+   2500          #endif
+   2501                          }
+   2502                      }
+   2503                      break;
+   2504                  case 'U':
+   2505                      {       // Extended command line that use base64 encoded parameters
+   2506                          static uint8_t encoded[512];
+   2507                          static uint8_t decoded[512];
+   2508                          //uint8_t *_decoded = &decoded[0];
+   2509                          uint16_t update_flags = 0;
+   2510                          char *p = NULL;
+   2511                          while (*s && isspace(*(++s)));
+   2512                          if (!*s) {
+   2513                            break;
+   2514                          }
+   2515          
+   2516                          addr = strtoul(s, &p, 10);
+   2517                          s = p;
+   2518                          while (*s && isspace(*(++s)));
+   2519                          if (!*s) {
+   2520                            break;
+   2521                          }
+   2522                          uint16_t value = strtoul(s, &p, 10);
+   2523                          s = p;
+   2524                          while (*s && isspace(*(++s)));
+   2525                          if (!*s) {
+   2526                            break;
+   2527                          }
+   2528                          strcpy((char*) encoded, s);
+   2529                          int ret = b64_pton(encoded, decoded, sizeof(decoded));
+   2530          
+   2531                          if (ret < sizeof(struct PacketHeader)) {
+   2532                              TRACE("Incorrect packet\r\n");
+   2533                              continue;
+   2534                          }
+   2535                          struct PacketHeader *packetHeader = (struct PacketHeader *)decoded;
+   2536                          if (packetHeader->size > ret) {
+   2537                              TRACE("Incorrect packet size\r\n");
+   2538                              continue;
+   2539                          }
+   2540          				if (ValidateCommandLine((char*)decoded, ret) == 0) {
+   2541                              TRACE("Incorrect packet\r\n");
+   2542                              continue;
+   2543          				}                
+   2544          
+   2545                          if (packetHeader->type == DEV_CMD_BAT_STATUS) {
+   2546          
+   2547                            __writeCmdLineRespPacket((void*) &lastBatStatus, sizeof(lastBatStatus), DEV_RESP_BAT_STATUS);
+   2548                          } else if (packetHeader->type == DEV_CMD_CONFIG_REQ) {
+   2549                              ex_config_t my_config;
+   2550                              CopyConfigToExConfig(&config, &my_config);
+   2551                              my_config.checksum = CalcConfigChecksum(&my_config.productID, my_config.size);
+   2552                              __writeCmdLineRespPacket((void *)&my_config,  sizeof(my_config), DEV_RESP_CONFIG);
+   2553                          } else if(packetHeader->type == DEV_CMD_GET_VERSION) {
+   2554                             struct RespFirmwareVersion respFirm;
+   2555                             respFirm.major = THIS_MAJOR;
+   2556                             respFirm.minor = THIS_MINOR;
+   2557                             respFirm.patch = THIS_PATCH;
+   2558                             respFirm.reserved = 0;                       // For compatible reason
+   2559                             respFirm.revision = THIS_REVISION;
+   2560                             strcpy((char*) respFirm.dateString, __DATE__);
+   2561                             strcpy((char*) respFirm.timeString, __TIME__);
+   2562                            __writeCmdLineRespPacket((void *)&respFirm,  sizeof(respFirm), DEV_RESP_VERSION);
+   2563                          }else if (packetHeader->type == DEV_CMD_RUNNING_STATUS_REQ) {
+   2564                            struct BeaconRunningStatus bat;
+   2565                            bat.errorCode = 0;
+   2566                            bat.index = BattUnion.BatteryLevel[1];
+   2567                            bat.radioOnOff = (radio_off == 0);
+   2568                            __writeCmdLineRespPacket((void *)&bat,  sizeof(bat), DEV_RESP_RUNNING_STATUS);
+   2569                          } else if (packetHeader->type == DEV_CMD_SET_CONFIG) {
+   2570                              ex_config_t* newConfig;
+   2571                              newConfig = (ex_config_t*)(decoded + sizeof(struct PacketHeader));
+   2572                              if (newConfig->panId != config.panId ||
+   2573                                  newConfig->mySrcAddr != config.mySrcAddr) {
+   2574                                    update_flags |= UPDATE_FLAG_PANID;
+   2575                              }
+   2576                              if (newConfig->routerDstAddr != config.routerDstAddr) {
+   2577                                update_flags |= UPDATE_FLAG_DSTADDR;
+   2578                              }
+   2579                              if (newConfig->ledDAC != config.ledDAC) {
+   2580                                update_flags |= UPDATE_FLAG_DAC;
+   2581                              }
+   2582                              if (newConfig->rfChan != config.rfChan) {
+   2583                                update_flags |= UPDATE_FLAG_RFCHAN;
+   2584                              }
+   2585                              if (newConfig->TxLevel != config.TxLevel) {
+   2586                                update_flags |= UPDATE_FLAG_TXLEVEL;
+   2587                              }
+   2588                                                 CopyExConfigToConfig(newConfig, &config);
+   2589                             // memcpy((void *)&config, (void *)newConfig, sizeof(beacon_config_t));
+   2590                              SaveConfig(&config);
+   2591                              if (update_flags & UPDATE_FLAG_PANID) {
+   2592                                RadioSetPanIdShortAddr(config.panId, config.mySrcAddr);
+   2593                              }
+   2594                              if (update_flags & UPDATE_FLAG_DSTADDR) {
+   2595                                routerAddr = config.routerDstAddr;
+   2596                              }
+   2597                              if (update_flags & UPDATE_FLAG_RFCHAN) {
+   2598                                RadioSetRFChan(rfChan);
+   2599                              }
+   2600                              if (update_flags & UPDATE_FLAG_TXLEVEL) {
+   2601                                RadioSetRFLevel(config.TxLevel);
+   2602                              }
+   2603          
+   2604                          } else if (packetHeader->type == DEV_CMD_SET_EEPROM_DATA) {
+   2605          					struct RespUpdate up;
+   2606          					up.index = 0;
+   2607          					if (packetHeader->size < sizeof(struct PacketHeader) + 32) { // if data body greater than 32, only 32 bytes are written 
+   2608          						up.errorCode = ERROR_WRONG_PACKET;
+   2609          					} else {
+   2610          						uint8_t *data = (uint8_t *) decoded + sizeof(struct PacketHeader);
+   2611          						I2C_EE_BufferWrite(data, 128, 32);
+   2612          						up.errorCode = 0;
+   2613          					}
+   2614          					uint8_t type = DEV_RESP_SET_EEPROM_DATA;
+   2615          					__writeCmdLineRespPacket((unsigned char*) &up, 4, type);
+   2616                          } else if (packetHeader->type == DEV_CMD_GET_EEPROM_DATA) {
+   2617          					struct RespEepromData resp;
+   2618          					I2C_EE_BufferRead(&resp.data[0], 128, 32);
+   2619          					resp.errorCode = 0;
+   2620          					__writeCmdLineRespPacket((unsigned char*) &resp, sizeof(resp), DEV_RESP_GET_EEPROM_DATA);
+   2621                          } else if (packetHeader->type == DEV_CMD_SET_PROD_AREA) {
+   2622          					struct RespUpdate up;
+   2623          					uint8_t type = DEV_RESP_SET_PROD_AREA;
+   2624          					ret = SerialDownload((char*) decoded, ret, packetHeader->type);
+   2625          					up.index = (ret & 0xFFFF0000) >> 16;
+   2626          					up.errorCode = ret & 0xFFFF;
+   2627          					__writeCmdLineRespPacket((unsigned char*) &up, 4, type);
+   2628                          } else if (packetHeader->type == DEV_CMD_GET_PROD_AREA) {
+   2629          					struct GetProdAreaPacketHeader *prodHeader = (struct GetProdAreaPacketHeader*) decoded;
+   2630          					struct RespProdArea resp;
+   2631          					page.address = FLASH_PROD_AREA;
+   2632          					page.count = 2048;
+   2633          					ret = ReadPage(&page);
+   2634          					resp.errorCode = ret;
+   2635          					resp.index = prodHeader->index;
+   2636          					if (!ret) {
+   2637          						memcpy(resp.data, &page.data[prodHeader->index*sizeof(resp.data)], sizeof(resp.data));
+   2638          					}
+   2639          					__writeCmdLineRespPacket((unsigned char*) &resp, sizeof(resp), DEV_RESP_GET_PROD_AREA);
+   2640                          }
+   2641                      }
+   2642                      break;
+   2643                  case '!':
+   2644                    {
+   2645                      uint8_t jumpToMain = 0xFF;
+   2646                      I2C_EE_BufferRead((uint8_t*) &jumpToMain, EEPROM_BEACON_FLAG_ADDRESS, 1);
+   2647                      if (jumpToMain != 0xFF) {
+   2648                        jumpToMain = 0xFF;
+   2649                        I2C_EE_BufferWrite((uint8_t*) &jumpToMain, EEPROM_BEACON_FLAG_ADDRESS, 1);
+   2650                      }
+   2651                      NVIC_GenerateSystemReset();
+   2652                    }
+   2653                     break;
+   2654          #if (defined USE_MY_ASSERT) || (defined USE_FULL_ASSERT)
+   2655                      case 'a':
+   2656                          {
+   2657                              assert_loop = 0;
+   2658                          }
+   2659                          break;
+   2660          #endif
+   2661                  default:
+   2662                          TRACE("**ERROR** Unrecognized Command '%c'\n\r", cmd);
+   2663                          break;
+   2664                  }
+   2665          
+   2666                  if (cmd != 'U') {
+   2667                      TRACE("> ");
+   2668                  }
+   2669              }
+   2670          }
+   2671          
+   2672          uint32_t mycalls;
+   2673          uint32_t radioTxEntries;
+   2674          StatusType lastRadioTx;
+   2675          StatusType setTxDone;
+   2676          
+   2677          /*******************************************************************************
+   2678          * Description    : [Task] Manage Outgoing (TX) Packet Queue
+   2679          * Input          :
+   2680          * Return         :
+   2681          *******************************************************************************/
+   2682          void TaskRadioTx(void* pdata){
+   2683              SAVE_LINE
+   2684              while (1) {
+   2685                  // avoid busy waiting. sleep a tick or until wake up by other task
+   2686                  SAVE_FUNC
+   2687                  radioTxEntries++;
+   2688                  lastRadioTx = CoWaitForSingleFlag(flagRadioTxReq, 1);
+   2689                  SAVE_POINT
+   2690                  while (1) {
+   2691                      SAVE_FUNC
+   2692                      RELOAD_WATCHDOG
+   2693                      __disable_interrupt();
+   2694          #ifndef NO_TK
+   2695                      if (remainOutOfSyncTime <= 0) {         // out of synchronization. Need to stop sending so that T.K. can occupy timeslot to sync again
+   2696                      //    CoSuspendTask(task1Id);
+   2697                      //    CoSuspendTask(taskRadioTxId);
+   2698          
+   2699                        __enable_interrupt();
+   2700                        SAVE_LINE
+   2701                          break;
+   2702                      }
+   2703          #endif
+   2704                      if (inIdx == outIdx) { // queue is NOT empty.       // TODO!!! Double check if producer can be run and modifies inIdx. If so it is a critical section.
+   2705                          queue_full = 1;
+   2706                          SAVE_LINE
+   2707                          __enable_interrupt();
+   2708                          break;
+   2709                      } else {
+   2710                        queue_full = 0;
+   2711                      }
+   2712                      __enable_interrupt();
+   2713          
+   2714          
+   2715                      SAVE_POINT
+   2716                      RadioIMU_WaitGrabSPI();
+   2717                      SAVE_POINT
+   2718                      startRadioTx.sec = sec;
+   2719                      startRadioTx.uSec = TIM1->CNT;
+   2720                      // outIdx is modified by Tx task only. So no lock required
+   2721                      RadioTxPkt(txPktQueue[outIdx].dstAddr,
+   2722                                 0,   // not a beacon frame
+   2723                                 txPktQueue[outIdx].payloadSize,
+   2724                                 txPktQueue[outIdx].payload,
+   2725                                 1);  // transmit immediately
+   2726                      SAVE_POINT
+   2727                      mycalls++;
+   2728                      endRadioTx.sec = sec;
+   2729                      endRadioTx.uSec = TIM1->CNT;
+   2730          #ifndef CCA_EN
+   2731                      RadioIMU_ReleaseSPI();      // TODO!!! verify if SPIIODone is correctly waiting
+   2732          #endif
+   2733          
+   2734                      // ring buffer operation is in critical section
+   2735                      __disable_interrupt();
+   2736                      outIdx = (outIdx + 1) % TX_PKT_QUEUE_SIZE;
+   2737                      __enable_interrupt();
+   2738          
+   2739                      numTxRetries = 0; // reset counter as we initiate tx
+   2740                      txRetryState = 1; // indicate STXONCCA has been issued. TODO!!! verify the meaning
+   2741          
+   2742                      /* fire up TIM5 to ring check CCA after 1ms */
+   2743          #ifdef CCA_EN
+   2744                      uint8_t txRetryState = 1;
+   2745                      uint8_t numTxRetries = NUM_TX_RETRIES;
+   2746          
+   2747                      do {
+   2748                        TIM5->EGR |= TIM_EGR_UG;
+   2749                        TIM5->CR1 |= TIM_CR1_CEN;
+   2750                        CoWaitForSingleFlag(flagRadioCCA, 1, 0);
+   2751                        SAVE_POINT
+   2752          
+   2753                        assert(txRetryState != 0); // [[DEBUG]]
+   2754          
+   2755                        if (txRetryState == 1) {            // read FMSTAT1
+   2756                          /* check if CCA was asserted */
+   2757                          if (!spiTxRxByteCount) {        // SPI not in use
+   2758                            /* read FSMSTAT1 register */
+   2759                            scratchBuf[0] = (CC2520_INS_REGRD | CC2520_FSMSTAT1);
+   2760                            scratchBuf[1] = 0;          // pad byte to push out reg val
+   2761                            spiTxRxByteCount = 0x02;  // indicate FMSTAT1 read
+   2762                            spiTxRxByteState = RF_SPI_CCA_CMD_STATE;
+   2763                            pSpiTxBuf = scratchBuf;
+   2764                            pSpiRxBuf = scratchBuf;     // self-clobbering ... that's ok
+   2765                            HwSPISSAssert(SPI_RADIO);
+   2766                            SPI_I2S_ITConfig(SPI_RADIO_SPI, SPI_I2S_IT_RXNE, ENABLE);
+   2767                            SPI_I2S_SendData(SPI_RADIO_SPI, *pSpiTxBuf++);
+   2768                            txRetryState++;             // go to next state
+   2769                          } else {
+   2770                            break;
+   2771                          }
+   2772                      } else if (txRetryState == 2) {     // check SAMPLED_CCA bit, retry TX if necessary
+   2773                        if (sampledCCA & CC2520_FSMSTAT1_SAMPLED_CCA_BM) {
+   2774                          /* CCA asserted, packet is going (has gone) out */
+   2775                          txRetryState = 0;
+   2776                          break;
+   2777                        }
+   2778          
+   2779                        /* CCA NOT asserted, packet isn't going out ... try STXONCCA again now */
+   2780          
+   2781                        if (numTxRetries < NUM_TX_RETRIES) {
+   2782                          if (!spiTxRxByteCount) {        // SPI not in use
+   2783                              spiTxRxByteCount = 0x01;  // indicate STXONCCA retry
+   2784                              spiTxRxByteState = RF_SPI_STXONCCA_CMD_STATE;
+   2785                              pSpiRxBuf = scratchBuf;     // don't care
+   2786                              HwSPISSAssert(SPI_RADIO);
+   2787                              SPI_I2S_ITConfig(SPI_RADIO_SPI, SPI_I2S_IT_RXNE, ENABLE);
+   2788                              SPI_I2S_SendData(SPI_RADIO_SPI, CC2520_INS_STXONCCA);
+   2789                              numTxRetries++;
+   2790                              txRetryState = 1;
+   2791                          }                               // else, remain in this state, retry later
+   2792                      } else { // done retrying, no more
+   2793                          txRetryState = 0;
+   2794                          // fake TX_FRM_DONE
+   2795                          setTxDone = CoSetFlag(flagRadioTxDone);
+   2796                          break;
+   2797                      }
+   2798                      SAVE_POINT
+   2799                  } else assert(0);
+   2800          
+   2801          
+   2802                      } while (1);
+   2803                      RadioIMU_ReleaseSPI();
+   2804          #endif
+   2805                  }
+   2806              }
+   2807          }
+   2808          
+   2809          float fVolt = 0.0f;
+   2810          
+   2811          /*******************************************************************************
+   2812          * Description    : [Task]A to D conversion for battery voltage
+   2813          * Input          :
+   2814          * Return         :
+   2815          * Calculation: resistive divider
+   2816          *  4.99k + 4.3k
+   2817          *  After divider have: 4.3/(4.3+4.99) = 0.462365 of original Vbat value
+   2818          *  With 4.2V nominal value will have 4.2V*0.462365=1.941935V at ADC
+   2819          *  With ADC Vref= V+ = 2.2V will have 1.941935V/2.2V = 0.8826979 of full scale
+   2820          *  With full scale of 65536 will have 0.8826979*65536=57848
+   2821          *  In hexadecimal 4.2V at battery will be reported as 0xE17F
+   2822          *  Other values calculated using linear scale
+   2823          *
+   2824          * There is no chip to calculate battery level, so following is data measured
+   2825          * with radio ON and no LED
+   2826          * DISCHARGE - starting at 4.2V:
+   2827          * after 1hr=4.12V 2hr = 4.07V 3hr = 4.03V 4hr = 3.99V, up to 9hr rate is 0.03V per hour
+   2828          * after 9hr rate up to 16 hr rate 0.02V, then 0.03V 2 hours up to 3.65V, then
+   2829          * during 1hr goes to 3.5V and turns off
+   2830          * CHARGE - 15 minutes to get to 3.92V, then steady rate 0.06V/hour
+   2831          * after reaching 4.21V 45 minutes to full charge
+   2832          *Data for V#3 hardware.. 4.2v= E1, 4.0v=D7, 3.9v=D0, 3.8v=CA, 3.7v=C6, 3.6v=C1
+   2833          *                         3.5v=BB, 3.4v=B6, 3.3v=B0,3.2v=AB, 3.1v= A5, 3.0v= A0
+   2834          *                         2.9v= 9A, 2.8v= 96, 2.7v= 90, 2.6v= 8B
+   2835          *******************************************************************************/
+   2836          
+   2837          float fLast[10];
+   2838          
+   2839          void Task8(void* pdata){
+   2840            while (1) {
+   2841                SAVE_POINT
+   2842              RELOAD_WATCHDOG
+   2843                  // enable a to d battery input
+   2844              HwGPOHigh(GPO_VBATT_ADC_EN);
+   2845                  // wait 1 for input to stabilise
+   2846              CoTickDelay(1);
+   2847              SAVE_POINT
+   2848                  // trigger a to d
+   2849              ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+   2850                  // wait 1 for data sample
+   2851              CoTickDelay(2);
+   2852              SAVE_POINT
+   2853                  // get sample data, disable input
+   2854              BattUnion.Battery_AtoD = (ADC_GetConversionValue(ADC1));
+   2855              HwGPOHigh(GPO_VBATT_ADC_EN);
+   2856                  // wait 100
+   2857              CoTickDelay(100);
+   2858              SAVE_POINT
+   2859              //CoTickDelay(1000);
+   2860              static uint32_t iter = 0;
+   2861              float fCurr = 4.2f * (float)BattUnion.Battery_AtoD;
+   2862              fCurr /= (float) 0xE1F8;
+   2863              fLast[iter%10] = fCurr;
+   2864              iter++;
+   2865              uint8_t cnt = (iter>10)?10:iter;
+   2866              fVolt = 0.0;
+   2867              for (uint8_t k = 0; k < cnt; k++) {
+   2868                fVolt += fLast[k];
+   2869              }
+   2870              fVolt /= (float) cnt;
+   2871             /* if (iter == 10)*/ {
+   2872                SAVE_LINE
+   2873            //    iter = 0;
+   2874                lastBatStatus.type = 0xBA;
+   2875                lastBatStatus.version = 0x01;
+   2876                lastBatStatus.flags = HwGPIState(GPI_CHG_STAT)?0x00:0x01;
+   2877                if (HwGPIState(GPI_USB_VBUS)) {
+   2878                  lastBatStatus.flags |= 0x02;
+   2879           //       if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_9)) {
+   2880                  rt_flags |= RT_FLAG_USB_CONNECTED;
+   2881           //     }
+   2882                } else {
+   2883                  rt_flags &= ~RT_FLAG_USB_CONNECTED;
+   2884                }
+   2885                lastBatStatus.minToRun = 0xFFFF;
+   2886                //fVolt /= (float) 10.0;
+   2887                float percents = 0;
+   2888                if (lastBatStatus.flags == 0x03) { //charging
+   2889                  if (fVolt > 4.20) {
+   2890                    percents = 95.0;
+   2891                  } else if (fVolt > 3.92) {
+   2892                    percents = 4.0 + 91.0*(fVolt - 3.92)/0.28;
+   2893                  } else {
+   2894                    percents = 4.0;
+   2895                  }
+   2896                } else {
+   2897                  if (fVolt > 4.1 && (lastBatStatus.flags & 0x01) == 0) {
+   2898                    percents = 100.0;
+   2899                  } else if (fVolt > 4.07) {
+   2900                    percents = 90.0 + 10.0 *(fVolt - 4.07)/0.14;
+   2901                    if (percents >= 100.0) {
+   2902                      percents = 99.0;
+   2903                    }
+   2904                  } else if (fVolt > 4.03) {
+   2905                    percents = 85.0 + 5.0*(fVolt - 4.03)/0.04;
+   2906                  } else if (fVolt > 3.84) {
+   2907                    percents = 55.0 + 30.0*(fVolt - 3.84)/0.19;
+   2908                  } else if (fVolt > 3.71) {
+   2909                    percents = 20.0 + 35.0*(fVolt -3.71)/0.13;
+   2910                  } else if (fVolt > 3.65) {
+   2911                    percents = 10.0 + (fVolt - 3.65)/0.006;
+   2912                  } else {
+   2913                    percents = (fVolt - 3.5)/10.0;
+   2914                    if (percents < 0) {
+   2915                      percents = 0.0;
+   2916                    }
+   2917                  }
+   2918                }
+   2919                lastBatStatus.voltiCents = (uint16_t) ((fVolt + 0.005)*100.0);
+   2920                last_percents = lastBatStatus.percents = (uint8_t) percents;
+   2921          
+   2922          //((config.radioPacketFlags & RADIOPACKET_BATTERY) && (battery_minutes != (secs/600))
+   2923                if ((config.flags & FLAG_SEND_BATTERY_INFO) && sec > last_bat_sent) {
+   2924                  last_bat_sent = 10 + (random%40);
+   2925                  if (config.flags & FLAG_TRACE_ASYNC) {
+   2926                    uint8_t hours = sec/3600;
+   2927                    uint8_t min = (sec/60)%60;
+   2928                    uint8_t mysec = (sec%60);
+   2929          
+   2930                    TRACE("Battery: %d.%04dV charge=%u%% %02d:%02d:%02d  %s charging; next in %d sec\n\r",
+   2931                        (uint8_t)fVolt, ((uint16_t) (fVolt*10000.0))%10000, last_percents,
+   2932                        hours, min, mysec,
+   2933                        lastBatStatus.flags == 3?"":"not", last_bat_sent);
+   2934          
+   2935                  }
+   2936                  last_bat_sent += sec;
+   2937                  static uint8_t ticks = 0;
+   2938                  lastBatStatus.tick = ticks++;
+   2939                  lastBatStatus.crc8 = crc8(&lastBatStatus.type, sizeof(lastBatStatus) - 1);
+   2940                  SAVE_POINT
+   2941                  RadioTxPktQueue(routerAddr, sizeof(lastBatStatus), (uint8_t*) &lastBatStatus);
+   2942                  SAVE_POINT
+   2943                }
+   2944              //  fVolt = 0.0;
+   2945          
+   2946              }
+   2947              //iter++;
+   2948          
+   2949          
+   2950           }
+   2951          
+   2952          }
+   2953          
+   2954          StatusType setIMUReady;
+   2955          uint32_t counterIMU;
+   2956          
+   2957          extern uint16_t over1;
+   2958          /*******************************************************************************
+   2959          * Description    : [Task]9 Used for reading the IMU reg data and packing
+   2960          * Input          :
+   2961          * Return         :
+   2962          *
+   2963          *******************************************************************************/
+   2964          void TaskIMU_G(void* pdata){
+   2965            //static count;
+   2966            while(1)
+   2967            {
+   2968              SAVE_POINT
+   2969          
+   2970              if (adjusted_changed) {
+   2971                adjusted_changed = 0;
+   2972                if (config.flags & FLAG_TRACE_ADJUST) {
+   2973                  TRACE("adjusted=%u over=%d @%d.%d\r\n", adjusted, over1, sec, tim_at_sec);
+   2974                }
+   2975              }
+   2976              RELOAD_WATCHDOG
+   2977              CoWaitForSingleFlag(flagIMU_G_DRDY, 0);
+   2978              counterIMU++;
+   2979              SAVE_POINT
+   2980              CoClearFlag(flagIMUNewData);        // DO NOT USE auto reset Flag as the DMA interrupt may take place before CoWaitForSingleFlag(flagIMUNewData, 0);  
+   2981            	//REV J 
+   2982            	RadioIMU_WaitGrabSPI();
+   2983            	IMUProcess();
+   2984            	RadioIMU_ReleaseSPI();
+   2985            	SAVE_POINT
+   2986            	InputDataIntoBuffer(&IMU_RawData[0]);
+   2987          
+   2988            	setIMUReady = CoSetFlag(flagIMUDataReady);
+   2989            	SAVE_POINT;
+   2990          #if 0	  //move to task3
+   2991          //((config.radioPacketFlags & RADIOPACKET_BUTTONPRESS) && (last_button_state != pBeacon_Data_pkt->BK_Preamble.button_pr)
+   2992          	if (button_state) {
+   2993          		static uint8_t tick;
+   2994          		struct ButtonClick btnClick;
+   2995          		btnClick.button_events = button_state;
+   2996          		btnClick.tick = tick++;
+   2997          		btnClick.type = 0xBC;
+   2998          		btnClick.version = PACKET_VERSION;
+   2999          		btnClick.crc8 = crc8(&btnClick.type, sizeof(btnClick) - 1);
+   3000          		if (config.flags & FLAG_TRACE_ASYNC) {
+   3001          			TRACE("BtnClick 0x%02X\r\n", btnClick.button_events);
+   3002          		}
+   3003          		RadioTxPktQueue(config.routerDstAddr, sizeof(btnClick), (uint8_t *) &btnClick);
+   3004              }
+   3005              if ((button_state & BUTTON_A)) {
+   3006          		if (config.flags & FLAG_TRACE_ASYNC) {
+   3007          			switch (button_state & BUTTON_A) {
+   3008          				case BUTTON_PRESS:
+   3009          					TRACE("Btn A PRESS\r\n");
+   3010          					break;
+   3011          				case BUTTON_CLICK:
+   3012          					TRACE("Btn A CLICK\r\n");
+   3013          					break;
+   3014          				case BUTTON_DBLCLICK:
+   3015          					TRACE("Btn A dblClick\r\n");
+   3016          					break;
+   3017          				case BUTTON_RELEASE:
+   3018          					TRACE("Btn A Release\r\n");
+   3019          				break;
+   3020          			}
+   3021          		}
+   3022          		button_state &= BUTTON_B;
+   3023              }
+   3024              if ((button_state & BUTTON_B)) {
+   3025          		if (config.flags & FLAG_TRACE_ASYNC) {
+   3026          			switch ((button_state & BUTTON_B) >>4) {
+   3027          				case BUTTON_PRESS:
+   3028          					TRACE("Btn B PRESS\r\n");
+   3029          					break;
+   3030          				case BUTTON_CLICK:
+   3031          					TRACE("Btn B CLICK\r\n");
+   3032          					break;
+   3033          				case BUTTON_DBLCLICK:
+   3034          					TRACE("Btn B dblClick\r\n");
+   3035          					break;
+   3036          				case BUTTON_RELEASE:
+   3037          					TRACE("Btn B Release\r\n");
+   3038          					break;
+   3039          			}
+   3040          		}
+   3041          		button_state &= BUTTON_A;
+   3042              }
+   3043          #endif
+   3044            }
+   3045          }
+   3046          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  GetAverageImuData
+       16  IMURegRd
+              16 -> HwSPISSAssert
+              16 -> HwSPISSDeAssert
+              16 -> SPI_I2S_GetFlagStatus
+              16 -> SPI_I2S_ReceiveData
+              16 -> SPI_I2S_SendData
+       16  IMURegWr
+              16 -> HwSPISSAssert
+              16 -> HwSPISSDeAssert
+              16 -> SPI_I2S_GetFlagStatus
+              16 -> SPI_I2S_ReceiveData
+              16 -> SPI_I2S_SendData
+        0  InputDataIntoBuffer
+        0  NVIC_GenerateSystemReset
+        8  PrintConfig
+               8 -> TRACE
+       24  RadioTxPktQueue
+              24 -> CoSetFlag
+              24 -> memcpy
+        8  ReadPage
+       32  SerialDownload
+              32 -> WritePage
+              32 -> memcpy
+       24  SetConfig
+              24 -> DAC_SetChannel2Data
+              24 -> RadioSetPanIdShortAddr
+              24 -> RadioSetRFChan
+              24 -> RadioSetRFLevel
+              24 -> SetTimeSlot
+              24 -> TRACE
+        8  SetTimeSlot
+               8 -> SetTimeSlot
+        8  Task1
+               8 -> CoAcceptSingleFlag
+               8 -> CoPendSem
+               8 -> CoPostSem
+               8 -> CoWaitForMultipleFlags
+               8 -> IWDG_ReloadCounter
+               8 -> RadioTxPktQueue
+               8 -> TRACE
+               8 -> __writeIMU
+               8 -> filltxbuf
+        0  Task3
+               0 -> CoAwakeTask
+               0 -> CoSchedLock
+               0 -> CoSetFlag
+               0 -> CoTickDelay
+               0 -> HwButtonPressed
+               0 -> HwGPIState
+               0 -> HwGPOInitOC
+               0 -> HwGPOLow
+               0 -> IWDG_ReloadCounter
+               0 -> SetTimeSlot
+               0 -> TRACE
+               0 -> chkbtnstate
+       24  Task8
+              24 -> ADC_GetConversionValue
+              24 -> ADC_SoftwareStartConvCmd
+              24 -> CoTickDelay
+              24 -> HwGPIState
+              24 -> HwGPOHigh
+              24 -> IWDG_ReloadCounter
+              24 -> RadioTxPktQueue
+              24 -> TRACE
+              24 -> __aeabi_cfcmple
+              24 -> __aeabi_cfrcmple
+              24 -> __aeabi_d2f
+              24 -> __aeabi_d2iz
+              24 -> __aeabi_dadd
+              24 -> __aeabi_ddiv
+              24 -> __aeabi_dmul
+              24 -> __aeabi_f2d
+              24 -> __aeabi_f2iz
+              24 -> __aeabi_fadd
+              24 -> __aeabi_fdiv
+              24 -> __aeabi_fmul
+              24 -> __aeabi_ui2f
+              24 -> crc8
+      440  TaskConfig
+             440 -> CalcConfigChecksum
+             440 -> CoClearFlag
+             440 -> CoGetOSTime
+             440 -> CoGetStackDepth
+             440 -> CoGetTaskFunc
+             440 -> CoGetTaskLine
+             440 -> CoGetTaskScheduledCount
+             440 -> CoTickDelay
+             440 -> CopyConfigToExConfig
+             440 -> CopyExConfigToConfig
+             440 -> I2C_EE_BufferRead
+             440 -> I2C_EE_BufferWrite
+             440 -> IMUProcess
+             440 -> IWDG_ReloadCounter
+             440 -> NVIC_GenerateSystemReset
+             440 -> PrintConfig
+             440 -> RadioIMU_ReleaseSPI
+             440 -> RadioIMU_WaitGrabSPI
+             440 -> RadioPrint2520Registers
+             440 -> RadioSetPanIdShortAddr
+             440 -> RadioSetRFChan
+             440 -> RadioSetRFLevel
+             440 -> ReadPage
+             440 -> SaveConfig
+             440 -> SerialDownload
+             440 -> SetConfig
+             440 -> TRACE
+             440 -> ValidateCommandLine
+             440 -> __writeCmdLineRespPacket
+             440 -> b64_pton
+             440 -> isspace
+             440 -> memcpy
+             440 -> memset
+             440 -> mygets
+             440 -> strcpy
+             440 -> strlen
+             440 -> strtoul
+        8  TaskIMU_G
+               8 -> CoClearFlag
+               8 -> CoSetFlag
+               8 -> CoWaitForSingleFlag
+               8 -> IMUProcess
+               8 -> IWDG_ReloadCounter
+               8 -> InputDataIntoBuffer
+               8 -> RadioIMU_ReleaseSPI
+               8 -> RadioIMU_WaitGrabSPI
+               8 -> TRACE
+       16  TaskRadioRx
+              16 -> CoGetOSTime
+              16 -> CoPendSem
+              16 -> IWDG_ReloadCounter
+              16 -> ProcessRXError
+              16 -> RadioIMU_ReleaseSPI
+              16 -> RadioIMU_WaitGrabSPI
+              16 -> RadioRxPkt
+              16 -> TIM_SetAutoreload
+              16 -> TIM_SetCompare2
+              16 -> TIM_SetCompare3
+              16 -> TIM_SetCompare4
+              16 -> TRACE
+              16 -> assert_failed
+              16 -> crc8
+        8  TaskRadioTx
+               8 -> CoWaitForSingleFlag
+               8 -> IWDG_ReloadCounter
+               8 -> RadioIMU_ReleaseSPI
+               8 -> RadioIMU_WaitGrabSPI
+               8 -> RadioTxPkt
+       32  WritePage
+              32 -> FLASH_ErasePage
+              32 -> FLASH_Lock
+              32 -> FLASH_ProgramWord
+              32 -> FLASH_Unlock
+        0  _LocaleC_isspace
+       16  __task1_bat_pack
+              16 -> fillmsgBAT
+              16 -> fillmsgPreamble
+       16  __task1_batbtn_pack
+              16 -> fillmsgBAT
+              16 -> fillmsgBTN
+              16 -> fillmsgPreamble
+       24  __task1_batbtnimu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgBAT
+              24 -> fillmsgBTN
+              24 -> fillmsgPreamble
+       24  __task1_batimu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgBAT
+              24 -> fillmsgPreamble
+       16  __task1_btn_pack
+              16 -> fillmsgBTN
+              16 -> fillmsgPreamble
+       24  __task1_btnimu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgBTN
+              24 -> fillmsgPreamble
+       24  __task1_imu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgPreamble
+       16  __task1_led_pack
+              16 -> fillmsgLED
+              16 -> fillmsgPreamble
+       16  __task1_ledbat_pack
+              16 -> fillmsgBAT
+              16 -> fillmsgLED
+              16 -> fillmsgPreamble
+       16  __task1_ledbatbtn_pack
+              16 -> fillmsgBAT
+              16 -> fillmsgBTN
+              16 -> fillmsgLED
+              16 -> fillmsgPreamble
+       24  __task1_ledbatbtnimu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgBAT
+              24 -> fillmsgBTN
+              24 -> fillmsgLED
+              24 -> fillmsgPreamble
+       24  __task1_ledbatimu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgBAT
+              24 -> fillmsgLED
+              24 -> fillmsgPreamble
+       16  __task1_ledbtn_pack
+              16 -> fillmsgBTN
+              16 -> fillmsgLED
+              16 -> fillmsgPreamble
+       24  __task1_ledbtnimu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgBTN
+              24 -> fillmsgLED
+              24 -> fillmsgPreamble
+       24  __task1_ledimu_pack
+              24 -> CoWaitForSingleFlag
+              24 -> GetAverageImuData
+              24 -> fillmsgLED
+              24 -> fillmsgPreamble
+        0  chkbtnstate
+        0  fastdivide250
+        8  fillmsgBAT
+               8 -> CoClearFlag
+        8  fillmsgBTN
+               8 -> CoClearFlag
+        8  fillmsgLED
+               8 -> CoClearFlag
+        0  fillmsgPreamble
+       16  filltxbuf
+              16 -> __task1_bat_pack
+              16 -> __task1_batbtn_pack
+              16 -> __task1_batbtnimu_pack
+              16 -> __task1_batimu_pack
+              16 -> __task1_btn_pack
+              16 -> __task1_btnimu_pack
+              16 -> __task1_imu_pack
+              16 -> __task1_led_pack
+              16 -> __task1_ledbat_pack
+              16 -> __task1_ledbatbtn_pack
+              16 -> __task1_ledbatbtnimu_pack
+              16 -> __task1_ledbatimu_pack
+              16 -> __task1_ledbtn_pack
+              16 -> __task1_ledbtnimu_pack
+              16 -> __task1_ledimu_pack
+        8  isspace
+               8 -> _LocaleC_isspace
+       16  memcpy
+              16 -> __aeabi_memcpy
+       16  memset
+              16 -> __aeabi_memset
+       16  mygets
+              16 -> CoTickDelay
+              16 -> getchar
+              16 -> putchar
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      28  ?<Constant " Mar 21 2019 : 16:04:...">
+      24  ?<Constant " No IMU Installed\n\n\r">
+      32  ?<Constant " Phase=%u inced=%u co...">
+       1  ?<Constant "">
+      16  ?<Constant "%X, %X, %X\n\r">
+      48  ?<Constant "**ERROR** Unrecognize...">
+      40  ?<Constant "**ERROR** Unrecognize...">_1
+      12  ?<Constant "16:04:22">
+      52  ?<Constant ": excFlag0=0x%02X exc...">
+      52  ?<Constant ": realFrameId=%d last...">
+      48  ?<Constant ": remainOutOfSyncTime...">
+      44  ?<Constant ": rxCount=%d rxFIFOEr...">
+      36  ?<Constant ": rxFIFOTime %d.%d se...">
+      36  ?<Constant ": rxWait @ %d.%d rxSt...">
+      52  ?<Constant ": successBeacons=%d f...">
+      64  ?<Constant ": txStart @ %d.%d txE...">
+      20  ?<Constant ":%u @%u t:%d d:%u\n\r">
+       4  ?<Constant "> ">
+      40  ?<Constant "ARM Serial Number 0x%...">
+      76  ?<Constant "Battery: %d.%04dV cha...">
+      32  ?<Constant "Beacon received: CRC8...">
+      48  ?<Constant "Beacon received: Unsu...">
+      40  ?<Constant "Beacon received: unkn...">
+      36  ?<Constant "Beacon: changing fram...">
+      32  ?<Constant "Built on Mar 21 2019 ...">
+     116  ?<Constant "C:\\Users\\User\\Documen...">
+      32  ?<Constant "CPU Serial #%04x:%04x...">
+      36  ?<Constant "Current SysTickCount:...">
+      24  ?<Constant "ERROR! Tx Buffer full\n\r">
+      12  ?<Constant "Erased\n\r">
+      20  ?<Constant "Flags = 0x%08X \r\n">
+      16  ?<Constant "Framebits: %d\r\n">
+      24  ?<Constant "Generating hard fault\r\n">
+      20  ?<Constant "IMU Debug print:\n\r">
+      16  ?<Constant "IMU Present\n\n\r">
+      24  ?<Constant "Incorrect packet size\r\n">
+      20  ?<Constant "Incorrect packet\r\n">
+      12  ?<Constant "Mar 21 2019">
+      20  ?<Constant "Mem addr error\n\r">
+      24  ?<Constant "Mem at 0x%08X=0x%08X\n\r">
+      36  ?<Constant "NULL packet, rxCount=...">
+      40  ?<Constant "New bcn id:%u>%u tick...">
+      28  ?<Constant "New timeslot offset =...">
+      32  ?<Constant "No TK sync for %d sec...">
+      28  ?<Constant "No sync timeout sec: ...">
+      52  ?<Constant "PERF: IdleTask: %u Ta...">
+      32  ?<Constant "PERF: Task8: %u TaskI...">
+      36  ?<Constant "PERF: TaskConfig: %u ...">
+      16  ?<Constant "RF CHAN: %d\n\r">
+      20  ?<Constant "RF Tx Level: %X\n\r">
+      44  ?<Constant "RadioRxTask [avail st...">
+      44  ?<Constant "RadioTxTask [avail st...">
+      40  ?<Constant "Task1 [avail stack:%d...">
+      40  ?<Constant "Task3 [avail stack:%d...">
+      40  ?<Constant "Task8 [avail stack:%d...">
+      44  ?<Constant "TaskConfig [avail sta...">
+      40  ?<Constant "TaskIMU [avail stack:...">
+      24  ?<Constant "Timekeeper sync: %s\n\r">
+      20  ?<Constant "Timer adjust: %d\n\r">
+      20  ?<Constant "Watchdog is %s\r\n">
+      24  ?<Constant "[0] productID   : %X\n\r">
+      24  ?<Constant "[1] serialNum   : %X\n\r">
+      28  ?<Constant "[2] panId       : %04X\n\r">
+      28  ?<Constant "[3] mySrcAddr   : %04X\n\r">
+      32  ?<Constant "[4] routerDstAddr   :...">
+      24  ?<Constant "[5] ledOnOffs   : %X\n\r">
+      24  ?<Constant "[6] ledOffOffs  : %X\n\r">
+      24  ?<Constant "[7] ledDAC      : %X\n\r">
+      28  ?<Constant "[8] rfChan      : %02X\n\r">
+      28  ?<Constant "[9] led0Id      : %02X\n\r">
+      28  ?<Constant "[?] rfTimeSlot  : %02X\n\r">
+      28  ?<Constant "[A] led1Id      : %02X\n\r">
+      28  ?<Constant "[B] led2Id      : %02X\n\r">
+      24  ?<Constant "[C] TestMode    : %d\n\r">
+      28  ?<Constant "[J] led0IdPattern : %...">
+      28  ?<Constant "[K] led1IdPattern : %...">
+      28  ?<Constant "[L] led2IdPattern : %...">
+      24  ?<Constant "[M] led0Index : %08X\n\r">
+      24  ?<Constant "[N] led1Index : %08X\n\r">
+      24  ?<Constant "[O] led2Index : %08X\n\r">
+      16  ?<Constant "[X] Radio: %s\n\r">
+      24  ?<Constant "[Y] frameBits   : %d\n\r">
+      24  ?<Constant "[Z] Tx RF Level : %X\n\r">
+      44  ?<Constant "\n\r FIRMWARE VERSION: ...">
+       8  ?<Constant "active">
+      48  ?<Constant "adjust=%d tim3_phase=...">
+      32  ?<Constant "adjusted=%u over=%d @...">
+      64  ?<Constant "changeClocks=%d newbc...">
+      56  ?<Constant "errorFrameId=%u valid...">
+      24  ?<Constant "fault_counter = %u\r\n">
+      56  ?<Constant "frIdCorr=%d lastFrIdC...">
+      20  ?<Constant "led blinking=%d\r\n">
+      48  ?<Constant "newFrameTime @%d.%d f...">
+       4  ?<Constant "no">
+      12  ?<Constant "not active">
+       4  ?<Constant "not">
+       4  ?<Constant "off">
+      52  ?<Constant "oldFrameTime @%d.%d f...">
+      48  ?<Constant "oldTim3Phase=%u newTi...">
+       4  ?<Constant "on">
+      24  ?<Constant "ooopss.. wrong value\n\r">
+      36  ?<Constant "realFrameId=%u frameI...">
+      44  ?<Constant "rxPkts=%u rxTotal=%u ...">
+      36  ?<Constant "saved_pc=0x%08X saved...">
+      40  ?<Constant "stacked_lr=0x%08X sta...">
+      40  ?<Constant "stacked_psr=0x%08X sa...">
+      44  ?<Constant "trace_irq=%d frIdCor=...">
+       4  ?<Constant "yes">
+       4  ??DataTable10
+       4  ??DataTable10_1
+       4  ??DataTable10_2
+       4  ??DataTable15
+       4  ??DataTable15_1
+       4  ??DataTable15_2
+       4  ??DataTable16
+       4  ??DataTable16_1
+       4  ??DataTable16_2
+       4  ??DataTable17
+       4  ??DataTable18
+       4  ??DataTable19
+       4  ??DataTable19_1
+       4  ??DataTable19_2
+       4  ??DataTable20
+       4  ??DataTable20_1
+       4  ??DataTable21
+       4  ??DataTable21_1
+       4  ??DataTable21_10
+       4  ??DataTable21_11
+       4  ??DataTable21_12
+       4  ??DataTable21_13
+       4  ??DataTable21_14
+       4  ??DataTable21_15
+       4  ??DataTable21_16
+       4  ??DataTable21_17
+       4  ??DataTable21_18
+       4  ??DataTable21_19
+       4  ??DataTable21_2
+       4  ??DataTable21_20
+       4  ??DataTable21_21
+       4  ??DataTable21_22
+       4  ??DataTable21_23
+       4  ??DataTable21_24
+       4  ??DataTable21_25
+       4  ??DataTable21_26
+       4  ??DataTable21_3
+       4  ??DataTable21_4
+       4  ??DataTable21_5
+       4  ??DataTable21_6
+       4  ??DataTable21_7
+       4  ??DataTable21_8
+       4  ??DataTable21_9
+       4  ??DataTable22
+       4  ??DataTable22_1
+       4  ??DataTable22_10
+       4  ??DataTable22_11
+       4  ??DataTable22_12
+       4  ??DataTable22_13
+       4  ??DataTable22_14
+       4  ??DataTable22_15
+       4  ??DataTable22_16
+       4  ??DataTable22_17
+       4  ??DataTable22_18
+       4  ??DataTable22_19
+       4  ??DataTable22_2
+       4  ??DataTable22_20
+       4  ??DataTable22_21
+       4  ??DataTable22_22
+       4  ??DataTable22_23
+       4  ??DataTable22_24
+       4  ??DataTable22_25
+       4  ??DataTable22_26
+       4  ??DataTable22_27
+       4  ??DataTable22_28
+       4  ??DataTable22_29
+       4  ??DataTable22_3
+       4  ??DataTable22_30
+       4  ??DataTable22_31
+       4  ??DataTable22_32
+       4  ??DataTable22_33
+       4  ??DataTable22_34
+       4  ??DataTable22_35
+       4  ??DataTable22_36
+       4  ??DataTable22_37
+       4  ??DataTable22_38
+       4  ??DataTable22_39
+       4  ??DataTable22_4
+       4  ??DataTable22_40
+       4  ??DataTable22_41
+       4  ??DataTable22_42
+       4  ??DataTable22_43
+       4  ??DataTable22_44
+       4  ??DataTable22_45
+       4  ??DataTable22_46
+       4  ??DataTable22_47
+       4  ??DataTable22_5
+       4  ??DataTable22_6
+       4  ??DataTable22_7
+       4  ??DataTable22_8
+       4  ??DataTable22_9
+       4  ??DataTable23
+       4  ??DataTable23_1
+       4  ??DataTable23_10
+       4  ??DataTable23_11
+       4  ??DataTable23_12
+       4  ??DataTable23_13
+       4  ??DataTable23_14
+       4  ??DataTable23_15
+       4  ??DataTable23_16
+       4  ??DataTable23_17
+       4  ??DataTable23_18
+       4  ??DataTable23_19
+       4  ??DataTable23_2
+       4  ??DataTable23_3
+       4  ??DataTable23_4
+       4  ??DataTable23_5
+       4  ??DataTable23_6
+       4  ??DataTable23_7
+       4  ??DataTable23_8
+       4  ??DataTable23_9
+       4  ??DataTable24
+       4  ??DataTable24_1
+       4  ??DataTable24_10
+       4  ??DataTable24_11
+       4  ??DataTable24_12
+       4  ??DataTable24_13
+       4  ??DataTable24_14
+       4  ??DataTable24_15
+       4  ??DataTable24_16
+       4  ??DataTable24_17
+       4  ??DataTable24_18
+       4  ??DataTable24_19
+       4  ??DataTable24_2
+       4  ??DataTable24_3
+       4  ??DataTable24_4
+       4  ??DataTable24_5
+       4  ??DataTable24_6
+       4  ??DataTable24_7
+       4  ??DataTable24_8
+       4  ??DataTable24_9
+       4  ??DataTable25
+       4  ??DataTable25_1
+       4  ??DataTable25_10
+       4  ??DataTable25_11
+       4  ??DataTable25_12
+       4  ??DataTable25_13
+       4  ??DataTable25_14
+       4  ??DataTable25_15
+       4  ??DataTable25_16
+       4  ??DataTable25_17
+       4  ??DataTable25_18
+       4  ??DataTable25_19
+       4  ??DataTable25_2
+       4  ??DataTable25_20
+       4  ??DataTable25_21
+       4  ??DataTable25_22
+       4  ??DataTable25_23
+       4  ??DataTable25_24
+       4  ??DataTable25_25
+       4  ??DataTable25_26
+       4  ??DataTable25_27
+       4  ??DataTable25_28
+       4  ??DataTable25_29
+       4  ??DataTable25_3
+       4  ??DataTable25_30
+       4  ??DataTable25_31
+       4  ??DataTable25_32
+       4  ??DataTable25_33
+       4  ??DataTable25_34
+       4  ??DataTable25_35
+       4  ??DataTable25_36
+       4  ??DataTable25_37
+       4  ??DataTable25_38
+       4  ??DataTable25_39
+       4  ??DataTable25_4
+       4  ??DataTable25_40
+       4  ??DataTable25_41
+       4  ??DataTable25_42
+       4  ??DataTable25_43
+       4  ??DataTable25_44
+       4  ??DataTable25_45
+       4  ??DataTable25_46
+       4  ??DataTable25_47
+       4  ??DataTable25_48
+       4  ??DataTable25_49
+       4  ??DataTable25_5
+       4  ??DataTable25_50
+       4  ??DataTable25_51
+       4  ??DataTable25_52
+       4  ??DataTable25_53
+       4  ??DataTable25_54
+       4  ??DataTable25_55
+       4  ??DataTable25_56
+       4  ??DataTable25_57
+       4  ??DataTable25_58
+       4  ??DataTable25_59
+       4  ??DataTable25_6
+       4  ??DataTable25_60
+       4  ??DataTable25_61
+       4  ??DataTable25_62
+       4  ??DataTable25_63
+       4  ??DataTable25_64
+       4  ??DataTable25_65
+       4  ??DataTable25_66
+       4  ??DataTable25_67
+       4  ??DataTable25_68
+       4  ??DataTable25_69
+       4  ??DataTable25_7
+       4  ??DataTable25_70
+       4  ??DataTable25_71
+       4  ??DataTable25_72
+       4  ??DataTable25_73
+       4  ??DataTable25_74
+       4  ??DataTable25_75
+       4  ??DataTable25_8
+       4  ??DataTable25_9
+       4  ??DataTable26
+       4  ??DataTable26_1
+       4  ??DataTable26_10
+       4  ??DataTable26_11
+       4  ??DataTable26_12
+       4  ??DataTable26_13
+       4  ??DataTable26_14
+       4  ??DataTable26_15
+       4  ??DataTable26_16
+       4  ??DataTable26_17
+       4  ??DataTable26_18
+       4  ??DataTable26_19
+       4  ??DataTable26_2
+       4  ??DataTable26_20
+       4  ??DataTable26_21
+       4  ??DataTable26_22
+       4  ??DataTable26_23
+       4  ??DataTable26_24
+       4  ??DataTable26_25
+       4  ??DataTable26_26
+       4  ??DataTable26_27
+       4  ??DataTable26_28
+       4  ??DataTable26_29
+       4  ??DataTable26_3
+       4  ??DataTable26_30
+       4  ??DataTable26_31
+       4  ??DataTable26_32
+       4  ??DataTable26_33
+       4  ??DataTable26_34
+       4  ??DataTable26_35
+       4  ??DataTable26_36
+       4  ??DataTable26_37
+       4  ??DataTable26_38
+       4  ??DataTable26_39
+       4  ??DataTable26_4
+       4  ??DataTable26_40
+       4  ??DataTable26_41
+       4  ??DataTable26_42
+       4  ??DataTable26_43
+       4  ??DataTable26_44
+       4  ??DataTable26_45
+       4  ??DataTable26_46
+       4  ??DataTable26_47
+       4  ??DataTable26_48
+       4  ??DataTable26_49
+       4  ??DataTable26_5
+       4  ??DataTable26_6
+       4  ??DataTable26_7
+       4  ??DataTable26_8
+       4  ??DataTable26_9
+       4  ??DataTable27
+       4  ??DataTable27_1
+       4  ??DataTable27_10
+       4  ??DataTable27_11
+       4  ??DataTable27_12
+       4  ??DataTable27_13
+       4  ??DataTable27_14
+       4  ??DataTable27_15
+       4  ??DataTable27_16
+       4  ??DataTable27_17
+       4  ??DataTable27_18
+       4  ??DataTable27_19
+       4  ??DataTable27_2
+       4  ??DataTable27_20
+       4  ??DataTable27_21
+       4  ??DataTable27_22
+       4  ??DataTable27_23
+       4  ??DataTable27_24
+       4  ??DataTable27_25
+       4  ??DataTable27_26
+       4  ??DataTable27_27
+       4  ??DataTable27_28
+       4  ??DataTable27_29
+       4  ??DataTable27_3
+       4  ??DataTable27_30
+       4  ??DataTable27_31
+       4  ??DataTable27_32
+       4  ??DataTable27_33
+       4  ??DataTable27_34
+       4  ??DataTable27_35
+       4  ??DataTable27_36
+       4  ??DataTable27_37
+       4  ??DataTable27_38
+       4  ??DataTable27_39
+       4  ??DataTable27_4
+       4  ??DataTable27_40
+       4  ??DataTable27_41
+       4  ??DataTable27_42
+       4  ??DataTable27_43
+       4  ??DataTable27_44
+       4  ??DataTable27_45
+       4  ??DataTable27_46
+       4  ??DataTable27_47
+       4  ??DataTable27_48
+       4  ??DataTable27_49
+       4  ??DataTable27_5
+       4  ??DataTable27_50
+       4  ??DataTable27_51
+       4  ??DataTable27_52
+       4  ??DataTable27_53
+       4  ??DataTable27_54
+       4  ??DataTable27_55
+       4  ??DataTable27_56
+       4  ??DataTable27_57
+       4  ??DataTable27_58
+       4  ??DataTable27_59
+       4  ??DataTable27_6
+       4  ??DataTable27_60
+       4  ??DataTable27_61
+       4  ??DataTable27_62
+       4  ??DataTable27_63
+       4  ??DataTable27_64
+       4  ??DataTable27_65
+       4  ??DataTable27_7
+       4  ??DataTable27_8
+       4  ??DataTable27_9
+       4  ??DataTable28
+       4  ??DataTable28_1
+       4  ??DataTable28_2
+       4  ??DataTable28_3
+       4  ??DataTable28_4
+       4  ??DataTable28_5
+       4  ??DataTable29
+       4  ??DataTable29_1
+       4  ??DataTable29_10
+       4  ??DataTable29_11
+       4  ??DataTable29_12
+       4  ??DataTable29_13
+       4  ??DataTable29_14
+       4  ??DataTable29_15
+       4  ??DataTable29_16
+       4  ??DataTable29_17
+       4  ??DataTable29_18
+       4  ??DataTable29_19
+       4  ??DataTable29_2
+       4  ??DataTable29_20
+       4  ??DataTable29_21
+       4  ??DataTable29_22
+       4  ??DataTable29_23
+       4  ??DataTable29_24
+       4  ??DataTable29_25
+       4  ??DataTable29_26
+       4  ??DataTable29_27
+       4  ??DataTable29_28
+       4  ??DataTable29_29
+       4  ??DataTable29_3
+       4  ??DataTable29_30
+       4  ??DataTable29_31
+       4  ??DataTable29_32
+       4  ??DataTable29_33
+       4  ??DataTable29_34
+       4  ??DataTable29_35
+       4  ??DataTable29_36
+       4  ??DataTable29_37
+       4  ??DataTable29_38
+       4  ??DataTable29_39
+       4  ??DataTable29_4
+       4  ??DataTable29_40
+       4  ??DataTable29_41
+       4  ??DataTable29_42
+       4  ??DataTable29_43
+       4  ??DataTable29_44
+       4  ??DataTable29_45
+       4  ??DataTable29_46
+       4  ??DataTable29_47
+       4  ??DataTable29_48
+       4  ??DataTable29_49
+       4  ??DataTable29_5
+       4  ??DataTable29_50
+       4  ??DataTable29_51
+       4  ??DataTable29_52
+       4  ??DataTable29_53
+       4  ??DataTable29_54
+       4  ??DataTable29_55
+       4  ??DataTable29_56
+       4  ??DataTable29_57
+       4  ??DataTable29_58
+       4  ??DataTable29_59
+       4  ??DataTable29_6
+       4  ??DataTable29_60
+       4  ??DataTable29_61
+       4  ??DataTable29_62
+       4  ??DataTable29_63
+       4  ??DataTable29_64
+       4  ??DataTable29_65
+       4  ??DataTable29_66
+       4  ??DataTable29_67
+       4  ??DataTable29_68
+       4  ??DataTable29_69
+       4  ??DataTable29_7
+       4  ??DataTable29_70
+       4  ??DataTable29_71
+       4  ??DataTable29_72
+       4  ??DataTable29_73
+       4  ??DataTable29_74
+       4  ??DataTable29_75
+       4  ??DataTable29_76
+       4  ??DataTable29_77
+       4  ??DataTable29_78
+       4  ??DataTable29_79
+       4  ??DataTable29_8
+       4  ??DataTable29_80
+       4  ??DataTable29_81
+       4  ??DataTable29_82
+       4  ??DataTable29_83
+       4  ??DataTable29_84
+       4  ??DataTable29_85
+       4  ??DataTable29_86
+       4  ??DataTable29_87
+       4  ??DataTable29_88
+       4  ??DataTable29_89
+       4  ??DataTable29_9
+       4  ??DataTable29_90
+       4  ??DataTable29_91
+       4  ??DataTable29_92
+       4  ??DataTable29_93
+       4  ??DataTable29_94
+       4  ??DataTable29_95
+       4  ??DataTable29_96
+       4  ??DataTable29_97
+       4  ??DataTable9
+       2  CurrentDataPointer
+      50  GetAverageImuData
+       1  IMUPresent
+      78  IMURegRd
+      74  IMURegWr
+       4  IMUdbgPrt
+      74  InputDataIntoBuffer
+      12  NVIC_GenerateSystemReset
+     530  PrintConfig
+     224  RadioTxPktQueue
+      36  ReadPage
+       2  RfTxLevel
+     276  SerialDownload
+     562  SetConfig
+      72  SetTimeSlot
+     448  Task1
+     574  Task3
+    1376  Task8
+    4484  TaskConfig
+     178  TaskIMU_G
+    2168  TaskRadioRx
+     414  TaskRadioTx
+      32  TimeSlotVals
+       4  Valids
+     190  WritePage
+      22  _LocaleC_isspace
+      24  __task1_bat_pack
+      32  __task1_batbtn_pack
+     144  __task1_batbtnimu_pack
+     132  __task1_batimu_pack
+      24  __task1_btn_pack
+     132  __task1_btnimu_pack
+     128  __task1_imu_pack
+      24  __task1_led_pack
+      32  __task1_ledbat_pack
+      40  __task1_ledbatbtn_pack
+     138  __task1_ledbatbtnimu_pack
+     148  __task1_ledbatimu_pack
+      32  __task1_ledbtn_pack
+     144  __task1_ledbtnimu_pack
+     136  __task1_ledimu_pack
+       1  acc_adjust_count
+       1  acc_done
+       4  acc_time_adjust
+      64  accs
+       4  addr
+       1  bat_slot_numbers
+       1  beaconInSync
+       1  beaconRSSI
+       8  btnA
+       8  btnB
+       1  btnmsg1
+       1  btnmsg2
+       4  btnval
+     512  buff
+       1  bufsize
+       8  buttonA
+       8  buttonB
+       1  button_state
+       4  calls
+       4  changeClocks
+       1  changeFrameClock
+     154  chkbtnstate
+       1  cmd
+      68  config
+       4  counterIMU
+     512  decoded
+     512  encoded
+       8  endRadioTx
+       4  errorFrameId
+      40  fLast
+       4  fVolt
+      18  fastdivide250
+      42  fillmsgBAT
+     170  fillmsgBTN
+      76  fillmsgLED
+      94  fillmsgPreamble
+     220  filltxbuf
+       1  firstTime
+       1  frameAdjust
+       4  frameIdCorrectionCount
+       1  frameIdFlag
+       2  frameOffset
+       1  got_beacon
+       2  halted
+       4  header
+       2  inIdx
+      12  isspace
+       4  iter
+      12  lastBatStatus
+       1  lastFrameClock
+       4  lastFrameId
+       4  lastFrameIdAtSync
+       4  lastFrameIdCorrection
+       8  lastFrameTime
+       1  lastRadioTx
+       1  lastTick
+       2  lastTim3Phase
+       4  lastTime
+       4  last_bat_sent
+       1  last_percents
+   16380  log
+       2  log_index_in
+       4  lostSync
+      22  memcpy
+      22  memset
+       4  mycalls
+     150  mygets
+       4  newFrameIdAtSync
+       8  newFrameTime
+       2  newTim3Phase
+       4  newbcn
+       4  notValids
+       4  now_sec
+       4  oldFrameIdAtSync
+       8  oldFrameTime
+       2  oldTim3Phase
+       4  old_sec
+       4  old_tim
+       2  outIdx
+       4  pRxPkt
+       2  packet
+    2056  page
+       4  pushed_times
+       2  pwr_holdCount
+       1  queue_full
+       8  radioRxEnd
+       8  radioRxStart
+       8  radioRxWait
+       4  radioTxEntries
+       4  random
+       2  random_slot1
+       2  random_slot2
+       4  realFrameId
+       4  remainOutOfSyncTime
+       1  rfChan
+       2  routerAddr
+       4  rt_flags
+       4  rxNotEmpty
+       4  rxReloaded
+       4  rxTotalRcvd
+       1  rx_reload
+       4  savedFrameIdAtSync
+       1  semAllow
+       1  semAllowPostTask
+       1  seqNum
+       1  setIMUReady
+       1  setRadioTx
+       1  setTxDone
+       4  span
+       8  startRadioTx
+       4  successBeacons
+    1024  tab_1024
+       4  target
+       1  task2StatusType
+       4  task2_errors
+       4  task2enter
+       1  test_imu_pkt_ctr
+       1  ticks
+       4  tim
+       2  tim4_phase
+       2  tim_at_sec
+     116  txBuf
+       4  txCalls
+       4  txCalls2
+     960  txPktQueue
+       2  txTimeSlot
+       1  use_sync
+       2  use_tim3_phase
+       4  value
+     352  -- Other
+
+ 
+ 20 541 bytes in section .bss
+  2 098 bytes in section .data
+      4 bytes in section .noinit
+  3 745 bytes in section .rodata
+ 15 844 bytes in section .text
+ 
+ 15 766 bytes of CODE  memory (+ 78 bytes shared)
+  3 745 bytes of CONST memory
+ 22 643 bytes of DATA  memory
+
+Errors: none
+Warnings: 25

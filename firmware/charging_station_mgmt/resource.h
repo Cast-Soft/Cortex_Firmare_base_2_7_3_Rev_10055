@@ -1,0 +1,120 @@
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// Used by cs_management.rc
+//
+#define IDM_ABOUTBOX                    0x0010
+#define IDD_ABOUTBOX                    100
+#define IDS_ABOUTBOX                    101
+#define IDD_CSM_DIALOG                  102
+#define IDR_MAINFRAME                   128
+#define IDC_LOG                         1000
+#define IDC_CLEAR_LOG                   1001
+#define IDC_LOG_DATA                    1002
+#define IDC_LOG_TO_FILE                 1003
+#define IDC_CONNECTION                  1004
+#define IDC_CMB_SERIAL_PORT             1005
+#define IDC_SEND_CMD                    1006
+#define IDC_CMD_LIST                    1007
+#define IDC_CMD_PARAM                   1008
+#define IDC_BTN_READ_FW                 1009
+#define IDC_FW_UPLOAD_ENABLE            1011
+#define IDC_BTN_UPLOAD_NOW              1012
+#define IDC_EDIT1                       1013
+#define IDC_SENT                        1013
+#define IDC_EDIT_DEVICE_ID              1013
+#define IDC_GET_CONFIG                  1014
+#define IDC_STORE_CONFIG                1015
+#define IDC_PRODUCTID                   1016
+#define IDC_BUTTON3                     1017
+#define IDC_SET_PRODUCT_ID              1017
+#define IDC_DEFAULT_CONFIG              1018
+#define IDC_SERIAL_NUM                  1022
+#define IDC_BUTTON4                     1023
+#define IDC_SET_SERIAL_NUMBER           1023
+#define IDC_BEACON_ID                   1024
+#define IDC_BUTTON5                     1025
+#define IDC_BT_SET_BEACONID             1025
+#define IDC_ROUTER_ADDR                 1026
+#define IDC_BUTTON6                     1027
+#define IDC_SET_ROUTER_ADDR             1027
+#define IDC_LED_ON_OFFSET               1028
+#define IDC_BUTTON7                     1029
+#define IDC_BT_LEDON_OFFSET             1029
+#define IDC_LED_OFF_OFFSET              1030
+#define IDC_BUTTON8                     1031
+#define IDC_BT_LEDOFF_OFFSET            1031
+#define IDC_BEACON_ID2                  1032
+#define IDC_GET_STATUS                  1033
+#define IDC_CHANNEL                     1034
+#define IDC_BUTTON10                    1035
+#define IDC_BT_SET_RF_CHANNEL           1035
+#define IDC_TIME_SLOT                   1036
+#define IDC_BUTTON11                    1037
+#define IDC_BT_SET_TIMESLOT             1037
+#define IDC_LED1_ID                     1038
+#define IDC_BUTTON12                    1039
+#define IDC_SET_LED1ID                  1039
+#define IDC_LED2_ID                     1040
+#define IDC_BUTTON13                    1041
+#define IDC_LED2ID                      1041
+#define IDC_FW_VERIFY                   1042
+#define IDC_EDIT2                       1043
+#define IDC_BATTERY                     1043
+#define IDC_LED3_ID                     1044
+#define IDC_BUTTON14                    1045
+#define IDC_LED3ID                      1045
+#define IDC_BT_WHO                      1046
+#define IDC_BT_SET_HOP_CH               1046
+#define IDC_EDIT3                       1047
+#define IDC_STATUS_ENABLED              1047
+#define IDC_TX_LEVEL                    1048
+#define IDC_BUTTON15                    1049
+#define IDC_BT_SET_POWER                1049
+#define IDC_AUTO_JMP_MAIN               1050
+#define IDC_BITS                        1050
+#define IDC_PAN_ID                      1052
+#define IDC_BUTTON9                     1053
+#define IDC_BT_SET_PANID                1053
+#define IDC_RADIO1                      1054
+#define IDC_UPDATE_TYPE                 1054
+#define IDC_RADIO2                      1055
+#define IDC_DEVICE_LIST                 1056
+#define IDC_CMD_ALL                     1057
+#define IDC_CMD_APPLY_ALL               1057
+#define IDC_CMD_APPLY_SELECTED          1058
+#define IDC_JUMP_ON_CONNECT             1059
+#define IDC_CHECK_RADIO_ON              1060
+#define IDC_RADIO3                      1062
+#define IDC_CMD_APPLY_SINGLE            1062
+#define IDC_CHECK_ENABLE_IMU            1063
+#define IDC_CHECK_ENABLE_BTN            1064
+#define IDC_CHECK3                      1065
+#define IDC_CHECK_ENABLE_BTRY           1065
+#define IDC_EDIT4                       1066
+#define IDC_EDIT_NUM_BITS               1066
+#define IDC_LED1_PATTERN                1067
+#define IDC_LED2_PATTERN                1068
+#define IDC_EDIT7                       1069
+#define IDC_LED3_PATTERN                1069
+#define IDC_LB_TKGROUP1                 1070
+#define IDC_LB_TIME_SLOT                1070
+#define IDC_LB_LED1_ID                  1071
+#define IDC_LB_LED2_ID                  1072
+#define IDC_LB_LED3_ID                  1073
+#define IDC_LB_TIME_SLOT2               1074
+#define IDC_LB_HOP_CH                   1074
+#define IDC_HOP_CH                      1075
+#define IDC_LOG_TO_SCREEN               1076
+#define IDC_BUTTON1                     1078
+#define IDC_FLUSH_BTN                   1078
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        130
+#define _APS_NEXT_COMMAND_VALUE         32771
+#define _APS_NEXT_CONTROL_VALUE         1079
+#define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif

@@ -1,0 +1,446 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     26/Oct/2019  13:14:15 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\m #
+#                    box.c                                                    #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\m #
+#                    box.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER -D          #
+#                    STM32F10X_CL -D COOS -D USE_MY_ASSERT -D _DEBUG -D       #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D BC_HW_REVJ   #
+#                    -lcN "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source  #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\mbox.lst             #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\mbox.o                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\mbox.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       mbox.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      Mailbox management implementation code of CooCox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          /*---------------------------- Include ---------------------------------------*/
+     17          #include <coocox.h>
+     18          
+     19          
+     20          #if CFG_MAILBOX_EN > 0
+     21          
+     22          
+     23          /**
+     24           *******************************************************************************
+     25           * @brief      Create a mailbox
+     26           * @param[in]  sortType     Mail box waiting list sort type.
+     27           * @param[out] None
+     28           * @retval     E_CREATE_FAIL   Create mailbox fail.
+     29           * @retval     others          Create mailbox successful.
+     30           *
+     31           * @par Description
+     32           * @details    This function is called to create a mailbox.
+     33           * @note
+     34           *******************************************************************************
+     35           */
+     36          OS_EventID CoCreateMbox(U8 sortType)
+     37          {
+     38              P_ECB pecb;
+     39          
+     40              /* Create a mailbox type event control block                              */
+     41              pecb = CreatEvent(EVENT_TYPE_MBOX,sortType,Co_NULL);
+     42              if(pecb == Co_NULL)                    /* If failed to create event block    */
+     43              {
+     44                  return E_CREATE_FAIL;
+     45              }
+     46              pecb->eventCounter = 0;
+     47              return (pecb->id);      /* Create a mailbox successfully, return event ID */
+     48          }
+     49          
+     50          
+     51          
+     52          /**
+     53           *******************************************************************************
+     54           * @brief      Delete a mailbox
+     55           * @param[in]  id     Event ID.
+     56           * @param[in]  opt    Delete option.
+     57           * @param[out] None
+     58           * @retval     E_INVALID_ID         Invalid event ID.
+     59           * @retval     E_INVALID_PARAMETER  Invalid parameter.
+     60           * @retval     E_TASK_WAITTING      Tasks waitting for the event,delete fail.
+     61           * @retval     E_OK                 Event deleted successful.
+     62           *
+     63           * @par Description
+     64           * @details    This function is called to delete a mailbox.
+     65           * @note
+     66           *******************************************************************************
+     67           */
+     68          StatusType CoDelMbox(OS_EventID id,U8 opt)
+     69          {
+     70              P_ECB pecb;
+     71          
+     72          #if CFG_PAR_CHECKOUT_EN >0
+     73              if(id >= CFG_MAX_EVENT)               /* Judge id is valid or not?        */
+     74              {
+     75                  return E_INVALID_ID;              /* Id is invalid ,return error      */
+     76              }
+     77          #endif
+     78              pecb = &EventTbl[id];
+     79          #if CFG_PAR_CHECKOUT_EN >0
+     80              if(pecb->eventType != EVENT_TYPE_MBOX)/* Validate event control block type*/
+     81              {
+     82                  return E_INVALID_ID;              /* The event is not mailbox         */
+     83              }
+     84          #endif
+     85              return (DeleteEvent(pecb,opt)); /* Delete the mailbox event control block */
+     86          }
+     87          
+     88          
+     89          
+     90          /**
+     91           *******************************************************************************
+     92           * @brief      Accept a mailbox
+     93           * @param[in]  id    Event ID.
+     94           * @param[out] perr  A pointer to error code.
+     95           * @retval     Co_NULL
+     96           * @retval     A pointer to mailbox accepted.
+     97           *
+     98           * @par Description
+     99           * @details    This function is called to accept a mailbox.
+    100           * @note
+    101           *******************************************************************************
+    102           */
+    103          void* CoAcceptMail(OS_EventID id,StatusType* perr)
+    104          {
+    105              P_ECB pecb;
+    106              void* pmail;
+    107          #if CFG_PAR_CHECKOUT_EN >0
+    108              if(id >= CFG_MAX_EVENT)
+    109              {
+    110                  *perr = E_INVALID_ID;             /* Invalid 'id'                     */
+    111                  return Co_NULL;
+    112              }
+    113          #endif
+    114              pecb = &EventTbl[id];
+    115          
+    116          #if CFG_PAR_CHECKOUT_EN >0
+    117              if(pecb->eventType != EVENT_TYPE_MBOX)/* Invalid event control block type */
+    118              {
+    119                  *perr = E_INVALID_ID;
+    120                  return Co_NULL;
+    121              }
+    122          #endif
+    123          	OsSchedLock();
+    124              if(pecb->eventCounter == 1)             /* If there is already a message  */
+    125              {
+    126                  *perr = E_OK;
+    127                  pmail = pecb->eventPtr;             /* Get the message                */
+    128                  pecb->eventPtr     = Co_NULL;          /* Clear the mailbox              */
+    129                  pecb->eventCounter = 0;
+    130          		OsSchedUnlock();
+    131                  return pmail;                       /* Return the message received    */
+    132              }
+    133              else                                    /* If the mailbox is empty        */
+    134              {
+    135          		OsSchedUnlock();
+    136                  *perr = E_MBOX_EMPTY;               /* Mailbox is empty,return Co_NULL   */
+    137                  return Co_NULL;
+    138              }
+    139          }
+    140          
+    141          
+    142          
+    143          /**
+    144           *******************************************************************************
+    145           * @brief      Wait for a mailbox
+    146           * @param[in]  id       Event ID.
+    147           * @param[in]  timeout  The longest time for writting mail.
+    148           * @param[out] perr     A pointer to error code.
+    149           * @retval     Co_NULL
+    150           * @retval     A pointer to mailbox accept.
+    151           *
+    152           * @par Description
+    153           * @details    This function is called to wait a mailbox.
+    154           * @note
+    155           *******************************************************************************
+    156           */
+    157          void* CoPendMail(OS_EventID id,U32 timeout,StatusType* perr)
+    158          {
+    159              P_ECB pecb;
+    160              void* pmail;
+    161              P_OSTCB  curTCB;
+    162          
+    163              if(OSIntNesting > 0)                /* If the caller is ISR               */
+    164              {
+    165                  *perr = E_CALL;
+    166                  return Co_NULL;
+    167              }
+    168          
+    169          #if CFG_PAR_CHECKOUT_EN >0
+    170              if(id >= CFG_MAX_EVENT)
+    171              {
+    172                  *perr = E_INVALID_ID;           /* Invalid 'id',retrun error          */
+    173                  return Co_NULL;
+    174              }
+    175          #endif
+    176          
+    177              pecb = &EventTbl[id];
+    178          #if CFG_PAR_CHECKOUT_EN >0
+    179              if(pecb->eventType != EVENT_TYPE_MBOX)
+    180              {
+    181                  *perr = E_INVALID_ID;       /* Invalid event type,not EVENT_TYPE_MBOX */
+    182                  return Co_NULL;
+    183              }
+    184          #endif
+    185          
+    186              if(OSSchedLock != 0)                /* Judge schedule is locked or not?   */
+    187              {
+    188                  *perr = E_OS_IN_LOCK;           /* Schedule is locked                 */
+    189                  return Co_NULL;                    /* return Co_NULL                        */
+    190              }
+    191              OsSchedLock();
+    192              if( pecb->eventCounter == 1)        /* If there is already a message      */
+    193              {
+    194                  *perr = E_OK;
+    195                  pmail = pecb->eventPtr;         /* Get the message                    */
+    196                  pecb->eventPtr     = Co_NULL;      /* Clear the mailbox                  */
+    197                  pecb->eventCounter = 0;
+    198                  OsSchedUnlock();
+    199                  return pmail;                   /* Return the message received        */
+    200              }
+    201              else                       /* If message is not available, task will pend */
+    202              {
+    203              	OsSchedUnlock();
+    204                  curTCB = TCBRunning;
+    205                  if(timeout == 0)                /* If time-out is not configured      */
+    206                  {
+    207                      EventTaskToWait(pecb,curTCB); /* Block task until event occurs    */
+    208                      *perr = E_OK;
+    209                      
+    210                      /* Have recived a message or the mailbox have been deleted        */
+    211                      OsSchedLock();
+    212                      pmail = curTCB->pmail;    
+    213                      pecb->eventCounter = 0;               
+    214                      curTCB->pmail = Co_NULL;
+    215                      OsSchedUnlock(); 
+    216                      return pmail;               /* Return received message or Co_NULL    */
+    217                  }
+    218                  else                            /* If time-out is configured          */
+    219                  {
+    220                      OsSchedLock();
+    221                      
+    222                      /* Block task until event or timeout occurs                       */
+    223                      EventTaskToWait(pecb,curTCB);
+    224                      InsertDelayList(curTCB,timeout);
+    225                      OsSchedUnlock();
+    226                      if( curTCB->pmail == Co_NULL)  /* Time-out occurred                  */
+    227                      {
+    228                          *perr = E_TIMEOUT;
+    229                          return Co_NULL;
+    230                      }
+    231                      else    /* Have recived a message or the mailbox have been deleted*/
+    232                      {
+    233                          *perr = E_OK;
+    234                          
+    235                          OsSchedLock();
+    236                          pmail = curTCB->pmail;            
+    237                          pecb->eventCounter = 0;   
+    238                          curTCB->pmail = Co_NULL;
+    239                          OsSchedUnlock(); 
+    240                         
+    241                          return pmail;           /* Return received message or Co_NULL    */
+    242                      }
+    243                  }
+    244              }
+    245          }
+    246          
+    247          
+    248          /**
+    249           *******************************************************************************
+    250           * @brief      Post a mailbox
+    251           * @param[in]  id      Event ID.
+    252           * @param[in]  pmail   Pointer to mail that want to send.
+    253           * @param[out] None
+    254           * @retval     E_INVALID_ID
+    255           * @retval     E_OK
+    256           *
+    257           * @par Description
+    258           * @details    This function is called to post a mail.
+    259           * @note
+    260           *******************************************************************************
+    261           */
+    262          StatusType CoPostMail(OS_EventID id,void* pmail)
+    263          {
+    264              P_ECB pecb;
+    265          #if CFG_PAR_CHECKOUT_EN >0
+    266              if(id >= CFG_MAX_EVENT)
+    267              {
+    268                  return E_INVALID_ID;            /* Invalid id,return error            */
+    269              }
+    270          #endif
+    271          
+    272              pecb = &EventTbl[id];
+    273          #if CFG_PAR_CHECKOUT_EN >0
+    274              if(pecb->eventType != EVENT_TYPE_MBOX)/* Validate event control block type*/
+    275              {
+    276                  return E_INVALID_ID;              /* Event is not mailbox,return error*/
+    277              }
+    278          #endif
+    279          
+    280              if(pecb->eventCounter == 0)   /* If mailbox doesn't already have a message*/
+    281              {
+    282                  OsSchedLock();
+    283                  pecb->eventPtr     = pmail;       /* Place message in mailbox         */
+    284                  pecb->eventCounter = 1;
+    285                  EventTaskToRdy(pecb);             /* Check waiting list               */
+    286                  OsSchedUnlock();
+    287                  return E_OK;
+    288              }
+    289              else                          /* If there is already a message in mailbox */
+    290              {
+    291                  return E_MBOX_FULL;       /* Mailbox is full,and return "E_MBOX_FULL" */
+    292              }
+    293          }
+    294          
+    295          /**
+    296           *******************************************************************************
+    297           * @brief      Post a mailbox in ISR
+    298           * @param[in]  id      Event ID.
+    299           * @param[in]  pmail   Pointer to mail that want to send.
+    300           * @param[out] None
+    301           * @retval     E_INVALID_ID
+    302           * @retval     E_OK
+    303           *
+    304           * @par Description
+    305           * @details    This function is called to post a mail in ISR.
+    306           * @note
+    307           *******************************************************************************
+    308           */
+    309          #if CFG_MAX_SERVICE_REQUEST > 0
+    310          StatusType isr_PostMail(OS_EventID id,void* pmail)
+    311          {
+    312              if(OSSchedLock > 0)         /* If scheduler is locked,(the caller is ISR) */
+    313              {
+    314                  /* Insert the request into service request queue                      */
+    315                  if(InsertInSRQ(MBOX_REQ,id,pmail) == Co_FALSE)
+    316                  {
+    317                      return E_SEV_REQ_FULL;        /* If service request queue is full */
+    318                  }
+    319                  else                              /* Operate successfully             */
+    320                  {
+    321                      return E_OK;
+    322                  }
+    323              }
+    324              else
+    325              {
+    326                  return(CoPostMail(id,pmail));     /* Sends the message to the mailbox */
+    327              }
+    328          }
+    329          
+    330          #endif
+    331          
+    332          #endif
+    333          
+    334          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       24  CoAcceptMail
+             24 -> OsSchedUnlock
+       16  CoCreateMbox
+             16 -> CreatEvent
+       16  CoDelMbox
+             16 -> DeleteEvent
+       32  CoPendMail
+             32 -> EventTaskToWait
+             32 -> InsertDelayList
+             32 -> OsSchedUnlock
+       16  CoPostMail
+             16 -> EventTaskToRdy
+             16 -> OsSchedUnlock
+       16  isr_PostMail
+             16 -> CoPostMail
+             16 -> InsertInSRQ
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable4
+       4  ??DataTable4_1
+       4  ??DataTable4_2
+       4  ??DataTable4_3
+      68  CoAcceptMail
+      34  CoCreateMbox
+      28  CoDelMbox
+     238  CoPendMail
+      56  CoPostMail
+      50  isr_PostMail
+
+ 
+ 490 bytes in section .text
+ 
+ 490 bytes of CODE memory
+
+Errors: none
+Warnings: none

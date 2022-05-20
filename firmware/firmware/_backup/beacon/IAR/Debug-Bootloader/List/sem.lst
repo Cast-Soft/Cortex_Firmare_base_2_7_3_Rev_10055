@@ -1,0 +1,427 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     19/Mar/2019  16:48:07 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\common\CoOS\kernel\sem.c                #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\common\CoOS\kernel\sem.c" -D           #
+#                    BEACON_APP -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D    #
+#                    COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D         #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -lcN            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\List\" -o  #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\"      #
+#                    --no_cse --no_unroll --no_inline --no_code_motion        #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\RevJ\RevJ Beacon\firmware\beacon\IAR\..\App\" -I       #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\CMSIS\CM3\Devi #
+#                    ceSupport\ST\STM32F10x\" -I                              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\STM32F10x_StdP #
+#                    eriph_Driver\inc\" -I "C:\Users\User\Documents\Cortex_gi #
+#                    t\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\..\.. #
+#                    \common\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex #
+#                    _git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\.. #
+#                    \..\common\CoOS\portable\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\..\common\" -I        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\USB-Device-CDC #
+#                    \" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Re #
+#                    vJ\RevJ Beacon\firmware\beacon\IAR\..\..\common\" -I     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\" -On --use_c++_inline -I   #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.4\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\List\sem.ls #
+#                    t                                                        #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\sem.o   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ Beacon\firmware\common\CoOS\kernel\sem.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       sem.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      Semaphore management implementation code of CooCox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          
+     17          /*---------------------------- Include ---------------------------------------*/
+     18          #include <coocox.h>
+     19          
+     20          #if CFG_SEM_EN >0
+     21          
+     22          /**
+     23           *******************************************************************************
+     24           * @brief      Create a semaphore
+     25           * @param[in]  initCnt   Semaphore valid counter.
+     26           * @param[in]  maxCnt    Semaphore max initialize counter.
+     27           * @param[in]  sortType  Semaphore sort type.
+     28           * @param[out] None
+     29           * @retval     E_CREATE_FAIL   Create semaphore fail.
+     30           * @retval     others          Create semaphore successful.
+     31           *
+     32           * @par Description
+     33           * @details    This function is called to create a semaphore.
+     34           *******************************************************************************
+     35           */
+     36          OS_EventID CoCreateSem(U16 initCnt,U16 maxCnt,U8 sortType)
+     37          {
+     38              P_ECB pecb;
+     39          #if CFG_PAR_CHECKOUT_EN >0
+     40              if(initCnt > maxCnt)
+     41              {
+     42                  return E_CREATE_FAIL;           /* Invalid 'initCnt' or 'maxCnt'      */
+     43              }
+     44          
+     45              if ((sortType != EVENT_SORT_TYPE_FIFO) && (sortType != EVENT_SORT_TYPE_PRIO))
+     46              {
+     47                  return E_CREATE_FAIL;           /* Illegal sort type,return error     */
+     48              }
+     49          #endif
+     50          
+     51              /* Create a semaphore type event control block                            */
+     52              pecb = CreatEvent(EVENT_TYPE_SEM,sortType,Co_NULL);
+     53              if(pecb == Co_NULL)                    /* If failed to create event block    */
+     54              {
+     55                  return E_CREATE_FAIL;
+     56              }
+     57              pecb->eventCounter        = initCnt;/* Initialize event block             */
+     58              pecb->initialEventCounter = maxCnt;
+     59              return (pecb->id);                  /* Return event id                    */
+     60          }
+     61          
+     62          
+     63          /**
+     64           *******************************************************************************
+     65           * @brief      Delete a semaphore
+     66           * @param[in]  id    Event ID which to be deleted.
+     67           * @param[in]  opt   Delete option.
+     68           * @arg        == OPT_DEL_ANYWAY    Delete semaphore always
+     69           * @arg        == OPT_DEL_NO_PEND	Delete semaphore only when no task pending on.
+     70           * @param[out] None
+     71           * @retval     E_INVALID_ID         Invalid event ID.
+     72           * @retval     E_INVALID_PARAMETER  Invalid parameter.
+     73           * @retval     E_TASK_WAITTING      Tasks waitting for the event,delete fail.
+     74           * @retval     E_OK                 Event deleted successful.
+     75           *
+     76           * @par Description
+     77           * @details    This function is called to delete a semaphore.
+     78           *
+     79           * @note
+     80           *******************************************************************************
+     81           */
+     82          StatusType CoDelSem(OS_EventID id,U8 opt)
+     83          {
+     84              P_ECB pecb;
+     85          
+     86          #if CFG_PAR_CHECKOUT_EN >0
+     87              if(id >= CFG_MAX_EVENT)
+     88              {
+     89                  return E_INVALID_ID;
+     90              }
+     91          #endif
+     92          
+     93              pecb = &EventTbl[id];
+     94          
+     95          #if CFG_PAR_CHECKOUT_EN >0
+     96              if(pecb->eventType != EVENT_TYPE_SEM)
+     97              {
+     98                  return E_INVALID_ID;             /* The event type is not semaphore   */
+     99              }
+    100          #endif
+    101          
+    102              return (DeleteEvent(pecb,opt));/* Delete the semaphore event control block*/
+    103          }
+    104          
+    105          
+    106          /**
+    107           *******************************************************************************
+    108           * @brief      Accept a semaphore without waitting
+    109           * @param[in]  id      Event ID
+    110           * @param[out] None
+    111           * @retval     E_INVALID_ID    Invalid event ID.
+    112           * @retval     E_SEM_EMPTY     No semaphore exist.
+    113           * @retval     E_OK            Get semaphore successful.
+    114           *
+    115           * @par Description
+    116           * @details    This function is called accept a semaphore without waitting.
+    117           *******************************************************************************
+    118           */
+    119          StatusType CoAcceptSem(OS_EventID id)
+    120          {
+    121              P_ECB pecb;
+    122          #if CFG_PAR_CHECKOUT_EN >0
+    123              if(id >= CFG_MAX_EVENT)
+    124              {
+    125                  return E_INVALID_ID;
+    126              }
+    127          #endif
+    128          
+    129          	pecb = &EventTbl[id];
+    130          #if CFG_PAR_CHECKOUT_EN >0
+    131              if( pecb->eventType != EVENT_TYPE_SEM)
+    132              {
+    133                  return E_INVALID_ID;
+    134              }
+    135          #endif
+    136          	OsSchedLock();
+    137              if(pecb->eventCounter > 0) /* If semaphore is positive,resource available */
+    138              {
+    139                  pecb->eventCounter--;         /* Decrement semaphore only if positive */
+    140          		OsSchedUnlock();        
+    141                  return E_OK;
+    142              }
+    143              else                                /* Resource is not available          */
+    144              {
+    145          		OsSchedUnlock();
+    146                  return E_SEM_EMPTY;
+    147              }
+    148          }
+    149          
+    150          
+    151          /**
+    152           *******************************************************************************
+    153           * @brief       wait for a semaphore
+    154           * @param[in]   id       Event ID.
+    155           * @param[in]   timeout  The longest time for writting semaphore.
+    156           * @para        0
+    157           * @para        0x1~0xff
+    158           * @param[out]  None
+    159           * @retval      E_CALL         Error call in ISR.
+    160           * @retval      E_INVALID_ID   Invalid event ID.
+    161           * @retval      E_TIMEOUT      Semaphore was not received within the specified
+    162           *                             'timeout' time.
+    163           * @retval      E_OK           The call was successful and your task owns the
+    164           *                             resource,or the event you are waiting for occurred.
+    165           *
+    166           * @par Description
+    167           * @details    This function is called to waits for a semaphore.
+    168           * @note       IF this function is called in ISR,nothing to do and return immediately.
+    169           *******************************************************************************
+    170           */
+    171          StatusType CoPendSem(OS_EventID id,U32 timeout)
+    172          {
+    173              P_ECB 	 pecb;
+    174              P_OSTCB  curTCB;
+    175              if(OSIntNesting > 0)                /* If the caller is ISR               */
+    176              {
+    177                  return E_CALL;
+    178              }
+    179          #if CFG_PAR_CHECKOUT_EN >0
+    180              if(id >= CFG_MAX_EVENT)
+    181              {
+    182                  return E_INVALID_ID;
+    183              }
+    184          #endif
+    185          
+    186          	  pecb = &EventTbl[id];
+    187          #if CFG_PAR_CHECKOUT_EN >0
+    188              if(pecb->eventType != EVENT_TYPE_SEM)
+    189              {
+    190                 return E_INVALID_ID;
+    191              }
+    192          #endif
+    193              if(OSSchedLock != 0)                /* Schdule is locked?                 */
+    194              {
+    195                  return E_OS_IN_LOCK;            /* Yes,error return                   */
+    196              }
+    197              OsSchedLock();
+    198              if(pecb->eventCounter > 0) /* If semaphore is positive,resource available */
+    199              {
+    200                  pecb->eventCounter--;         /* Decrement semaphore only if positive */
+    201                  OsSchedUnlock();
+    202                  return E_OK;
+    203              }
+    204              else                                /* Resource is not available          */
+    205              {
+    206                  curTCB = TCBRunning;
+    207                  if(timeout == 0)                /* If time-out is not configured      */
+    208                  {
+    209                      EventTaskToWait(pecb,curTCB); /* Block task until event occurs    */ 
+    210                      pecb->eventCounter--;             
+    211                      curTCB->pmail = Co_NULL;
+    212                      OsSchedUnlock();
+    213                      return E_OK;
+    214                  }
+    215                  else                            /* If time-out is configured          */
+    216                  {
+    217                      /* Block task until event or timeout occurs                       */
+    218                      EventTaskToWait(pecb,curTCB);
+    219                      InsertDelayList(curTCB,timeout);
+    220                      
+    221                      OsSchedUnlock();
+    222                      if (curTCB->pmail == Co_NULL)  /* If pmail is Co_NULL, time-out occurred*/
+    223                      {
+    224                        return E_TIMEOUT;	
+    225                      }                               
+    226                      else                  /* Event occurred or event have been deleted*/    
+    227                      {
+    228                          OsSchedLock();
+    229                          curTCB->pmail = Co_NULL;
+    230                          pecb->eventCounter--; 
+    231                          OsSchedUnlock();
+    232                          return E_OK;	
+    233                      }				
+    234                  }		
+    235              }
+    236          }
+    237          
+    238          
+    239          
+    240          /**
+    241           *******************************************************************************
+    242           * @brief       Post a semaphore
+    243           * @param[in]   id   id of event control block associated with the desired semaphore.
+    244           * @param[out]  None
+    245           * @retval      E_INVALID_ID   Parameter id passed was invalid event ID.
+    246           * @retval      E_SEM_FULL     Semaphore full.
+    247           * @retval      E_OK           Semaphore had post successful.
+    248           *
+    249           * @par Description
+    250           * @details    This function is called to post a semaphore to corresponding event.
+    251           *
+    252           * @note
+    253           *******************************************************************************
+    254           */
+    255          StatusType CoPostSem(OS_EventID id)
+    256          {
+    257              P_ECB pecb;
+    258          #if CFG_PAR_CHECKOUT_EN >0
+    259              if(id >= CFG_MAX_EVENT)
+    260              {
+    261                  return E_INVALID_ID;
+    262              }
+    263          #endif
+    264          
+    265              pecb = &EventTbl[id];
+    266          #if CFG_PAR_CHECKOUT_EN >0
+    267              if(pecb->eventType != EVENT_TYPE_SEM) /* Invalid event control block type */
+    268              {
+    269                  return E_INVALID_ID;
+    270              }
+    271          #endif
+    272          
+    273              /* Make sure semaphore will not overflow */
+    274              if(pecb->eventCounter == pecb->initialEventCounter)
+    275              {
+    276                  return E_SEM_FULL;    /* The counter of Semaphore reach the max number*/
+    277              }
+    278              OsSchedLock();
+    279              pecb->eventCounter++;     /* Increment semaphore count to register event  */
+    280              EventTaskToRdy(pecb);     /* Check semaphore event waiting list           */
+    281              OsSchedUnlock();
+    282              return E_OK;
+    283          
+    284          }
+    285          
+    286          
+    287          /**
+    288           *******************************************************************************
+    289           * @brief       Post a semaphore in ISR
+    290           * @param[in]   id    identifier of event control block associated with the
+    291           *                    desired semaphore.
+    292           * @param[out]  None
+    293           * @retval      E_INVALID_ID        Parameter id passed was invalid event ID.
+    294           * @retval      E_NO_TASK_WAITTING  There are one more tasks waitting for the event.
+    295           * @retval      E_OK                Semaphore had signaled successful.
+    296           *
+    297           * @par Description
+    298           * @details    This function is called in ISR to post a semaphore to corresponding
+    299           *             event.
+    300           * @note
+    301           *******************************************************************************
+    302           */
+    303          #if CFG_MAX_SERVICE_REQUEST > 0
+    304          StatusType isr_PostSem(OS_EventID id)
+    305          {
+    306              if(OSSchedLock > 0)         /* If scheduler is locked,(the caller is ISR) */
+    307              {
+    308                  /* Initiate a post service handling request */
+    309                  if(InsertInSRQ(SEM_REQ,id,Co_NULL) == Co_FALSE)
+    310                  {
+    311                      return E_SEV_REQ_FULL;        /* If service request queue is full */
+    312                  }
+    313                  else                              /* Operate successfully             */
+    314                  {
+    315                      return E_OK;
+    316                  }
+    317              }
+    318              else
+    319              {
+    320                  return(CoPostSem(id));            /* Post semaphore                   */
+    321              }
+    322          }
+    323          #endif
+    324          
+    325          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  CoAcceptSem
+             16 -> OsSchedUnlock
+       24  CoCreateSem
+             24 -> CreatEvent
+       16  CoDelSem
+             16 -> DeleteEvent
+       24  CoPendSem
+             24 -> EventTaskToWait
+             24 -> InsertDelayList
+             24 -> OsSchedUnlock
+       16  CoPostSem
+             16 -> EventTaskToRdy
+             16 -> OsSchedUnlock
+        8  isr_PostSem
+              8 -> CoPostSem
+              8 -> InsertInSRQ
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable4
+       4  ??DataTable4_1
+       4  ??DataTable4_2
+       4  ??DataTable4_3
+      52  CoAcceptSem
+      38  CoCreateSem
+      28  CoDelSem
+     164  CoPendSem
+      56  CoPostSem
+      46  isr_PostSem
+
+ 
+ 400 bytes in section .text
+ 
+ 400 bytes of CODE memory
+
+Errors: none
+Warnings: none

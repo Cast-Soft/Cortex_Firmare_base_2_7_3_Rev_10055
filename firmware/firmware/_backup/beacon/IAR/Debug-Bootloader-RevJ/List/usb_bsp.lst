@@ -1,0 +1,250 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     19/Mar/2019  14:41:00 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\common\USB-Device-CDC\usb_bsp.c         #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\common\USB-Device-CDC\usb_bsp.c" -D    #
+#                    BEACON_APP -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D    #
+#                    COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D         #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -lcN            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\List\ #
+#                    " -o "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Rev #
+#                    J\RevJ Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\RevJ\RevJ Beacon\firmware\beacon\IAR\..\App\" -I       #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\CMSIS\CM3\Devi #
+#                    ceSupport\ST\STM32F10x\" -I                              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\STM32F10x_StdP #
+#                    eriph_Driver\inc\" -I "C:\Users\User\Documents\Cortex_gi #
+#                    t\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\..\.. #
+#                    \common\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex #
+#                    _git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\.. #
+#                    \..\common\CoOS\portable\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\..\common\" -I        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\USB-Device-CDC #
+#                    \" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Re #
+#                    vJ\RevJ Beacon\firmware\beacon\IAR\..\..\common\" -I     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\" -On --use_c++_inline -I   #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.4\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\List\u #
+#                    sb_bsp.lst                                               #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\Obj\us #
+#                    b_bsp.o                                                  #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ Beacon\firmware\common\USB-Device-CDC\usb_bsp.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    usb_bsp.c
+      4            * @author  MCD Application Team
+      5            * @version V1.1.0
+      6            * @date    19-March-2012
+      7            * @brief   This file is responsible to offer board support package and is 
+      8            *          configurable by user.
+      9            ******************************************************************************
+     10            * @attention
+     11            *
+     12            * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+     13            *
+     14            * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+     15            * You may not use this file except in compliance with the License.
+     16            * You may obtain a copy of the License at:
+     17            *
+     18            *        http://www.st.com/software_license_agreement_liberty_v2
+     19            *
+     20            * Unless required by applicable law or agreed to in writing, software 
+     21            * distributed under the License is distributed on an "AS IS" BASIS, 
+     22            * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     23            * See the License for the specific language governing permissions and
+     24            * limitations under the License.
+     25            *
+     26            ******************************************************************************
+     27            */ 
+     28          
+     29          /* Includes ------------------------------------------------------------------*/
+     30          #include "usb_bsp.h"
+     31          #include "usbd_conf.h"
+     32          
+     33          /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
+     34          * @{
+     35          */
+     36          
+     37          /** @defgroup USB_BSP
+     38          * @brief This file is responsible to offer board support package
+     39          * @{
+     40          */ 
+     41          
+     42          /** @defgroup USB_BSP_Private_Defines
+     43          * @{
+     44          */ 
+     45          /**
+     46          * @}
+     47          */ 
+     48          
+     49          
+     50          /** @defgroup USB_BSP_Private_TypesDefinitions
+     51          * @{
+     52          */ 
+     53          /**
+     54          * @}
+     55          */ 
+     56          
+     57          
+     58          
+     59          
+     60          
+     61          /** @defgroup USB_BSP_Private_Macros
+     62          * @{
+     63          */ 
+     64          /**
+     65          * @}
+     66          */ 
+     67          
+     68          /** @defgroup USBH_BSP_Private_Variables
+     69          * @{
+     70          */ 
+     71          
+     72          /**
+     73          * @}
+     74          */ 
+     75          
+     76          /** @defgroup USBH_BSP_Private_FunctionPrototypes
+     77          * @{
+     78          */ 
+     79          /**
+     80          * @}
+     81          */ 
+     82          
+     83          /** @defgroup USB_BSP_Private_Functions
+     84          * @{
+     85          */ 
+     86          
+     87          
+     88          /**
+     89          * @brief  USB_OTG_BSP_Init
+     90          *         Initilizes BSP configurations
+     91          * @param  None
+     92          * @retval None
+     93          */
+     94          
+     95          void USB_OTG_BSP_Init(USB_OTG_CORE_HANDLE *pdev)
+     96          {
+     97            RCC_OTGFSCLKConfig(RCC_OTGFSCLKSource_PLLVCO_Div3);
+     98            RCC_AHBPeriphClockCmd(RCC_AHBPeriph_OTG_FS, ENABLE) ;
+     99          }
+    100          /**
+    101          * @brief  USB_OTG_BSP_EnableInterrupt
+    102          *         Enabele USB Global interrupt
+    103          * @param  None
+    104          * @retval None
+    105          */
+    106          void USB_OTG_BSP_EnableInterrupt(USB_OTG_CORE_HANDLE *pdev)
+    107          {
+    108            NVIC_InitTypeDef NVIC_InitStructure; 
+    109            
+    110            NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    111            NVIC_InitStructure.NVIC_IRQChannel = OTG_FS_IRQn;  
+    112            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+    113            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
+    114            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    115            NVIC_Init(&NVIC_InitStructure);  
+    116          }
+    117          /**
+    118          * @brief  USB_OTG_BSP_uDelay
+    119          *         This function provides delay time in micro sec
+    120          * @param  usec : Value of delay required in micro sec
+    121          * @retval None
+    122          */
+    123          void USB_OTG_BSP_uDelay (const uint32_t usec)
+    124          {
+    125            uint32_t count = 0;
+    126            const uint32_t utime = (120 * usec / 7);
+    127            do
+    128            {
+    129              if ( ++count > utime )
+    130              {
+    131                return ;
+    132              }
+    133            }
+    134            while (1);
+    135          }
+    136          
+    137          
+    138          /**
+    139          * @brief  USB_OTG_BSP_mDelay
+    140          *          This function provides delay time in milli sec
+    141          * @param  msec : Value of delay required in milli sec
+    142          * @retval None
+    143          */
+    144          void USB_OTG_BSP_mDelay (const uint32_t msec)
+    145          {
+    146            USB_OTG_BSP_uDelay(msec * 1000);   
+    147          }
+    148          /**
+    149          * @}
+    150          */ 
+    151          
+    152          /**
+    153          * @}
+    154          */ 
+    155          
+    156          /**
+    157          * @}
+    158          */
+    159          
+    160          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  USB_OTG_BSP_EnableInterrupt
+             16 -> NVIC_Init
+             16 -> NVIC_PriorityGroupConfig
+        8  USB_OTG_BSP_Init
+              8 -> RCC_AHBPeriphClockCmd
+              8 -> RCC_OTGFSCLKConfig
+        8  USB_OTG_BSP_mDelay
+              8 -> USB_OTG_BSP_uDelay
+        0  USB_OTG_BSP_uDelay
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      46  USB_OTG_BSP_EnableInterrupt
+      22  USB_OTG_BSP_Init
+      18  USB_OTG_BSP_mDelay
+      24  USB_OTG_BSP_uDelay
+
+ 
+ 110 bytes in section .text
+ 
+ 110 bytes of CODE memory
+
+Errors: none
+Warnings: none

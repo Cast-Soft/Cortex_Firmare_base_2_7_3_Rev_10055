@@ -1,0 +1,364 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     13/Nov/2019  10:52:16 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\radio.c                                         #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\radio.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER  #
+#                    -D STM32F10X_CL -D COOS -D USE_MY_ASSERT -D _DEBUG -D    #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D BC_HW_REVJ   #
+#                    -lcN "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source  #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\radio.lst            #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\radio.o               #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\radio.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : imu_radio.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : All routines related to CC2520 Radio
+      9          *******************************************************************************/
+     10          
+     11          /* INCLUDES ------------------------------------------------------------------*/
+     12          
+     13          #include "hardware.h"
+     14          #include "radio.h"
+     15          #include "radio_defs.h"
+     16          #include "imu_defs.h"
+     17          #include "CoOS.h"
+     18          
+     19          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     20          
+     21          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     22          
+     23          /* PRIVATE MACROS ------------------------------------------------------------*/
+     24          
+     25          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     26          
+     27          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     28          
+     29          // Recommended register settings which differ from the data sheet
+     30          
+     31          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     32          
+     33          /* EXTERNAL FUNCTION PROTOTYPES ---------------------------------------------*/
+     34          
+     35          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+     36          
+     37          static uint8_t          TK_BK_SPI_RX(void);
+     38          static void             TK_BK_SPI_TX(uint8_t x);
+     39          static uint8_t          TK_BK_SPI_TXRX(uint8_t x);
+     40          void TK_BK_SPI_WAIT_RXRDY(void);
+     41          
+     42          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+     43          
+     44          /*******************************************************************************
+     45          * Description :
+     46          * Input       : -
+     47          * Return      :
+     48          *******************************************************************************/
+     49          static uint8_t TK_BK_SPI_RX(void) {
+     50          	return (SPI_I2S_ReceiveData(SPI_RADIO_IMU_SPI));
+     51          }
+     52          
+     53          /*******************************************************************************
+     54          * Description :
+     55          * Input       :
+     56          * Return      : -
+     57          *******************************************************************************/
+     58          static void TK_BK_SPI_TX(uint8_t x) {
+     59          	SPI_I2S_SendData(SPI_RADIO_IMU_SPI, x);
+     60          }
+     61          
+     62          /*******************************************************************************
+     63          * Description :
+     64          * Input       :
+     65          * Return      :
+     66          *******************************************************************************/
+     67          static uint8_t TK_BK_SPI_TXRX(uint8_t x) {
+     68              TK_BK_SPI_TX(x);
+     69              TK_BK_SPI_WAIT_RXRDY();
+     70              return TK_BK_SPI_RX();
+     71          }
+     72          
+     73          /*******************************************************************************
+     74          * Description :
+     75          * Input       : -
+     76          * Return      : -
+     77          *******************************************************************************/
+     78          void TK_BK_SPI_WAIT_RXRDY(void) {
+     79          	while (RESET == SPI_I2S_GetFlagStatus(SPI_RADIO_IMU_SPI, SPI_I2S_FLAG_RXNE));
+     80          }
+     81          
+     82          /* PUBLIC FUNCTIONS ----------------------------------------------------------*/
+     83          
+     84          /*******************************************************************************
+     85          * Description :
+     86          * Input       :
+     87          * Return      :
+     88          *******************************************************************************/
+     89          uint8_t Send_SPI_byte(uint16_t s_data) {
+     90              HwSPISSAssert(SPI_RADIO);
+     91              uint8_t r_status = TK_BK_SPI_TXRX(s_data);
+     92              HwSPISSDeAssert(SPI_RADIO);
+     93              return (r_status);
+     94          }
+     95          
+     96          /*******************************************************************************
+     97          * Description :
+     98          * Input       :
+     99          * Return      : -
+    100          *******************************************************************************/
+    101          void Send_SPI_2byte(uint16_t command, uint16_t s_data) {
+    102              HwSPISSAssert(SPI_RADIO);
+    103              TK_BK_SPI_TXRX(command);
+    104              TK_BK_SPI_TXRX(s_data);
+    105              HwSPISSDeAssert(SPI_RADIO);
+    106          }
+    107          
+    108          /*******************************************************************************
+    109          * Description : Write memory 8 bits
+    110          * Input       :
+    111          * Return      : -
+    112          *******************************************************************************/
+    113          void TK_BK_MEMWR8(uint16_t addr, uint8_t value) {
+    114              HwSPISSAssert(SPI_RADIO);
+    115              TK_BK_SPI_TXRX(CC2520_INS_MEMWR | HI_UINT16(addr));
+    116              TK_BK_SPI_TXRX(LO_UINT16(addr));
+    117              TK_BK_SPI_TXRX(value);
+    118              HwSPISSDeAssert(SPI_RADIO);
+    119          }
+    120          
+    121          uint8_t TK_BK_MEMRD8(uint16_t addr) {
+    122              HwSPISSAssert(SPI_RADIO);
+    123              TK_BK_SPI_TXRX(CC2520_INS_MEMRD | HI_UINT16(addr));
+    124              TK_BK_SPI_TXRX(LO_UINT16(addr));
+    125              uint8_t value = TK_BK_SPI_TXRX(0x00);
+    126              HwSPISSDeAssert(SPI_RADIO);
+    127              return value;
+    128          }
+    129          /*******************************************************************************
+    130          * Description : Write memory 16 bits
+    131          * Input       :
+    132          * Return      : -
+    133          *******************************************************************************/
+    134          void TK_BK_MEMWR16(uint16_t addr, uint16_t value) {
+    135              HwSPISSAssert(SPI_RADIO);
+    136              TK_BK_SPI_TXRX(CC2520_INS_MEMWR | HI_UINT16(addr));
+    137              TK_BK_SPI_TXRX(LO_UINT16(addr));
+    138              TK_BK_SPI_TXRX(LO_UINT16(value));
+    139              TK_BK_SPI_TXRX(HI_UINT16(value));
+    140              HwSPISSDeAssert(SPI_RADIO);
+    141          }
+    142          
+    143          /*******************************************************************************
+    144          * Description : Read one register byte
+    145          * Input       :
+    146          * Return      :
+    147          *******************************************************************************/
+    148          uint8_t TK_BK_REGRD8(uint8_t addr) {
+    149              assert(!(addr & ~0x3F));
+    150              HwSPISSAssert(SPI_RADIO);
+    151              TK_BK_SPI_TXRX(CC2520_INS_REGRD | addr);
+    152              uint8_t value = TK_BK_SPI_TXRX(0x00);
+    153              HwSPISSDeAssert(SPI_RADIO);
+    154              return value;
+    155          }
+    156          
+    157          /*******************************************************************************
+    158          * Description : Write one register byte
+    159          * Input       :
+    160          * Return      : -
+    161          *******************************************************************************/
+    162          void TK_BK_REGWR8(uint8_t addr, uint8_t value) {
+    163              assert(!(addr & ~0x3F));
+    164              HwSPISSAssert(SPI_RADIO);
+    165              TK_BK_SPI_TXRX(CC2520_INS_REGWR | addr);
+    166              TK_BK_SPI_TXRX(value);
+    167              HwSPISSDeAssert(SPI_RADIO);
+    168              return;
+    169          }
+    170          
+    171          uint8_t IMU_ReadOneByte(uint8_t reg){
+    172          	reg = reg | 0x80;
+    173          	HwSPISSAssert(SPI_IMU);
+    174          	TK_BK_SPI_TXRX(reg);
+    175          	uint8_t val = TK_BK_SPI_TXRX(0x00);
+    176          	HwSPISSDeAssert(SPI_IMU);
+    177                  return val;
+    178          }
+    179          
+    180          void IMU_WriteOneByte(uint8_t reg, uint8_t Data){
+    181          	reg = reg & 0x7F;
+    182          	HwSPISSAssert(SPI_IMU);
+    183          	TK_BK_SPI_TXRX(reg);
+    184              TK_BK_SPI_TXRX(Data);
+    185          	HwSPISSDeAssert(SPI_IMU);	
+    186          }
+    187          
+    188          void IMU_SelectBank(uint8_t bank) {
+    189          	IMU_WriteOneByte(IMU_REG_BANK_SEL, bank);
+    190          }
+    191          
+    192          uint32_t RadioGetRandom() {
+    193              uint32_t ret = 0;
+    194              HwSPISSAssert(SPI_RADIO);
+    195              TK_BK_SPI_TXRX(CC2520_INS_RANDOM);
+    196              for (int i = 0; i < 6; i++) {
+    197                ret <<= 8;
+    198                ret |= TK_BK_SPI_TXRX(0x00);
+    199              }
+    200              HwSPISSDeAssert(SPI_RADIO);
+    201              return ret;
+    202          }
+    203          
+    204          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  IMU_ReadOneByte
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+        8  IMU_SelectBank
+              8 -> IMU_WriteOneByte
+       16  IMU_WriteOneByte
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+       16  RadioGetRandom
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+       16  Send_SPI_2byte
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+       16  Send_SPI_byte
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+       16  TK_BK_MEMRD8
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+       16  TK_BK_MEMWR16
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+       16  TK_BK_MEMWR8
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+       16  TK_BK_REGRD8
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+             16 -> assert_failed
+       16  TK_BK_REGWR8
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> TK_BK_SPI_TXRX
+             16 -> assert_failed
+        8  TK_BK_SPI_RX
+              8 -> SPI_I2S_ReceiveData
+        8  TK_BK_SPI_TX
+              8 -> SPI_I2S_SendData
+        8  TK_BK_SPI_TXRX
+              8 -> TK_BK_SPI_RX
+              8 -> TK_BK_SPI_TX
+              8 -> TK_BK_SPI_WAIT_RXRDY
+        8  TK_BK_SPI_WAIT_RXRDY
+              8 -> SPI_I2S_GetFlagStatus
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     112  ?<Constant "C:\\Users\\kmak\\Documen...">
+       4  ??DataTable4
+       4  ??DataTable4_1
+      42  IMU_ReadOneByte
+      16  IMU_SelectBank
+      40  IMU_WriteOneByte
+      48  RadioGetRandom
+      36  Send_SPI_2byte
+      32  Send_SPI_byte
+      52  TK_BK_MEMRD8
+      60  TK_BK_MEMWR16
+      50  TK_BK_MEMWR8
+      54  TK_BK_REGRD8
+      52  TK_BK_REGWR8
+      12  TK_BK_SPI_RX
+      18  TK_BK_SPI_TX
+      22  TK_BK_SPI_TXRX
+      16  TK_BK_SPI_WAIT_RXRDY
+
+ 
+ 112 bytes in section .rodata
+ 558 bytes in section .text
+ 
+ 558 bytes of CODE  memory
+ 112 bytes of CONST memory
+
+Errors: none
+Warnings: none

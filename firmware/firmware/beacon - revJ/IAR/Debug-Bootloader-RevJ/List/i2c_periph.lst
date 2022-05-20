@@ -1,0 +1,862 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     13/Nov/2019  10:52:15 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\i2c_periph.c                                    #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\i2c_periph.c" -D BEACON_APP -D                  #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D    #
+#                    TASKS_PROFILE -D BATTERY_CHECK -D CCA_EN_NO -D           #
+#                    NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D OLD_CONFIG -D    #
+#                    CIRCULAR_LOG -D BC_HW_REVJ -lcN                          #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\i2c_periph.lst       #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\i2c_periph.o          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\i2c_periph.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : i2c_periph.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : All routines related to I2C with exception of EEPROM
+      9          * Future iterations should merge i2c_ee with i2c_periph
+     10          *******************************************************************************/
+     11          
+     12          /* INCLUDES ------------------------------------------------------------------*/
+     13          
+     14          #include "hardware.h"
+     15          #include "i2c_ee.h"
+     16          #include "stm32f10x_i2c.h"
+     17          
+     18          #include "i2c_periph.h"
+     19          //#include "bq27441.h"
+     20          #include "ina219_defs.h"
+     21          #include "CoOS.h"
+     22          #include "config.h"
+     23          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     24          
+     25          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     26          #define I2C_LENGTH_MAX 10
+     27          const uint8_t shunt1_address        =   0x40<<1;    //0x41<<1;
+     28          const uint8_t shunt2_address        =   0x44<<1;
+     29          const uint8_t shunt3_address        =   0x41<<1;    //0x40<<1;
+     30          const uint8_t battmonitor_address   =   0x55<<1;
+     31          const uint8_t pressure_address      =   0x76<<1;
+     32          /* PRIVATE MACROS ------------------------------------------------------------*/
+     33          #define assert(expr)
+     34          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     35          
+     36          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     37          static uint8_t          i2c_txBuf[I2C_LENGTH_MAX];
+     38          static uint8_t          i2c_rxBuf[I2C_LENGTH_MAX];
+     39          static uint8_t          scratch_val;
+     40          
+     41          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     42          volatile uint8_t    I2CTxRxByteCount = 0;
+     43          volatile I2C_State  I2CTxRxByteState = I2C_INIT_MODE;
+     44          volatile uint8_t I2C_ERR = 0;
+     45          
+     46          U64 I2COSTime;
+     47          OS_MutexID  flagI2CIODone;
+     48          OS_FlagID   flagI2CMachineDone = 0xFF;
+     49          //OS_EventID  semI2CAllow;
+     50          
+     51          uint8_t*            pI2CTxBuf;
+     52          uint8_t*            pI2CRxBuf;
+     53          /* EXTERNAL FUNCTION PROTOTYPES ---------------------------------------------*/
+     54          
+     55          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+     56          void init_ina219(uint8_t shunt_address);
+     57          
+     58          void i2cWriteRoutine(uint8_t * payload, uint8_t payloadSize);
+     59          uint8_t i2cReadRoutine(uint8_t addr, uint8_t payloadSize);
+     60          
+     61          #ifdef BQ27441_BAT_MONITOR
+     62          void i2c_bat_read_data_block(uint8_t offset, uint8_t *data, uint8_t bytes);
+     63          void i2c_bat_ctrl_write(uint16_t subcommand);
+     64          void i2c_bat_ctrl_read(uint16_t subcommand, uint16_t * data);
+     65          void i2c_bat_cmd_write(uint8_t command, uint16_t* data);
+     66          void i2c_bat_cmd_read( uint8_t command, uint16_t* data);
+     67          void i2c_bat_write_data_block(uint8_t offset, uint8_t *data, uint8_t bytes);
+     68          #endif
+     69          
+     70          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+     71          
+     72          /*******************************************************************************
+     73          * Description : Setup RTOS dependent variables for I2C.
+     74          * Input       : -
+     75          * Return      : -
+     76          *******************************************************************************/
+     77          void init_coosi2c(void){
+     78              flagI2CIODone     = CoCreateMutex(); // since multiple tasks will be using the line.
+     79              flagI2CMachineDone = CoCreateFlag(1, 0); // auto-reset, flag clear
+     80              //semI2CAllow        = CoCreateSem(0, 1, EVENT_SORT_TYPE_FIFO);   // since multiple tasks will be using the line.
+     81          }
+     82          
+     83          /*******************************************************************************
+     84          * Description : Tasks access I2C exclusively
+     85          * Input       : -
+     86          * Return      : -
+     87          *******************************************************************************/
+     88          void WaitGrabI2C() {
+     89            CoEnterMutexSection(flagI2CIODone);
+     90          }
+     91          
+     92          /*******************************************************************************
+     93          * Description : Release I2C for other tasks
+     94          * Input       : -
+     95          * Return      : -
+     96          *******************************************************************************/
+     97          void ReleaseI2C(void) {
+     98              CoLeaveMutexSection(flagI2CIODone);
+     99          }
+    100          
+    101          /*******************************************************************************
+    102          * Description : Prepares the i2c tx buffer and initializes I2C interrupt routine.
+    103          * Input       : -
+    104          * Return      : -
+    105          *******************************************************************************/
+    106          void i2cWriteRoutine(uint8_t * payload, uint8_t payloadSize){
+    107              I2CTxRxByteCount = payloadSize;
+    108              assert(I2CTxRxByteState == I2C_INIT_MODE);
+    109              I2CTxRxByteState = I2C_WRITE_MODE;   
+    110              
+    111              pI2CTxBuf = payload;
+    112              pI2CRxBuf = &scratch_val;
+    113              CoClearFlag(flagI2CMachineDone);
+    114              /* Enable Event and Error Interrupts */
+    115              I2C_ITConfig(I2C_EE, I2C_IT_ERR|I2C_IT_EVT, ENABLE);    
+    116              I2C_GenerateSTART(I2C_EE, ENABLE);
+    117              
+    118              CoWaitForSingleFlag(flagI2CMachineDone, 0);
+    119          }
+    120          
+    121          /*******************************************************************************
+    122          * Description : Prepares the i2c rx buffer and initializes I2C interrupt routine.
+    123          * Input       : -
+    124          * Return      : -
+    125          *******************************************************************************/
+    126          uint8_t i2cReadRoutine(uint8_t addr, uint8_t payloadSize){
+    127              uint8_t count=0;
+    128              StatusType result;
+    129              I2CTxRxByteCount = payloadSize;
+    130              I2CTxRxByteState = I2C_READ_MODE;
+    131              
+    132              pI2CTxBuf = &addr;
+    133              pI2CRxBuf = i2c_rxBuf;
+    134              CoClearFlag(flagI2CMachineDone);
+    135              I2C_ERR=0;
+    136              
+    137              if(I2C_GetFlagStatus(I2C_EE, I2C_FLAG_BUSY)){
+    138                  CoTickDelay(1);
+    139                  if(++count > 2) return 0; 
+    140              }
+    141              //I2COSTime = CoGetOSTime();   
+    142              I2C_AcknowledgeConfig(I2C_EE, ENABLE);
+    143              I2C_ITConfig(I2C_EE, I2C_IT_EVT|I2C_IT_ERR|I2C_IT_BUF, ENABLE);
+    144              I2C_GenerateSTART(I2C_EE, ENABLE);
+    145          
+    146          //Check for potential errors, if error occurred, make sure to reset the line
+    147              //result = CoAcceptSingleFlag(flagI2CMachineDone);
+    148              while((result=CoAcceptSingleFlag(flagI2CMachineDone))!=E_OK && count < 6){
+    149                  count++;
+    150                  CoTickDelay(1);
+    151                 //result = CoAcceptSingleFlag(flagI2CMachineDone);
+    152              }
+    153              if(result!=E_OK || I2C_ERR==1){
+    154                  I2C_ITConfig(I2C_EE, (I2C_IT_EVT|I2C_IT_ERR|I2C_IT_BUF), DISABLE); 
+    155                  I2CTxRxByteCount = 0;
+    156                  I2CTxRxByteState = I2C_INIT_MODE;
+    157                  if(config.flags & FLAG_TRACE_LEDSHUNTSYNC){
+    158                      if(count>=6)
+    159                          TRACE("I2C Timeout\r\n");
+    160                      else{
+    161                          TRACE("I2C Subroutine error\r\n");
+    162                      }
+    163                  }
+    164                  //HwI2CReset();
+    165                  HwI2CInit();
+    166                  return 0;       
+    167              }
+    168              return 1;
+    169              /*
+    170              result = CoWaitForSingleFlag(flagI2CMachineDone, 0);
+    171          
+    172              if(result == E_TIMEOUT || I2C_ERR==1){
+    173                  I2C_ITConfig(I2C_EE, (I2C_IT_EVT|I2C_IT_ERR|I2C_IT_BUF), DISABLE); 
+    174                  I2CTxRxByteCount = 0;
+    175                  I2CTxRxByteState = I2C_INIT_MODE;
+    176                  I2C_GenerateSTOP (I2C_EE, ENABLE);
+    177                  I2C_AcknowledgeConfig(I2C_EE, ENABLE);
+    178                  while((I2C1->SR2&0x0002) == 0x0002);
+    179                  return 0;
+    180              }
+    181              else return 1;*/
+    182          }
+    183          
+    184          /*******************************************************************************
+    185          * Description : [API] selects the 3 INA219 ICs to initialize 
+    186          * Input       : -
+    187          * Return      : -
+    188          *******************************************************************************/
+    189          void init_ledshunt(){
+    190          	init_ina219(shunt1_address);
+    191          	init_ina219(shunt2_address);
+    192          	init_ina219(shunt3_address);
+    193          }
+    194          
+    195          /*******************************************************************************
+    196          * Description : [API] initialize targetted INA219 on the I2C line
+    197          * Input       : -
+    198          * Return      : -
+    199          *******************************************************************************/
+    200          void init_ina219(uint8_t shunt_address){
+    201              uint16_t config;
+    202              uint8_t data[3];
+    203              //Set calibration register with calculated calibration value defined in header file
+    204              data[0] = INA219_CALIBRATION;
+    205              data[1] = ina219_calibration_value >> 8;
+    206              data[2] = ina219_calibration_value & 0xFF;
+    207              i2c_write(shunt_address, data,3);
+    208          
+    209              // Set Config register to take into account the settings above    
+    210              config = INA219_CONFIG_BVOLTAGERANGE_16V |
+    211                       INA219_CONFIG_GAIN_2_80MV |
+    212                       INA219_CONFIG_BADCRES_9BIT |
+    213                       INA219_CONFIG_SADCRES_9BIT_1S_84US |
+    214                       INA219_CONFIG_MODE_SANDBVOLT_CONTINUOUS;
+    215              
+    216              data[0] = INA219_CONFIGURATION;
+    217              data[1] = config >> 8;
+    218              data[2] = config & 0xFF;
+    219              i2c_write(shunt_address, data,3);
+    220          
+    221              // Set the pointer to current register. Note. can read the shunt voltage register too
+    222              data[0] = INA219_CURRENT;
+    223              i2c_write(shunt_address, data,1);
+    224          }
+    225          
+    226          /*******************************************************************************
+    227          * Description : [API] Set up  rx and tx buffers used to read the led.
+    228          * Input       : -
+    229          * Return      : -
+    230          *******************************************************************************/
+    231          int16_t ledbuffer_set(uint8_t addr, uint8_t * errorcheck){
+    232          	*errorcheck = i2cReadRoutine(addr, 2);
+    233          	return  (i2c_rxBuf[0]<<8 | i2c_rxBuf[1]);
+    234          }
+    235          
+    236          /*******************************************************************************
+    237          * Description : [API] initialize the battery monitor BQ27441 on the I2C line
+    238          * Input       : -
+    239          * Return      : -
+    240          *******************************************************************************/
+    241          uint8_t I2C_pressureID(){
+    242          	const uint8_t chipID_addr = 0x00;
+    243          	uint8_t addr = pressure_address;
+    244          	i2c_write(addr, &chipID_addr, 1);
+    245              i2c_read(addr, i2c_rxBuf, 1);
+    246              return i2c_rxBuf[0];
+    247          }
+    248          
+    249          #ifdef BQ27441_BAT_MONITOR
+    250          /*******************************************************************************
+    251          * Description : [API] initialize the battery monitor BQ27441 on the I2C line
+    252          * Input       : -
+    253          * Return      : -
+    254          *******************************************************************************/
+    255          uint16_t init_batmonitor(uint16_t designCapacity_mAh, uint16_t term_Voltage, uint16_t taperCurrent){
+    256              //follow the variable setup and instruction flow chart laid out in sluuap7.pdf
+    257              uint16_t designEnergy_mWh, taperRate, flags, checksumOld, checksumRead;
+    258              uint8_t checksumNew;
+    259              uint16_t device_ID;
+    260              designEnergy_mWh = 3.7 * designCapacity_mAh;
+    261              taperRate = designCapacity_mAh / ( 0.1 * taperCurrent );
+    262              i2c_bat_ctrl_read( BQ27441_CONTROL_DEVICE_TYPE, &device_ID );
+    263              return device_ID;
+    264          #if 0
+    265              if(device_ID != 0x421) return;
+    266              // Unseal gauge
+    267              i2c_bat_ctrl_write( BQ27441_CONTROL_UNSEAL );
+    268              i2c_bat_ctrl_write( BQ27441_CONTROL_UNSEAL );
+    269          
+    270              // Send CFG_UPDATE
+    271              i2c_bat_ctrl_write( BQ27441_CONTROL_SET_CFGUPDATE );
+    272          
+    273              do{
+    274                  i2c_bat_cmd_read( BQ27441_FLAGS_LOW, &flags );
+    275                  if( !(flags & 0x0010) )
+    276                  {
+    277                      HwWait(2);
+    278                  //    HAL_Delay( 50 );
+    279                  }
+    280              }
+    281              while( !(flags & 0x0010) );
+    282          
+    283              // Enable Block Data Memory Control
+    284              i2c_bat_cmd_write( BQ27441_BLOCK_DATA_CONTROL, 0x0000 );
+    285              
+    286              // Access State subclass
+    287              i2c_bat_cmd_write( BQ27441_DATA_CLASS, 0x0052 );
+    288          
+    289              // Write the block offset
+    290              i2c_bat_cmd_write( BQ27441_DATA_BLOCK, 0x0000 );
+    291          
+    292              // Read block checksum
+    293              i2c_bat_cmd_read( BQ27441_BLOCK_DATA_CHECKSUM, &checksumOld );
+    294          
+    295              //Read 32-byte block of data
+    296              uint8_t block[32];
+    297              for(uint8_t i = 0; i < 32; i++ ){
+    298                  block[i] = 0x00;
+    299              }
+    300          
+    301              i2c_bat_read_data_block( 0x00, block, 32 );
+    302          
+    303              // Calculate checksum
+    304              uint8_t checksumCalc = 0x00;
+    305          
+    306              for(uint8_t i = 0; i < 32; i++ ){
+    307                  checksumCalc += block[i];
+    308              }
+    309              checksumCalc = 0xFF - checksumCalc;
+    310          
+    311              // Update design capacity
+    312              block[10] = (uint8_t)( designCapacity_mAh >> 8 );
+    313              block[11] = (uint8_t)( designCapacity_mAh & 0x00FF );
+    314              // Update design energy
+    315              block[12] = (uint8_t)( designEnergy_mWh >> 8 );
+    316              block[13] = (uint8_t)( designEnergy_mWh & 0x00FF );
+    317              // Update terminate voltage
+    318              block[16] = (uint8_t)( term_Voltage >> 8 );
+    319              block[17] = (uint8_t)( term_Voltage & 0x00FF );
+    320              // Update taper rate
+    321              block[27] = (uint8_t)( taperRate >> 8 );
+    322              block[28] = (uint8_t)( taperRate & 0x00FF );
+    323          
+    324              // Calculate new checksum
+    325              checksumNew = 0x00;
+    326              for(int i = 0; i < 32; i++ ){
+    327                  checksumNew += block[i];
+    328              }
+    329              checksumNew = 0xFF - checksumNew;
+    330          
+    331              // Enable Block Data Memory Control
+    332              i2c_bat_cmd_write( BQ27441_BLOCK_DATA_CONTROL, 0x0000 );
+    333          
+    334              HwWait(BQ27441_DELAY);
+    335              //HAL_Delay( BQ27441_DELAY );
+    336              
+    337              // Access State subclass
+    338              i2c_bat_cmd_write( BQ27441_DATA_CLASS, 0x0052 );
+    339          
+    340              // Write the block offset
+    341              i2c_bat_cmd_write( BQ27441_DATA_BLOCK, 0x0000 );
+    342          
+    343              // Write 32-byte block of updated data
+    344              i2c_bat_write_data_block( 0x00, block, 32 );
+    345          
+    346              // Write new checksum
+    347              i2c_bat_cmd_write( BQ27441_BLOCK_DATA_CHECKSUM, checksumNew );
+    348          
+    349              // Access State subclass
+    350              i2c_bat_cmd_write( BQ27441_DATA_CLASS, 0x0052 );
+    351          
+    352              // Write the block offset
+    353              i2c_bat_cmd_read( BQ27441_DATA_BLOCK, 0x0000 );
+    354          
+    355              // Read block checksum
+    356              i2c_bat_cmd_read( BQ27441_BLOCK_DATA_CHECKSUM, &checksumRead );
+    357          
+    358              // Verify
+    359              if( checksumRead != (uint8_t)checksumNew ){
+    360                  return 0;
+    361              }
+    362          
+    363              // Enable Block Data Memory Control
+    364              i2c_bat_cmd_write( BQ27441_BLOCK_DATA_CONTROL, 0x0000 );
+    365          
+    366              HwWait(BQ27441_DELAY);
+    367              //HAL_Delay( BQ27421_DELAY );
+    368              
+    369              // Access Registers subclass
+    370              i2c_bat_cmd_write( BQ27441_DATA_CLASS, 0x0040 );
+    371          
+    372              // Write the block offset
+    373              i2c_bat_cmd_write( BQ27441_DATA_BLOCK, 0x0000 );
+    374          
+    375              // Read block checksum
+    376              i2c_bat_cmd_read( BQ27441_BLOCK_DATA_CHECKSUM, &checksumOld );
+    377          
+    378              // Read 32-byte block of data
+    379              for(uint8_t i = 0; i < 32; i++ ){
+    380                  block[i] = 0x00;
+    381              }
+    382          
+    383              i2c_bat_read_data_block( 0x00, block, 32 );
+    384          
+    385              // Calculate checksum
+    386              checksumCalc = 0x00;
+    387          
+    388              for(uint8_t i = 0; i < 32; i++ ){
+    389                  checksumCalc += block[i];
+    390              }
+    391              checksumCalc = 0xFF - checksumCalc;
+    392          
+    393              // Update OpConfig
+    394              block[0] = 0x05;
+    395          
+    396              // Calculate new checksum
+    397              checksumNew = 0x00;
+    398              for(int i = 0; i < 32; i++ ){
+    399                  checksumNew += block[i];
+    400              }
+    401              checksumNew = 0xFF - checksumNew;
+    402          
+    403              // Enable Block Data Memory Control
+    404              i2c_bat_cmd_write( BQ27441_BLOCK_DATA_CONTROL, 0x0000 );
+    405          
+    406              HwWait(BQ27441_DELAY);
+    407              //HAL_Delay( BQ27421_DELAY );
+    408              
+    409              // Access Registers subclass
+    410              i2c_bat_cmd_write( BQ27441_DATA_CLASS, 0x0040 );
+    411          
+    412              // Write the block offset
+    413              i2c_bat_cmd_write( BQ27441_DATA_BLOCK, 0x0000 );
+    414          
+    415              // Write 32-byte block of updated data
+    416              i2c_bat_write_data_block( 0x00, block, 32 );
+    417          
+    418              // Write new checksum
+    419              i2c_bat_cmd_write( BQ27441_BLOCK_DATA_CHECKSUM, checksumNew );
+    420          
+    421              // Access Registers subclass
+    422              i2c_bat_cmd_write( BQ27441_DATA_CLASS, 0x0040 );
+    423          
+    424              // Write the block offset
+    425              i2c_bat_cmd_write( BQ27441_DATA_BLOCK, 0x0000 );
+    426          
+    427              // Read block checksum
+    428              i2c_bat_cmd_read( BQ27441_BLOCK_DATA_CHECKSUM, &checksumRead );
+    429          
+    430              // Verify
+    431              if( checksumRead != (uint8_t)checksumNew )
+    432              {
+    433                  return 0;
+    434              }
+    435          
+    436              // Configure BAT_DET
+    437              i2c_bat_ctrl_write( BQ27441_CONTROL_BAT_INSERT );
+    438          
+    439              // Send Soft Reset
+    440              i2c_bat_ctrl_write( BQ27441_CONTROL_SOFT_RESET );
+    441          
+    442              // Poll flags
+    443              do
+    444              {
+    445                  i2c_bat_cmd_read( BQ27441_FLAGS_LOW, &flags );
+    446                  if( !(flags & 0x0010) )
+    447                  {
+    448                      HwWait(2);
+    449                      //HAL_Delay( 50 );
+    450                  }
+    451              }
+    452              while( (flags & 0x0010) );
+    453          
+    454              // Seal gauge
+    455              i2c_bat_ctrl_write( BQ27441_CONTROL_SEALED );
+    456              return 1;
+    457          #endif
+    458          
+    459          }
+    460          
+    461          /*******************************************************************************
+    462          * Description : Prepares the i2c tx/rx buffers and initializes the routine.
+    463          * Input       : -
+    464          * Return      : -
+    465          *******************************************************************************/
+    466          uint16_t i2cBattRoutine(){
+    467              //1. move the internal pointer to the correct address
+    468              //2. read data of register
+    469              //3. set data into appropriate places
+    470              //4. end.
+    471              i2c_txBuf[0]=battmonitor_address;
+    472              i2c_txBuf[1]=BQ27441_STATE_OF_CHARGE_LOW;
+    473              i2cWriteRoutine(i2c_txBuf, 2);
+    474              if(I2C_ERR){
+    475                  return 0;
+    476              }    
+    477              i2cReadRoutine(battmonitor_address,2);
+    478              if(I2C_ERR){
+    479                  return 0;
+    480              }
+    481              return i2c_rxBuf[0] | (i2c_rxBuf[1]<<8);
+    482          }
+    483          
+    484          /*******************************************************************************
+    485          * Description : [API] write subcommand to the control register on the battery monitor I2C line
+    486          * Input       : -
+    487          * Return      : -
+    488          *******************************************************************************/
+    489          void i2c_bat_ctrl_write(uint16_t subcommand){
+    490          	uint8_t subCommandMSB = (subcommand >> 8);
+    491          	uint8_t subCommandLSB = (subcommand & 0x00FF);
+    492          	uint8_t data[3];
+    493              data[0] = BQ27441_CONTROL_LOW;
+    494              data[1] = subCommandLSB;
+    495              data[2] = subCommandMSB;
+    496          	i2c_write(battmonitor_address, data, 3);
+    497              //delay;
+    498          }
+    499          
+    500          /*******************************************************************************
+    501          * Description : [API] read content of subcommand within control register for battery monitor
+    502          * Input       : -
+    503          * Return      : -
+    504          *******************************************************************************/
+    505          void i2c_bat_ctrl_read(uint16_t subcommand, uint16_t * data){
+    506          	uint8_t subCommandMSB = (subcommand >> 8);
+    507          	uint8_t subCommandLSB = (subcommand & 0x00FF);
+    508          	uint8_t i2c_data[3];
+    509          	i2c_data[0] = BQ27441_CONTROL_LOW;
+    510          	i2c_data[1] = subCommandLSB;
+    511          	i2c_data[2] = subCommandMSB;
+    512          
+    513          	i2c_write(battmonitor_address, i2c_data, 3);
+    514          	i2c_write(battmonitor_address, i2c_data, 1);
+    515              i2c_read(battmonitor_address, i2c_data, 2);
+    516              *data = (i2c_data[1]<<8) |i2c_data[0];
+    517              //delay;
+    518          }
+    519          
+    520          /*******************************************************************************
+    521          * Description : [API] write data to a command/register on the I2C battery monitor
+    522          * Input       : -
+    523          * Return      : -
+    524          *******************************************************************************/
+    525          void i2c_bat_cmd_write(uint8_t command, uint16_t* data){
+    526              uint8_t i2c_data[3];
+    527              i2c_data[0] = command;
+    528              i2c_data[1] = (*data) & 0x00FF;
+    529              i2c_data[2] = (*data) >> 8;
+    530              i2c_write(battmonitor_address, &i2c_data[0],3);
+    531              //delay;  
+    532          }
+    533          /*******************************************************************************
+    534          * Description : [API]read data from a command/register on the I2C battery monitor
+    535          * Input       : -
+    536          * Return      : -
+    537          *******************************************************************************/
+    538          void i2c_bat_cmd_read( uint8_t command, uint16_t* data){
+    539             uint8_t i2c_data[2];
+    540             i2c_write(battmonitor_address, &command, 1);  
+    541             i2c_read(battmonitor_address, &i2c_data[0], 2);
+    542             *data = (i2c_data[1]<<8)|i2c_data[0];
+    543          }
+    544          
+    545          /*******************************************************************************
+    546          * Description : [API]read data from a command/register on the I2C battery monitor
+    547          * Input       : -
+    548          * Return      : -
+    549          *******************************************************************************/
+    550          void i2c_bat_write_data_block(uint8_t offset, uint8_t *data, uint8_t bytes){
+    551              uint8_t i2c_data[2], i;
+    552              for(i=0; i< bytes; i++){
+    553                  i2c_data[0]= BQ27441_BLOCK_DATA_START +offset+i;
+    554                  i2c_data[1]= data[i];
+    555                  i2c_write(battmonitor_address, &i2c_data[0],2);
+    556                  //delay
+    557              }
+    558          
+    559          }
+    560          
+    561          /*******************************************************************************
+    562          * Description : [API]read data from a command/register on the I2C battery monitor
+    563          * Input       : -
+    564          * Return      : -
+    565          *******************************************************************************/
+    566          void i2c_bat_read_data_block(uint8_t offset, uint8_t *data, uint8_t bytes){
+    567              uint8_t i2c_data = BQ27441_BLOCK_DATA_START + offset;
+    568              i2c_write(battmonitor_address, &i2c_data,1);
+    569              i2c_read(battmonitor_address, data,bytes);
+    570          }
+    571          #endif
+    572          
+    573          /*******************************************************************************
+    574          * Description : [API] general purpose write on the I2C line
+    575          * Input       : -
+    576          * Return      : -
+    577          *******************************************************************************/
+    578          void i2c_write(uint8_t Periph_Addr, const uint8_t* pBuffer, uint8_t size){
+    579          	/* While the bus is busy */
+    580          	while(I2C_GetFlagStatus(I2C_EE, I2C_FLAG_BUSY));
+    581          
+    582          	/* Send START condition */
+    583              I2C_GenerateSTART(I2C_EE, ENABLE);
+    584              /* Test on EV5 and clear it */
+    585              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_MODE_SELECT));
+    586              /* Send target address for write */
+    587              I2C_Send7bitAddress(I2C_EE, Periph_Addr, I2C_Direction_Transmitter);
+    588              /* Test on EV6 and clear it */
+    589              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+    590          
+    591              while(size){
+    592                  I2C_SendData(I2C_EE, *pBuffer++);                                       /* Send the byte to be written */
+    593                  while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_BYTE_TRANSMITTED));      /* Test on EV8 and clear it */
+    594                  size--;
+    595              }  
+    596              /* Send STOP condition */
+    597              I2C_GenerateSTOP(I2C_EE, ENABLE);
+    598          }
+    599          
+    600          /*******************************************************************************
+    601          * Description : [API] general purpose byte read on the I2C line
+    602          * Input       : -
+    603          * Return      : -
+    604          *******************************************************************************/
+    605          void i2c_read(uint8_t Periph_Addr, uint8_t* pBuffer, uint8_t size){
+    606          	while(I2C_GetFlagStatus(I2C_EE, I2C_FLAG_BUSY));
+    607          	I2C_GenerateSTART(I2C_EE, ENABLE);                                          //generate start bit
+    608              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_MODE_SELECT));                
+    609          
+    610              I2C_Send7bitAddress(I2C_EE, Periph_Addr, I2C_Direction_Receiver);           /* Send target address for write */
+    611              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));    
+    612          
+    613              I2C_AcknowledgeConfig(I2C_EE, ENABLE);
+    614              while(size--){
+    615                  if(!size){
+    616                      I2C_AcknowledgeConfig(I2C_EE, DISABLE);
+    617                  }
+    618                  /* Test on EV7 and clear it */
+    619                  while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_BYTE_RECEIVED));
+    620                  *pBuffer++ = I2C_ReceiveData(I2C_EE);            /* Read a byte from the EEPROM */
+    621                      //pBuffer++; /* Point to the next location where the byte read will be saved */
+    622                      //size--;  /* Decrement the read bytes counter */
+    623              }
+    624          	I2C_AcknowledgeConfig(I2C_EE, DISABLE);
+    625              I2C_GenerateSTOP(I2C_EE, ENABLE);
+    626              I2C_AcknowledgeConfig(I2C_EE, ENABLE);  /* Enable Acknowledgement to be ready for another reception */
+    627          }
+    628          
+    629          /*******************************************************************************
+    630          * Description : [API] general purpose byte read on the I2C line
+    631          * Input       : -
+    632          * Return      : -
+    633          *******************************************************************************/
+    634          void i2c_burstread(uint8_t Periph_Addr, uint8_t subaddr, uint8_t* pBuffer, uint8_t size){
+    635          	while(I2C_GetFlagStatus(I2C_EE, I2C_FLAG_BUSY));
+    636          	I2C_GenerateSTART(I2C_EE, ENABLE);                                          //generate start bit
+    637              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_MODE_SELECT));
+    638          
+    639              I2C_Send7bitAddress(I2C_EE, Periph_Addr, I2C_Direction_Transmitter);           /* Send target address for write */
+    640              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+    641              I2C_SendData(I2C_EE, 0);
+    642              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+    643          	I2C_GenerateSTOP(I2C_EE, ENABLE);
+    644          	I2C_GenerateSTART(I2C_EE, ENABLE);
+    645              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_MODE_SELECT));
+    646              I2C_Send7bitAddress(I2C_EE, Periph_Addr, I2C_Direction_Receiver);
+    647              while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
+    648          
+    649              I2C_AcknowledgeConfig(I2C_EE, ENABLE);
+    650              while(size--){
+    651                  if(!size){
+    652                      I2C_AcknowledgeConfig(I2C_EE, DISABLE);
+    653                  }
+    654                  /* Test on EV7 and clear it */
+    655                  while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_BYTE_RECEIVED));
+    656                  *pBuffer++ = I2C_ReceiveData(I2C_EE);            /* Read a byte from the EEPROM */
+    657                      //pBuffer++; /* Point to the next location where the byte read will be saved */
+    658                      //size--;  /* Decrement the read bytes counter */
+    659              }
+    660          	I2C_AcknowledgeConfig(I2C_EE, DISABLE);
+    661              I2C_GenerateSTOP(I2C_EE, ENABLE);
+    662              I2C_AcknowledgeConfig(I2C_EE, ENABLE);  /* Enable Acknowledgement to be ready for another reception */
+    663          }
+    664          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  I2C_pressureID
+             16 -> i2c_read
+             16 -> i2c_write
+        8  ReleaseI2C
+              8 -> CoLeaveMutexSection
+        8  WaitGrabI2C
+              8 -> CoEnterMutexSection
+       24  i2cReadRoutine
+             24 -> CoAcceptSingleFlag
+             24 -> CoClearFlag
+             24 -> CoTickDelay
+             24 -> HwI2CInit
+             24 -> I2C_AcknowledgeConfig
+             24 -> I2C_GenerateSTART
+             24 -> I2C_GetFlagStatus
+             24 -> I2C_ITConfig
+             24 -> TRACE
+       16  i2cWriteRoutine
+             16 -> CoClearFlag
+             16 -> CoWaitForSingleFlag
+             16 -> I2C_GenerateSTART
+             16 -> I2C_ITConfig
+       24  i2c_burstread
+             24 -> I2C_AcknowledgeConfig
+             24 -> I2C_CheckEvent
+             24 -> I2C_GenerateSTART
+             24 -> I2C_GenerateSTOP
+             24 -> I2C_GetFlagStatus
+             24 -> I2C_ReceiveData
+             24 -> I2C_Send7bitAddress
+             24 -> I2C_SendData
+       16  i2c_read
+             16 -> I2C_AcknowledgeConfig
+             16 -> I2C_CheckEvent
+             16 -> I2C_GenerateSTART
+             16 -> I2C_GenerateSTOP
+             16 -> I2C_GetFlagStatus
+             16 -> I2C_ReceiveData
+             16 -> I2C_Send7bitAddress
+       16  i2c_write
+             16 -> I2C_CheckEvent
+             16 -> I2C_GenerateSTART
+             16 -> I2C_GenerateSTOP
+             16 -> I2C_GetFlagStatus
+             16 -> I2C_Send7bitAddress
+             16 -> I2C_SendData
+        8  init_coosi2c
+              8 -> CoCreateFlag
+              8 -> CoCreateMutex
+       16  init_ina219
+             16 -> i2c_write
+        8  init_ledshunt
+              8 -> init_ina219
+       16  ledbuffer_set
+             16 -> i2cReadRoutine
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      24  ?<Constant "I2C Subroutine error\r\n">
+      16  ?<Constant "I2C Timeout\r\n">
+       4  ??DataTable10
+       4  ??DataTable10_1
+       4  ??DataTable10_10
+       4  ??DataTable10_11
+       4  ??DataTable10_12
+       4  ??DataTable10_13
+       4  ??DataTable10_14
+       4  ??DataTable10_15
+       4  ??DataTable10_16
+       4  ??DataTable10_17
+       4  ??DataTable10_18
+       4  ??DataTable10_19
+       4  ??DataTable10_2
+       4  ??DataTable10_20
+       4  ??DataTable10_21
+       4  ??DataTable10_3
+       4  ??DataTable10_4
+       4  ??DataTable10_5
+       4  ??DataTable10_6
+       4  ??DataTable10_7
+       4  ??DataTable10_8
+       4  ??DataTable10_9
+       8  I2COSTime
+       1  I2CTxRxByteCount
+       1  I2CTxRxByteState
+       1  I2C_ERR
+      44  I2C_pressureID
+      14  ReleaseI2C
+      14  WaitGrabI2C
+       1  battmonitor_address
+       1  flagI2CIODone
+       1  flagI2CMachineDone
+     238  i2cReadRoutine
+      84  i2cWriteRoutine
+     222  i2c_burstread
+     148  i2c_read
+      12  i2c_rxBuf
+     108  i2c_write
+      28  init_coosi2c
+      92  init_ina219
+      28  init_ledshunt
+      34  ledbuffer_set
+       4  pI2CRxBuf
+       4  pI2CTxBuf
+       1  pressure_address
+       1  scratch_val
+       1  shunt1_address
+       1  shunt2_address
+       1  shunt3_address
+
+ 
+    33 bytes in section .bss
+     1 byte  in section .data
+    45 bytes in section .rodata
+ 1 142 bytes in section .text
+ 
+ 1 142 bytes of CODE  memory
+    45 bytes of CONST memory
+    34 bytes of DATA  memory
+
+Errors: none
+Warnings: 4

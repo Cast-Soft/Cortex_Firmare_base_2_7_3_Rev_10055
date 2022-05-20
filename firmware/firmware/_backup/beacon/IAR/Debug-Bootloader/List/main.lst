@@ -1,0 +1,478 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     20/Mar/2019  16:27:03 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon\App\main.c    #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon\App\main.c"   #
+#                    -D BEACON_APP -D USE_STDPERIPH_DRIVER -D STM32F10X_CL    #
+#                    -D COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D      #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -lcN            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Debug-Boo #
+#                    tloader\List\" -o "C:\Users\User\Documents\Cortex_git\BL #
+#                    KT-01.git\Source Code\BLKT-01                            #
+#                    Beacon\Source\firmware\beacon\IAR\Debug-Bootloader\Obj\" #
+#                     --no_cse --no_unroll --no_inline --no_code_motion       #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\ #
+#                    ..\App\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01. #
+#                    git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IA #
+#                    R\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F10x\"    #
+#                    -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sourc #
+#                    e Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\..\..\c #
+#                    ommon\STM32F10x_StdPeriph_Driver\inc\" -I                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\..\..\com #
+#                    mon\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex_git #
+#                    \BLKT-01.git\Source Code\BLKT-01                         #
+#                    Beacon\Source\firmware\beacon\IAR\..\..\common\CoOS\port #
+#                    able\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\ #
+#                    ..\..\..\common\" -I "C:\Users\User\Documents\Cortex_git #
+#                    \BLKT-01.git\Source Code\BLKT-01                         #
+#                    Beacon\Source\firmware\beacon\IAR\..\..\common\USB-Devic #
+#                    e-CDC\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.g #
+#                    it\Source Code\BLKT-01 Beacon\Source\firmware\beacon\IAR #
+#                    \..\..\common\" -I "C:\Users\User\Documents\Cortex_git\B #
+#                    LKT-01.git\Source Code\BLKT-01                           #
+#                    Beacon\Source\firmware\beacon\IAR\" -On                  #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Debug-Boo #
+#                    tloader\List\main.lst                                    #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon\IAR\Debug-Boo #
+#                    tloader\Obj\main.o                                       #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon\App\main.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : main.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : Main Application for BlackTrax:Beacon
+      9          *******************************************************************************/
+     10          
+     11          /*
+     12              LED1 : Toggle on RF Packet TX
+     13              LED2 : Toggle on 50x RF Packet TX'es
+     14              LED3 : Toggle on RF Packet RX
+     15              LED4 : Toggle on 50x RF Packet RX'es
+     16          */
+     17          
+     18          /* INCLUDES ------------------------------------------------------------------*/
+     19          
+     20          #include "hardware.h"
+     21          #include "CoOS.h"
+     22          #include "tasks.h"
+     23          #include "basic_rf.h"
+     24          #ifndef STDIO_TO_USART
+     25          #include "usb_regs.h"
+     26          #include "usbd_cdc_core.h"
+     27          #include "usbd_usr.h"
+     28          #include "usb_conf.h"
+     29          #include "usbd_desc.h"
+     30          #endif
+     31          #include <stdio.h>
+     32          #include <string.h>
+     33          #include "stm32f10x_dac.h"
+     34          #include "stm32f10x_rcc.h"
+     35          
+     36          #include "i2c_ee.h"
+     37          #include "flash_map.h"
+     38          #include "config.h"
+     39          
+     40          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     41          
+     42          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     43          
+     44          #define FIRMWARE_VERSION "0.6"
+     45          
+     46          #define OS_STACK_SIZE   256
+     47          
+     48          /* PRIVATE MACROS ------------------------------------------------------------*/
+     49          
+     50          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     51          extern uint32_t __vector_table;
+     52          extern uint8_t bat_slot_numbers;
+     53          
+     54          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     55          
+     56          __ALIGN_BEGIN USB_OTG_CORE_HANDLE    USB_OTG_dev __ALIGN_END ;
+     57          
+     58          static OS_STK task1Stack[OS_STACK_SIZE];
+     59          static OS_STK taskRadioRxStack[OS_STACK_SIZE];
+     60          static OS_STK task3Stack[OS_STACK_SIZE];
+     61          static OS_STK task4Stack[OS_STACK_SIZE];
+     62          static OS_STK taskRadioTxStack[OS_STACK_SIZE];
+     63          static OS_STK task8Stack[OS_STACK_SIZE];
+     64          static OS_STK taskIMU_A_Stack[OS_STACK_SIZE];
+     65          static OS_STK taskIMU_G_Stack[OS_STACK_SIZE];
+     66          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     67          
+     68          #ifdef WDT_ENABLE
+     69          uint8_t  watchdog_active = 1;
+     70          #else
+     71          uint8_t  watchdog_active = 0;
+     72          #endif
+     73          
+     74          uint8_t asserted;
+     75          const char firmwareVersion[] = FIRMWARE_VERSION;
+     76          
+     77          OS_TID task1Id;
+     78          OS_TID taskRadioRxId;
+     79          OS_TID task3Id;
+     80          OS_TID taskConfigId;
+     81          OS_TID taskRadioTxId;
+     82          OS_TID task8Id;
+     83          OS_TID taskIMUGId;
+     84          
+     85          OS_FlagID flagIMUNewData = 0xFF;
+     86          OS_FlagID flagIMU_G_DRDY = 0xFF;
+     87          OS_FlagID flagRadioTxReq = 0xFF;
+     88          OS_FlagID flagIMUTimeToSend = 0xFF;
+     89          OS_FlagID flagRadioCCA = 0xFF;
+     90          
+     91          OS_FlagID  flagIMUDataReady = 0xFF;
+     92          
+     93          OS_EventID semRFRxFrames;   // Number of RF frames received in Rx-FIFO. It is notified by RX_FRM_DONE interrupt
+     94          
+     95          uint8_t* const led0Id = &config.led0Id;
+     96          uint8_t* const led1Id = &config.led1Id;
+     97          uint8_t* const led2Id = &config.led2Id;
+     98          
+     99          
+    100          volatile uint16_t tasksWDT = 0;
+    101          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+    102          
+    103          //static void OsStackPaint(OS_STK *stk, unsigned short size);
+    104          //static unsigned short OsStackCheck(OS_STK *stk);
+    105          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+    106          
+    107          
+    108          /*******************************************************************************
+    109          * Description : Check FLASH Configuration Struct Checksum
+    110          * Input       :
+    111          * Return      : Checksum if GOOD, 0 if BAD
+    112          *******************************************************************************/
+    113          uint16_t CalcConfigChecksum(uint16_t* pConfig, uint16_t len) {
+    114              uint16_t checksum = 0xCCCC; // checksum initialization
+    115          
+    116              // checksum is last half-word in struct
+    117              // checksum field not included in checksum
+    118              for (uint16_t i = 0; i < len/2; i++) {
+    119                  checksum ^= (i ^ *pConfig++);
+    120              }
+    121          
+    122              return checksum;
+    123          }
+    124          
+    125          /* PUBLIC FUNCTION PROTOTYPES ------------------------------------------------*/
+    126          //volatile       uint8_t buf[64/*sizeof(config_t)*/];
+    127          uint8_t loop = 1;
+    128          
+    129          /*******************************************************************************
+    130          * Description    : Main routine.
+    131          * Input          : -
+    132          * Return         : -
+    133          *******************************************************************************/
+    134          void  main(void) {
+    135          
+    136          #ifdef BOOTLOADER
+    137              NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0xC000);
+    138          #endif
+    139          
+    140              SysTick_Config(SystemCoreClock / 1000); // SysTick Interrupt Freq = (1/1000)s = 1ms
+    141          
+    142          #ifdef CIRCULAR_LOG
+    143              memset((void*) log, 0, LOG_SIZE);
+    144          #endif
+    145          
+    146                HwI2CInit();
+    147          
+    148                if (RCC_GetFlagStatus(RCC_FLAG_IWDGRST) == SET) {
+    149                  RCC_ClearFlag();
+    150                }
+    151                // Read EEPROM_BEACON_FLAG_ADDRESS - if it is not 0xFF, write 0xFF - this flag is used by
+    152                // bootloader - when it is 0xFE, bootloader stays in bootloader when connected by USB
+    153                // used by "Jump to bootloader" CSM command
+    154                uint8_t jumpToMain;
+    155                I2C_EE_BufferRead((uint8_t*) &jumpToMain, EEPROM_BEACON_FLAG_ADDRESS, 1);
+    156                if (jumpToMain != 0xFE) {
+    157                  jumpToMain = 0xFE;
+    158                  I2C_EE_BufferWrite((uint8_t*) &jumpToMain, EEPROM_BEACON_FLAG_ADDRESS, 1);
+    159                }
+    160          
+    161                   LoadConfig(&config);
+    162          
+    163              whole_time_adjust = config.time_adjust/10;
+    164              part_time_adjust = config.time_adjust%10;
+    165          
+    166              if (config.frameCountNoSync == 0xFFFF) {
+    167                config.frameCountNoSync = DEFAULT_FRAME_COUNT_NO_SYNC;
+    168              }
+    169          
+    170              CoInitOS();
+    171          
+    172              __enable_interrupt();
+    173          
+    174              semRFRxFrames = CoCreateSem (0, 127, EVENT_SORT_TYPE_FIFO);   //Number of RF frames received in Rx-FIFO. It is notified by RX_FRM_DONE interrupt
+    175              assert(semRFRxFrames != E_CREATE_FAIL);
+    176          
+    177              HwPeriphInit();
+    178              //HwLEDOff(LED2);
+    179              DAC_SetChannel2Data(DAC_Align_12b_R, config.ledDAC);
+    180          
+    181              GetARM_UUID();
+    182          
+    183              RELOAD_WATCHDOG
+    184          #ifndef STDIO_TO_USART
+    185                USBD_Init(&USB_OTG_dev,
+    186                      USB_OTG_FS_CORE_ID,
+    187                      &USR_desc,
+    188                      &USBD_CDC_cb,
+    189                      &USR_cb);
+    190          
+    191              RELOAD_WATCHDOG
+    192          #endif
+    193          
+    194          
+    195          #ifdef BC_HW_REVJ
+    196          	IMUInit();
+    197          #endif
+    198          
+    199          #ifndef STM3210C_EVAL
+    200              RadioInit(config.panId, config.mySrcAddr, config.rfChan, config.TestMode);
+    201          #endif
+    202          
+    203              flagIMUNewData = 	CoCreateFlag(0, 0);    	// Manual-reset, flag cleared
+    204              flagIMU_G_DRDY = 	CoCreateFlag(1, 0);    	// auto-reset, flag cleared
+    205              flagRadioTxReq = 	CoCreateFlag(1, 0);    	// auto-reset, flag cleared
+    206              flagIMUTimeToSend = CoCreateFlag(1, 0); 	// auto-reset, flag cleared
+    207              flagRadioCCA = 		CoCreateFlag(1, 0);
+    208              flagIMUDataReady  = CoCreateFlag(1, 0); 	// auto-reset, flag clear
+    209              // Task1: Process and Send each new IMU data sample
+    210              task1Id = CoCreateTaskEx(Task1, (void*)0, 1, &task1Stack[OS_STACK_SIZE-1], OS_STACK_SIZE, (uint32_t)0, (uint32_t)1);
+    211          
+    212          #ifndef STM3210C_EVAL
+    213              // TaskRadioRx: Process Incoming Radio Packets
+    214              taskRadioRxId 	= CoCreateTaskEx(TaskRadioRx, (void*)0, 2, &taskRadioRxStack[OS_STACK_SIZE-1], OS_STACK_SIZE, (uint32_t)0, (uint32_t)1);
+    215              // Task3: RF Chan Scan, then Monitor GPO_PWRON Power Switch
+    216              task3Id 		= CoCreateTask  (Task3, (void*)0, 0, &task3Stack[OS_STACK_SIZE-1], OS_STACK_SIZE);
+    217          #endif
+    218              // TaskConfig: Implements Simple Text Command Console
+    219              taskConfigId 	= CoCreateTaskEx(TaskConfig, (void*)0, 9, &task4Stack[OS_STACK_SIZE-1], OS_STACK_SIZE,(uint32_t)0, (uint32_t)0);
+    220              // TaskRadioTx: Manage Outgoing (TX) Packet Queue. Highest priority
+    221              taskRadioTxId 	= CoCreateTask  (TaskRadioTx, (void*)0, 0, &taskRadioTxStack[OS_STACK_SIZE-1], OS_STACK_SIZE);
+    222          
+    223              // A to D battery monitor//
+    224              task8Id 		= CoCreateTask  (Task8, (void*)0, 7, &task8Stack[OS_STACK_SIZE-1], OS_STACK_SIZE);
+    225          
+    226              // IMU Data Read task
+    227          	//  CoCreateTask(TaskIMU_A, (void*)0, 3, &taskIMU_A_Stack[OS_STACK_SIZE-1], OS_STACK_SIZE);
+    228              taskIMUGId = CoCreateTaskEx(TaskIMU_G, (void*)0, 1/*3*/, &taskIMU_G_Stack[OS_STACK_SIZE-1], OS_STACK_SIZE, (uint32_t)0, (uint32_t)1);
+    229          
+    230              WDTimerInit();    // Init th WD timer
+    231          
+    232              CoStartOS();
+    233          
+    234              while (1);
+    235          }
+    236          
+    237          #if (defined USE_MY_ASSERT) || (defined USE_FULL_ASSERT)
+    238          uint8_t assert_loop = 1;
+    239          /*******************************************************************************
+    240          * Description    : Reports the name of the source file and the source line number
+    241          *                  where the assert error has occurred.
+    242          * Input          :
+    243          * Return         : -
+    244          *******************************************************************************/
+    245          void assert_failed(uint8_t *file, uint32_t line) {
+    246              asserted = 1;
+    247              while (assert_loop)
+    248              {
+    249                  RELOAD_WATCHDOG
+    250                  TRACE("!ASSERT FAILED! @%d:%s\n\r", line, file);
+    251                  TRACE("  %s\n\r", file);
+    252                  TRACE("  %d\n\r", line);
+    253                  //HwLEDOn(LED1); HwLEDOn(LED4); HwLEDOff(LED2); HwLEDOff(LED3);
+    254                  HwWait(5000);
+    255                  //HwLEDOn(LED2); HwLEDOn(LED3); HwLEDOff(LED1); HwLEDOff(LED4);
+    256                  HwWait(5000);
+    257              }
+    258              assert_loop = 1;
+    259              asserted = 0;
+    260              return;
+    261          }
+    262          #endif
+    263          
+    264          /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        4  CalcConfigChecksum
+        0  NVIC_SetPriority
+        8  SysTick_Config
+              8 -> NVIC_SetPriority
+       16  assert_failed
+             16 -> HwWait
+             16 -> IWDG_ReloadCounter
+             16 -> TRACE
+        8  main
+              8 -> CoCreateFlag
+              8 -> CoCreateSem
+              8 -> CoInitOS
+              8 -> CoStartOS
+              8 -> CreateTask
+              8 -> DAC_SetChannel2Data
+              8 -> GetARM_UUID
+              8 -> HwI2CInit
+              8 -> HwPeriphInit
+              8 -> I2C_EE_BufferRead
+              8 -> I2C_EE_BufferWrite
+              8 -> IMUInit
+              8 -> IWDG_ReloadCounter
+              8 -> LoadConfig
+              8 -> NVIC_SetVectorTable
+              8 -> RCC_ClearFlag
+              8 -> RCC_GetFlagStatus
+              8 -> RadioInit
+              8 -> SysTick_Config
+              8 -> USBD_Init
+              8 -> WDTimerInit
+              8 -> assert_failed
+              8 -> memset
+       16  memset
+             16 -> __aeabi_memset
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       8  ?<Constant "  %d\n\r">
+       8  ?<Constant "  %s\n\r">
+      28  ?<Constant "!ASSERT FAILED! @%d:%s\n\r">
+     108  ?<Constant "C:\\Users\\User\\Documen...">
+       4  ??DataTable3
+       4  ??DataTable3_1
+       4  ??DataTable3_10
+       4  ??DataTable3_11
+       4  ??DataTable3_12
+       4  ??DataTable3_13
+       4  ??DataTable3_14
+       4  ??DataTable3_15
+       4  ??DataTable3_16
+       4  ??DataTable3_17
+       4  ??DataTable3_18
+       4  ??DataTable3_19
+       4  ??DataTable3_2
+       4  ??DataTable3_20
+       4  ??DataTable3_21
+       4  ??DataTable3_22
+       4  ??DataTable3_23
+       4  ??DataTable3_24
+       4  ??DataTable3_25
+       4  ??DataTable3_26
+       4  ??DataTable3_27
+       4  ??DataTable3_28
+       4  ??DataTable3_29
+       4  ??DataTable3_3
+       4  ??DataTable3_30
+       4  ??DataTable3_31
+       4  ??DataTable3_32
+       4  ??DataTable3_33
+       4  ??DataTable3_34
+       4  ??DataTable3_35
+       4  ??DataTable3_36
+       4  ??DataTable3_37
+       4  ??DataTable3_38
+       4  ??DataTable3_39
+       4  ??DataTable3_4
+       4  ??DataTable3_40
+       4  ??DataTable3_41
+       4  ??DataTable3_42
+       4  ??DataTable3_43
+       4  ??DataTable3_44
+       4  ??DataTable3_45
+       4  ??DataTable3_46
+       4  ??DataTable3_47
+       4  ??DataTable3_48
+       4  ??DataTable3_49
+       4  ??DataTable3_5
+       4  ??DataTable3_50
+       4  ??DataTable3_51
+       4  ??DataTable3_52
+       4  ??DataTable3_6
+       4  ??DataTable3_7
+       4  ??DataTable3_8
+       4  ??DataTable3_9
+      42  CalcConfigChecksum
+      34  NVIC_SetPriority
+      50  SysTick_Config
+    1524  USB_OTG_dev
+      90  assert_failed
+       1  assert_loop
+       1  asserted
+       4  firmwareVersion
+       1  flagIMUDataReady
+       1  flagIMUNewData
+       1  flagIMUTimeToSend
+       1  flagIMU_G_DRDY
+       1  flagRadioCCA
+       1  flagRadioTxReq
+       4  led0Id
+       4  led1Id
+       4  led2Id
+       1  loop
+     474  main
+      22  memset
+       1  semRFRxFrames
+       1  task1Id
+    1024  task1Stack
+       1  task3Id
+    1024  task3Stack
+    1024  task4Stack
+       1  task8Id
+    1024  task8Stack
+       1  taskConfigId
+       1  taskIMUGId
+    1024  taskIMU_G_Stack
+       1  taskRadioRxId
+    1024  taskRadioRxStack
+       1  taskRadioTxId
+    1024  taskRadioTxStack
+       2  tasksWDT
+       1  watchdog_active
+
+ 
+ 8 703 bytes in section .bss
+     9 bytes in section .data
+   168 bytes in section .rodata
+   924 bytes in section .text
+ 
+   902 bytes of CODE  memory (+ 22 bytes shared)
+   168 bytes of CONST memory
+ 8 712 bytes of DATA  memory
+
+Errors: none
+Warnings: 1

@@ -1,0 +1,544 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     19/Mar/2019  16:48:06 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\common\CoOS\kernel\queue.c              #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\common\CoOS\kernel\queue.c" -D         #
+#                    BEACON_APP -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D    #
+#                    COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D         #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -lcN            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\List\" -o  #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\"      #
+#                    --no_cse --no_unroll --no_inline --no_code_motion        #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\RevJ\RevJ Beacon\firmware\beacon\IAR\..\App\" -I       #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\CMSIS\CM3\Devi #
+#                    ceSupport\ST\STM32F10x\" -I                              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\STM32F10x_StdP #
+#                    eriph_Driver\inc\" -I "C:\Users\User\Documents\Cortex_gi #
+#                    t\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\..\.. #
+#                    \common\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex #
+#                    _git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\.. #
+#                    \..\common\CoOS\portable\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\..\common\" -I        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\USB-Device-CDC #
+#                    \" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Re #
+#                    vJ\RevJ Beacon\firmware\beacon\IAR\..\..\common\" -I     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\" -On --use_c++_inline -I   #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.4\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\List\queue. #
+#                    lst                                                      #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader\Obj\queue.o #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ Beacon\firmware\common\CoOS\kernel\queue.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       queue.c
+      4           * @version   V1.1.4
+      5           * @date      2011.04.20
+      6           * @brief      Queue management implementation code of CooCox CoOS kernel.
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           *
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */
+     15          
+     16          /*---------------------------- Include ---------------------------------------*/
+     17          #include <coocox.h>
+     18          
+     19          
+     20          #if CFG_QUEUE_EN > 0
+     21          /*---------------------------- Variable Define -------------------------------*/
+     22          QCB   QueueTbl[CFG_MAX_QUEUE] = {{0}};    /*!< Queue control block table        */
+     23          U32   QueueIDVessel = 0;                /*!< Queue list mask                  */
+     24          
+     25          
+     26          
+     27          /**
+     28           *******************************************************************************
+     29           * @brief      Create a queue
+     30           * @param[in]  qStart    Pointer to mail pointer buffer.
+     31           * @param[in]  size      The length of queue.
+     32           * @param[in]  sortType  Mail queue waiting list sort type.
+     33           * @param[out] None
+     34           * @retval     E_CREATE_FAIL  Create queue fail.
+     35           * @retval     others         Create queue successful.
+     36           *
+     37           * @par Description
+     38           * @details    This function is called to create a queue.
+     39           * @note
+     40           *******************************************************************************
+     41           */
+     42          OS_EventID CoCreateQueue(void **qStart, U16 size ,U8 sortType)
+     43          {
+     44              U8    i;
+     45              P_ECB pecb;
+     46          
+     47          #if CFG_PAR_CHECKOUT_EN >0
+     48              if((qStart == Co_NULL) || (size == 0))
+     49              {
+     50                  return E_CREATE_FAIL;
+     51              }
+     52          #endif
+     53          
+     54              OsSchedLock();
+     55              for(i = 0; i < CFG_MAX_QUEUE; i++)
+     56              {
+     57                  /* Assign a free QUEUE control block                                  */
+     58                  if((QueueIDVessel & (1 << i)) == 0)
+     59                  {
+     60                      QueueIDVessel |= (1<<i);
+     61                      OsSchedUnlock();
+     62          
+     63                      QueueTbl[i].qStart   = qStart;  /* Initialize the queue           */
+     64                      QueueTbl[i].id       = i;
+     65                      QueueTbl[i].head     = 0;
+     66                      QueueTbl[i].tail     = 0;
+     67                      QueueTbl[i].qMaxSize = size;
+     68                      QueueTbl[i].qSize    = 0;
+     69          
+     70                      /* Get a event control block and initial the event content        */
+     71                      pecb = CreatEvent(EVENT_TYPE_QUEUE,sortType,&QueueTbl[i]);
+     72          
+     73                      if(pecb == Co_NULL )       /* If there is no free EVENT control block*/
+     74                      {
+     75                          return E_CREATE_FAIL;
+     76                      }
+     77                      return (pecb->id);
+     78                  }
+     79              }
+     80          
+     81              OsSchedUnlock();
+     82              return E_CREATE_FAIL;             /* There is no free QUEUE control block */
+     83          }
+     84          
+     85          
+     86          /**
+     87           *******************************************************************************
+     88           * @brief      Delete a queue
+     89           * @param[in]  id     Event ID.
+     90           * @param[in]  opt    Delete option.
+     91           * @param[out] None
+     92           * @retval     E_INVALID_ID         Invalid event ID.
+     93           * @retval     E_INVALID_PARAMETER  Invalid parameter.
+     94           * @retval     E_TASK_WAITTING      Tasks waitting for the event,delete fail.
+     95           * @retval     E_OK                 Event deleted successful.
+     96           *
+     97           * @par Description
+     98           * @details    This function is called to delete a queue.
+     99           * @note
+    100           *******************************************************************************
+    101           */
+    102          StatusType CoDelQueue(OS_EventID id,U8 opt)
+    103          {
+    104              P_ECB   pecb;
+    105              P_QCB   pqcb;
+    106              StatusType err;
+    107          #if CFG_PAR_CHECKOUT_EN >0
+    108              if(id >= CFG_MAX_EVENT)
+    109              {
+    110                  return E_INVALID_ID;            /* Invalid id,return error            */
+    111              }
+    112          #endif
+    113          
+    114              pecb = &EventTbl[id];
+    115          #if CFG_PAR_CHECKOUT_EN >0
+    116              if( pecb->eventType != EVENT_TYPE_QUEUE)
+    117              {
+    118                  return E_INVALID_ID;            /* The event is not queue,return error*/
+    119              }
+    120          #endif
+    121              pqcb = (P_QCB)pecb->eventPtr;       /* Point at queue control block       */
+    122              err  = DeleteEvent(pecb,opt);       /* Delete the event control block     */
+    123              if(err == E_OK)                   /* If the event block have been deleted */
+    124              {
+    125                  QueueIDVessel &= ~((U32)(1<<(pqcb->id)));   /* Update free queue list             */
+    126                  pqcb->qStart   = Co_NULL;
+    127          		    pqcb->id       = 0;
+    128                  pqcb->head     = 0;
+    129                  pqcb->tail     = 0;
+    130                  pqcb->qMaxSize = 0;
+    131                  pqcb->qSize    = 0;
+    132              }
+    133              return err;
+    134          }
+    135          
+    136          
+    137          
+    138          /**
+    139           *******************************************************************************
+    140           * @brief      Accept a mail from queue
+    141           * @param[in]  id     Event ID.
+    142           * @param[out] perr   A pointer to error code.
+    143           * @retval     Co_NULL
+    144           * @retval     A pointer to mail accepted.
+    145           *
+    146           * @par Description
+    147           * @details    This function is called to accept a mail from queue.
+    148           * @note
+    149           *******************************************************************************
+    150           */
+    151          void* CoAcceptQueueMail(OS_EventID id,StatusType* perr)
+    152          {
+    153            P_ECB pecb;
+    154            P_QCB pqcb;
+    155            void* pmail;
+    156          #if CFG_PAR_CHECKOUT_EN >0
+    157              if(id >= CFG_MAX_EVENT)
+    158              {
+    159                  *perr = E_INVALID_ID;           /* Invalid id,return error            */
+    160                  return Co_NULL;
+    161              }
+    162          #endif
+    163          
+    164              pecb = &EventTbl[id];
+    165          #if CFG_PAR_CHECKOUT_EN >0
+    166              if(pecb->eventType != EVENT_TYPE_QUEUE)/* Invalid event control block type*/
+    167              {
+    168                  *perr = E_INVALID_ID;
+    169                  return Co_NULL;
+    170              }
+    171          #endif
+    172              pqcb = (P_QCB)pecb->eventPtr;       /* Point at queue control block       */
+    173          	OsSchedLock();
+    174              if(pqcb->qSize != 0)            /* If there are any messages in the queue */
+    175              {
+    176                  /* Extract oldest message from the queue */
+    177                  pmail = *(pqcb->qStart + pqcb->head);
+    178                  pqcb->head++;                   /* Update the queue head              */
+    179                  pqcb->qSize--;          /* Update the number of messages in the queue */
+    180                  if(pqcb->head == pqcb->qMaxSize)
+    181                  {
+    182                      pqcb->head = 0;
+    183                  }
+    184          		OsSchedUnlock();
+    185                  *perr = E_OK;
+    186                  return pmail;                   /* Return message received            */
+    187              }
+    188              else                                /* If there is no message in the queue*/
+    189              {
+    190          		OsSchedUnlock();
+    191                  *perr = E_QUEUE_EMPTY;
+    192                  return Co_NULL;                    /* Return Co_NULL                        */
+    193              }
+    194          }
+    195          
+    196          
+    197          
+    198          /**
+    199           *******************************************************************************
+    200           * @brief      Pend for a mail
+    201           * @param[in]  id       Event ID.
+    202           * @param[in]  timeout  The longest time for writting mail.
+    203           * @param[out] perr     A pointer to error code.
+    204           * @retval     Co_NULL
+    205           * @retval     A pointer to mail accept.
+    206           *
+    207           * @par Description
+    208           * @details    This function is called to wait for a mail.
+    209           * @note
+    210           *******************************************************************************
+    211           */
+    212          void* CoPendQueueMail(OS_EventID id,U32 timeout,StatusType* perr)
+    213          {
+    214              P_ECB   pecb;
+    215              P_QCB   pqcb;
+    216              P_OSTCB curTCB;
+    217              void*   pmail;
+    218              if(OSIntNesting > 0)                /* If the caller is ISR               */
+    219              {
+    220                  *perr = E_CALL;
+    221                  return Co_NULL;
+    222              }
+    223          #if CFG_PAR_CHECKOUT_EN >0
+    224              if(id >= CFG_MAX_EVENT)
+    225              {
+    226                  *perr = E_INVALID_ID;           /* Invalid event id,return error      */
+    227                  return Co_NULL;
+    228              }
+    229          #endif
+    230          
+    231              pecb = &EventTbl[id];
+    232          #if CFG_PAR_CHECKOUT_EN >0
+    233              if(pecb->eventType != EVENT_TYPE_QUEUE) /* The event type is not queue    */
+    234              {
+    235                  *perr = E_INVALID_ID;
+    236                  return Co_NULL;
+    237              }
+    238          #endif
+    239              if(OSSchedLock != 0)                /* Judge schedule is locked or not?   */
+    240              {
+    241                  *perr = E_OS_IN_LOCK;           /* Schedule is locked,return error    */
+    242                  return Co_NULL;
+    243              }
+    244              pqcb = (P_QCB)pecb->eventPtr;       /* Point at queue control block       */
+    245              OsSchedLock();
+    246              if(pqcb->qSize != 0)            /* If there are any messages in the queue */
+    247              {
+    248                  /* Extract oldest message from the queue                              */
+    249                  pmail = *(pqcb->qStart + pqcb->head);
+    250                  pqcb->head++;                   /* Update the queue head              */
+    251                  pqcb->qSize--;          /* Update the number of messages in the queue */
+    252                  if(pqcb->head == pqcb->qMaxSize)/* Check queue head                   */
+    253                  {
+    254                      pqcb->head = 0;
+    255                  }
+    256                  OsSchedUnlock();
+    257                  *perr = E_OK;
+    258                  return pmail;                   /* Return message received            */
+    259              }
+    260              else                                /* If there is no message in the queue*/
+    261              {
+    262              	OsSchedUnlock();
+    263                  curTCB = TCBRunning;
+    264                  if(timeout == 0)                /* If time-out is not configured      */
+    265                  {
+    266                      /* Block current task until the event occur                       */
+    267                      EventTaskToWait(pecb,curTCB); 
+    268                      
+    269                      /* Have recived message or the queue have been deleted            */
+    270                      OsSchedLock(); 
+    271                      pmail = curTCB->pmail;              
+    272                      curTCB->pmail = Co_NULL;
+    273                      pqcb->head++;                             /* Clear event sign         */
+    274                      pqcb->qSize--;
+    275                      if(pqcb->head == pqcb->qMaxSize)
+    276                      {
+    277                          pqcb->head = 0;	
+    278                      }
+    279                      OsSchedUnlock();
+    280                      *perr = E_OK;
+    281                      return pmail;               /* Return message received or Co_NULL    */
+    282                  }
+    283                  else                            /* If time-out is configured          */
+    284                  {
+    285                      OsSchedLock(); 
+    286                 
+    287                      /* Block current task until event or timeout occurs               */           
+    288                      EventTaskToWait(pecb,curTCB);       
+    289                      InsertDelayList(curTCB,timeout);
+    290                      OsSchedUnlock();
+    291                      if(curTCB->pmail == Co_NULL)   /* If time-out occurred               */
+    292                      {
+    293                          *perr = E_TIMEOUT;
+    294                          return Co_NULL;
+    295                      }
+    296                      else                        /* If event occured                   */
+    297                      {
+    298                          OsSchedLock();
+    299                          pmail = curTCB->pmail;              
+    300                          curTCB->pmail = Co_NULL;
+    301                          pqcb->head++;                             /* Clear event sign         */
+    302                          pqcb->qSize--;
+    303                          if(pqcb->head == pqcb->qMaxSize)
+    304                          {
+    305                              pqcb->head = 0;	
+    306                          }
+    307                          OsSchedUnlock();
+    308                          *perr = E_OK;
+    309                          return pmail;           /* Return message received or Co_NULL    */
+    310                      }				
+    311                  }	
+    312              }
+    313          }
+    314          
+    315          
+    316          
+    317          /**
+    318           *******************************************************************************
+    319           * @brief      Post a mail to queue
+    320           * @param[in]  id      Event ID.
+    321           * @param[in]  pmail   Pointer to mail that want to send.
+    322           * @param[out] None
+    323           * @retval     E_OK
+    324           * @retval     E_INVALID_ID
+    325           * @retval     E_QUEUE_FULL
+    326           *
+    327           * @par Description
+    328           * @details    This function is called to post a mail to queue.
+    329           * @note
+    330           *******************************************************************************
+    331           */
+    332          StatusType CoPostQueueMail(OS_EventID id,void* pmail)
+    333          {
+    334              P_ECB pecb;
+    335              P_QCB pqcb;
+    336          #if CFG_PAR_CHECKOUT_EN >0
+    337              if(id >= CFG_MAX_EVENT)
+    338              {
+    339                  return E_INVALID_ID;
+    340              }
+    341          #endif
+    342          
+    343              pecb = &EventTbl[id];
+    344          #if CFG_PAR_CHECKOUT_EN >0
+    345              if(pecb->eventType != EVENT_TYPE_QUEUE)
+    346              {
+    347                  return E_INVALID_ID;            /* The event type isn't queue,return  */
+    348              }
+    349          #endif
+    350              pqcb = (P_QCB)pecb->eventPtr;
+    351              if(pqcb->qSize == pqcb->qMaxSize)   /* If queue is full                   */
+    352              {
+    353                  return E_QUEUE_FULL;
+    354              }
+    355              else                                /* If queue is not full               */
+    356              {
+    357                  OsSchedLock();
+    358                  *(pqcb->qStart + pqcb->tail) = pmail;   /* Insert message into queue  */
+    359                  pqcb->tail++;                           /* Update queue tail          */
+    360                  pqcb->qSize++;          /* Update the number of messages in the queue */
+    361                  if(pqcb->tail == pqcb->qMaxSize)        /* Check queue tail           */
+    362                  {
+    363                      pqcb->tail = 0;
+    364                  }
+    365                  EventTaskToRdy(pecb);           /* Check the event waiting list       */
+    366                  OsSchedUnlock();
+    367                  return E_OK;
+    368              }
+    369          }
+    370          
+    371          
+    372          /**
+    373           *******************************************************************************
+    374           * @brief      Post a mail to queue in ISR
+    375           * @param[in]  id      Event ID.
+    376           * @param[in]  pmail   Pointer to mail that want to send.
+    377           * @param[out] None
+    378           * @retval     E_OK
+    379           * @retval     E_INVALID_ID
+    380           * @retval     E_QUEUE_FULL
+    381           *
+    382           * @par Description
+    383           * @details    This function is called in ISR to post a mail to queue.
+    384           * @note
+    385           *******************************************************************************
+    386           */
+    387          #if CFG_MAX_SERVICE_REQUEST > 0
+    388          StatusType isr_PostQueueMail(OS_EventID id,void* pmail)
+    389          {
+    390              if(OSSchedLock > 0)         /* If scheduler is locked,(the caller is ISR) */
+    391              {
+    392                  /* Insert the request into service request queue                      */
+    393                  if(InsertInSRQ(QUEUE_REQ,id,pmail) == Co_FALSE)
+    394                  {
+    395                      return E_SEV_REQ_FULL;      /* If service request queue is full   */
+    396                  }
+    397                  else  /* If the request have been inserted into service request queue */
+    398                  {
+    399                      return E_OK;
+    400                  }
+    401              }
+    402              else                                /* The scheduler is unlocked          */
+    403              {
+    404                  return(CoPostQueueMail(id,pmail));    /* Send the message to the queue*/
+    405              }
+    406          }
+    407          
+    408          StatusType isr_PostQueueMailWithWaterMark(OS_EventID id,void* pmail)
+    409          {
+    410              if(OSSchedLock > 0)         /* If scheduler is locked,(the caller is ISR) */
+    411              {
+    412                  /* Insert the request into service request queue                      */
+    413                  if(InsertInSRQWithWaterMark(QUEUE_REQ,id,pmail) == Co_FALSE)
+    414                  {
+    415                      return E_SEV_REQ_FULL;      /* If service request queue is full   */
+    416                  }
+    417                  else  /* If the request have been inserted into service request queue */
+    418                  {
+    419                      return E_OK;
+    420                  }
+    421              }
+    422              else                                /* The scheduler is unlocked          */
+    423              {
+    424                  return(CoPostQueueMail(id,pmail));    /* Send the message to the queue*/
+    425              }
+    426          }
+    427          
+    428          
+    429          #endif
+    430          
+    431          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       24  CoAcceptQueueMail
+             24 -> OsSchedUnlock
+       24  CoCreateQueue
+             24 -> CreatEvent
+             24 -> OsSchedUnlock
+       24  CoDelQueue
+             24 -> DeleteEvent
+       32  CoPendQueueMail
+             32 -> EventTaskToWait
+             32 -> InsertDelayList
+             32 -> OsSchedUnlock
+       24  CoPostQueueMail
+             24 -> EventTaskToRdy
+             24 -> OsSchedUnlock
+       16  isr_PostQueueMail
+             16 -> CoPostQueueMail
+             16 -> InsertInSRQ
+       16  isr_PostQueueMailWithWaterMark
+             16 -> CoPostQueueMail
+             16 -> InsertInSRQWithWaterMark
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable6
+       4  ??DataTable6_1
+       4  ??DataTable6_2
+       4  ??DataTable6_3
+       4  ??DataTable6_4
+       4  ??DataTable6_5
+      98  CoAcceptQueueMail
+     180  CoCreateQueue
+      94  CoDelQueue
+     352  CoPendQueueMail
+      88  CoPostQueueMail
+       4  QueueIDVessel
+      32  QueueTbl
+      50  isr_PostQueueMail
+      50  isr_PostQueueMailWithWaterMark
+
+ 
+  36 bytes in section .bss
+ 936 bytes in section .text
+ 
+ 936 bytes of CODE memory
+  36 bytes of DATA memory
+
+Errors: none
+Warnings: none

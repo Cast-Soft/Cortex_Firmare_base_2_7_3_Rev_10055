@@ -1,0 +1,1883 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     21/Mar/2019  12:17:17 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\App\hardware.c                                      #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\App\hardware.c" -D BEACON_APP -D                    #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D BOOTLOADER -D   #
+#                    EE_M24C02 -D TASKS_PROFILE -D BATTERY_CHECK -D           #
+#                    CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D     #
+#                    OLD_CONFIG -D CIRCULAR_LOG -D msgmethod1 -lcN            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\" -o                      #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\" --no_cse --no_unroll     #
+#                    --no_inline --no_code_motion --no_tbaa --no_clustering   #
+#                    --no_scheduling --debug --endian=little --cpu=Cortex-M3  #
+#                    -e --fpu=None --dlib_config "C:\Program Files (x86)\IAR  #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\Source Code\BLKT-01 Beacon\Source\firmware\beacon -    #
+#                    Copy\IAR\..\App\" -I "C:\Users\User\Documents\Cortex_git #
+#                    \BLKT-01.git\Source Code\BLKT-01                         #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    Copy\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\ #
+#                    Source Code\BLKT-01 Beacon\Source\firmware\beacon -      #
+#                    Copy\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Sourc #
+#                    e Code\BLKT-01 Beacon\Source\firmware\beacon -           #
+#                    Copy\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source   #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\..\..\common\" -I "C:\Users\User\Documents\Cort #
+#                    ex_git\BLKT-01.git\Source Code\BLKT-01                   #
+#                    Beacon\Source\firmware\beacon - Copy\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\List\hardware.lst              #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    Copy\IAR\Debug-Bootloader\Obj\hardware.o                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\Source Code\BLKT-01 Beacon\Source\firmware\beacon - Copy\App\hardware.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : hardware.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 6/2/2011
+      8          * Description        : ?
+      9          *******************************************************************************/
+     10          /*
+     11              NVIC Priority (Highest first):
+     12                  - OTG_FS_IRQ
+     13                  - TIM3_IRQn
+     14                  - SPI3_IRQn (SPI_RADIO_IRQn)
+     15                  - EXTI2_IRQn (GPI_RADIO_GPIO0_IRQn)
+     16                  - EXTI1_IRQn (GPI_RADIO_GPIO1_IRQn)
+     17                  - DMA1_Channel4_IRQn (SPI_IMU_RX_DMA_IRQ)
+     18                  - EXTI15_10_IRQn (GPI_IMU_DIO1_IRQn)
+     19                  - TIM6_IRQn
+     20                  - TIM5_IRQn
+     21                  - TIM2_IRQn
+     22          */
+     23          
+     24          /* INCLUDES ------------------------------------------------------------------*/
+     25          #include "hardware.h"
+     26          #include "stm32f10x_gpio.h"
+     27          #include "stm32f10x_spi.h"
+     28          #include "stm32f10x_usart.h"
+     29          #include "stm32f10x_dma.h"
+     30          #include "stm32f10x_exti.h"
+     31          #include "stm32f10x_iwdg.h"
+     32          #include "stm32f10x_dbgmcu.h"
+     33          #include "stm32f10x_adc.h"
+     34          #include "tasks.h"
+     35          #include "stm32f10x_i2c.h"
+     36          #include "i2c_ee.h"
+     37          
+     38          #include "CoOS.h"
+     39          
+     40          #ifdef STDIO_TO_USART
+     41          #include <yfuns.h>
+     42          #endif
+     43          
+     44          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     45          
+     46          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     47          
+     48          //#define STDIO_TO_USART
+     49          
+     50          /* PRIVATE MACROS ------------------------------------------------------------*/
+     51          
+     52          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     53          
+     54          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     55          
+     56          static U64          SysTickTimerExp = 0;
+     57          
+     58          // This is the SPI command string sent to the IMU to trigger a burst read of all registers
+     59          // We only read the 1st 7 which include xGyro,YGyro,ZGyro,x Accl,Yaccl, Zaccl
+     60          
+     61          //const uint16_t spiIMUTxBuf[8] = {0x3E00, 0, 0, 0, 0, 0, 0, 0};
+     62          // Read and auto inc add = 0xC000 | address 0x2800
+     63          const uint16_t spiIMUTxBuf[8] = {0xC000 | 0x2800, 0, 0, 0, 0 ,0 ,0 ,0};
+     64          
+     65          #define I2C_Speed              200000
+     66          #define I2C_SLAVE_ADDRESS7     0xA0
+     67          uint16_t EEPROM_ADDRESS = 0xA0;
+     68          
+     69          //BC_HW_REVJ pin mapping
+     70          /* GPI_RADIO_GPIO0, GPI_RADIO_GPIO1, GPI_RADIO_GPIO2, GPI_SW_PWR, GPI_IMU_DIO1, GPI_IMU_DIO2, GPI_IRLED_DAC */
+     71          		GPIO_TypeDef*	GPI_PORT[] = {GPI_RADIO_GPIO0_PORT, GPI_RADIO_GPIO1_PORT, GPI_RADIO_GPIO2_PORT, GPI_SW_PWR_PORT, GPI_IMU_INT_PORT, GPI_INK_BUSY_PORT, GPI_IRLED_DAC_PORT, GPI_USB_VBUS_PORT,
+     72                                                GPI_VBAT_ADC_PORT,GPI_CHG_STAT_PORT, GPI_AtoDin3_PORT, GPI_RADIO_GPIO5_PORT};
+     73          
+     74          const uint32_t          GPI_CLK[] =  {GPI_RADIO_GPIO0_CLK,  GPI_RADIO_GPIO1_CLK,  GPI_RADIO_GPIO2_CLK,  GPI_SW_PWR_CLK,  GPI_IMU_INT_CLK, GPI_INK_BUSY_CLK, GPI_IRLED_DAC_CLK, GPI_USB_VBUS_CLK,
+     75                                                GPI_VBAT_ADC_CLK, GPI_CHG_STAT_CLK, GPI_AtoDin3_CLK, GPI_RADIO_GPIO5_CLK };
+     76          
+     77          const uint16_t          GPI_PIN[] =  {GPI_RADIO_GPIO0_PIN,  GPI_RADIO_GPIO1_PIN,  GPI_RADIO_GPIO2_PIN,  GPI_SW_PWR_PIN,  GPI_IMU_INT_PIN, GPI_INK_BUSY_PIN, GPI_IRLED_DAC_PIN,GPI_USB_VBUS_PIN,
+     78                                                GPI_VBAT_ADC_PIN, GPI_CHG_STAT_PIN, GPI_AtoDin3_PIN, GPI_RADIO_GPIO5_PIN};
+     79          
+     80          const GPIOMode_TypeDef  GPI_TYPE[] = {GPI_RADIO_GPIO0_TYPE, GPI_RADIO_GPIO1_TYPE, GPI_RADIO_GPIO2_TYPE, GPI_SW_PWR_TYPE, GPI_IMU_INT_TYPE, GPI_INK_BUSY_TYPE, GPI_IRLED_DAC_TYPE, GPI_USB_VBUS_TYPE,
+     81                                                GPI_VBAT_ADC_TYPE,GPI_CHG_STAT_TYPE, GPI_AtoDin3_TYPE, GPI_RADIO_GPIO5_TYPE  };
+     82          									  
+     83          /* GPO_RADIO_GPIO2, GPO_PWRON, GPO_IRLED0, GPO_IRLED1, GPO_IRLED2, GPO_TP10, GPO_TP11, GPO_TP12 */
+     84                GPIO_TypeDef*     GPO_PORT[] = {GPO_RADIO_GPIO2_PORT, GPO_PWRON_PORT, GPO_IRLED0_PORT, GPO_IRLED1_PORT, GPO_IRLED2_PORT, GPO_TP6_PORT, GPO_TP7_PORT, GPO_TP10_PORT, GPO_2520_RST_PORT,
+     85                                                GPO_RF_EN_PORT, GPO_5V_IMU_EN_PORT, GPO_VBATT_ADC_EN_PORT, GPO_RF_HGM_PORT, GPO_TP5_PORT, GPO_IMU_CLK_PORT, GPO_USB_VBUS_PORT, GPO_IMU_FSYNC_PORT, GPO_INK_RST_PORT};
+     86          const uint32_t          GPO_CLK[] =  {GPO_RADIO_GPIO2_CLK,  GPO_PWRON_CLK,  GPO_IRLED0_CLK,  GPO_IRLED1_CLK,  GPO_IRLED2_CLK,  GPO_TP6_CLK,  GPO_TP7_CLK,  GPO_TP10_CLK, GPO_2520_RST_CLK,
+     87                                                GPO_RF_EN_CLK, GPO_5V_IMU_EN_CLK, GPO_VBATT_ADC_EN_CLK, GPO_RF_HGM_CLK, GPO_TP5_CLK, GPO_IMU_CLK_CLK, GPO_USB_VBUS_CLK, GPO_IMU_FSYNC_CLK, GPO_INK_RST_CLK};
+     88          const uint16_t          GPO_PIN[] =  {GPO_RADIO_GPIO2_PIN,  GPO_PWRON_PIN,  GPO_IRLED0_PIN,  GPO_IRLED1_PIN,  GPO_IRLED2_PIN,  GPO_TP6_PIN,  GPO_TP7_PIN,  GPO_TP10_PIN, GPO_2520_RST_PIN,
+     89                                                GPO_RF_EN_PIN, GPO_5V_IMU_EN_PIN, GPO_VBATT_ADC_EN_PIN, GPO_RF_HGM_PIN, GPO_TP5_PIN, GPO_IMU_CLK_PIN, GPO_USB_VBUS_PIN, GPO_IMU_FSYNC_PIN, GPO_INK_RST_PIN};
+     90          
+     91          /* BUTTON1, BUTTON2 */
+     92                GPIO_TypeDef*     BUTTON_PORT[] = {BUTTON1_PORT, BUTTON2_PORT};
+     93          const uint32_t          BUTTON_CLK[] =  {BUTTON1_CLK, BUTTON2_CLK};
+     94          const uint16_t          BUTTON_PIN[] =  {BUTTON1_PIN, BUTTON2_PIN};
+     95          
+     96          /* COM1 */
+     97                USART_TypeDef*    COM_USART[] =     {COM1_USART};
+     98          const uint32_t          COM_USART_CLK[] = {COM1_USART_CLK};
+     99          const uint32_t          COM_REMAP[] =     {COM1_REMAP};
+    100                GPIO_TypeDef*     COM_PORT[] =      {COM1_PORT};
+    101          const uint32_t          COM_CLK[] =       {COM1_CLK};
+    102          const uint16_t          COM_PIN_RX[] =    {COM1_PIN_RX};
+    103          const uint16_t          COM_PIN_TX[] =    {COM1_PIN_TX};
+    104          
+    105          /* SPI_RADIO, SPI_IMU */
+    106                SPI_TypeDef*      SPI_SPI[] =      {SPI_RADIO_IMU_SPI, SPI_INK_SPI};
+    107          const uint32_t          SPI_SPI_CLK[] =  {SPI_RADIO_IMU_SPI_CLK, SPI_INK_SPI_CLK};
+    108          const uint32_t          SPI_REMAP[] =    {SPI_RADIO_IMU_REMAP, SPI_INK_REMAP};
+    109                GPIO_TypeDef*     SPI_PORT[] =     {SPI_RADIO_IMU_PORT, SPI_INK_PORT};
+    110          const uint32_t          SPI_CLK[] =      {SPI_RADIO_IMU_CLK, SPI_INK_CLK};
+    111          const uint16_t          SPI_PIN_SCK[] =  {SPI_RADIO_IMU_PIN_SCK, SPI_INK_PIN_SCK};
+    112          const uint16_t          SPI_PIN_MOSI[] = {SPI_RADIO_IMU_PIN_MOSI, SPI_INK_PIN_MOSI};
+    113          const uint16_t          SPI_PIN_MISO[] = {SPI_RADIO_IMU_PIN_MISO, SPI_INK_PIN_MISO};
+    114                GPIO_TypeDef*     SPI_SS_PORT[] =  {SPI_RADIO_SS_PORT, SPI_INK_SS_PORT, SPI_IMU_SS_PORT};
+    115          const uint16_t          SPI_SS_CLK[] =   {SPI_RADIO_SS_CLK,  SPI_INK_SS_CLK, SPI_IMU_SS_CLK};
+    116          const uint16_t          SPI_SS_PIN[] =   {SPI_RADIO_SS_PIN,  SPI_INK_SS_PIN, SPI_IMU_SS_PIN};
+    117          
+    118          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+    119          
+    120          //volatile uint8_t spiIMURxBufDma[16];
+    121          //volatile uint16_t spiIMURxBuf[8];
+    122          volatile ImuBuffer_t ImuGyroBuffer, ImuAccelBuffer;
+    123          
+    124          
+    125          Batt_Union_t BattUnion, *pBattUnion;
+    126          
+    127          ARM_proc_SN_t ARM_proc_SN;
+    128          
+    129          uint16_t imu_data_test, imu_data_test2,imu_data_test3;
+    130          
+    131          extern void IMURegWr(uint8_t addr, uint8_t Sensor, uint16_t val);
+    132          extern uint16_t IMURegRd(uint8_t addr, uint8_t Sensor);
+    133          
+    134          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+    135          static void HwTIM1Init(void);
+    136          static void HwTIM3Init(void);
+    137          static void HwTIM4Init(void);
+    138          static void HwTIM5Init(void);
+    139          static void HwTIM6Init(void);
+    140          
+    141          static void HwRadioSPIInit(void);
+    142          #ifndef BC_HW_REVJ
+    143          static void HwIMUPeriphInit(void);
+    144          #else
+    145          static void HwInkPeriphInit(void);
+    146          #endif
+    147          static void HwDACInit(void);
+    148          static void HwAtoDInit(void);
+    149          static void HwGPOInitAF(HwGPO_TypeDef GPO);
+    150          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+    151          
+    152          /*******************************************************************************
+    153          * Description : Initialization of TIM1 (Timer for external IMU clock or triggers Non IMU sends)
+    154          *               this is used to start the IMU samples so they end at the right time for TxSlot assigned
+    155          *               ideally it should be set to 10ms but to ensure that it is faster than the RF Tx period
+    156          *               which is 50ms) we target 9.5ms (47.5ms for 5 packets) giving us a 2.5ms gaurd band
+    157          * Input       : -
+    158          * Return      : -
+    159          *******************************************************************************/
+    160          void HwTIM1Init(void) {
+    161              TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    162              TIM_ICInitTypeDef TIM_ICInitStructure;
+    163              NVIC_InitTypeDef NVIC_InitStructure;
+    164          
+    165              TIM_DeInit(TIM1);
+    166              TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+    167              DBGMCU_Config(DBGMCU_TIM1_STOP, ENABLE);
+    168              RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
+    169          
+    170              TIM_TimeBaseStructure.TIM_Prescaler = 1199 ;     //3600 prescall = 20khz//
+    171              TIM_TimeBaseStructure.TIM_Period = 59999;       // try: change to 10: to send faster.    21 count = 9.5 hz (pwm'd to give 9.5hz sq wave
+    172          
+    173              TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    174              TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    175              TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure);
+    176          
+    177              TIM_ARRPreloadConfig(TIM1, ENABLE); // ARR Preload Enable
+    178          
+    179              TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
+    180          
+    181              // Enable and Set Interrupt Priority
+    182              NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_IRQn;
+    183              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 9; // 9th Highest
+    184              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    185              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    186              NVIC_Init(&NVIC_InitStructure);
+    187          
+    188              TIM_Cmd(TIM1, ENABLE);
+    189          }
+    190          
+    191          
+    192          /*******************************************************************************
+    193          * Description : Initialization of TIM2 (10Hz Radio TX Inhibit)
+    194          * Input       : -
+    195          * Return      : -
+    196          *******************************************************************************/
+    197          static void HwTIM2Init(void) {
+    198              TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    199              TIM_ICInitTypeDef TIM_ICInitStructure;
+    200              NVIC_InitTypeDef NVIC_InitStructure;
+    201          
+    202              TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+    203          
+    204              /* Stop TIM2 when in debugger */
+    205              DBGMCU_Config(DBGMCU_TIM2_STOP, ENABLE);
+    206          
+    207              /* TIM2 configuration */
+    208              RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+    209              TIM_TimeBaseStructure.TIM_Prescaler = 119;      // 72MHz/120 = 600.0kHz
+    210              TIM_TimeBaseStructure.TIM_Period = TIM_AUTORELOAD; //59999;       // 600.0khz/60,000 = 10Hz
+    211              TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    212              TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    213              TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+    214          
+    215              /* Configure Input Capture 1 */
+    216              TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;
+    217              TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
+    218              TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
+    219              TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+    220              TIM_ICInitStructure.TIM_ICFilter = 0x0;
+    221              TIM_ICInit(TIM2, &TIM_ICInitStructure);
+    222          
+    223              /* Configure Output Compare 2 & 3 */
+    224              TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);
+    225              TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable);
+    226            // Trigger IMU start
+    227                 TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable);
+    228          
+    229              TIM_ARRPreloadConfig(TIM2, ENABLE); // ARR Preload Enable
+    230              TIM_Cmd(TIM2, ENABLE);
+    231          
+    232              /* Enable the Capture Compare 2 & 3 Interrupt Request */
+    233              TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+    234              TIM_ITConfig(TIM2, TIM_IT_CC2, ENABLE);
+    235              TIM_ITConfig(TIM2, TIM_IT_CC3, ENABLE);
+    236              TIM_ITConfig(TIM2, TIM_IT_CC4, ENABLE);
+    237          
+    238              /* Enable and Set Interrupt Priority */
+    239              NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+    240              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;//0; //  Highest
+    241              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    242              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    243              NVIC_Init(&NVIC_InitStructure);
+    244          }
+    245          
+    246          /*******************************************************************************
+    247          * Description : Initialization of TIM3 (100Hz IRLED)
+    248          * Input       : -
+    249          * Return      : -
+    250          *******************************************************************************/
+    251          static void HwTIM3Init(void) {
+    252              TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    253              TIM_ICInitTypeDef TIM_ICInitStructure;
+    254              NVIC_InitTypeDef NVIC_InitStructure;
+    255          
+    256              TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+    257          
+    258              /* Stop TIM3 when in debugger */
+    259              DBGMCU_Config(DBGMCU_TIM3_STOP, ENABLE);
+    260          
+    261              /* TIM3 configuration */
+    262              RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+    263              TIM_TimeBaseStructure.TIM_Prescaler = 23; // 3MHz //11;       // 72MHz/12 = 6.000MHz
+    264              TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Down; //TIM_CounterMode_Up;
+    265              TIM_TimeBaseStructure.TIM_Period = TIM3_AUTORELOAD; /*29999*///TIM_AUTORELOAD; //5999; //59999;       // 6.000Mhz/60,000 = 100Hz
+    266              TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    267              TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+    268          
+    269              /* Configure Input Capture 1 */
+    270              TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;
+    271              TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
+    272              TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
+    273              TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+    274              TIM_ICInitStructure.TIM_ICFilter = 0x0;
+    275              TIM_ICInit(TIM3, &TIM_ICInitStructure);
+    276          
+    277              /* Configure Output Compare 2 & 3 */
+    278              TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable);
+    279              TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable);
+    280          
+    281           //   TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Enable);
+    282          // for outgoung Tx slot data capture start
+    283          
+    284              TIM_ARRPreloadConfig(TIM3, ENABLE); // ARR Preload Enable
+    285              TIM_Cmd(TIM3, ENABLE);
+    286          
+    287              /* Enable the Capture Compare 2 & 3 Interrupt Request */
+    288              TIM_ITConfig(TIM3, TIM_IT_CC2, ENABLE);
+    289              TIM_ITConfig(TIM3, TIM_IT_CC3, ENABLE);
+    290              TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+    291              /* Enable and Set Interrupt Priority */
+    292              NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+    293              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;// changed to 0 from 2 - with IMU ON LED id may jump 2;//1; // 1st Highest
+    294              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    295              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    296              NVIC_Init(&NVIC_InitStructure);
+    297          }
+    298          
+    299          #ifdef USE_TIM4
+    300          /*******************************************************************************
+    301          * Description : Initialization of TIM4 (Beacon 10Hz RF-Sync Freq Measurement)
+    302          * Input       : -
+    303          * Return      : -
+    304          *******************************************************************************/
+    305          static void HwTIM4Init(void) {
+    306              TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    307              TIM_ICInitTypeDef TIM_ICInitStructure;
+    308          
+    309              TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+    310          
+    311              /* Stop TIM4 when in debugger */
+    312              DBGMCU_Config(DBGMCU_TIM4_STOP, ENABLE);
+    313          
+    314              /* TIM4 configuration */
+    315              RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+    316              TIM_TimeBaseStructure.TIM_Prescaler = 11; //239;      // 72MHz/240 = 300.0kHz
+    317              TIM_TimeBaseStructure.TIM_Period = 59999; //0xFFFF;      // max 218ms
+    318              TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    319              TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    320              TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
+    321          
+    322              /* Configure Input Capture 1 */
+    323          #if 1
+    324              TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;
+    325              TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
+    326              TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
+    327              TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+    328              TIM_ICInitStructure.TIM_ICFilter = 0x0;
+    329              TIM_ICInit(TIM4, &TIM_ICInitStructure);
+    330          #endif
+    331              TIM_ARRPreloadConfig(TIM4, ENABLE); // ARR Preload Enable
+    332              TIM_Cmd(TIM4, ENABLE);
+    333          }
+    334          #endif
+    335          
+    336          /*******************************************************************************
+    337          * Description : Initialization of TIM5 (STXONCCA Retries)
+    338          * Input       : -
+    339          * Return      : -
+    340          *******************************************************************************/
+    341          static void HwTIM5Init(void) {
+    342              TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    343              NVIC_InitTypeDef NVIC_InitStructure;
+    344          
+    345              TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+    346          
+    347              /* Stop TIM5 when in debugger */
+    348              DBGMCU_Config(DBGMCU_TIM5_STOP, ENABLE);
+    349          
+    350              /* TIM5 configuration */
+    351              RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
+    352              TIM_TimeBaseStructure.TIM_Prescaler = 71;       // 72MHz/72 = 1MHz
+    353              TIM_TimeBaseStructure.TIM_Period = 999;         // 1ms
+    354              TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Down;
+    355              TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    356              TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
+    357          
+    358              TIM5->CR1 &= ~TIM_CR1_ARPE;     // ARR Preload Disable
+    359              TIM5->CR1 |= TIM_CR1_OPM;       // One-Pulse Mode
+    360              TIM5->CR1 |= TIM_CR1_URS;       // Only Counter OF/UF generates UEV
+    361              TIM5->CR1 &= ~TIM_CR1_UDIS;     // UEV Enabled
+    362          
+    363              /*  Clear and Enable the Update Interrupt Request */
+    364              TIM_ClearITPendingBit(TIM5, TIM_IT_Update);
+    365              TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE);
+    366          
+    367              /* Enable and Set Interrupt Priority */
+    368              NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
+    369              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 8; // 8th Highest
+    370              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    371              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    372              NVIC_Init(&NVIC_InitStructure);
+    373          }
+    374          
+    375          #ifdef USE_TIM6
+    376          /*******************************************************************************
+    377          * Description : Initialization of TIM6 (TX_FRM_DONE to flagRadioTxDone Delay)
+    378          * Input       : -
+    379          * Return      : -
+    380          *******************************************************************************/
+    381          static void HwTIM6Init(void) {
+    382              TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+    383              NVIC_InitTypeDef NVIC_InitStructure;
+    384          
+    385              TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+    386          
+    387              /* Stop TIM6 when in debugger */
+    388              DBGMCU_Config(DBGMCU_TIM6_STOP, ENABLE);
+    389          
+    390              /* TIM6 configuration */
+    391              RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
+    392              TIM_TimeBaseStructure.TIM_Prescaler = 71;       // 72MHz/72 = 1MHz
+    393              TIM_TimeBaseStructure.TIM_Period = 349;         // 350us
+    394              TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Down;
+    395              TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    396              TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure);
+    397          
+    398              TIM6->CR1 &= ~TIM_CR1_ARPE;     // ARR Preload Disable
+    399              TIM6->CR1 |= TIM_CR1_OPM;       // One-Pulse Mode
+    400              TIM6->CR1 |= TIM_CR1_URS;       // Only Counter OF/UF generates UEV
+    401              TIM6->CR1 &= ~TIM_CR1_UDIS;     // UEV Enabled
+    402          
+    403              /*  Clear and Enable the Update Interrupt Request */
+    404              TIM_ClearITPendingBit(TIM6, TIM_IT_Update);
+    405              TIM_ITConfig(TIM6, TIM_IT_Update, ENABLE);
+    406          
+    407              /* Enable and Set Interrupt Priority */
+    408              NVIC_InitStructure.NVIC_IRQChannel = TIM6_IRQn;
+    409              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7; // 7th Highest
+    410              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    411              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    412              NVIC_Init(&NVIC_InitStructure);
+    413          }
+    414          
+    415          #endif
+    416          
+    417          /*******************************************************************************
+    418          * Description : Initialization of SPI peripheral used by the Radio
+    419          				RevJ: also initializes IMU chip select
+    420          * Input       : -
+    421          * Return      : -
+    422          *******************************************************************************/
+    423          static void HwRadioSPIInit(void) {
+    424              SPI_InitTypeDef SPI_InitStructure;
+    425              NVIC_InitTypeDef NVIC_InitStructure;
+    426          
+    427              /* Initialize SPI_RADIO */
+    428              SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    429              SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+    430              SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+    431              SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
+    432              SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
+    433              SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    434              SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8;
+    435              SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+    436              SPI_InitStructure.SPI_CRCPolynomial = 7;
+    437              HwSPIInit(SPI_RADIO, &SPI_InitStructure);
+    438          
+    439              /* Default to Disable RXNE Interrupt Request */
+    440              SPI_I2S_ITConfig(SPI_RADIO_IMU_SPI, SPI_I2S_IT_RXNE, DISABLE);
+    441          
+    442              /* Enable and Set Interrupt Priority */
+    443              NVIC_InitStructure.NVIC_IRQChannel = SPI_RADIO_IMU_IRQn;
+    444              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;//2; // 2nd Highest
+    445              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    446              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    447              NVIC_Init(&NVIC_InitStructure);
+    448          }
+    449          
+    450          #if 0
+    451          /*******************************************************************************
+    452          * Description : Initialization of Peripherals used by the IMU. RevH
+    453          * Input       : -
+    454          * Return      : -
+    455          *******************************************************************************/
+    456          static void HwIMUPeriphInit(void) {
+    457              SPI_InitTypeDef SPI_InitStructure;
+    458              DMA_InitTypeDef DMA_InitStructure;
+    459              NVIC_InitTypeDef NVIC_InitStructure;
+    460              EXTI_InitTypeDef EXTI_InitStructure;
+    461          
+    462              /* Initialize SPI_IMU */
+    463              SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    464              SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+    465              SPI_InitStructure.SPI_DataSize = SPI_DataSize_16b;
+    466              SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+    467              SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+    468              SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    469              SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;
+    470              SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+    471              SPI_InitStructure.SPI_CRCPolynomial = 7;
+    472              HwSPIInit(SPI_A_IMU, &SPI_InitStructure);
+    473          
+    474              /* Enable SPI_MASTER DMA Rx & Tx Request */
+    475              SPI_I2S_DMACmd(SPI_IMU_SPI, SPI_I2S_DMAReq_Rx, ENABLE);
+    476              SPI_I2S_DMACmd(SPI_IMU_SPI, SPI_I2S_DMAReq_Tx, ENABLE);
+    477          
+    478              /* Enable DMA clock for SPI_IMU */
+    479              RCC_AHBPeriphClockCmd(SPI_IMU_DMA_CLK, ENABLE);
+    480          
+    481              /* Initialize Rx DMA for SPI_IMU */
+    482              DMA_DeInit(SPI_IMU_RX_DMA_CHAN);
+    483              DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t) &(SPI_IMU_SPI->DR);
+    484              DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)spiIMURxBufDma;
+    485              DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+    486              DMA_InitStructure.DMA_BufferSize = sizeof(spiIMUTxBuf);
+    487              DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    488              DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    489              DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    490              DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    491              DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+    492              DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+    493              DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+    494              DMA_Init(SPI_IMU_RX_DMA_CHAN, &DMA_InitStructure);
+    495          
+    496              /* Initialize Tx DMA for SPI_IMU */
+    497              DMA_DeInit(SPI_IMU_TX_DMA_CHAN);
+    498              DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)spiIMUTxBuf;
+    499              DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+    500              DMA_InitStructure.DMA_BufferSize = sizeof(spiIMURxBufDma);
+    501              DMA_InitStructure.DMA_Priority = DMA_Priority_Low;
+    502              DMA_Init(SPI_IMU_TX_DMA_CHAN, &DMA_InitStructure);
+    503          
+    504              /* Enable DMA Channel Transfer Complete Interrupt Request */
+    505              DMA_ITConfig(SPI_IMU_RX_DMA_CHAN, DMA_IT_TC, ENABLE);
+    506          
+    507              /* Enable and Set Interrupt Priority */
+    508              NVIC_InitStructure.NVIC_IRQChannel = SPI_IMU_RX_DMA_IRQ;
+    509              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5; // 5th Highest
+    510              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    511              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    512              NVIC_Init(&NVIC_InitStructure);
+    513          
+    514              /* Configure GPI_IMU_DIO1 (PD.8) as EXTI Interrupt */
+    515          
+    516              // Connect EXTI Line to GPI_IMU_DIO1 Pin
+    517              GPIO_EXTILineConfig(GPI_IMU_DIO1_PORT_SRC, GPI_IMU_DIO1_PIN_SRC);
+    518              EXTI_InitStructure.EXTI_Line = GPI_IMU_DIO1_EXTI_LINE;
+    519              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    520              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    521              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    522              EXTI_Init(&EXTI_InitStructure);
+    523          
+    524              /* Configure GPI_IMU_DIO2 (PD.8) as EXTI Interrupt */
+    525              GPIO_EXTILineConfig(GPI_IMU_DIO2_PORT_SRC, GPI_IMU_DIO2_PIN_SRC);
+    526              EXTI_InitStructure.EXTI_Line = GPI_IMU_DIO2_EXTI_LINE;
+    527              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    528              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    529              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    530              EXTI_Init(&EXTI_InitStructure);
+    531          
+    532              // Enable and Set EXTI Interrupt Priority
+    533              NVIC_InitStructure.NVIC_IRQChannel = GPI_IMU_DIO1_IRQn;
+    534              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 6; // 6th Highest
+    535              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    536              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    537              NVIC_Init(&NVIC_InitStructure);
+    538          
+    539              EXTI_Init(&EXTI_InitStructure);
+    540              // Enable and Set EXTI Interrupt Priority
+    541              NVIC_InitStructure.NVIC_IRQChannel = GPI_IMU_DIO2_IRQn;
+    542              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 6; // 6th Highest
+    543              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    544              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    545              NVIC_Init(&NVIC_InitStructure);
+    546          }
+    547          #endif
+    548          /*******************************************************************************
+    549          * Description : Initialization of Peripherals used by the Ink
+    550          * Input       : -
+    551          * Return      : -
+    552          *******************************************************************************/
+    553          static void HwInkPeriphInit(void) {
+    554              SPI_InitTypeDef SPI_InitStructure;
+    555              DMA_InitTypeDef DMA_InitStructure;
+    556              NVIC_InitTypeDef NVIC_InitStructure;
+    557              EXTI_InitTypeDef EXTI_InitStructure;
+    558          
+    559              /* Initialize SPI_IMU */
+    560              SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    561              SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+    562              SPI_InitStructure.SPI_DataSize = SPI_DataSize_16b;
+    563              SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+    564              SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+    565              SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+    566              SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;
+    567              SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+    568              SPI_InitStructure.SPI_CRCPolynomial = 7;
+    569              HwSPIInit(SPI_INK, &SPI_InitStructure);
+    570          
+    571          #if 0	//disable for now. Not sure how to add this part as of yet as it requires spiInkTxBuf?
+    572              /* Enable SPI_MASTER DMA Rx & Tx Request */
+    573              SPI_I2S_DMACmd(SPI_INK_SPI, SPI_I2S_DMAReq_Rx, ENABLE);
+    574              SPI_I2S_DMACmd(SPI_INK_SPI, SPI_I2S_DMAReq_Tx, ENABLE);
+    575          
+    576              /* Enable DMA clock for SPI_INK */
+    577              RCC_AHBPeriphClockCmd(SPI_INK_DMA_CLK, ENABLE);
+    578          
+    579              /* Initialize Rx DMA for SPI_INK */
+    580              DMA_DeInit(SPI_INK_RX_DMA_CHAN);
+    581              DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t) &(SPI_INK_SPI->DR);
+    582              DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)spiInkRxBufDma;
+    583              DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+    584              DMA_InitStructure.DMA_BufferSize = sizeof(spiInkTxBuf);
+    585              DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    586              DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    587              DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    588              DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    589              DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+    590              DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+    591              DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+    592              DMA_Init(SPI_INK_RX_DMA_CHAN, &DMA_InitStructure);
+    593          
+    594              /* Initialize Tx DMA for SPI_IMU */
+    595              DMA_DeInit(SPI_INK_TX_DMA_CHAN);
+    596              DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)spiInkTxBuf;
+    597              DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+    598              DMA_InitStructure.DMA_BufferSize = sizeof(spiInkRxBufDma);
+    599              DMA_InitStructure.DMA_Priority = DMA_Priority_Low;
+    600              DMA_Init(SPI_INK_TX_DMA_CHAN, &DMA_InitStructure);
+    601          
+    602              /* Enable DMA Channel Transfer Complete Interrupt Request */
+    603              DMA_ITConfig(SPI_INK_RX_DMA_CHAN, DMA_IT_TC, ENABLE);
+    604          
+    605              /* Enable and Set Interrupt Priority */
+    606              NVIC_InitStructure.NVIC_IRQChannel = SPI_INK_RX_DMA_IRQ;
+    607              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5; // 5th Highest
+    608              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    609              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    610              NVIC_Init(&NVIC_InitStructure);
+    611          #endif
+    612          	
+    613          #if 0
+    614              /* Configure GPI_IMU_DIO1 (PD.8) as EXTI Interrupt */
+    615          
+    616              // Connect EXTI Line to GPI_IMU_DIO1 Pin
+    617              GPIO_EXTILineConfig(GPI_IMU_DIO1_PORT_SRC, GPI_IMU_DIO1_PIN_SRC);
+    618              EXTI_InitStructure.EXTI_Line = GPI_IMU_DIO1_EXTI_LINE;
+    619              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    620              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    621              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    622              EXTI_Init(&EXTI_InitStructure);
+    623          
+    624              /* Configure GPI_IMU_DIO2 (PD.8) as EXTI Interrupt */
+    625              GPIO_EXTILineConfig(GPI_IMU_DIO2_PORT_SRC, GPI_IMU_DIO2_PIN_SRC);
+    626              EXTI_InitStructure.EXTI_Line = GPI_IMU_DIO2_EXTI_LINE;
+    627              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    628              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+    629              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    630              EXTI_Init(&EXTI_InitStructure);
+    631          
+    632              // Enable and Set EXTI Interrupt Priority
+    633              NVIC_InitStructure.NVIC_IRQChannel = GPI_IMU_DIO1_IRQn;
+    634              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 6; // 6th Highest
+    635              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    636              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    637              NVIC_Init(&NVIC_InitStructure);
+    638          
+    639              EXTI_Init(&EXTI_InitStructure);
+    640              // Enable and Set EXTI Interrupt Priority
+    641              NVIC_InitStructure.NVIC_IRQChannel = GPI_IMU_DIO2_IRQn;
+    642              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 6; // 6th Highest
+    643              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    644              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    645              NVIC_Init(&NVIC_InitStructure);
+    646          #endif
+    647          }	
+    648          
+    649          
+    650          /*******************************************************************************
+    651          * Description : Initialization of Digital to Analog converter used for IR Led brightness
+    652          * Input       : -
+    653          * Return      : -
+    654          *******************************************************************************/
+    655          static void HwDACInit(void) {
+    656              DAC_InitTypeDef DAC_InitStructure;
+    657          
+    658              RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE);
+    659          
+    660              /* DAC Channel2 Configuration */
+    661              DAC_DeInit();
+    662              DAC_InitStructure.DAC_Trigger = DAC_Trigger_None;
+    663              DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;
+    664              DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = DAC_LFSRUnmask_Bit0;
+    665              DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
+    666              DAC_Init(DAC_Channel_2, &DAC_InitStructure);
+    667          
+    668              DAC_Cmd(DAC_Channel_2, ENABLE);
+    669          }
+    670          
+    671          /* PUBLIC FUNCTIONS ----------------------------------------------------------*/
+    672          
+    673          /*******************************************************************************
+    674          * Description : Configures GPI GPIO
+    675          * Input       :
+    676          * Return      :
+    677          *******************************************************************************/
+    678          void HwGPIInit(HwGPI_TypeDef GPI) {
+    679              GPIO_InitTypeDef  GPIO_InitStructure;
+    680          
+    681              /* Enable the GPIO_GPI Clock */
+    682              RCC_APB2PeriphClockCmd(GPI_CLK[GPI], ENABLE);
+    683          
+    684              /* Configure the GPIO_GPI pin */
+    685              GPIO_InitStructure.GPIO_Mode = GPI_TYPE[GPI];
+    686              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    687              GPIO_InitStructure.GPIO_Pin = GPI_PIN[GPI];
+    688              GPIO_Init(GPI_PORT[GPI], &GPIO_InitStructure);
+    689          }
+    690          
+    691          /*******************************************************************************
+    692          * Description : Returns the selected GPI state
+    693          * Input       :
+    694          * Return      :
+    695          *******************************************************************************/
+    696          uint32_t HwGPIState(HwGPI_TypeDef GPI) {
+    697              return(GPI_PORT[GPI]->IDR & GPI_PIN[GPI]);
+    698          }
+    699          
+    700          /*******************************************************************************
+    701          * Description : Configures GPO GPIO
+    702          * Input       :
+    703          * Return      :
+    704          *******************************************************************************/
+    705          void HwGPOInit(HwGPO_TypeDef GPO) {
+    706              GPIO_InitTypeDef  GPIO_InitStructure;
+    707          
+    708              /* Enable the GPIO_GPO Clock */
+    709              RCC_APB2PeriphClockCmd(GPO_CLK[GPO], ENABLE);
+    710          
+    711              /* Configure the GPIO_GPO pin */
+    712              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    713              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    714              GPIO_InitStructure.GPIO_Pin = GPO_PIN[GPO];
+    715              GPIO_Init(GPO_PORT[GPO], &GPIO_InitStructure);
+    716          }
+    717          
+    718          
+    719          /*******************************************************************************
+    720          * Description : Configures GPO GPIO open collector
+    721          * Input       :
+    722          * Return      :
+    723          *******************************************************************************/
+    724          void HwGPOInitOC(HwGPO_TypeDef GPO) {
+    725              GPIO_InitTypeDef  GPIO_InitStructure;
+    726          
+    727              /* Enable the GPIO_GPO Clock */
+    728              RCC_APB2PeriphClockCmd(GPO_CLK[GPO], ENABLE);
+    729          
+    730              /* Configure the GPIO_GPO pin */
+    731              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+    732              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    733              GPIO_InitStructure.GPIO_Pin = GPO_PIN[GPO];
+    734              GPIO_Init(GPO_PORT[GPO], &GPIO_InitStructure);
+    735          }
+    736          
+    737          
+    738          /*******************************************************************************
+    739          * Description : Configures GPO GPIO Alternate Function
+    740          * Input       :
+    741          * Return      :
+    742          *******************************************************************************/
+    743          void HwGPOInitAF(HwGPO_TypeDef GPO) {
+    744              GPIO_InitTypeDef  GPIO_InitStructure;
+    745          
+    746              /* Enable the GPIO_GPO Clock */
+    747              RCC_APB2PeriphClockCmd(GPO_CLK[GPO], ENABLE);
+    748                  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+    749          
+    750              /* Configure the GPIO_GPO pin */
+    751              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    752              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    753              GPIO_InitStructure.GPIO_Pin = GPO_PIN[GPO];
+    754              GPIO_Init(GPO_PORT[GPO], &GPIO_InitStructure);
+    755          }
+    756          /*******************************************************************************
+    757          * Description : Output Low on selected GPO
+    758          * Input       :
+    759          * Return      :
+    760          *******************************************************************************/
+    761          void HwGPOLow(HwGPO_TypeDef GPO) {
+    762              //__disable_interrupt();
+    763              //GPO_PORT[GPO]->BRR = GPO_PIN[GPO];
+    764              GPIO_ResetBits(GPO_PORT[GPO], GPO_PIN[GPO]);        // Does it equal to above
+    765              //__enable_interrupt();
+    766          }
+    767          
+    768          /*******************************************************************************
+    769          * Description : Output High on selected GPO
+    770          * Input       :
+    771          * Return      :
+    772          *******************************************************************************/
+    773          void HwGPOHigh(HwGPO_TypeDef GPO) {
+    774              //GPO_PORT[GPO]->BSRR = GPO_PIN[GPO];
+    775              GPIO_SetBits(GPO_PORT[GPO], GPO_PIN[GPO]);        // Does it equal to above
+    776          }
+    777          
+    778          /*******************************************************************************
+    779          * Description : Toggles the selected GPO
+    780          * Input       :
+    781          * Return      :
+    782          *******************************************************************************/
+    783          void HwGPOToggle(HwGPO_TypeDef GPO) {
+    784              //x__disable_interrupt();
+    785              if(GPIO_ReadInputDataBit(GPO_PORT[GPO], GPO_PIN[GPO]))      //Does it equal to below?
+    786              {
+    787                HwGPOLow(GPO);
+    788              }
+    789              else
+    790              {
+    791                HwGPOHigh(GPO);
+    792              }
+    793              //GPO_PORT[GPO]->ODR ^= GPO_PIN[GPO];
+    794              //x__enable_interrupt();
+    795          }
+    796          #if 0
+    797          /*******************************************************************************
+    798          * Description : Configures LED GPIO
+    799          * Input       :
+    800          * Return      :
+    801          *******************************************************************************/
+    802          void HwLEDInit(HwLED_TypeDef Led) {
+    803              GPIO_InitTypeDef  GPIO_InitStructure;
+    804          
+    805              /* Enable the GPIO_LED Clock */
+    806              RCC_APB2PeriphClockCmd(LED_CLK[Led], ENABLE);
+    807          
+    808              /* Configure the GPIO_LED pin */
+    809           //   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    810               GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+    811              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    812              GPIO_InitStructure.GPIO_Pin = LED_PIN[Led];
+    813              GPIO_Init(LED_PORT[Led], &GPIO_InitStructure);
+    814          }
+    815          
+    816          /*******************************************************************************
+    817          * Description : Turns selected LED On
+    818          * Input       :
+    819          * Return      :
+    820          *******************************************************************************/
+    821          void HwLEDOn(HwLED_TypeDef Led) {
+    822              LED_PORT[Led]->BRR = LED_PIN[Led];
+    823          }
+    824          
+    825          /*******************************************************************************
+    826          * Description : Turns selected LED Off
+    827          * Input       :
+    828          * Return      :
+    829          *******************************************************************************/
+    830          void HwLEDOff(HwLED_TypeDef Led) {
+    831              LED_PORT[Led]->BSRR = LED_PIN[Led];
+    832          }
+    833          
+    834          /*******************************************************************************
+    835          * Description : Toggles the selected LED
+    836          * Input       :
+    837          * Return      :
+    838          *******************************************************************************/
+    839          void HwLEDToggle(HwLED_TypeDef Led) {
+    840              //x__disable_interrupt();
+    841              LED_PORT[Led]->ODR ^= LED_PIN[Led];
+    842              //x__enable_interrupt();
+    843          }
+    844          #endif
+    845          /*******************************************************************************
+    846          * Description : Configures Button GPIO
+    847          * Input       :
+    848          * Return      :
+    849          *******************************************************************************/
+    850          void HwButtonInit(HwButton_TypeDef Button) {
+    851              GPIO_InitTypeDef GPIO_InitStructure;
+    852          
+    853              /* Enable Button GPIO clock */
+    854              RCC_APB2PeriphClockCmd(BUTTON_CLK[Button], ENABLE);
+    855          
+    856              /* Configure Button pin as input pull-up */
+    857              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    858              GPIO_InitStructure.GPIO_Pin = BUTTON_PIN[Button];
+    859              GPIO_Init(BUTTON_PORT[Button], &GPIO_InitStructure);
+    860          }
+    861          
+    862          /*******************************************************************************
+    863          * Description : Returns the selected Button state
+    864          * Input       :
+    865          * Return      :
+    866          *******************************************************************************/
+    867          uint32_t HwButtonPressed(HwButton_TypeDef Button) {
+    868              return((~BUTTON_PORT[Button]->IDR) & BUTTON_PIN[Button]);
+    869          }
+    870          
+    871          /*******************************************************************************
+    872          * Description : Configures COM port.
+    873          * Input       : <COM> COM?
+    874          *               <USART_InitStruct> Configuration Information
+    875          * Return      : -
+    876          *******************************************************************************/
+    877          void HwCOMInit(HwCOM_TypeDef COM, USART_InitTypeDef* USART_InitStruct) {
+    878              GPIO_InitTypeDef GPIO_InitStructure;
+    879          
+    880              /* Enable GPIO clock */
+    881              RCC_APB2PeriphClockCmd(COM_CLK[COM], ENABLE);
+    882          
+    883              /* Enable alternate function remapping if necessary */
+    884              if (COM_REMAP[COM]) {
+    885                  GPIO_PinRemapConfig(COM_REMAP[COM], ENABLE);
+    886              }
+    887          
+    888              /* Configure TX as alternate function push-pull */
+    889              GPIO_InitStructure.GPIO_Pin = COM_PIN_TX[COM];
+    890              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    891              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    892              GPIO_Init(COM_PORT[COM], &GPIO_InitStructure);
+    893          
+    894              /* Configure RX as input pull-up */
+    895              GPIO_InitStructure.GPIO_Pin = COM_PIN_RX[COM];
+    896              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    897              GPIO_Init(COM_PORT[COM], &GPIO_InitStructure);
+    898          
+    899              /* Enable peripheral clock */
+    900              if (COM_USART_CLK[COM] == RCC_APB2Periph_USART1) {
+    901                  RCC_APB2PeriphClockCmd(COM_USART_CLK[COM], ENABLE);
+    902              } else {
+    903                  RCC_APB1PeriphClockCmd(COM_USART_CLK[COM], ENABLE);
+    904              }
+    905          
+    906              /* Peripheral configuration */
+    907              USART_Init(COM_USART[COM], USART_InitStruct);
+    908          
+    909              /* Enable peripheral */
+    910              USART_Cmd(COM_USART[COM], ENABLE);
+    911          }
+    912          
+    913          /*******************************************************************************
+    914          * Description : Configures SPI port
+    915          * Input       :
+    916          * Return      :
+    917          *******************************************************************************/
+    918          void HwSPIInit(HwSPI_TypeDef SPI, SPI_InitTypeDef *SPI_InitStruct) {
+    919              GPIO_InitTypeDef GPIO_InitStructure;
+    920          
+    921              /* Enable GPIO clock */
+    922              RCC_APB2PeriphClockCmd(SPI_CLK[SPI] | SPI_SS_CLK[SPI], ENABLE);
+    923          
+    924              /* Enable alternate function remapping if necessary */
+    925              if (SPI_REMAP[SPI]) {
+    926                  GPIO_PinRemapConfig(SPI_REMAP[SPI], ENABLE);
+    927              }
+    928          
+    929              /* Configure SCK as alternate function push-pull */
+    930              GPIO_InitStructure.GPIO_Pin = SPI_PIN_SCK[SPI];
+    931              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    932              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    933              GPIO_Init(SPI_PORT[SPI], &GPIO_InitStructure);
+    934          
+    935              /* Configure MOSI as alternate function push-pull */
+    936              GPIO_InitStructure.GPIO_Pin = SPI_PIN_MOSI[SPI];
+    937              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    938              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    939              GPIO_Init(SPI_PORT[SPI], &GPIO_InitStructure);
+    940          
+    941              /* Configure MISO as input floating */
+    942              GPIO_InitStructure.GPIO_Pin = SPI_PIN_MISO[SPI];
+    943              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    944              GPIO_Init(SPI_PORT[SPI], &GPIO_InitStructure);
+    945          
+    946              /* Configure NSS as output push-pull */
+    947              GPIO_InitStructure.GPIO_Pin = SPI_SS_PIN[SPI];
+    948              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    949              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    950              GPIO_Init(SPI_SS_PORT[SPI], &GPIO_InitStructure);
+    951          
+    952              /* Output High (Deassert) on NSS */
+    953              SPI_SS_PORT[SPI]->BSRR = SPI_SS_PIN[SPI];
+    954          
+    955              if(SPI == SPI_RADIO)
+    956              {
+    957                // Configure SPI_IMU SS pin too
+    958                /* Configure NSS as output push-pull */
+    959                GPIO_InitStructure.GPIO_Pin = SPI_SS_PIN[SPI_IMU];
+    960                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    961                GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    962                GPIO_Init(SPI_SS_PORT[SPI_IMU], &GPIO_InitStructure);
+    963                /* Output High (Deassert) on NSS */
+    964                SPI_SS_PORT[SPI_IMU]->BSRR = SPI_SS_PIN[SPI_IMU];
+    965              }	
+    966          
+    967              /* Enable peripheral clock */
+    968              if (SPI_SPI_CLK[SPI] == RCC_APB2Periph_SPI1) {
+    969                  RCC_APB2PeriphClockCmd(SPI_SPI_CLK[SPI], ENABLE);
+    970              } else {
+    971                  RCC_APB1PeriphClockCmd(SPI_SPI_CLK[SPI], ENABLE);
+    972              }
+    973          
+    974              /* Peripheral configuration */
+    975              SPI_Init(SPI_SPI[SPI], SPI_InitStruct);
+    976          
+    977              /* Enable peripheral */
+    978              SPI_Cmd(SPI_SPI[SPI], ENABLE);
+    979          
+    980              /* Flush input data register */
+    981              if (SPI_I2S_GetFlagStatus(SPI_SPI[SPI], SPI_I2S_FLAG_RXNE) == SET)
+    982                  SPI_I2S_ReceiveData(SPI_SPI[SPI]);
+    983          }
+    984          
+    985          /***************************************************************************/
+    986          /*******************************************************************************
+    987          * Description : Configures AtoD #1 In 18 on Port C3
+    988          * Input       :
+    989          * Return      :
+    990          *******************************************************************************/
+    991          void HwAtoDInit(void){
+    992          
+    993          /* Private typedef -----------------------------------------------------------*/
+    994          /* Private define ------------------------------------------------------------*/
+    995          //#define ADC1_DR_Address    ((uint32_t)0x4001244C)
+    996          //#define ADC3_DR_Address    ((uint32_t)0x40013C4C)
+    997          
+    998          /* Private mac/ro -------------------------------------------------------------*/
+    999          /* Private variables ---------------------------------------------------------*/
+   1000          ADC_InitTypeDef ADC_InitStructure;
+   1001          //DMA_InitTypeDef DMA_InitStructure;
+   1002          GPIO_InitTypeDef GPIO_InitStructure;
+   1003          
+   1004          
+   1005          
+   1006          __IO uint16_t ADC1ConvertedValue = 0, ADC3ConvertedValue = 0;
+   1007          
+   1008          // Init the data pointer to the battery data conversion union type
+   1009                  pBattUnion = &BattUnion;
+   1010                  BattUnion.Battery_AtoD= 0xD700; // int to 4.0 volts
+   1011          /* Enable peripheral clocks --------------------------------------------------*/
+   1012            /* Enable DMA1 and DMA2 clocks */
+   1013          //  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 | RCC_AHBPeriph_DMA2, ENABLE);
+   1014          
+   1015              /* ADCCLK = PCLK2/4 */
+   1016              RCC_ADCCLKConfig(RCC_PCLK2_Div4);
+   1017          
+   1018            /* Enable ADC1 and GPIOC clocks */
+   1019            RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_GPIOA, ENABLE);
+   1020          
+   1021            /* Configure  PC.03 , ADC Channel13  as analog inputs */
+   1022           // GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_3 ;
+   1023           // GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+   1024           // GPIO_Init(GPIOC, &GPIO_InitStructure);
+   1025          /* Configure  PA.06 , ADC Channel6  as analog inputs */
+   1026              GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_6 ;
+   1027           GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+   1028            GPIO_Init(GPIOA, &GPIO_InitStructure);
+   1029          
+   1030            /* ADC1 configuration ------------------------------------------------------*/
+   1031            ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+   1032            ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+   1033            //ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+   1034            ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
+   1035            ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+   1036           // ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+   1037            ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Left;
+   1038            ADC_InitStructure.ADC_NbrOfChannel = 1;
+   1039            ADC_Init(ADC1, &ADC_InitStructure);
+   1040            /* ADC1 regular channels configuration */
+   1041           // ADC_RegularChannelConfig(ADC1, ADC_Channel_13, 1, ADC_SampleTime_28Cycles5);
+   1042          ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 1, ADC_SampleTime_28Cycles5);
+   1043           /* Enable ADC1 */
+   1044            ADC_Cmd(ADC1, ENABLE);
+   1045            /* Enable ADC1 reset calibaration register */
+   1046            ADC_ResetCalibration(ADC1);
+   1047            /* Check the end of ADC1 reset calibration register */
+   1048          
+   1049           while(ADC_GetResetCalibrationStatus(ADC1));
+   1050          
+   1051            /* Start ADC1 calibaration */
+   1052            ADC_StartCalibration(ADC1);
+   1053            /* Check the end of ADC1 calibration */
+   1054            while(ADC_GetCalibrationStatus(ADC1));
+   1055          
+   1056            /* Start ADC1 Software Conversion */
+   1057            ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+   1058              ADC_Cmd(ADC1, ENABLE);
+   1059          
+   1060              while(ADC_GetFlagStatus(ADC1,ADC_FLAG_EOC)== RESET){
+   1061                      ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+   1062              }
+   1063          }
+   1064          
+   1065          
+   1066          
+   1067          /**
+   1068            * @brief  Configures the different GPIO ports.
+   1069            * @param  None
+   1070            * @retval None
+   1071            */
+   1072          
+   1073          /**
+   1074            * @brief  Configures Vector Table base location.
+   1075            * @param  None
+   1076            * @retval None
+   1077            */
+   1078          /*
+   1079          void NVIC_Configuration(void)
+   1080          {
+   1081            NVIC_InitTypeDef NVIC_InitStructure;
+   1082          */
+   1083            /* Configure and enable ADC interrupt */
+   1084          /*
+   1085            NVIC_InitStructure.NVIC_IRQChannel = ADC1_2_IRQn;
+   1086            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+   1087            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+   1088            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   1089            NVIC_Init(&NVIC_InitStructure);
+   1090          }
+   1091          
+   1092          */
+   1093          
+   1094          
+   1095          /*******************************************************************************
+   1096          * Description : Assert NSS
+   1097          * Input       :
+   1098          * Return      : -
+   1099          *******************************************************************************/
+   1100          void HwSPISSAssert(HwSPI_TypeDef SPI) {
+   1101              SPI_SS_PORT[SPI]->BRR = SPI_SS_PIN[SPI];
+   1102              //if (SPI == SPI_RADIO) HwGPOLow(GPO_TP11); // [[DEBUG]]
+   1103          }
+   1104          
+   1105          /*******************************************************************************
+   1106          * Description : DeAssert NSS
+   1107          * Input       :
+   1108          * Return      : -
+   1109          *******************************************************************************/
+   1110          void HwSPISSDeAssert(HwSPI_TypeDef SPI) {
+   1111              SPI_SS_PORT[SPI]->BSRR = SPI_SS_PIN[SPI];
+   1112              //if (SPI == SPI_RADIO) HwGPOHigh(GPO_TP11); // [[DEBUG]]
+   1113          }
+   1114          
+   1115          /*******************************************************************************
+   1116          * Description : DeAssert NSS
+   1117          * Input       :
+   1118          * Return      : -
+   1119          *******************************************************************************/
+   1120          uint32_t HwGetSPISS(HwSPI_TypeDef SPI) {
+   1121          	//active low. high means deassert, low means assert
+   1122              return((~SPI_SS_PORT[SPI]->ODR) & SPI_SS_PIN[SPI]);
+   1123          }
+   1124          /*******************************************************************************
+   1125          * Description : Uses SysTick ISR to Spin Wait
+   1126          * Input       : # of SysTicks to wait
+   1127          * Return      :
+   1128          *******************************************************************************/
+   1129          void HwWait(unsigned int ticks) {
+   1130              U64 systick_next = CoGetOSTime() + ticks;
+   1131              while (CoGetOSTime() < systick_next);
+   1132          }
+   1133          
+   1134          /*******************************************************************************
+   1135          * Description : Uses SysTick ISR to Set a Timer
+   1136          * Input       : # of SysTicks to wait
+   1137          * Return      :
+   1138          *******************************************************************************/
+   1139          void HwTimerSet(unsigned int ticks) {
+   1140              SysTickTimerExp = CoGetOSTime() + ticks;
+   1141          }
+   1142          
+   1143          /*******************************************************************************
+   1144          * Description : Uses SysTick ISR to Check if Timer has Expired
+   1145          * Input       :
+   1146          * Return      :
+   1147          *******************************************************************************/
+   1148          unsigned int HwTimerExpired(void) {
+   1149              return (CoGetOSTime() > SysTickTimerExp);
+   1150          }
+   1151          /*******************************************************************************
+   1152          * Description : Inits Watchdog timer
+   1153          * Input       :
+   1154          * Return      :
+   1155          *******************************************************************************/
+   1156          void WDTimerInit(void){
+   1157          #ifdef WDT_ENABLE
+   1158              /* Configure and Start IWDT */
+   1159              IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
+   1160              //IWDG_SetPrescaler(IWDG_Prescaler_4);    // timeout = 410ms(nom), 273ms(min)
+   1161              IWDG_SetPrescaler(IWDG_Prescaler_16);    // timeout = 1640ms(nom), 1092(min)
+   1162              IWDG_SetReload(0xFFF);                  // ""
+   1163              IWDG_Enable();
+   1164              /* Stop IWDT when in debugger */
+   1165              DBGMCU_Config(DBGMCU_IWDG_STOP, ENABLE);
+   1166          #endif
+   1167          }
+   1168          /*******************************************************************************
+   1169          * Description : Initialization of Peripherals used on the Beacon
+   1170          * Input       : -
+   1171          * Return      : -
+   1172          *******************************************************************************/
+   1173          void HwPeriphInit(void) {
+   1174          
+   1175              /* Enable AFIO Clock */
+   1176              RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+   1177          
+   1178              /* Initialize LEDs */
+   1179          //    HwLEDInit(LED1); HwLEDOff(LED1);	//revH remnant
+   1180          //    HwLEDInit(LED2); HwLEDOff(LED2);	//revH remnant
+   1181          //    HwLEDInit(LED3); HwLEDOff(LED3);	//revH remnant
+   1182          //    HwLEDInit(LED4); HwLEDOff(LED4);	//revH remnant
+   1183          
+   1184          //    HwLEDInit(LED5); HwLEDOff(LED5);	//revH remnant
+   1185          
+   1186              /* Initialize PushButtons */
+   1187              HwButtonInit(BUTTON1);
+   1188              HwButtonInit(BUTTON2);
+   1189          
+   1190              /* Initialize GPIs */
+   1191              HwGPIInit(GPI_RADIO_GPIO0);
+   1192              HwGPIInit(GPI_RADIO_GPIO1);
+   1193              HwGPIInit(GPI_RADIO_GPIO2); 	// use CC2520's GPIO2 for TX state output
+   1194              HwGPIInit(GPI_RADIO_GPIO5); 	// use CC2520's GPIO5 for RX state output
+   1195              HwGPIInit(GPI_SW_PWR);
+   1196              HwGPIInit(GPI_CHG_STAT);
+   1197          
+   1198          //   HwGPIInit(GPI_IMU_DIO1);		//REVH remnant
+   1199          //   HwGPIInit(GPI_IMU_DIO2);		//REVH remnant
+   1200           
+   1201          	HwGPIInit(GPI_IMU_INT);
+   1202          	HwGPIInit(GPI_INK_BUSY);
+   1203          
+   1204              HwGPIInit(GPI_IRLED_DAC); // avoid parasitic consumption
+   1205          
+   1206              HwGPIInit(GPI_USB_VBUS);
+   1207          
+   1208              /* Initialize GPOs */
+   1209              HwGPOInit(GPO_RADIO_GPIO2); HwGPOLow(GPO_RADIO_GPIO2); // use CC2520's GPIO2 for command strobes
+   1210              HwGPOInit(GPO_PWRON);       HwGPOHigh(GPO_PWRON); // assert BC_PWR_ON
+   1211              HwGPOInit(GPO_IRLED0);      HwGPOLow(GPO_IRLED0); // active-High
+   1212              HwGPOInit(GPO_IRLED1);      HwGPOLow(GPO_IRLED1); // active-High
+   1213              HwGPOInit(GPO_IRLED2);      HwGPOLow(GPO_IRLED2); // active-High
+   1214          
+   1215          //    HwGPOInit(GPO_TP10);        HwGPOLow(GPO_TP10);		//REVH remnant, name change
+   1216          //    HwGPOInit(GPO_TP11);        HwGPOLow(GPO_TP11);		//REVH remnant, name change
+   1217          //    HwGPOInit(GPO_TP12); HwGPOLow(GPO_TP12);			//REVH remnant, name change
+   1218          
+   1219          //    HwLEDOn(LED1);		//REVH remnant
+   1220          //    HwLEDOn(LED2);		//REVH remnant
+   1221          //    HwLEDOn(LED3);		//REVH remnant
+   1222          //    HwLEDOn(LED4);		//REVH remnant
+   1223          //    HwLEDOn(LED5);		//REVH remnant
+   1224          
+   1225          	HwGPOInit(GPO_TP6);			HwGPOLow(GPO_TP6);
+   1226          	HwGPOInit(GPO_TP7);			HwGPOLow(GPO_TP7);
+   1227          	HwGPOInit(GPO_TP10);		HwGPOLow(GPO_TP10);
+   1228          
+   1229              HwGPIInit(GPI_AtoDin3);
+   1230          
+   1231              //HwGPOInit(GPO_IMU_RST);   HwGPOLow(GPO_IMU_RST);
+   1232          
+   1233              HwGPOInit(GPO_5V_IMU_EN);   HwGPOLow(GPO_5V_IMU_EN);
+   1234              HwGPOInit(GPO_2520_RST);    HwGPOLow(GPO_2520_RST);
+   1235              HwGPOInit(GPO_RF_EN);       HwGPOLow(GPO_RF_EN);
+   1236              HwGPOInit(GPO_VBATT_ADC_EN);HwGPOLow(GPO_VBATT_ADC_EN);
+   1237              HwGPOInit(GPO_RF_HGM);      HwGPOLow(GPO_RF_HGM);
+   1238          
+   1239          //    HwGPOInit(GPO_TP50);        HwGPOLow(GPO_TP50);	//REVH remnant, name change
+   1240          	HwGPOInit(GPO_TP5);			HwGPOLow(GPO_TP5);
+   1241          
+   1242              HwGPOInitAF(GPO_IMU_CLK);   HwGPOLow(GPO_IMU_CLK);
+   1243          
+   1244              HwGPOHigh(GPO_5V_IMU_EN);
+   1245              HwGPOHigh(GPO_RF_EN);  // radio pwr on
+   1246              HwGPOHigh(GPO_2520_RST);
+   1247              HwGPOHigh(GPO_RF_HGM);
+   1248              HwGPOHigh(GPO_VBATT_ADC_EN);
+   1249              HwGPOHigh(GPO_IMU_CLK);
+   1250          // Turn this off....not require for V2 or V3 Timekeepers
+   1251              /* Initialize COM1
+   1252                  - BaudRate = 115200 baud
+   1253                  - Word Length = 8 Bits
+   1254                  - One Stop Bit
+   1255                  - No parity
+   1256                  - Hardware flow control disabled (RTS and CTS signals)
+   1257                  - Receive and transmit enabled
+   1258              */
+   1259          #ifdef STDIO_TO_USART
+   1260              USART_InitStructure.USART_BaudRate = 115200;
+   1261              USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+   1262              USART_InitStructure.USART_StopBits = USART_StopBits_1;
+   1263              USART_InitStructure.USART_Parity = USART_Parity_No;
+   1264              USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+   1265              USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+   1266             HwCOMInit(COM1, &USART_InitStructure);
+   1267          #endif
+   1268              /* NVIC Priority */
+   1269              NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+   1270          
+   1271              /* Initialize TIMs */
+   1272              HwTIM1Init();
+   1273              HwTIM2Init();
+   1274              HwTIM3Init();
+   1275              HwTIM4Init();
+   1276          #ifdef CCA_EN
+   1277              HwTIM5Init();
+   1278          #endif
+   1279              /* Initialize Radio SPI */
+   1280              HwRadioSPIInit();	//REVJ also initializes IMU here
+   1281              /* Initialize IMU Peripherals */
+   1282          //  HwIMUPeriphInit();	//REVH remnant
+   1283          
+   1284          	HwInkPeriphInit();
+   1285              HwWait(20);
+   1286          
+   1287          
+   1288              /* Initialize DAC */
+   1289              HwDACInit();
+   1290          
+   1291              /*init AtoD */
+   1292              HwAtoDInit();
+   1293          
+   1294              WDTimerInit();
+   1295          }
+   1296          /*******************************************************************************
+   1297          * Description : Configures I2C port
+   1298          * Input       :
+   1299          * Return      :
+   1300          *******************************************************************************/
+   1301          void HwI2CInit(void){
+   1302          
+   1303            I2C_InitTypeDef  I2C_InitStructure;
+   1304            GPIO_InitTypeDef GPIO_InitStructure;
+   1305            uint8_t recovery = 9;
+   1306          
+   1307            /* GPIO Periph clock enable */
+   1308            RCC_APB2PeriphClockCmd(I2C_EE_GPIO_CLK, ENABLE);
+   1309            RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+   1310          
+   1311              /* I2C Periph clock enable */
+   1312            RCC_APB1PeriphClockCmd(I2C_EE_CLK, ENABLE);
+   1313          
+   1314            /* Now first thing would be to bit bang trying to recocver
+   1315             * from broken transmission
+   1316             * send up to 9 pulses on SCL until SDA is high
+   1317             */
+   1318             /* Set SDA to input and make sure it is high */
+   1319             /* ------ START I2C bit bang reset ------ */
+   1320             GPIO_InitStructure.GPIO_Pin =  I2C_EE_SDA;
+   1321             GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   1322             GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+   1323             GPIO_Init(I2C_EE_GPIO, &GPIO_InitStructure);
+   1324          
+   1325             GPIO_InitStructure.GPIO_Pin =  I2C_EE_SCL;
+   1326             GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   1327             GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+   1328             GPIO_Init(I2C_EE_GPIO, &GPIO_InitStructure);
+   1329          
+   1330             GPIO_SetBits(GPIOB, I2C_EE_SCL);
+   1331             uint32_t time = SysTick->VAL ;
+   1332             while (SysTick->VAL == time);
+   1333             while (GPIO_ReadInputDataBit(GPIOB, I2C_EE_SDA) == Bit_RESET) {
+   1334               GPIO_ResetBits(GPIOB, I2C_EE_SCL);
+   1335               time =SysTick->VAL ;
+   1336               while (SysTick->VAL == time);
+   1337               GPIO_SetBits(GPIOB, I2C_EE_SCL);
+   1338               time = SysTick->VAL ;
+   1339               while (SysTick->VAL == time);
+   1340               recovery--;
+   1341               if (recovery == 0) {
+   1342                  break;
+   1343               }
+   1344             }
+   1345          
+   1346             /* ------  END I2C bit bang reset  ------ */
+   1347          
+   1348            /* Enable alternate function remapping if necessary */
+   1349            GPIO_PinRemapConfig(GPIO_Remap_I2C1, ENABLE);
+   1350          
+   1351            GPIO_InitStructure.GPIO_Pin =  I2C_EE_SCL | I2C_EE_SDA;
+   1352            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+   1353            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+   1354            GPIO_Init(I2C_EE_GPIO, &GPIO_InitStructure);
+   1355          
+   1356          
+   1357            RCC_APB1PeriphResetCmd(RCC_APB1Periph_I2C1, ENABLE);
+   1358            RCC_APB1PeriphResetCmd(RCC_APB1Periph_I2C1, DISABLE);
+   1359          
+   1360            /* I2C configuration */
+   1361            I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
+   1362            I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
+   1363            I2C_InitStructure.I2C_OwnAddress1 = 0; //I2C_SLAVE_ADDRESS7;
+   1364            I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
+   1365            I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+   1366            I2C_InitStructure.I2C_ClockSpeed = I2C_Speed/2;
+   1367          
+   1368            /* I2C Peripheral Enable */
+   1369                I2C_Cmd(I2C_EE, ENABLE);
+   1370          
+   1371            /* Apply I2C configuration after enabling it */
+   1372            I2C_Init(I2C_EE, &I2C_InitStructure);
+   1373          
+   1374          
+   1375          
+   1376          
+   1377           // TRACE("I2C CR1: %x \n\r",I2C_ReadRegister(I2C1,I2C_Register_CR1));
+   1378          //TRACE("I2C CR2: %x \n\r",I2C_ReadRegister(I2C1,I2C_Register_CR2));
+   1379          // TRACE("I2C SR1: %x \n\r",I2C_ReadRegister(I2C1,I2C_Register_SR1));
+   1380          // TRACE("I2C SR2: %x \n\r",I2C_ReadRegister(I2C1,I2C_Register_SR2));
+   1381          //  TRACE("I2C_Register_CCR: %x \n\r",I2C_ReadRegister(I2C1,I2C_Register_CCR)) ;
+   1382          // TRACE("I2C_Register_TRISE: %x \n\r",I2C_ReadRegister(I2C1,I2C_Register_TRISE)) ;
+   1383          }
+   1384          
+   1385          /*******************************************************************************
+   1386          * Description : Initialization of EXTIs used by the Radio
+   1387          * Input       : -
+   1388          * Return      : -
+   1389          *******************************************************************************/
+   1390          void HwRadioEXTIInit(void) {
+   1391              EXTI_InitTypeDef EXTI_InitStructure;
+   1392              NVIC_InitTypeDef NVIC_InitStructure;
+   1393          
+   1394              /* Configure GPI_RADIO_GPIO0(PD.2)=>RX_FRM_DONE as EXTI Interrupt */
+   1395          
+   1396              // Connect EXTI Line to GPI_RADIO_GPIO0 Pin
+   1397              GPIO_EXTILineConfig(GPI_RADIO_GPIO0_PORT_SRC, GPI_RADIO_GPIO0_PIN_SRC);
+   1398              // Configure EXTI line
+   1399              EXTI_InitStructure.EXTI_Line = GPI_RADIO_GPIO0_EXTI_LINE;
+   1400              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+   1401              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+   1402              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+   1403              EXTI_Init(&EXTI_InitStructure);
+   1404              EXTI_ClearITPendingBit(GPI_RADIO_GPIO0_EXTI_LINE);
+   1405              // Enable and Set EXTI Interrupt Priority
+   1406              NVIC_InitStructure.NVIC_IRQChannel = GPI_RADIO_GPIO0_IRQn;
+   1407              //Need higher interrupt level, as it is important to synchronize clock
+   1408              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // chnaged from 0 to 2 0;//3; // 3rd Highest
+   1409              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+   1410              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   1411              NVIC_Init(&NVIC_InitStructure);
+   1412          
+   1413              /* Configure GPI_RADIO_GPIO1(PD.1)=>TX_FRM_DONE as EXTI Interrupt */
+   1414          
+   1415              // Connect EXTI Line to GPI_RADIO_GPIO1 Pin
+   1416              GPIO_EXTILineConfig(GPI_RADIO_GPIO1_PORT_SRC, GPI_RADIO_GPIO1_PIN_SRC);
+   1417              // Configure EXTI line
+   1418              EXTI_InitStructure.EXTI_Line = GPI_RADIO_GPIO1_EXTI_LINE;
+   1419              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+   1420              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+   1421              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+   1422              EXTI_Init(&EXTI_InitStructure);
+   1423              EXTI_ClearITPendingBit(GPI_RADIO_GPIO1_EXTI_LINE);
+   1424              // Enable and Set EXTI Interrupt Priority
+   1425              NVIC_InitStructure.NVIC_IRQChannel = GPI_RADIO_GPIO1_IRQn;
+   1426              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4; // 4th Highest
+   1427              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+   1428              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   1429              NVIC_Init(&NVIC_InitStructure);
+   1430          
+   1431              /* Configure GPI_RADIO_GPIO2 => TX_UNDERFLOW | TX_OVERFLOW as EXTI Interrupt */
+   1432          
+   1433              // Connect EXTI Line to GPI_RADIO_GPIO2 Pin
+   1434              GPIO_EXTILineConfig(GPI_RADIO_GPIO2_PORT_SRC, GPI_RADIO_GPIO2_PIN_SRC);
+   1435              // Configure EXTI line
+   1436              EXTI_InitStructure.EXTI_Line = GPI_RADIO_GPIO2_EXTI_LINE;
+   1437              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+   1438              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+   1439              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+   1440              EXTI_Init(&EXTI_InitStructure);
+   1441              EXTI_ClearITPendingBit(GPI_RADIO_GPIO2_EXTI_LINE);
+   1442              // Enable and Set EXTI Interrupt Priority
+   1443              NVIC_InitStructure.NVIC_IRQChannel = GPI_RADIO_GPIO2_IRQn;
+   1444              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4; // 4th Highest
+   1445              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+   1446              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   1447              NVIC_Init(&NVIC_InitStructure);
+   1448          
+   1449              /* Configure GPI_RADIO_GPIO5 => RX_UNDERFLOW | RX_OVERFLOW as EXTI Interrupt */
+   1450          
+   1451              // Connect EXTI Line to GPI_RADIO_GPIO5 Pin
+   1452              GPIO_EXTILineConfig(GPI_RADIO_GPIO5_PORT_SRC, GPI_RADIO_GPIO5_PIN_SRC);
+   1453              // Configure EXTI line
+   1454              EXTI_InitStructure.EXTI_Line = GPI_RADIO_GPIO5_EXTI_LINE;
+   1455              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+   1456              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+   1457              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+   1458              EXTI_Init(&EXTI_InitStructure);
+   1459              EXTI_ClearITPendingBit(GPI_RADIO_GPIO5_EXTI_LINE);
+   1460              // Enable and Set EXTI Interrupt Priority
+   1461              NVIC_InitStructure.NVIC_IRQChannel = GPI_RADIO_GPIO5_IRQn;
+   1462              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4; // 4th Highest
+   1463              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+   1464              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   1465              NVIC_Init(&NVIC_InitStructure);
+   1466          
+   1467          }
+   1468          
+   1469          /*******************************************************************************
+   1470          * Description : Initialization of EXTIs used by the IMU
+   1471          * Input       : -
+   1472          * Return      : -
+   1473          *******************************************************************************/
+   1474          void HwIMUEXTIInit(void) {
+   1475              EXTI_InitTypeDef EXTI_InitStructure;
+   1476              NVIC_InitTypeDef NVIC_InitStructure;
+   1477          
+   1478              /* Configure GPI_RADIO_GPIO0(PD.2)=>RX_FRM_DONE as EXTI Interrupt */
+   1479          
+   1480              // Connect EXTI Line to GPI_RADIO_GPIO0 Pin
+   1481              GPIO_EXTILineConfig(GPI_IMU_INT_PORT_SRC, GPI_IMU_INT_PIN_SRC);
+   1482              // Configure EXTI line
+   1483              EXTI_InitStructure.EXTI_Line = GPI_IMU_INT_EXTI_LINE;
+   1484              EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+   1485              EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+   1486              EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+   1487              EXTI_Init(&EXTI_InitStructure);
+   1488              EXTI_ClearITPendingBit(GPI_IMU_INT_EXTI_LINE);
+   1489              // Enable and Set EXTI Interrupt Priority
+   1490              NVIC_InitStructure.NVIC_IRQChannel = GPI_IMU_INT_IRQn;
+   1491              //Need higher interrupt level, as it is important to synchronize clock
+   1492              NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 6; // chnaged from 0 to 2 0;//3; // 3rd Highest
+   1493              NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+   1494              NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   1495              NVIC_Init(&NVIC_InitStructure);
+   1496          }
+   1497          /*-----------------------------------------------------------*/
+   1498          // ARM processor unique ID
+   1499          // set at manufacturing time
+   1500          // 96 bits UUID
+   1501          /*-----------------------------------------------------------*/
+   1502          void GetARM_UUID(void){
+   1503          
+   1504          
+   1505              ARM_proc_SN.a = *(__IO uint32_t *)(0x1FFFF7E8);
+   1506              ARM_proc_SN.b = *(__IO uint32_t *)(0x1FFFF7EC);
+   1507              ARM_proc_SN.c = *(__IO uint32_t *)(0x1FFFF7F0);
+   1508          
+   1509          }
+   1510          
+   1511          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+   1512          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  GetARM_UUID
+       32  HwAtoDInit
+             32 -> ADC_Cmd
+             32 -> ADC_GetCalibrationStatus
+             32 -> ADC_GetFlagStatus
+             32 -> ADC_GetResetCalibrationStatus
+             32 -> ADC_Init
+             32 -> ADC_RegularChannelConfig
+             32 -> ADC_ResetCalibration
+             32 -> ADC_SoftwareStartConvCmd
+             32 -> ADC_StartCalibration
+             32 -> GPIO_Init
+             32 -> RCC_ADCCLKConfig
+             32 -> RCC_APB2PeriphClockCmd
+       16  HwButtonInit
+             16 -> GPIO_Init
+             16 -> RCC_APB2PeriphClockCmd
+        0  HwButtonPressed
+       16  HwCOMInit
+             16 -> GPIO_Init
+             16 -> GPIO_PinRemapConfig
+             16 -> RCC_APB1PeriphClockCmd
+             16 -> RCC_APB2PeriphClockCmd
+             16 -> USART_Cmd
+             16 -> USART_Init
+       24  HwDACInit
+             24 -> DAC_Cmd
+             24 -> DAC_DeInit
+             24 -> DAC_Init
+             24 -> RCC_APB1PeriphClockCmd
+       16  HwGPIInit
+             16 -> GPIO_Init
+             16 -> RCC_APB2PeriphClockCmd
+        0  HwGPIState
+        8  HwGPOHigh
+              8 -> GPIO_SetBits
+       16  HwGPOInit
+             16 -> GPIO_Init
+             16 -> RCC_APB2PeriphClockCmd
+       16  HwGPOInitAF
+             16 -> GPIO_Init
+             16 -> RCC_APB2PeriphClockCmd
+       16  HwGPOInitOC
+             16 -> GPIO_Init
+             16 -> RCC_APB2PeriphClockCmd
+        8  HwGPOLow
+              8 -> GPIO_ResetBits
+        8  HwGPOToggle
+              8 -> GPIO_ReadInputDataBit
+              8 -> HwGPOHigh
+              8 -> HwGPOLow
+        0  HwGetSPISS
+       32  HwI2CInit
+             32 -> GPIO_Init
+             32 -> GPIO_PinRemapConfig
+             32 -> GPIO_ReadInputDataBit
+             32 -> GPIO_ResetBits
+             32 -> GPIO_SetBits
+             32 -> I2C_Cmd
+             32 -> I2C_Init
+             32 -> RCC_APB1PeriphClockCmd
+             32 -> RCC_APB1PeriphResetCmd
+             32 -> RCC_APB2PeriphClockCmd
+       16  HwIMUEXTIInit
+             16 -> EXTI_ClearITPendingBit
+             16 -> EXTI_Init
+             16 -> GPIO_EXTILineConfig
+             16 -> NVIC_Init
+       24  HwInkPeriphInit
+             24 -> HwSPIInit
+        8  HwPeriphInit
+              8 -> HwAtoDInit
+              8 -> HwButtonInit
+              8 -> HwDACInit
+              8 -> HwGPIInit
+              8 -> HwGPOHigh
+              8 -> HwGPOInit
+              8 -> HwGPOInitAF
+              8 -> HwGPOLow
+              8 -> HwInkPeriphInit
+              8 -> HwRadioSPIInit
+              8 -> HwTIM1Init
+              8 -> HwTIM2Init
+              8 -> HwTIM3Init
+              8 -> HwTIM4Init
+              8 -> HwWait
+              8 -> NVIC_PriorityGroupConfig
+              8 -> RCC_APB2PeriphClockCmd
+              8 -> WDTimerInit
+       16  HwRadioEXTIInit
+             16 -> EXTI_ClearITPendingBit
+             16 -> EXTI_Init
+             16 -> GPIO_EXTILineConfig
+             16 -> NVIC_Init
+       32  HwRadioSPIInit
+             32 -> HwSPIInit
+             32 -> NVIC_Init
+             32 -> SPI_I2S_ITConfig
+       16  HwSPIInit
+             16 -> GPIO_Init
+             16 -> GPIO_PinRemapConfig
+             16 -> RCC_APB1PeriphClockCmd
+             16 -> RCC_APB2PeriphClockCmd
+             16 -> SPI_Cmd
+             16 -> SPI_I2S_GetFlagStatus
+             16 -> SPI_I2S_ReceiveData
+             16 -> SPI_Init
+        0  HwSPISSAssert
+        0  HwSPISSDeAssert
+       24  HwTIM1Init
+             24 -> DBGMCU_Config
+             24 -> NVIC_Init
+             24 -> RCC_APB2PeriphClockCmd
+             24 -> TIM_ARRPreloadConfig
+             24 -> TIM_Cmd
+             24 -> TIM_DeInit
+             24 -> TIM_ITConfig
+             24 -> TIM_TimeBaseInit
+             24 -> TIM_TimeBaseStructInit
+       32  HwTIM2Init
+             32 -> DBGMCU_Config
+             32 -> NVIC_Init
+             32 -> RCC_APB1PeriphClockCmd
+             32 -> TIM_ARRPreloadConfig
+             32 -> TIM_Cmd
+             32 -> TIM_ICInit
+             32 -> TIM_ITConfig
+             32 -> TIM_OC2PreloadConfig
+             32 -> TIM_OC3PreloadConfig
+             32 -> TIM_OC4PreloadConfig
+             32 -> TIM_TimeBaseInit
+             32 -> TIM_TimeBaseStructInit
+       32  HwTIM3Init
+             32 -> DBGMCU_Config
+             32 -> NVIC_Init
+             32 -> RCC_APB1PeriphClockCmd
+             32 -> TIM_ARRPreloadConfig
+             32 -> TIM_Cmd
+             32 -> TIM_ICInit
+             32 -> TIM_ITConfig
+             32 -> TIM_OC2PreloadConfig
+             32 -> TIM_OC3PreloadConfig
+             32 -> TIM_TimeBaseInit
+             32 -> TIM_TimeBaseStructInit
+       32  HwTIM4Init
+             32 -> DBGMCU_Config
+             32 -> RCC_APB1PeriphClockCmd
+             32 -> TIM_ARRPreloadConfig
+             32 -> TIM_Cmd
+             32 -> TIM_ICInit
+             32 -> TIM_TimeBaseInit
+             32 -> TIM_TimeBaseStructInit
+       16  HwTimerExpired
+             16 -> CoGetOSTime
+        8  HwTimerSet
+              8 -> CoGetOSTime
+       24  HwWait
+             24 -> CoGetOSTime
+        8  WDTimerInit
+              8 -> DBGMCU_Config
+              8 -> IWDG_Enable
+              8 -> IWDG_SetPrescaler
+              8 -> IWDG_SetReload
+              8 -> IWDG_WriteAccessCmd
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable23
+       4  ??DataTable23_1
+       4  ??DataTable23_10
+       4  ??DataTable23_11
+       4  ??DataTable23_12
+       4  ??DataTable23_13
+       4  ??DataTable23_14
+       4  ??DataTable23_15
+       4  ??DataTable23_16
+       4  ??DataTable23_17
+       4  ??DataTable23_18
+       4  ??DataTable23_19
+       4  ??DataTable23_2
+       4  ??DataTable23_20
+       4  ??DataTable23_21
+       4  ??DataTable23_22
+       4  ??DataTable23_23
+       4  ??DataTable23_24
+       4  ??DataTable23_25
+       4  ??DataTable23_26
+       4  ??DataTable23_27
+       4  ??DataTable23_28
+       4  ??DataTable23_29
+       4  ??DataTable23_3
+       4  ??DataTable23_30
+       4  ??DataTable23_31
+       4  ??DataTable23_32
+       4  ??DataTable23_33
+       4  ??DataTable23_34
+       4  ??DataTable23_35
+       4  ??DataTable23_36
+       4  ??DataTable23_37
+       4  ??DataTable23_38
+       4  ??DataTable23_39
+       4  ??DataTable23_4
+       4  ??DataTable23_40
+       4  ??DataTable23_41
+       4  ??DataTable23_42
+       4  ??DataTable23_43
+       4  ??DataTable23_44
+       4  ??DataTable23_5
+       4  ??DataTable23_6
+       4  ??DataTable23_7
+       4  ??DataTable23_8
+       4  ??DataTable23_9
+      12  ARM_proc_SN
+       8  BUTTON_CLK
+       4  BUTTON_PIN
+       8  BUTTON_PORT
+       4  BattUnion
+       4  COM_CLK
+       2  COM_PIN_RX
+       2  COM_PIN_TX
+       4  COM_PORT
+       4  COM_REMAP
+       4  COM_USART
+       4  COM_USART_CLK
+       2  EEPROM_ADDRESS
+      48  GPI_CLK
+      24  GPI_PIN
+      48  GPI_PORT
+      12  GPI_TYPE
+      72  GPO_CLK
+      36  GPO_PIN
+      72  GPO_PORT
+      26  GetARM_UUID
+     234  HwAtoDInit
+      60  HwButtonInit
+      26  HwButtonPressed
+     214  HwCOMInit
+      54  HwDACInit
+      72  HwGPIInit
+      26  HwGPIState
+      30  HwGPOHigh
+      66  HwGPOInit
+      74  HwGPOInitAF
+      66  HwGPOInitOC
+      30  HwGPOLow
+      52  HwGPOToggle
+      26  HwGetSPISS
+     296  HwI2CInit
+      80  HwIMUEXTIInit
+      76  HwInkPeriphInit
+     356  HwPeriphInit
+     292  HwRadioEXTIInit
+     116  HwRadioSPIInit
+     420  HwSPIInit
+      24  HwSPISSAssert
+      24  HwSPISSDeAssert
+     142  HwTIM1Init
+     236  HwTIM2Init
+     214  HwTIM3Init
+     128  HwTIM4Init
+      34  HwTimerExpired
+      26  HwTimerSet
+      32  HwWait
+       8  ImuAccelBuffer
+       8  ImuGyroBuffer
+       8  SPI_CLK
+       4  SPI_PIN_MISO
+       4  SPI_PIN_MOSI
+       4  SPI_PIN_SCK
+       8  SPI_PORT
+       8  SPI_REMAP
+       8  SPI_SPI
+       8  SPI_SPI_CLK
+       8  SPI_SS_CLK
+       8  SPI_SS_PIN
+      12  SPI_SS_PORT
+       8  SysTickTimerExp
+      40  WDTimerInit
+       2  imu_data_test
+       2  imu_data_test2
+       2  imu_data_test3
+       4  pBattUnion
+      16  spiIMUTxBuf
+
+ 
+    50 bytes in section .bss
+   166 bytes in section .data
+   288 bytes in section .rodata
+ 3 772 bytes in section .text
+ 
+ 3 772 bytes of CODE  memory
+   288 bytes of CONST memory
+   216 bytes of DATA  memory
+
+Errors: none
+Warnings: 6

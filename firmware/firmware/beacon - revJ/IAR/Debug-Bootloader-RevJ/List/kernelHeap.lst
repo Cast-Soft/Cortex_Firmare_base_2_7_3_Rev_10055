@@ -1,0 +1,516 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     26/Oct/2019  13:14:15 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\k #
+#                    ernelHeap.c                                              #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\k #
+#                    ernelHeap.c" -D BEACON_APP -D USE_STDPERIPH_DRIVER -D    #
+#                    STM32F10X_CL -D COOS -D USE_MY_ASSERT -D _DEBUG -D       #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -D BC_HW_REVJ   #
+#                    -lcN "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source  #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\kernelHeap.lst       #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\kernelHeap.o          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\common\CoOS\kernel\kernelHeap.c
+      1          /**
+      2           *******************************************************************************
+      3           * @file       kernelHeap.c
+      4           * @version   V1.1.4    
+      5           * @date      2011.04.20
+      6           * @brief      kernel heap management implementation code of CooCox CoOS kernel.	
+      7           *******************************************************************************
+      8           * @copy
+      9           *
+     10           * INTERNAL FILE,DON'T PUBLIC.
+     11           * 
+     12           * <h2><center>&copy; COPYRIGHT 2009 CooCox </center></h2>
+     13           *******************************************************************************
+     14           */ 
+     15          
+     16          
+     17          /*---------------------------- Include ---------------------------------------*/
+     18          #include <coocox.h>
+     19          
+     20          
+     21          #if CFG_KHEAP_EN >0
+     22          /*---------------------------- Variable Define -------------------------------*/
+     23          U32     KernelHeap[KHEAP_SIZE] = {0};   /*!< Kernel heap                      */
+     24          P_FMB   FMBlist = Co_NULL;                 /*!< Free memory block list           */
+     25          KHeap   Kheap   = {0};                  /*!< Kernel heap control              */
+     26          
+     27          
+     28          /*---------------------------- Function Declare ------------------------------*/
+     29          static P_FMB  GetPreFMB(P_UMB usedMB);
+     30          /**
+     31           *******************************************************************************
+     32           * @brief      Create kernel heap	 
+     33           * @param[in]  None
+     34           * @param[out] None
+     35           * @retval     None			 
+     36           *
+     37           * @par Description
+     38           * @details    This function is called to create kernel heap.
+     39           *******************************************************************************
+     40           */
+     41          void CoCreateKheap(void)
+     42          {
+     43              Kheap.startAddr  = (U32)(KernelHeap); /* Initialize kernel heap control   */
+     44              Kheap.endAddr    = (U32)(KernelHeap) + KHEAP_SIZE*4;
+     45              FMBlist          = (P_FMB)KernelHeap; /* Initialize free memory block list*/
+     46              FMBlist->nextFMB = Co_NULL;
+     47              FMBlist->nextUMB = Co_NULL;
+     48              FMBlist->preUMB  = Co_NULL;
+     49          }
+     50          
+     51          
+     52          /**
+     53           *******************************************************************************
+     54           * @brief      Allocation size bytes of memory block from kernel heap.
+     55           * @param[in]  size     Length of menory block.	
+     56           * @param[out] None
+     57           * @retval     Co_NULL     Allocate fail.
+     58           * @retval     others   Pointer to memory block.		 
+     59           *
+     60           * @par Description
+     61           * @details    This function is called to allocation size bytes of memory block.
+     62           *******************************************************************************
+     63           */
+     64          void* CoKmalloc(U32 size)
+     65          {
+     66              P_FMB freeMB,newFMB,preFMB;
+     67              P_UMB usedMB,tmpUMB;
+     68              U8*   memAddr;
+     69              U32   freeSize;
+     70              U32   kheapAddr;
+     71              
+     72          #if CFG_PAR_CHECKOUT_EN >0              /* Check validity of parameter        */
+     73              if( size == 0 )
+     74              {
+     75                  return Co_NULL;
+     76              }
+     77          #endif
+     78          
+     79              /* Word alignment,and add used memory head size */
+     80              size      = (((size+3)>>2)<<2) + 8;
+     81              kheapAddr = Kheap.endAddr;        /* Get the end address of kernel heap   */
+     82              OsSchedLock();                    /* Lock schedule                        */
+     83              freeMB = FMBlist;                 /* Get first item of free memory list   */
+     84              preFMB = Co_NULL;
+     85              while(freeMB != Co_NULL )            /* Is out of free memory list?          */
+     86              {                                 /* No                                   */
+     87                  if(freeMB->nextUMB == Co_NULL)   /* Is last item of free memory list?    */
+     88                  {                             /* Yes,get size for this free item      */
+     89                      freeSize = kheapAddr - (U32)(freeMB);
+     90                  }
+     91                  else                          /* No,get size for this free item       */
+     92                  {							   
+     93                      freeSize = (U32)(freeMB->nextUMB) -1 - (U32)(freeMB);	
+     94                  }
+     95                  if(freeSize >= size)        /* If the size equal or greater than need */
+     96                  {                           /* Yes,assign in this free memory         */
+     97                      usedMB=(P_UMB)freeMB;/* Get the address for used memory block head*/
+     98                      
+     99                      /* Get the address for used memory block                          */
+    100                      memAddr = (U8*)((U32)(usedMB) + 8);	
+    101                      
+    102                      /* Is left size of free memory smaller than 12?                   */	 
+    103                      if((freeSize-size) < 12)	 
+    104                      {		
+    105                          /* Yes,malloc together(12 is the size of the header information 
+    106                             of free memory block ).                                    */
+    107                          if(preFMB != Co_NULL)/* Is first item of free memory block list? */
+    108                          {                             /* No,set the link for list     */
+    109                              preFMB->nextFMB = freeMB->nextFMB;
+    110                          }
+    111                          else                          /* Yes,reset the first item     */
+    112                          {						
+    113                              FMBlist = freeMB->nextFMB;		
+    114                          }
+    115                          
+    116                          if(freeMB->nextUMB != Co_NULL)   /* Is last item?                */
+    117                          {                             /* No,set the link for list     */
+    118                              tmpUMB = (P_UMB)((U32)(freeMB->nextUMB)-1); 
+    119                              tmpUMB->preMB = (void*)((U32)usedMB|0x1);
+    120                          }
+    121                          
+    122                          usedMB->nextMB = freeMB->nextUMB;/* Set used memory block link*/
+    123                          usedMB->preMB  = freeMB->preUMB;
+    124                      }
+    125                      else                            /* No,the left size more than 12  */
+    126                      {		
+    127                          /* Get new free memory block address                          */
+    128                          newFMB = (P_FMB)((U32)(freeMB) + size);
+    129                          
+    130                          if(preFMB != Co_NULL)/* Is first item of free memory block list? */
+    131                          {						
+    132                              preFMB->nextFMB = newFMB; /* No,set the link for list     */		
+    133                          }	
+    134                          else
+    135                          {					    
+    136                              FMBlist = newFMB;         /* Yes,reset the first item     */	
+    137                          }
+    138                          
+    139                          /* Set link for new free memory block                         */
+    140                          newFMB->preUMB  = (P_UMB)((U32)usedMB|0x1);
+    141                          newFMB->nextUMB = freeMB->nextUMB;
+    142                          newFMB->nextFMB = freeMB->nextFMB;
+    143                          
+    144                          if(freeMB->nextUMB != Co_NULL) /* Is last item?                  */
+    145                          {                           /* No,set the link for list       */
+    146                              tmpUMB = (P_UMB)((U32)(freeMB->nextUMB)-1); 
+    147                              tmpUMB->preMB = newFMB;
+    148                          }
+    149                          
+    150                          usedMB->nextMB = newFMB;    /* Set used memory block link     */
+    151                          usedMB->preMB  = freeMB->preUMB;
+    152                      }
+    153                    
+    154                      if(freeMB->preUMB != Co_NULL)      /* Is first item?                 */
+    155                      {                               /* No,set the link for list       */
+    156                          tmpUMB = (P_UMB)((U32)(freeMB->preUMB)-1); 
+    157                          tmpUMB->nextMB = (void*)((U32)usedMB|0x1);
+    158                      }
+    159                    
+    160                      OsSchedUnlock();              /* Unlock schedule                  */
+    161                      return memAddr;               /* Return used memory block address */
+    162                  }
+    163                  preFMB = freeMB;        /* Save current free memory block as previous */
+    164                  freeMB = freeMB->nextFMB;         /* Get the next item as current item*/
+    165              }
+    166              OsSchedUnlock();                      /* Unlock schedule                  */
+    167              return Co_NULL;                          /* Error return                     */
+    168          }
+    169          
+    170          
+    171          /**
+    172           *******************************************************************************
+    173           * @brief      Release memory block to kernel heap.  
+    174           * @param[in]  memBuf    Pointer to memory block.
+    175           * @param[out] None
+    176           * @retval     None  		 
+    177           *
+    178           * @par Description
+    179           * @details    This function is called to release memory block.
+    180           *******************************************************************************
+    181           */
+    182          void CoKfree(void* memBuf)
+    183          {
+    184              P_FMB    curFMB,nextFMB,preFMB;
+    185              P_UMB    usedMB,nextUMB,preUMB;
+    186          
+    187          #if CFG_PAR_CHECKOUT_EN >0              /* Check validity of parameter        */
+    188              if(memBuf == Co_NULL)
+    189              {
+    190                  return;
+    191              }
+    192          #endif
+    193              
+    194              usedMB = (P_UMB)((U32)(memBuf)-8);
+    195              
+    196          #if CFG_PAR_CHECKOUT_EN >0              /* Check validity of parameter        */
+    197              if((U32)(memBuf) < Kheap.startAddr)
+    198              {
+    199                  return;
+    200              }
+    201              if((U32)(memBuf) > Kheap.endAddr)
+    202              {
+    203                  return;
+    204              }
+    205          #endif
+    206              
+    207              
+    208              OsSchedLock();                      /* Lock schedule                      */
+    209          
+    210          #if CFG_PAR_CHECKOUT_EN >0              /* Check UMB in list                  */ 
+    211              if((U32)(usedMB) < (U32)(FMBlist))
+    212              {
+    213                  preUMB = (P_UMB)((U32)(FMBlist->preUMB)-1);
+    214                  while(preUMB != usedMB)	
+    215                  {
+    216                      if(preUMB == Co_NULL)
+    217                      {
+    218                          OsSchedUnlock();
+    219                          return;
+    220                      }
+    221                      preUMB = (P_UMB)((U32)(preUMB->preMB)-1);	
+    222                  }
+    223              }
+    224              else
+    225              {
+    226                  if(FMBlist == Co_NULL)
+    227                  {
+    228                      nextUMB = (P_UMB)(Kheap.startAddr);	
+    229                  }
+    230                  else
+    231                  {
+    232                      if(FMBlist->nextUMB != Co_NULL)
+    233                      {
+    234                          nextUMB = (P_UMB)((U32)(FMBlist->nextUMB)-1);	
+    235                      }
+    236                      else
+    237                      {
+    238                          nextUMB = Co_NULL;
+    239                      }
+    240                  }
+    241              	
+    242                  while(nextUMB != usedMB)	
+    243                  {
+    244                      if(nextUMB == Co_NULL)
+    245                      {
+    246                          OsSchedUnlock();
+    247                          return;
+    248                      }	
+    249                      if(((U32)(nextUMB->nextMB)&0x1) == 0)		
+    250                      {
+    251                          nextFMB = (P_FMB)(nextUMB->nextMB);
+    252                          nextUMB = (P_UMB)((U32)(nextFMB->nextUMB)-1);		
+    253                      }
+    254                      else
+    255                      {
+    256                          nextUMB = (P_UMB)((U32)(nextUMB->nextMB)-1);	
+    257                      }
+    258                  }		
+    259              }
+    260          #endif
+    261              
+    262              
+    263              /* Is between two free memory block? */	 
+    264              if( (((U32)(usedMB->nextMB)&0x1) == 0) && (((U32)(usedMB->preMB)&0x1)==0) )	
+    265              {                             /* Yes,is the only one item in kernel heap? */
+    266                  if((usedMB->nextMB == Co_NULL) && (usedMB->preMB == Co_NULL))
+    267                  {
+    268                      curFMB = (P_FMB)usedMB;       /* Yes,release this item            */
+    269                      curFMB->nextFMB = Co_NULL;
+    270                      curFMB->nextUMB = Co_NULL;
+    271                      curFMB->preUMB  = Co_NULL;
+    272                      FMBlist = curFMB;	
+    273                  }
+    274                  else if(usedMB->preMB == Co_NULL)    /* Is the first item in kernel heap */
+    275                  {		
+    276                      /* Yes,release this item,and set link for list                    */						
+    277                      curFMB  = (P_FMB)usedMB; 
+    278                      nextFMB = (P_FMB)usedMB->nextMB;
+    279                      
+    280                      curFMB->nextFMB = nextFMB->nextFMB;	
+    281                      curFMB->nextUMB = nextFMB->nextUMB;
+    282                      curFMB->preUMB  = Co_NULL;
+    283                      FMBlist         = curFMB;
+    284                  }
+    285                  else if(usedMB->nextMB == Co_NULL)   /* Is the last item in kernel heap  */
+    286                  {                      /* Yes,release this item,and set link for list */
+    287                      curFMB = (P_FMB)(usedMB->preMB);	
+    288                      curFMB->nextFMB = Co_NULL;
+    289                      curFMB->nextUMB = Co_NULL;
+    290                  }							    
+    291                  else                  /* All no,show this item between two normal FMB */
+    292                  {		
+    293                      /* release this item,and set link for list                        */						  
+    294                      nextFMB = (P_FMB)usedMB->nextMB;
+    295                      curFMB  = (P_FMB)(usedMB->preMB);	
+    296                      
+    297                      curFMB->nextFMB = nextFMB->nextFMB;
+    298                      curFMB->nextUMB = nextFMB->nextUMB;
+    299                  }
+    300              }
+    301              else if(((U32)(usedMB->preMB)&0x1) == 0)  /* Is between FMB and UMB?      */
+    302              {								   
+    303                  if(usedMB->preMB == Co_NULL)   /* Yes,is the first item in kernel heap?  */
+    304                  {
+    305                      /* Yes,release this item,and set link for list                    */
+    306                      curFMB          = (P_FMB)usedMB;      
+    307                      nextUMB         = (P_UMB)usedMB->nextMB;		
+    308                      curFMB->nextUMB = nextUMB;
+    309                      curFMB->preUMB  = Co_NULL;
+    310                      curFMB->nextFMB = FMBlist;
+    311                      FMBlist         = curFMB;
+    312                  }
+    313                  else                    /* No,release this item,and set link for list */
+    314                  {							      
+    315                      curFMB          = (P_FMB)usedMB->preMB;
+    316                      nextUMB         = (P_UMB)usedMB->nextMB;
+    317                      curFMB->nextUMB = nextUMB;
+    318                  }
+    319              
+    320              }
+    321              else if(((U32)(usedMB->nextMB)&0x1) == 0)   /* Is between UMB and FMB?    */
+    322              {                                           /* Yes                        */
+    323                  preUMB = (P_UMB)(usedMB->preMB);        /* Get previous UMB           */
+    324                  curFMB = (P_FMB)(usedMB);               /* new FMB                    */
+    325                  preFMB = GetPreFMB(usedMB);             /* Get previous FMB           */
+    326                  if(preFMB == Co_NULL)                      /* Is previous FMB==Co_NULL?     */
+    327                  {	
+    328                      nextFMB = FMBlist;                  /* Yes,get next FMB           */ 
+    329                      FMBlist = curFMB;   /* Reset new FMB as the first item of FMB list*/
+    330                  }
+    331                  else
+    332                  {
+    333                      nextFMB = preFMB->nextFMB;          /* No,get next FMB            */
+    334                      preFMB->nextFMB  = curFMB;          /* Set link for FMB list      */
+    335                  }
+    336                  
+    337                  if(nextFMB == Co_NULL)           /* Is new FMB as last item of FMB list? */
+    338                  {	
+    339                      curFMB->preUMB  = preUMB;           /* Yes,set link for list      */
+    340                      curFMB->nextUMB = Co_NULL;
+    341                      curFMB->nextFMB = Co_NULL;
+    342                  }	
+    343                  else
+    344                  {
+    345                      curFMB->preUMB  = preUMB;           /* No,set link for list       */
+    346                      curFMB->nextUMB = nextFMB->nextUMB;
+    347                      curFMB->nextFMB = nextFMB->nextFMB;	
+    348                  }
+    349              }
+    350              else                                    /* All no,show UMB between two UMB*/
+    351              {									  
+    352                  curFMB  = (P_FMB)(usedMB);          /* new FMB                        */
+    353                  preFMB  = GetPreFMB(usedMB);        /* Get previous FMB               */
+    354                  preUMB  = (P_UMB)(usedMB->preMB);   /* Get previous UMB               */
+    355                  nextUMB = (P_UMB)(usedMB->nextMB);  /* Get next UMB                   */
+    356                  
+    357                  if(preFMB == Co_NULL )                 /* Is previous FMB==Co_NULL?         */
+    358                  {
+    359                      nextFMB = FMBlist;              /* Yes,get next FMB               */
+    360                      FMBlist = curFMB;  /* Reset new FMB as the first item of FMB list */
+    361                	}
+    362                	else
+    363                	{
+    364                      nextFMB = preFMB->nextFMB;      /* No,get next FMB                */
+    365                      preFMB->nextFMB = curFMB;       /* Set link for FMB list          */
+    366                	}
+    367                	
+    368                  curFMB->preUMB  = preUMB;           /* Set current FMB link for list  */
+    369                  curFMB->nextUMB = nextUMB;
+    370                  curFMB->nextFMB = nextFMB;
+    371              }
+    372              
+    373              if(curFMB->preUMB != Co_NULL)/* Is current FMB as first item in kernel heap? */
+    374              {                         /* No,set link for list                         */
+    375                	preUMB = (P_UMB)((U32)(curFMB->preUMB)-1); 
+    376                	preUMB->nextMB = (void*)curFMB;
+    377              }
+    378              if(curFMB->nextUMB != Co_NULL)/* Is current FMB as last item in kernel heap? */
+    379              {                          /* No,set link for list                        */
+    380                	nextUMB = (P_UMB)((U32)(curFMB->nextUMB)-1); 
+    381                	nextUMB->preMB = (void*)curFMB;		
+    382              }
+    383              OsSchedUnlock();           /* Unlock schedule                             */
+    384          }
+    385          
+    386          
+    387          /**
+    388           *******************************************************************************
+    389           * @brief      Get previous free memory block pointer.  
+    390           * @param[in]  usedMB    Current used memory block.
+    391           * @param[out] None
+    392           * @retval     Previous free memory block pointer.		 
+    393           *
+    394           * @par Description
+    395           * @details    This function is called to get previous free memory block pointer.
+    396           *******************************************************************************
+    397           */
+    398          static P_FMB GetPreFMB(P_UMB usedMB)
+    399          {
+    400              P_UMB preUMB;
+    401              preUMB = usedMB;
+    402              while(((U32)(preUMB->preMB)&0x1))   /* Is previous MB as FMB?             */
+    403              {                                   /* No,get previous MB                 */
+    404                  preUMB = (P_UMB)((U32)(preUMB->preMB)-1);
+    405              }	
+    406              return (P_FMB)(preUMB->preMB);      /* Yes,return previous MB             */
+    407          }
+    408          
+    409          #endif
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  CoCreateKheap
+       32  CoKfree
+             32 -> GetPreFMB
+             32 -> OsSchedUnlock
+       40  CoKmalloc
+             40 -> OsSchedUnlock
+        0  GetPreFMB
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable2
+       4  ??DataTable2_1
+       4  ??DataTable2_2
+       4  ??DataTable2_3
+       4  ??DataTable2_4
+      44  CoCreateKheap
+     388  CoKfree
+     234  CoKmalloc
+       4  FMBlist
+      20  GetPreFMB
+   10240  KernelHeap
+       8  Kheap
+
+ 
+ 10 252 bytes in section .bss
+    706 bytes in section .text
+ 
+    706 bytes of CODE memory
+ 10 252 bytes of DATA memory
+
+Errors: none
+Warnings: none

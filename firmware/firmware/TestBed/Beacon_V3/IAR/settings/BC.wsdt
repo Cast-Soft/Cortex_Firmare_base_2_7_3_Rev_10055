@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>BC/Debug</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>266</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1068</ColumnWidth1><ColumnWidth2>285</ColumnWidth2><ColumnWidth3>71</ColumnWidth3></Build>
+    <TerminalIO/><Debug-Log><ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1425</ColumnWidth1></Debug-Log><Breakpoints><col-names><item>Breakpoint</item><item>_I0</item></col-names><col-widths><item>500</item><item>35</item></col-widths></Breakpoints><Find-in-Files><ColumnWidth0>440</ColumnWidth0><ColumnWidth1>62</ColumnWidth1><ColumnWidth2>754</ColumnWidth2></Find-in-Files></Static>
+    <Windows>
+      
+      
+    <Wnd0>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-16046-29374</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>BC</ExpandedNode><ExpandedNode>BC/CMSIS</ExpandedNode><ExpandedNode>BC/User</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd0><Wnd1>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-4252-29391</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-2977-29619</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab><Tab><Identity>TabID-24527-18602</Identity><TabName>Breakpoints</TabName><Factory>Breakpoints</Factory></Tab><Tab><Identity>TabID-17846-4529</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd1></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\tasks.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>1652</SelStart><SelEnd>1652</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\usb_desc.c</Filename><XPos>0</XPos><YPos>102</YPos><SelStart>2296</SelStart><SelEnd>2296</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\usb_conf.h</Filename><XPos>0</XPos><YPos>100</YPos><SelStart>1868</SelStart><SelEnd>1868</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\hardware.c</Filename><XPos>0</XPos><YPos>492</YPos><SelStart>36607</SelStart><SelEnd>36607</SelEnd></Tab><ActiveTab>3</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\usb_hw_config.c</Filename><XPos>0</XPos><YPos>99</YPos><SelStart>5961</SelStart><SelEnd>5961</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\main.c</Filename><XPos>0</XPos><YPos>133</YPos><SelStart>4517</SelStart><SelEnd>4517</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\usb_prop.c</Filename><XPos>0</XPos><YPos>138</YPos><SelStart>5677</SelStart><SelEnd>5677</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\stm32f10x_it.c</Filename><XPos>0</XPos><YPos>288</YPos><SelStart>9866</SelStart><SelEnd>9876</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\App\tasks.c</Filename><XPos>0</XPos><YPos>561</YPos><SelStart>18436</SelStart><SelEnd>18436</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\CoOS\kernel\time.c</Filename><XPos>0</XPos><YPos>141</YPos><SelStart>5829</SelStart><SelEnd>5829</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-01349bd8><key>iaridepm.enu1</key></Toolbar-01349bd8></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>553</Bottom><Right>340</Right><x>-2</x><y>-2</y><xscreen>173</xscreen><yscreen>129</yscreen><sizeHorzCX>135156</sizeHorzCX><sizeHorzCY>178177</sizeHorzCY><sizeVertCX>267188</sizeVertCX><sizeVertCY>766575</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>127</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>129</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>178177</sizeHorzCY><sizeVertCX>135156</sizeVertCX><sizeVertCY>178177</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

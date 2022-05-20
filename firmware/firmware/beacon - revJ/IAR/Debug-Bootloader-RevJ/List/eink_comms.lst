@@ -1,0 +1,305 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     13/Nov/2019  10:52:14 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\eink_comms.c                                    #
+#    Command line =  "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\App\eink_comms.c" -D BEACON_APP -D                  #
+#                    USE_STDPERIPH_DRIVER -D STM32F10X_CL -D COOS -D          #
+#                    USE_MY_ASSERT -D _DEBUG -D BOOTLOADER -D EE_M24C02 -D    #
+#                    TASKS_PROFILE -D BATTERY_CHECK -D CCA_EN_NO -D           #
+#                    NEW_BEACON -D USE_TIM4 -D WDT_ENABLE -D OLD_CONFIG -D    #
+#                    CIRCULAR_LOG -D BC_HW_REVJ -lcN                          #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\" -o                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\" --no_cse            #
+#                    --no_unroll --no_inline --no_code_motion --no_tbaa       #
+#                    --no_clustering --no_scheduling --debug --endian=little  #
+#                    --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program  #
+#                    Files (x86)\IAR Systems\Embedded Workbench               #
+#                    6.4\arm\INC\c\DLib_Config_Normal.h" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\App\" -I "C:\Users\kmak\Documents\Cortex_Git #
+#                    \BLKT-01\Source Code\BLKT-01                             #
+#                    Beacon\Source\firmware\beacon -                          #
+#                    revJ\IAR\..\..\common\CMSIS\CM3\DeviceSupport\ST\STM32F1 #
+#                    0x\" -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Sour #
+#                    ce Code\BLKT-01 Beacon\Source\firmware\beacon -          #
+#                    revJ\IAR\..\..\common\STM32F10x_StdPeriph_Driver\inc\"   #
+#                    -I "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source    #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\kernel\" -I                   #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\CoOS\portable\" -I                 #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\..\common\" -I                            #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\USB-Device-CDC\" -I                #
+#                    "C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source       #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\..\..\common\" -I "C:\Users\kmak\Documents\Cort #
+#                    ex_Git\BLKT-01\Source Code\BLKT-01                       #
+#                    Beacon\Source\firmware\beacon - revJ\IAR\" -On           #
+#                    --use_c++_inline -I "C:\Program Files (x86)\IAR          #
+#                    Systems\Embedded Workbench 6.4\arm\CMSIS\Include\"       #
+#    List file    =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\List\eink_comms.lst       #
+#    Object file  =  C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source        #
+#                    Code\BLKT-01 Beacon\Source\firmware\beacon -             #
+#                    revJ\IAR\Debug-Bootloader-RevJ\Obj\eink_comms.o          #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\kmak\Documents\Cortex_Git\BLKT-01\Source Code\BLKT-01 Beacon\Source\firmware\beacon - revJ\App\eink_comms.c
+      1          /********************  All title and rights are owned by  *********************
+      2          *******  the CAST Group of Companies Inc. or licensors thereto. ***************
+      3          *******************************************************************************
+      4          * File Name          : eink_comms.c
+      5          * Author             : ?
+      6          * Version            : V1.0
+      7          * Date               : 5/17/2019
+      8          * Description        : All SPI routines related to EINK screen
+      9          *******************************************************************************/
+     10          
+     11          /* INCLUDES ------------------------------------------------------------------*/
+     12          
+     13          #include "hardware.h"
+     14          #include "eink_comms.h"
+     15          #include "eink_defs.h"
+     16          //#include "CoOS.h"
+     17          #include "basic_rf.h"
+     18          #include "eink.h"
+     19          /* PRIVATE TYPEDEF -----------------------------------------------------------*/
+     20          
+     21          /* PRIVATE DEFINES -----------------------------------------------------------*/
+     22          
+     23          /* PRIVATE MACROS ------------------------------------------------------------*/
+     24          
+     25          /* EXTERN VARIABLES ----------------------------------------------------------*/
+     26          
+     27          /* PRIVATE VARIABLES ---------------------------------------------------------*/
+     28          
+     29          // Recommended register settings which differ from the data sheet
+     30          
+     31          /* PUBLIC VARIABLES ----------------------------------------------------------*/
+     32          
+     33          /* EXTERNAL FUNCTION PROTOTYPES ---------------------------------------------*/
+     34          
+     35          /* PRIVATE FUNCTION PROTOTYPES -----------------------------------------------*/
+     36          
+     37          static uint8_t          EINK_SPI_RX(void);
+     38          static void             EINK_SPI_TX(uint8_t x);
+     39          static uint8_t          EINK_SPI_TXRX(uint8_t x);
+     40          void EINK_SPI_WAIT_RXRDY(void);
+     41          
+     42          /* PRIVATE FUNCTIONS ---------------------------------------------------------*/
+     43          
+     44          /*******************************************************************************
+     45          * Description :
+     46          * Input       : -
+     47          * Return      :
+     48          *******************************************************************************/
+     49          static uint8_t EINK_SPI_RX(void) {
+     50          	return (SPI_I2S_ReceiveData(SPI_INK_SPI));
+     51          }
+     52          
+     53          /*******************************************************************************
+     54          * Description :
+     55          * Input       :
+     56          * Return      : -
+     57          *******************************************************************************/
+     58          static void EINK_SPI_TX(uint8_t x) {
+     59          	SPI_I2S_SendData(SPI_INK_SPI, x);
+     60          }
+     61          
+     62          /*******************************************************************************
+     63          * Description :
+     64          * Input       :
+     65          * Return      :
+     66          *******************************************************************************/
+     67          static uint8_t EINK_SPI_TXRX(uint8_t x) {
+     68              EINK_SPI_TX(x);
+     69              EINK_SPI_WAIT_RXRDY();
+     70              return EINK_SPI_RX();
+     71          }
+     72          
+     73          /*******************************************************************************
+     74          * Description :
+     75          * Input       : -
+     76          * Return      : -
+     77          *******************************************************************************/
+     78          void EINK_SPI_WAIT_RXRDY(void) {
+     79          	while (RESET == SPI_I2S_GetFlagStatus(SPI_INK_SPI, SPI_I2S_FLAG_RXNE));
+     80          }
+     81          
+     82          /* PUBLIC FUNCTIONS ----------------------------------------------------------*/
+     83          /*******************************************************************************
+     84          * Description : Read one register byte
+     85          * Input       :
+     86          * Return      :
+     87          *******************************************************************************/
+     88          uint8_t EINK_RegisterRead(uint8_t addr) {
+     89              assert(!(addr & ~0x3F));
+     90              addr = addr |0x80;
+     91              HwSPISSAssert(SPI_INK);
+     92              EINK_SPI_TXRX(addr);
+     93              uint8_t value = EINK_SPI_TXRX(0x00);
+     94              HwSPISSDeAssert(SPI_INK);
+     95              return value;
+     96          }
+     97          
+     98          void EINK_RegisterReadBytes(uint8_t addr, uint8_t * buf, uint8_t cnt){
+     99          	uint8_t i=0;
+    100          	assert(!(addr & ~0x3F));
+    101          	addr = addr | 0x80;
+    102          	HwSPISSAssert(SPI_INK);
+    103          	EINK_SPI_TXRX(addr);
+    104          	for(i=0; cnt-- != 0; i++){
+    105          		buf[i] = EINK_SPI_TXRX(0x00);
+    106          	}
+    107          	HwSPISSDeAssert(SPI_INK);
+    108          	return;
+    109          }
+    110          
+    111          uint8_t EINK_MTP_RAM_Read(uint8_t addr){
+    112              assert(!(addr & ~0x3F));
+    113              HwSPISSAssert(SPI_INK);
+    114              EINK_SPI_TXRX(0x80 | addr);
+    115              EINK_SPI_TXRX(0x00);
+    116              uint8_t value = EINK_SPI_TXRX(0x00);
+    117              HwSPISSDeAssert(SPI_INK);
+    118              return value;
+    119          }
+    120          
+    121          void EINK_RegisterWrite(uint8_t reg, uint8_t val1, uint8_t val2, uint8_t val3, uint8_t val4, uint8_t count){
+    122          	uint8_t x=0;
+    123              HwSPISSAssert(SPI_INK);
+    124              EINK_SPI_TXRX(reg);
+    125              while(count--){
+    126                  switch(x){
+    127                      case 0:
+    128                          EINK_SPI_TXRX(val1);
+    129                      break;
+    130                      case 1:
+    131                          EINK_SPI_TXRX(val2);
+    132                      break;
+    133                      case 2:
+    134                          EINK_SPI_TXRX(val3);
+    135                      break;
+    136                      case 3:
+    137                          EINK_SPI_TXRX(val4);
+    138                      break;
+    139                  }
+    140                  x++;
+    141              }
+    142              HwSPISSDeAssert(SPI_INK);
+    143          }
+    144          
+    145          void EINK_write2ram(){
+    146          	int8_t x=0;
+    147              HwSPISSAssert(SPI_INK);
+    148              EINK_SPI_TXRX(0x10);
+    149              for(int i=0; i< EPD_BUFFERSIZE; i++){
+    150              	EINK_SPI_TXRX(spiInk_ImgBuf.buffer[i]);
+    151              }
+    152              HwSPISSDeAssert(SPI_INK);
+    153          }
+    154          
+    155          void EINK_readram(){
+    156          	int i;
+    157          	HwSPISSAssert(SPI_INK);
+    158          	EINK_SPI_TXRX(0x11|0x80);
+    159          	EINK_SPI_TXRX(0x00);
+    160          	for(i=0; i< EPD_BUFFERSIZE;i++){
+    161          		spiInk_ImgBuf.buffer[i]=EINK_SPI_TXRX(0x00);
+    162          	}
+    163          	HwSPISSDeAssert(SPI_INK);
+    164          }
+    165          /******************* (C) COPYRIGHT 2011 NaturalPoint, Inc. *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       16  EINK_MTP_RAM_Read
+             16 -> EINK_SPI_TXRX
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> assert_failed
+       16  EINK_RegisterRead
+             16 -> EINK_SPI_TXRX
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+             16 -> assert_failed
+       24  EINK_RegisterReadBytes
+             24 -> EINK_SPI_TXRX
+             24 -> HwSPISSAssert
+             24 -> HwSPISSDeAssert
+             24 -> assert_failed
+       32  EINK_RegisterWrite
+             32 -> EINK_SPI_TXRX
+             32 -> HwSPISSAssert
+             32 -> HwSPISSDeAssert
+        8  EINK_SPI_RX
+              8 -> SPI_I2S_ReceiveData
+        8  EINK_SPI_TX
+              8 -> SPI_I2S_SendData
+        8  EINK_SPI_TXRX
+              8 -> EINK_SPI_RX
+              8 -> EINK_SPI_TX
+              8 -> EINK_SPI_WAIT_RXRDY
+        8  EINK_SPI_WAIT_RXRDY
+              8 -> SPI_I2S_GetFlagStatus
+        8  EINK_readram
+              8 -> EINK_SPI_TXRX
+              8 -> HwSPISSAssert
+              8 -> HwSPISSDeAssert
+       16  EINK_write2ram
+             16 -> EINK_SPI_TXRX
+             16 -> HwSPISSAssert
+             16 -> HwSPISSDeAssert
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     120  ?<Constant "C:\\Users\\kmak\\Documen...">
+       4  ??DataTable7
+       4  ??DataTable7_1
+       4  ??DataTable7_2
+      60  EINK_MTP_RAM_Read
+      56  EINK_RegisterRead
+      78  EINK_RegisterReadBytes
+     124  EINK_RegisterWrite
+      12  EINK_SPI_RX
+      18  EINK_SPI_TX
+      22  EINK_SPI_TXRX
+      16  EINK_SPI_WAIT_RXRDY
+      56  EINK_readram
+      48  EINK_write2ram
+
+ 
+ 120 bytes in section .rodata
+ 502 bytes in section .text
+ 
+ 502 bytes of CODE  memory
+ 120 bytes of CONST memory
+
+Errors: none
+Warnings: 1

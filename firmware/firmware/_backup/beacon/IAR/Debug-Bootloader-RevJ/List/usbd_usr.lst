@@ -1,0 +1,331 @@
+###############################################################################
+#                                                                             #
+# IAR ANSI C/C++ Compiler V6.40.1.53790/W32 for ARM     19/Mar/2019  14:41:03 #
+# Copyright 1999-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Cpu mode     =  thumb                                                    #
+#    Endian       =  little                                                   #
+#    Source file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\common\USB-Device-CDC\usbd_usr.c        #
+#    Command line =  "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\common\USB-Device-CDC\usbd_usr.c" -D   #
+#                    BEACON_APP -D USE_STDPERIPH_DRIVER -D STM32F10X_CL -D    #
+#                    COOS -D USE_MY_ASSERT -D BC_HW_REVJ -D _DEBUG -D         #
+#                    BOOTLOADER -D EE_M24C02 -D TASKS_PROFILE -D              #
+#                    BATTERY_CHECK -D CCA_EN_NO -D NEW_BEACON -D USE_TIM4 -D  #
+#                    WDT_ENABLE -D OLD_CONFIG -D CIRCULAR_LOG -lcN            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\List\ #
+#                    " -o "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Rev #
+#                    J\RevJ Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\ #
+#                    Obj\" --no_cse --no_unroll --no_inline --no_code_motion  #
+#                    --no_tbaa --no_clustering --no_scheduling --debug        #
+#                    --endian=little --cpu=Cortex-M3 -e --fpu=None            #
+#                    --dlib_config "C:\Program Files (x86)\IAR                #
+#                    Systems\Embedded Workbench 6.4\arm\INC\c\DLib_Config_Nor #
+#                    mal.h" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.gi #
+#                    t\RevJ\RevJ Beacon\firmware\beacon\IAR\..\App\" -I       #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\CMSIS\CM3\Devi #
+#                    ceSupport\ST\STM32F10x\" -I                              #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\STM32F10x_StdP #
+#                    eriph_Driver\inc\" -I "C:\Users\User\Documents\Cortex_gi #
+#                    t\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\..\.. #
+#                    \common\CoOS\kernel\" -I "C:\Users\User\Documents\Cortex #
+#                    _git\BLKT-01.git\RevJ\RevJ Beacon\firmware\beacon\IAR\.. #
+#                    \..\common\CoOS\portable\" -I                            #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\..\common\" -I        #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\..\..\common\USB-Device-CDC #
+#                    \" -I "C:\Users\User\Documents\Cortex_git\BLKT-01.git\Re #
+#                    vJ\RevJ Beacon\firmware\beacon\IAR\..\..\common\" -I     #
+#                    "C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\Rev #
+#                    J Beacon\firmware\beacon\IAR\" -On --use_c++_inline -I   #
+#                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
+#                    6.4\arm\CMSIS\Include\"                                  #
+#    List file    =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\List\u #
+#                    sbd_usr.lst                                              #
+#    Object file  =  C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ #
+#                     Beacon\firmware\beacon\IAR\Debug-Bootloader-RevJ\Obj\us #
+#                    bd_usr.o                                                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Users\User\Documents\Cortex_git\BLKT-01.git\RevJ\RevJ Beacon\firmware\common\USB-Device-CDC\usbd_usr.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file    usbd_usr.c
+      4            * @author  MCD Application Team
+      5            * @version V1.1.0
+      6            * @date    19-March-2012
+      7            * @brief   This file includes the user application layer
+      8            ******************************************************************************
+      9            * @attention
+     10            *
+     11            * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+     12            *
+     13            * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+     14            * You may not use this file except in compliance with the License.
+     15            * You may obtain a copy of the License at:
+     16            *
+     17            *        http://www.st.com/software_license_agreement_liberty_v2
+     18            *
+     19            * Unless required by applicable law or agreed to in writing, software 
+     20            * distributed under the License is distributed on an "AS IS" BASIS, 
+     21            * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     22            * See the License for the specific language governing permissions and
+     23            * limitations under the License.
+     24            *
+     25            ******************************************************************************
+     26            */ 
+     27          
+     28          /* Includes ------------------------------------------------------------------*/
+     29          #include "usbd_usr.h"
+     30          #include "usbd_ioreq.h"
+     31          //#include "lcd_log.h"
+     32          
+     33          /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
+     34          * @{
+     35          */
+     36          
+     37          /** @defgroup USBD_USR 
+     38          * @brief    This file includes the user application layer
+     39          * @{
+     40          */ 
+     41          
+     42          /** @defgroup USBD_USR_Private_TypesDefinitions
+     43          * @{
+     44          */ 
+     45          /**
+     46          * @}
+     47          */ 
+     48          
+     49          
+     50          /** @defgroup USBD_USR_Private_Defines
+     51          * @{
+     52          */ 
+     53          /**
+     54          * @}
+     55          */ 
+     56          
+     57          
+     58          /** @defgroup USBD_USR_Private_Macros
+     59          * @{
+     60          */ 
+     61          /**
+     62          * @}
+     63          */ 
+     64          
+     65          
+     66          /** @defgroup USBD_USR_Private_Variables
+     67          * @{
+     68          */ 
+     69          
+     70          USBD_Usr_cb_TypeDef USR_cb =
+     71          {
+     72            USBD_USR_Init,
+     73            USBD_USR_DeviceReset,
+     74            USBD_USR_DeviceConfigured,
+     75            USBD_USR_DeviceSuspended,
+     76            USBD_USR_DeviceResumed,
+     77            
+     78            
+     79            USBD_USR_DeviceConnected,
+     80            USBD_USR_DeviceDisconnected,    
+     81          };
+     82          
+     83          /**
+     84          * @}
+     85          */
+     86          
+     87          /** @defgroup USBD_USR_Private_Constants
+     88          * @{
+     89          */ 
+     90          
+     91          /**
+     92          * @}
+     93          */
+     94          
+     95          
+     96          
+     97          /** @defgroup USBD_USR_Private_FunctionPrototypes
+     98          * @{
+     99          */ 
+    100          /**
+    101          * @}
+    102          */ 
+    103          
+    104          
+    105          /** @defgroup USBD_USR_Private_Functions
+    106          * @{
+    107          */ 
+    108          
+    109          /**
+    110          * @brief  USBD_USR_Init 
+    111          *         Displays the message on LCD for host lib initialization
+    112          * @param  None
+    113          * @retval None
+    114          */
+    115          void USBD_USR_Init(void)
+    116          {
+    117          #if 0  
+    118            /* Initialize LEDs */
+    119            STM_EVAL_LEDInit(LED1);
+    120            STM_EVAL_LEDInit(LED2);
+    121            STM_EVAL_LEDInit(LED3);
+    122            STM_EVAL_LEDInit(LED4);   
+    123            
+    124            /* Initialize the LCD */
+    125            STM3210C_LCD_Init();
+    126          
+    127            LCD_LOG_Init();
+    128            
+    129            LCD_LOG_SetHeader(" USB OTG FS VCP Device");
+    130            LCD_UsrLog("> USB device library started.\n"); 
+    131            LCD_LOG_SetFooter ("     USB Device Library v1.1.0" );
+    132          #endif
+    133          }
+    134          
+    135          /**
+    136          * @brief  USBD_USR_DeviceReset 
+    137          *         Displays the message on LCD on device Reset Event
+    138          * @param  speed : device speed
+    139          * @retval None
+    140          */
+    141          void USBD_USR_DeviceReset(uint8_t speed )
+    142          {
+    143          #if 0  
+    144           switch (speed)
+    145           {
+    146             case USB_OTG_SPEED_HIGH: 
+    147               LCD_LOG_SetFooter ("     USB Device Library v1.1.0 [HS]" );
+    148               break;
+    149          
+    150            case USB_OTG_SPEED_FULL: 
+    151               LCD_LOG_SetFooter ("     USB Device Library v1.1.0 [FS]" );
+    152               break;
+    153           default:
+    154               LCD_LOG_SetFooter ("     USB Device Library v1.1.0 [??]" );
+    155           }
+    156          #endif 
+    157          }
+    158          
+    159          
+    160          /**
+    161          * @brief  USBD_USR_DeviceConfigured
+    162          *         Displays the message on LCD on device configuration Event
+    163          * @param  None
+    164          * @retval Staus
+    165          */
+    166          void USBD_USR_DeviceConfigured (void)
+    167          {
+    168          #if 0  
+    169            LCD_UsrLog("> VCP Interface configured.\n");
+    170          #endif
+    171          }
+    172          
+    173          /**
+    174          * @brief  USBD_USR_DeviceSuspended 
+    175          *         Displays the message on LCD on device suspend Event
+    176          * @param  None
+    177          * @retval None
+    178          */
+    179          void USBD_USR_DeviceSuspended(void)
+    180          {
+    181          #if 0  
+    182            LCD_UsrLog("> USB Device in Suspend Mode.\n");
+    183            /* Users can do their application actions here for the USB-Reset */
+    184          #endif
+    185          }
+    186          
+    187          
+    188          /**
+    189          * @brief  USBD_USR_DeviceResumed 
+    190          *         Displays the message on LCD on device resume Event
+    191          * @param  None
+    192          * @retval None
+    193          */
+    194          void USBD_USR_DeviceResumed(void)
+    195          {
+    196          #if 0  
+    197              LCD_UsrLog("> USB Device in Idle Mode.\n");
+    198            /* Users can do their application actions here for the USB-Reset */
+    199          #endif
+    200          }
+    201          
+    202          
+    203          /**
+    204          * @brief  USBD_USR_DeviceConnected
+    205          *         Displays the message on LCD on device connection Event
+    206          * @param  None
+    207          * @retval Staus
+    208          */
+    209          void USBD_USR_DeviceConnected (void)
+    210          {
+    211          #if 0  
+    212            LCD_UsrLog("> USB Device Connected.\n");
+    213          #endif
+    214          }
+    215          
+    216          
+    217          /**
+    218          * @brief  USBD_USR_DeviceDisonnected
+    219          *         Displays the message on LCD on device disconnection Event
+    220          * @param  None
+    221          * @retval Staus
+    222          */
+    223          void USBD_USR_DeviceDisconnected (void)
+    224          {
+    225          #if 0  
+    226            LCD_UsrLog("> USB Device Disconnected.\n");
+    227          #endif
+    228          }
+    229          /**
+    230          * @}
+    231          */ 
+    232          
+    233          /**
+    234          * @}
+    235          */ 
+    236          
+    237          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+        0  USBD_USR_DeviceConfigured
+        0  USBD_USR_DeviceConnected
+        0  USBD_USR_DeviceDisconnected
+        0  USBD_USR_DeviceReset
+        0  USBD_USR_DeviceResumed
+        0  USBD_USR_DeviceSuspended
+        0  USBD_USR_Init
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  USBD_USR_DeviceConfigured
+       2  USBD_USR_DeviceConnected
+       2  USBD_USR_DeviceDisconnected
+       2  USBD_USR_DeviceReset
+       2  USBD_USR_DeviceResumed
+       2  USBD_USR_DeviceSuspended
+       2  USBD_USR_Init
+      28  USR_cb
+
+ 
+ 28 bytes in section .data
+ 14 bytes in section .text
+ 
+ 14 bytes of CODE memory
+ 28 bytes of DATA memory
+
+Errors: none
+Warnings: none
